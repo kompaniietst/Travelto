@@ -1,0 +1,126 @@
+html,
+body {
+    height: 100%;
+}
+html {
+    overflow-y: scroll;
+}
+body {
+    font-size: 14px;
+    line-height: 21px;
+    margin: 0;
+    font-family: $font_regular;
+}
+
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+h1 {
+    color: #1c8ec0;
+    font-size: 28px;
+    line-height: 40px;
+    font-family: $font_bold;
+}
+
+h2 {
+    font-family: $font_bold;
+    font-size: 24px;
+    margin-bottom: 40px;
+    &.header_title {
+        font-family: $font_bold;
+        font-size: 22px;
+        text-transform: uppercase;
+        margin: 50px 0 44px;
+    }
+}
+
+h4 {
+    font-size: 15px;
+    font-family: $font_bold;
+}
+
+strong {
+    font-family: $font_bold;
+}
+.container {
+    max-width: 90%;
+    margin: auto;
+}
+.section {
+    padding: 40px 0;
+}
+
+.page {
+    padding-top: 28px;
+}
+
+.wrapper {
+    min-height: 50%;
+}
+.title {
+    font-size: 24px;
+    padding-bottom: 20px;
+}
+.btn {
+    border-radius: 3px;
+    font-size: 15px;
+    border: none;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    font-family: $font_bold;
+    height: 47px;
+    cursor: pointer;
+
+    &.btn-orange {
+        color: white;
+        background: #fc6341;
+    }
+
+    &.btn-blue {
+        color: white;
+        background: #0098db;
+
+        span {
+            position: relative;
+            padding-left: 24px;
+
+            &:before {
+                content: "";
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                background: url(src/assets/images/icons/ok.svg) no-repeat;
+                background-size: 100%;
+                margin-left: -40px;
+            }
+        }
+    }
+
+    &.btn-blue-outline {
+        border: 1px solid #0098db;
+        border-radius: 25px;
+        background: white;
+        padding: 10px 20px;
+    }
+
+    &.btn-grey-outline {
+        background: #ffffff;
+        border: 1px solid #dcdcdc;
+        color: #6f6f6f;
+    }
+}
+.inner_page_header {
+    padding-bottom: 25px;
+}
+
+input,
+textarea,
+.label,
+form {
+    font-family: $font_regular;
+}

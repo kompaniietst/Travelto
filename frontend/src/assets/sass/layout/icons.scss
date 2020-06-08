@@ -1,0 +1,180 @@
+@import "src/assets/sass/abstracts/variables.scss";
+@import "src/assets/sass/abstracts/mixins.scss";
+
+.icon {
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid #ff6847;
+    border-radius: 50px;
+    padding: 4px;
+    margin: 0 5px;
+    &.icon_breakfast {
+        background: url(src/assets/images/icons/card/breakfast.svg) no-repeat center;
+        background-size: 58%;
+    }
+    &.icon_parking {
+        background: url(src/assets/images/icons/card/parking.svg) no-repeat center;
+        background-size: 58%;
+    }
+    &.icon_wifi {
+        background: url(src/assets/images/icons/card/wifi.svg) no-repeat center;
+        background-size: 58%;
+    }
+    &.icon_transfer {
+        background: url(src/assets/images/icons/card/transfer.svg) no-repeat center;
+        background-size: 58%;
+    }
+    &.icon_nearsea {
+        background: url(src/assets/images/icons/card/morncheckin.svg) no-repeat center;
+        background-size: 58%;
+    }
+    &.icon_pet {
+        background: url(src/assets/images/marker.svg) no-repeat center;
+        background: url(src/assets/images/icons/card/allowpet.svg) no-repeat center;
+        background-size: 58%;
+    }
+    &.icon_bed {
+        background: url(src/assets/images/icons/form/bed.svg) no-repeat center;
+        background-size: 58%;
+    }
+    &.icon_conditioner {
+        background: url(src/assets/images/icons/form/conditioner.svg) no-repeat center;
+        background-size: 58%;
+    }
+    &.icon_fridge {
+        background: url(src/assets/images/icons/form/fridge.svg) no-repeat center;
+        background-size: 58%;
+    }
+    &.icon_square {
+        background: url(src/assets/images/icons/form/square.svg) no-repeat center;
+        background-size: 58%;
+    }
+    &.icon_no_smoke {
+        background: url(src/assets/images/icons/form/nosmoke.svg) no-repeat center;
+        background-size: 58%;
+    }
+    &.icon_payment {
+        background: url(src/assets/images/icons/form/wallet.svg) no-repeat center;
+        background-size: 58%;
+    }
+    &.icon_teapot {
+        background: url(src/assets/images/icons/form/teapot.svg) no-repeat center;
+        background-size: 58%;
+    }
+    &.icon_pool {
+        background: url(src/assets/images/icons/form/pool.svg) no-repeat center;
+        background-size: 58%;
+    }
+
+    &.icon_bar {
+        background: url(src/assets/images/icons/form/drink.svg) no-repeat center;
+        background-size: 58%;
+    }
+
+    &.icon_lift {
+        background: url(src/assets/images/icons/form/lift.svg) no-repeat center;
+        background-size: 58%;
+    }
+
+    &.icon_washing {
+        background: url(src/assets/images/icons/form/shirt.svg) no-repeat center;
+        background-size: 58%;
+    }
+
+    &.icon_excursion {
+        background: url(src/assets/images/icons/form/excurs.svg) no-repeat center;
+        background-size: 58%;
+    }
+
+    &.icon_babysitting {
+        background: url(src/assets/images/icons/form/baby.svg) no-repeat center;
+        background-size: 58%;
+    }
+}
+.icon.icon_facebook,
+.icon.icon_vk,
+.icon.icon_insta {
+    border: none;
+    position: relative;
+    width: 43px;
+    height: 43px;
+    @include centered;
+    // background: url(src/assets/images/icons/social/f.svg) no-repeat center;
+    &:before,
+    &:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(29, 93, 188, 0.308);
+        border-radius: 40px;
+        z-index: -2;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &:after {
+        width: 80%;
+        height: 80%;
+        background: #1d5dbc;
+    }
+}
+.icon.icon_vk {
+    // background: url(src/assets/images/icons/social/vk.svg) no-repeat center;
+    &:before {
+        background: rgb(47, 147, 220, 0.308);
+    }
+    &:after {
+        background: rgb(47, 147, 220);
+    }
+}
+.icon.icon_insta {
+    // background: url(src/assets/images/icons/social/i.svg) no-repeat center;
+    &:before {
+        background: rgb(191, 100, 188, 0.308);
+    }
+    &:after {
+        background: rgb(191, 100, 188);
+    }
+}
+.icon.icon_home {
+    width: 23px;
+    height: 23px;
+    display: inline-block;
+    background: url(src/assets/images/icons/home.svg) no-repeat center;
+    border: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+}
+
+.icon.icon_favorite {
+    width: 24px;
+    height: 24px;
+    background: url(src/assets/images/icons/favorite.svg) no-repeat center;
+    background-size: 100%;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    @include transition;
+    &:hover {
+        transform: scale(1.1);
+        background: url(src/assets/images/icons/favorite_blue.svg) no-repeat center;
+        background-size: 100%;
+        @include transition;
+    }
+}
+
+.icon.icon_trash{
+    background: url(src/assets/images/icons/trash.svg) no-repeat center;
+    width: 16px;
+    height: 20px;
+    background-size: 100%;
+    display: block;
+    border: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+}

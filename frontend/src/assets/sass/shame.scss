@@ -1,0 +1,46 @@
+
+
+
+
+
+
+
+
+.currency {
+    font-family: "Arial";
+    font-size: 90%;
+}
+
+
+
+
+
+.rating {
+    font-size: 16px;
+    background: #0098db;
+    border-radius: 7px;
+    color: white;
+
+    padding: 10px;
+}
+
+.price {
+    .blue {
+        color: #199ad2;
+        font-size: 21px;
+    }
+}
+
+.place {
+    font-size: 13px;
+    color: #484848;
+
+    span {
+        background: url(src/assets/images/icons/form/map.svg) no-repeat left;
+        background-size: 13px;
+        -webkit-filter: brightness(0);
+        filter: brightness(0);
+        padding-left: 21px;
+        opacity: 0.5;
+    }
+}
