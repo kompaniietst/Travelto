@@ -1,0 +1,31 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h2 class="text_center">Регистрация</h2>
+    <button [mat-dialog-close]="true" class="close">
+        <mat-icon>close</mat-icon>
+    </button>
+
+    <div>
+        <div class="label">Firstname</div>
+        <input type="text" formControlName="firstname">
+    </div>
+
+    <div>
+        <div class="label">Phone</div>
+        <input type="text" formControlName="phone">
+    </div>
+
+    <div>
+        <div class="label">Email</div>
+        <input type="text" formControlName="email">
+    </div>
+
+    <div>
+        <div class="label">Пароль</div>
+        <input type="password" formControlName="password">
+    </div>
+
+    <app-alert-message></app-alert-message>
+    
+    <button type="submit" class="btn btn-orange w_100">Зарегистрироваться</button>
+    <button (click)="openModal()" class="btn btn-grey-outline w_100">У меня уже есть аккаунт</button>
+</form>
