@@ -13,7 +13,7 @@ import { AuthenticationService } from '../authentication.service';
 export class RegistrationComponent implements OnInit {
 
   constructor(private dialog: MatDialog,
-    private authenticationService: AuthenticationService,
+    private auth: AuthenticationService,
     private alert: AlertMessageService
   ) { }
 
@@ -34,7 +34,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authenticationService
+    this.auth
       .register(this.form.value)
       .subscribe(
         _ => {

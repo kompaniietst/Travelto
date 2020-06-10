@@ -1,0 +1,18 @@
+<ng-container [formGroup]="form">
+    <ng-container [ngSwitch]="control.controlType">
+
+        <ng-container *ngSwitchCase="'input' || 'textarea'">
+            <div class="{{ control.controlType }} {{ control.key }}">
+                <div *ngIf="control.label" class="label" [ngClass]="{'required': control.required }">{{ control.label }}
+                </div>
+
+                <input *ngIf="control.type != 'textarea'" type="text" [formControlName]="control.key"
+                    [placeholder]="control.placeholder">
+                <textarea *ngIf="control.type == 'textarea'" type="text" [formControlName]="control.key"
+                    [placeholder]="control.placeholder">
+            </textarea>
+            </div>
+        </ng-container>
+
+    </ng-container>
+</ng-container>

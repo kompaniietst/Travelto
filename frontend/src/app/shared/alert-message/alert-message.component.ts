@@ -18,7 +18,6 @@ export class AlertMessageComponent implements OnInit {
     this.alertMessageService.subject
       .subscribe(x => {
         this.message = x;
-        console.log('subscRIPTION', x)
       })
   }
 

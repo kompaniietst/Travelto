@@ -42,24 +42,28 @@ var uploadImage = multer({
             cb(null, './uploads/profImages/')
         },
         filename: function (req, file, cb) {
-            cb(null, file.originalname)
+            cb(null, (file.originalname).replace(/ /g,''))
         }
     })
 })
-app.post('/images/profImages/:id?', uploadImage.single('file'), function (req, res, next) {
+app.post('/images/profImages/:id?', uploadImage.single('file'), async function (req, res, next) {
 
     const file = req.file;
     const id = req.params.id;
-    const imageUrl = `http://localhost:${port}/images/profImages/` + file.filename
+    const imageUrl = `/images/profImages/` + file.filename;
+    // const imageUrl = `http://localhost:${port}/images/profImages/` + file.filename
 
-    User.findByIdAndUpdate({ _id: id },
+    await User.findByIdAndUpdate({ _id: id },
 
         { "image": imageUrl },
 
         { new: true }, function (err, result) {
             if (err) throw err;
-            res.json(req.file);
+            console.log(result);
+
+            res.json({ filename: imageUrl });
         });
+    //res.send();
 });
 
 app.listen(port, () => console.log(`Server running on port ${port}`))

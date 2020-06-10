@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private authenticationService: AuthenticationService,
+    private auth: AuthenticationService,
     private alert: AlertMessageService
   ) { }
 
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authenticationService
+    this.auth
       .login(this.form.value.email, this.form.value.password)
       .subscribe(
         _ => this.dialog.closeAll(),

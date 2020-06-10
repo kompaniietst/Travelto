@@ -18,11 +18,11 @@ export class ProfileTriggerComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private router: Router,
-    private authenticationService: AuthenticationService,
+    private auth: AuthenticationService,
     // private bookingService: BookingService
   ) {
 
-    this.authenticationService.currUser.subscribe((user: User) => {
+    this.auth.currUser.subscribe((user: User) => {
       this.currUser = user
     })
 
@@ -47,7 +47,7 @@ export class ProfileTriggerComponent implements OnInit {
   }
 
   logout() {
-    this.authenticationService.logout();
+    this.auth.logout();
     this.router.navigate(['/']);
   }
 

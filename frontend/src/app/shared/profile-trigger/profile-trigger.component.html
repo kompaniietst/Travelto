@@ -1,3 +1,8 @@
+<!-- <a routerLink="/">LINK</a><br>
+<a routerLink="test">test</a><br>
+<a routerLink="profile">profile</a><br>
+<a routerLink="personal">personal</a> -->
+
 <div class="account" *ngIf="currUser != null; else default">
     <div mat-button [matMenuTriggerFor]="menu">
         <div class="notification" *ngIf="notification>0"><strong>{{ notification }}</strong></div>
@@ -17,7 +22,7 @@
         </div>
     </div>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/profile">Personal account</button>
+        <button mat-menu-item routerLink="profile/{{ currUser._id }}">Personal account</button>
         <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
     <div></div>

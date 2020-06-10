@@ -28,7 +28,9 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string) {
-    return this.http.post(`${URL}/users/login`, { email, password })
+    console.log('url',this.URL);
+    
+    return this.http.post(`${this.URL}/users/login`, { email, password })
       .pipe(
         map((resp: UserResponse) => {
 
@@ -42,11 +44,11 @@ export class AuthenticationService {
   }
 
   register(user: User) {
-    return this.http.post(`${URL}/users`, user)
+    return this.http.post(`${this.URL}/users`, user)
   }
 
   update(_id: string, data: User) {
-    return this.http.put(`${URL}/users/${_id}`, data)
+    return this.http.put(`${this.URL}/users/${_id}`, data)
       .pipe(
         map((user: User) => {
           localStorage.setItem("currUser", JSON.stringify(user));
@@ -58,11 +60,14 @@ export class AuthenticationService {
   uploadProfileImage(_id: string, imageData: FormData) {
     console.log('imageData ', imageData);
 
-    return this.http.post(`${URL}/images/profImages/${_id}`, imageData).
+    return this.http.post(`${this.URL}/images/profImages/${_id}`, imageData).
       pipe(
-        map(resp => {
-          var image = `${URL}/images/profImage/` + resp[0].filename;
-
+        map((resp:any) => {
+          console.log('RESPONSE ', resp);
+         
+          
+          var image = this.URL + resp.filename;
+      
           this.saveToLocalstorage(image);
           return image;
         }))
@@ -75,6 +80,8 @@ export class AuthenticationService {
   }
 
   saveToLocalstorage(image) {
+    console.log('i',image);
+    
     var _local = JSON.parse(localStorage.getItem("currUser"));
     _local['image'] = image;
     localStorage.setItem("currUser", JSON.stringify(_local));

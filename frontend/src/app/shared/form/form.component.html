@@ -1,0 +1,21 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+
+    <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+
+    <div class="controls_container">
+        <app-form-control *ngFor="let control of controls; trackBy: trackById" 
+            [control]="control" 
+            [form]="form"
+            class="item form_group">
+        </app-form-control>
+
+        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+
+        <button *ngIf="buttonName" type="submit" class="item btn btn-orange w_100">{{ buttonName }}</button>
+    </div>
+
+    <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+
+    <ng-content select=".btn"></ng-content>
+
+</form>

@@ -10,10 +10,6 @@ export class AlertMessageService {
 
   constructor() { }
 
-  get alert() {
-    return this.subject.asObservable();
-  }
-
   success(message: string) {
     this.subject.next({ type: 'success', text: message })
   }
