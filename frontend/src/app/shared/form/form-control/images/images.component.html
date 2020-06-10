@@ -1,0 +1,17 @@
+<div [formGroup]="form" class="">
+    <div class="upload_button">
+        <input type="file" [placeholder]="control.placeholder" multiple #imageInputs (change)="processFile($event)">
+        <div>
+            <span></span>
+            Upload images
+        </div>
+    </div>
+
+    <div formArrayName="array" class="images_container" cdkDropList #todoList="cdkDropList"
+        [cdkDropListData]="selectedFiles" (cdkDropListDropped)="onDrop($event)">
+        <mat-card *ngFor="let item of imgs; trackBy: trackById; index as i" cdkDrag>
+            <div class="remove" (click)="removeImage(i)"><span class="icon icon_trash"></span></div>
+            <img src="http://localhost:4000/images/{{ item.filename }}" alt="">
+        </mat-card>
+    </div>
+</div>

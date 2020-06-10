@@ -1,0 +1,26 @@
+@import "src/assets/sass/abstracts/mixins.scss";
+@import "src/assets/sass/abstracts/variables.scss";
+
+ul {
+    li {
+        border-bottom: $border;
+        padding: 16px 20px;
+        cursor: pointer;
+        position: relative;
+        @include transition;
+        &:hover,
+        &.active {
+            color: white;
+            background: $background_color;
+            @include transition;
+        }
+    }
+}
+
+app-sidebar,
+.wrapper {
+    padding-top: 0;
+}
+.wrapper {
+    width: 100%;
+}

@@ -10,6 +10,7 @@ import { AuthenticationModule } from './core/authentication/authentication.modul
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminModule } from './admin/admin.module';
 
 
 
@@ -23,7 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
 
-    
+    AdminModule,
     SharedModule,
     CoreModule,
     AuthenticationModule,

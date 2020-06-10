@@ -14,5 +14,20 @@
             </div>
         </ng-container>
 
+        <ng-container *ngSwitchCase="'address'">
+            <app-advanced-input [formControlName]="control.key" [control]="control" class="{{ control.controlType }}">
+            </app-advanced-input>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'checkbox'">
+            <app-advanced-input [formControlName]="control.key" [control]="control" class="{{ control.controlType }}">
+            </app-advanced-input>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'images'">
+            <app-images [formControlName]="control.key" [control]="control"
+                class="{{ control.controlType }} {{ control.key }}"></app-images>
+        </ng-container>
+
     </ng-container>
 </ng-container>

@@ -9,14 +9,19 @@ import { AlertMessageComponent } from './alert-message/alert-message.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { ProfileTriggerComponent } from './profile-trigger/profile-trigger.component';
+import { MatCardModule } from "@angular/material/card";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
+import { ProfileTriggerComponent } from './profile-trigger/profile-trigger.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormComponent } from './form/form.component';
 import { FormControlComponent } from './form/form-control/form-control.component';
-import { TestComponent } from './test/test.component';
+import { AdvancedInputComponent } from './form/form-control/advanced-input/advanced-input.component';
+import { ImagesComponent } from './form/form-control/images/images.component';
 
 
 const routes: Routes = []
@@ -26,11 +31,12 @@ const COMPONENTS = [
   ProfileTriggerComponent,
   AlertMessageComponent,
   SidebarComponent,
- 
+
   NavbarComponent,
   FormComponent,
-  FormControlComponent
-
+  FormControlComponent,
+  AdvancedInputComponent,
+  ImagesComponent
 ];
 
 const MODULES = [
@@ -40,6 +46,10 @@ const MODULES = [
   MatButtonModule, // material
   MatMenuModule,
   MatDialogModule,
+  MatCardModule,
+  MatCheckboxModule,
+  DragDropModule,
+  // MatAutocompleteModule,
 
   FormsModule, ReactiveFormsModule,
 
@@ -47,9 +57,9 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [ WrapperComponent,...COMPONENTS],
+  declarations: [WrapperComponent, ...COMPONENTS],
   imports: [...MODULES],
-  exports: [ WrapperComponent,...COMPONENTS,
+  exports: [WrapperComponent, ...COMPONENTS,
     FormsModule, ReactiveFormsModule
   ]
 })

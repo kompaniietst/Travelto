@@ -1,0 +1,51 @@
+@import "src/assets/sass/abstracts/variables.scss";
+
+.block {
+    margin: 20px 0;
+    &.images {
+        display: flex;
+        flex-wrap: wrap;
+        .img {
+            width: 15%;
+            height: 100px;
+            overflow: hidden;
+            margin-right: 1px;
+            margin-bottom: 1px;
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+    &.amenities {
+        flex-wrap: wrap;
+        display: flex;
+        width: 70%;
+        .amenity {
+            width: 33.3%;
+            align-items: center;
+            display: flex;
+            font-size: 12px;
+            img {
+                width: 16px;
+                height: auto;
+                margin-right: 10px;
+            }
+        }
+    }
+}
+.name {
+    a {
+        color: $color;
+        font-size: 20px;
+        margin-right: 10px;
+    }
+}
+.price {
+    font-size: 21px;
+}
+a {
+    margin-right: 10px;
+    color: black;
+}

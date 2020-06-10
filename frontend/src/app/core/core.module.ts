@@ -2,11 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { Routes, RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './shared/header/header.component';
 import { SharedModule } from '../shared/shared.module';
 
 import { HttpClientModule } from '@angular/common/http';
+
+const routes: Routes = []
 
 const COMPONENTS = [
   HeaderComponent
@@ -19,7 +22,9 @@ const MODULES = [
   CommonModule,
   HttpClientModule,
   FormsModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+
+  RouterModule.forRoot(routes)
 ];
 
 @NgModule({

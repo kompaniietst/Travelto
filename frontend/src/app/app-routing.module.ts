@@ -6,6 +6,10 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { PersonalComponent } from './pages/profile/personal/personal.component';
 import { OrdersComponent } from './pages/profile/orders/orders.component';
 import { FavoriteComponent } from './pages/profile/favorite/favorite.component';
+import { AdminComponent } from './admin/admin/admin.component';
+import { HotelsComponent } from './admin/hotels/hotels.component';
+import { RoomsComponent } from './admin/rooms/rooms.component';
+import { AmenitiesComponent } from './admin/amenities/amenities.component';
 
 
 const routes: Routes = [
@@ -21,6 +25,28 @@ const routes: Routes = [
     ]
   },
   { path: 'personal', component: PersonalComponent },
+
+  {
+    path: 'admin', component: AdminComponent,
+    children: [
+      { path: '', redirectTo: 'hotels', pathMatch: 'full' },
+      {
+        path: 'amenities', component: AmenitiesComponent,
+        // resolve: { amenities: AmenitiesResolver }
+      },
+      {
+        path: 'hotels', component: HotelsComponent,
+        // resolve: { amenities: AmenitiesResolver }
+      },
+      {
+        path: 'rooms', component: RoomsComponent,
+        //   resolve: {
+        //     amenities: AmenitiesResolver,
+        //     hotels: HotelsResolver,
+        //   }
+      },
+    ]
+  },
 
   { path: '**', component: NotfoundComponent },
 ];
