@@ -10,6 +10,7 @@ import { AdminComponent } from './admin/admin/admin.component';
 import { HotelsComponent } from './admin/hotels/hotels.component';
 import { RoomsComponent } from './admin/rooms/rooms.component';
 import { AmenitiesComponent } from './admin/amenities/amenities.component';
+import { CitiesComponent } from './admin/cities/cities.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,10 @@ const routes: Routes = [
         //     amenities: AmenitiesResolver,
         //     hotels: HotelsResolver,
         //   }
+      },
+      {
+        path: 'cities', component: CitiesComponent,
+        // resolve: { amenities: AmenitiesResolver }
       },
     ]
   },

@@ -1,17 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-// import { Input } from 'src/app/shared/models/form/Input';
-// import { Address } from 'src/app/shared/models/form/Address';
-// import { ImageInput } from 'src/app/shared/models/form/ImageInput';
-// import { Checkbbox } from 'src/app/shared/models/form/Checkbbox';
-// import { HotelService } from 'src/app/core/http/hotel.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AdminService } from 'src/app/admin/admin.service';
 import { Control } from 'src/app/core/models/Control';
-// import { BehaviorSubjectService } from 'src/app/core/behaviorsubjects/behavior-subject.service';
-// import { FilterDropdown } from 'src/app/shared/models/form/FilterDropdown';
-// import { Dropdown } from 'src/app/shared/models/form/Dropdown';
-// import { RoomService } from 'src/app/core/http/room.service';
+import { Observable, of, forkJoin } from 'rxjs';
+import { Amenity } from 'src/app/core/models/Amenity';
+import { Hotel } from 'src/app/core/models/Hotel';
+import { AlertMessageService } from 'src/app/core/services/alert-message.service';
+import { Room } from 'src/app/core/models/Room';
 
 @Component({
   selector: 'app-add-room',
@@ -20,49 +14,46 @@ import { Control } from 'src/app/core/models/Control';
 })
 export class AddRoomComponent implements OnInit {
 
-  amenities;
-  hotels: any = [];
+  amenities: Amenity[];
+  hotels: Hotel[];
+  showSpinner = false;
 
   constructor(
-    // private roomService: RoomService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private http: HttpClient,
-    private adminService: AdminService,
-    // private behaviorSubjectService: BehaviorSubjectService,
-    // private hotelService: HotelService
+    private admin: AdminService,
+    private alert: AlertMessageService
   ) {
-    console.log(':::::::', this.route.snapshot.data);
-    // this.behaviorSubjectService.amenities.subscribe(x => {
-    // this.amenities = this.route.snapshot.data.amenities;
-    // this.hotels = this.route.snapshot.data.hotels.map(x => { return { id: x._id, label: x.name } });
-    //   console.log('this.amenities', this.amenities);
 
-    // this.hotelService.get()
-    //   .subscribe(x => this.hotels = x);
+    forkJoin(
+      this.admin.getAmenities(),
+      this.admin.getHotels()
+    )
+      .subscribe(x => {
+        var amenities = x[0];
+
+        var hotels = x[1]
+          .map(h => { return { _id: h._id, label: h.name } })
+
+        this.initFormStructure(amenities, hotels)
+      })
   }
 
-  formStructure;
+  formStructure$: Observable<Control[]>;
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
 
-    console.log('HOTELS', this.hotels);
-
-
-    this.formStructure = [
+  initFormStructure(amenities: Amenity[], hotels: { _id: string, label: string }[]) {
+    this.formStructure$ = of([
       new Control({
-        controlType: 'input',
-        key: 'hotelId',
+        controlType: 'dropdown',
+        key: 'hotel_id',
         label: 'Select hotel name',
-        options: this.hotels,
-        // placeholder: 'Select hotel name',
+        options: hotels,
         required: true
       }),
 
       new Control({
         controlType: 'input',
         key: 'name',
-        // label: 'Name:',
         placeholder: 'Name:',
         required: true
       }),
@@ -70,14 +61,13 @@ export class AddRoomComponent implements OnInit {
         controlType: 'input',
         type: 'textarea',
         key: 'description',
-        // label: 'Description:',
         placeholder: 'Description:',
         required: true
       }),
       new Control({
         controlType: 'input',
         key: 'price',
-        // label: 'Price: (per night)',
+        type: 'number',
         placeholder: '$ Price: (per night)',
         required: true
       }),
@@ -87,15 +77,16 @@ export class AddRoomComponent implements OnInit {
         key: 'specials',
         label: 'Choose specials:',
         options: [
-          { id: "1", label: "25%" },
-          { id: "2", label: "Рекомендуем" },
-          { id: "3", label: "Лучшая цена" }
+          { _id: "1", label: "25%" },
+          { _id: "2", label: "Рекомендуем" },
+          { _id: "3", label: "Лучшая цена" }
         ],
       }),
 
       new Control({
         controlType: 'images',
         key: 'images',
+        type: 'rooms',
         options: []
       }),
 
@@ -103,28 +94,24 @@ export class AddRoomComponent implements OnInit {
         controlType: 'checkbox',
         key: 'amenities',
         label: 'Choose amenities:',
-        options: this.amenities,
+        options: amenities,
       }),
 
-    ]
-
-
-
+    ])
   }
 
-  onValueChanged(room: any) {
-    // console.log('before backend', room);
-
-    // this.roomService.register(room)
-    //   .subscribe(
-    //     (respRoom: any) => {
-    //       console.log('respRoom', respRoom);
-    //       // this.router.navigate([`/room/${respRoom._id}`])
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     }
-    //   )
+  onSubmit(room: Room) {
+    this.showSpinner = true;
+    this.admin.registerRoom(room)
+      .subscribe(
+        (_: Room) => {
+          this.showSpinner = false;
+          console.log('respRoom', _);
+          //this.router.navigate([`/room/${_._id}`])
+          this.alert.success('Item is successfully added');
+        },
+        err => this.alert.error(err.error)
+      )
 
   }
 

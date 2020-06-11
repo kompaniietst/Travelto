@@ -1,0 +1,3 @@
+<span *ngFor="let item of starsAmount; trackBy: trackById; let i = index;">
+    <span [ngClass]="{ 'checked': starRating > i }">&#9733;</span>
+</span>

@@ -1,0 +1,6 @@
+<h2 class="header_title">Cities</h2>
+<div class="items">
+    <div *ngFor="let item of cities$ | async" class="item">
+        <div class="label">{{ item.label }}</div>
+    </div>
+</div>

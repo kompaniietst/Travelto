@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AdminService } from '../../admin.service';
+import { Amenity } from 'src/app/core/models/Amenity';
 
 @Component({
   selector: 'app-hotel-item',
@@ -10,16 +12,22 @@ export class HotelItemComponent implements OnInit {
 
   @Input() item;
 
-  hotelAmenities = [];
-  allAmenities: [];
+  hotelAmenities: Amenity[];
+  allAmenities: Amenity[];
 
-  constructor(private route: ActivatedRoute) {
-    this.allAmenities = this.route.snapshot.data.amenities;
-    console.log('this.allAmenities', this.allAmenities);
+  constructor(
+    private route: ActivatedRoute,
+    private admin: AdminService
+  ) {
+    this.admin.getAmenities()
+      .subscribe((x: Amenity[]) => this.initAllAmenities(x))
   }
 
-  ngOnInit(): void {
-    this.hotelAmenities = this.allAmenities.filter((a: any) => this.item.amenities.some(x => x == a._id))
-  }
+  ngOnInit(): void { }
 
+  initAllAmenities(allAmenities) {
+    this.hotelAmenities = allAmenities
+      .filter((a: Amenity) => this.item.amenities
+        .some((x: Amenity) => x == a._id));
+  }
 }

@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Input } from 'src/app/shared/models/form/Input';
-import { Radio } from 'src/app/shared/models/form/Radio';
-import { error } from '@angular/compiler/src/util';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
-import { ActivatedRoute } from '@angular/router';
-import { ImageInput } from 'src/app/shared/models/form/ImageInput';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { AdminService } from '../../admin.service';
+import { Control } from 'src/app/core/models/Control';
+import { of } from 'rxjs';
 
 
 @Component({
@@ -16,22 +11,25 @@ import { AdminService } from '../../admin.service';
   styleUrls: ['./add.component.scss']
 })
 export class AddAmenitiesComponent implements OnInit {
+
+  showSpinner = false;
+
   constructor(
-    private adminService: AdminService,
+    private admin: AdminService,
     private alert: AlertMessageService,
-    private route: ActivatedRoute,
-    private http: HttpClient
   ) { }
 
 
-  formStructure = [
+  formStructure$ = of([
 
-    new Input({
+    new Control({
+      controlType: 'input',
       key: 'label',
       placeholder: 'Label:',
     }),
 
-    new Radio({
+    new Control({
+      controlType: 'radio',
       key: 'checked',
       placeholder: 'Checked:',
       options: [
@@ -40,22 +38,24 @@ export class AddAmenitiesComponent implements OnInit {
       ]
     }),
 
-    new ImageInput({
+    new Control({
       controlType: 'images',
       key: 'images',
+      type: "amenities",
       options: []
     }),
-  ]
+  ])
 
-  onValueChanged(data) {
-    this.adminService.registerAmenity(data)
+  onSubmit(formData) {
+    this.showSpinner = true;
+    this.admin.registerAmenity(formData)
       .subscribe(
-        x => {
-          console.log('amenity_ ', x);
+        _ => {
+          this.showSpinner = false;
           this.alert.success('Item is successfuly added.');
         }
       ),
-      error => console.log(error)
+      err => this.alert.error(err.error)
   }
 
   ngOnInit(): void { }

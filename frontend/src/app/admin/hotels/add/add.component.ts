@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-// import { Input } from 'src/app/shared/models/form/Input';
-// import { Address } from 'src/app/shared/models/form/Address';
-// import { ImageInput } from 'src/app/shared/models/form/ImageInput';
-// import { Checkbbox } from 'src/app/shared/models/form/Checkbbox';
-// import { HotelService } from 'src/app/core/http/hotel.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AdminService } from 'src/app/admin/admin.service';
 import { Control } from 'src/app/core/models/Control';
-// import { BehaviorSubjectService } from 'src/app/core/behaviorsubjects/behavior-subject.service';
+import { Observable, of, forkJoin } from 'rxjs';
+import { Amenity } from 'src/app/core/models/Amenity';
+import { Hotel } from 'src/app/core/models/Hotel';
+import { AlertMessageService } from 'src/app/core/services/alert-message.service';
+import { City } from 'src/app/core/models/City';
 
 @Component({
   selector: 'app-add-hotel',
@@ -17,25 +14,29 @@ import { Control } from 'src/app/core/models/Control';
 })
 export class AddHotelComponent implements OnInit {
 
-  amenities;
+  amenities: Observable<any>;
+  showSpinner = false;
 
   constructor(
-    // private hotelService: HotelService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private http: HttpClient,
-    private adminService: AdminService,
-    // private behaviorSubjectService: BehaviorSubjectService,
+    private admin: AdminService,
+    private alert: AlertMessageService
   ) {
-    this.amenities = this.route.snapshot.data.amenities;
+
+    forkJoin(
+      this.admin.getAmenities(),
+      this.admin.getCities()
+    )
+      .subscribe(x => {
+        this.initFormStructure(x[0], x[1])
+      })
   }
 
-  formStructure;
+  formStructure$: Observable<Control[]>;
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
 
-
-    this.formStructure = [
+  initFormStructure(amenities: Amenity[], cities: City[]) {
+    this.formStructure$ = of([
 
       new Control({
         controlType: 'input',
@@ -44,17 +45,19 @@ export class AddHotelComponent implements OnInit {
         required: true
       }),
 
+      
       new Control({
         controlType: 'input',
         key: 'stars',
+        type: 'number',
         placeholder: 'Stars amount:',
         required: true
       }),
-
+      
       new Control({
         controlType: 'input',
-        type: 'textarea',
         key: 'description',
+        type: 'textarea',
         placeholder: 'Description:',
         required: true
       }),
@@ -64,15 +67,22 @@ export class AddHotelComponent implements OnInit {
         key: 'address',
         options: [
           new Control({
-            controlType: 'input',
+            controlType: 'dropdown',
             key: 'city',
             placeholder: 'City:',
+            options: cities,
             required: true
           }),
           new Control({
             controlType: 'input',
             key: 'street',
             placeholder: 'Street:',
+            required: true
+          }),
+          new Control({
+            controlType: 'input',
+            key: 'houseNumber',
+            placeholder: '№:',
             required: true
           }),
           new Control({
@@ -97,6 +107,7 @@ export class AddHotelComponent implements OnInit {
       new Control({
         controlType: 'images',
         key: 'images',
+        type: 'hotels',
         options: []
       }),
 
@@ -104,24 +115,23 @@ export class AddHotelComponent implements OnInit {
         controlType: 'checkbox',
         key: 'amenities',
         label: 'Choose amenities:',
-        options: this.amenities,
+        options: amenities,
       }),
-    ]
+
+    ])
   }
 
-  onValueChanged(hotel: any) {
-    // console.log('before backend', hotel);
-
-    // this.hotelService.register(hotel)
-    //   .subscribe(
-    //     (respHotel: any) => {
-    //       console.log('respHotel', respHotel);
-    //       this.router.navigate([`/hotel/${respHotel._id}`])
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     }
-    //   )
+  onSubmit(hotel: Hotel) {
+    this.showSpinner = true;
+    this.admin.registerHotel(hotel)
+      .subscribe(
+        (x: Hotel) => {
+          this.showSpinner = false;
+          this.alert.success('Item is successfully added');
+          // this.router.navigate([`/hotel/${x._id}`])
+        },
+        err => this.alert.error(err.error)
+      )
 
   }
 

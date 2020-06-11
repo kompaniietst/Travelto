@@ -1,4 +1,4 @@
-@import 'src/assets/sass/abstracts/variables.scss';
+@import "src/assets/sass/abstracts/variables.scss";
 
 :host {
     &.form_subscription .form {
@@ -244,12 +244,19 @@
         }
         &.city,
         &.street,
+        &.houseNumber,
         &.disctrict {
             float: left;
-            width: 33.3%;
+            width: 35%;
             &:not(.city) {
                 padding-left: 20px;
             }
+        }
+        &.houseNumber {
+            width: 10%;
+        }
+        &.disctrict {
+            width: 20%;
         }
         &.map {
             display: flex;
@@ -264,7 +271,7 @@
             clear: both;
         }
     }
-    .input.description{
+    .input.description {
         float: left;
         width: 100%;
     }
@@ -280,7 +287,8 @@
             display: flex;
             flex-wrap: wrap;
             .mat-checkbox {
-                width: 25%;margin-bottom: 5px;
+                width: 25%;
+                margin-bottom: 5px;
             }
         }
     }
@@ -325,11 +333,33 @@
                 justify-content: center;
                 align-items: center;
             }
-            img{
+            img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
             }
+        }
+    }
+}
+:host.attach_amenity_form ::ng-deep {
+    .images {
+        text-align: center;
+        .upload_button {
+            margin-top: 20px;
+            div {
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%, 0);
+            }
+            margin-bottom: 40px;
+        }
+    }
+    .mat-radio-group {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        .mat-radio-button {
+            margin: 15px;
         }
     }
 }
@@ -380,7 +410,8 @@
             display: flex;
             flex-wrap: wrap;
             .mat-checkbox {
-                width: 25%;margin-bottom: 5px;
+                width: 25%;
+                margin-bottom: 5px;
             }
         }
     }
@@ -425,7 +456,7 @@
                 justify-content: center;
                 align-items: center;
             }
-            img{
+            img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;

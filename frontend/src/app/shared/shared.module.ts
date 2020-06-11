@@ -13,6 +13,10 @@ import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { ProfileTriggerComponent } from './profile-trigger/profile-trigger.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -22,6 +26,10 @@ import { FormComponent } from './form/form.component';
 import { FormControlComponent } from './form/form-control/form-control.component';
 import { AdvancedInputComponent } from './form/form-control/advanced-input/advanced-input.component';
 import { ImagesComponent } from './form/form-control/images/images.component';
+import { DropdownComponent } from './form/form-control/dropdown/dropdown.component';
+import { RadioFinalComponent } from './form/form-control/radio-final/radio-final.component';
+import { CheckboxComponent } from './form/form-control/checkbox/checkbox.component';
+import { StarRatingComponent } from './star-rating/star-rating.component';
 
 
 const routes: Routes = []
@@ -36,7 +44,12 @@ const COMPONENTS = [
   FormComponent,
   FormControlComponent,
   AdvancedInputComponent,
-  ImagesComponent
+  ImagesComponent,
+  DropdownComponent,
+  RadioFinalComponent,
+  CheckboxComponent,
+  WrapperComponent,
+  StarRatingComponent,
 ];
 
 const MODULES = [
@@ -49,7 +62,11 @@ const MODULES = [
   MatCardModule,
   MatCheckboxModule,
   DragDropModule,
-  // MatAutocompleteModule,
+  MatAutocompleteModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatRadioModule,
+  MatProgressSpinnerModule,
 
   FormsModule, ReactiveFormsModule,
 
@@ -57,9 +74,9 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [WrapperComponent, ...COMPONENTS],
+  declarations: [...COMPONENTS, StarRatingComponent],
   imports: [...MODULES],
-  exports: [WrapperComponent, ...COMPONENTS,
+  exports: [...COMPONENTS,
     FormsModule, ReactiveFormsModule
   ]
 })

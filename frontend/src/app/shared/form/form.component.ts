@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { GenerateFormStructureService } from 'src/app/core/services/generate-form-structure.service';
 import { Control } from 'src/app/core/models/Control';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -11,13 +12,14 @@ import { Control } from 'src/app/core/models/Control';
 })
 export class FormComponent implements OnInit {
 
-  @Input() controls: Control[] = [];
+  @Input() controls$: Observable<Control[]>;
   @Input() buttonName: string;
+  @Input() showSpinner: string;
 
   @Input() headerTemplate: TemplateRef<any>;
   @Input() contentTemplate: TemplateRef<any>;
   @Input() footerTemplate: TemplateRef<any>;
-  
+
   @Output() valueChange = new EventEmitter();
 
   form: FormGroup;
@@ -25,11 +27,7 @@ export class FormComponent implements OnInit {
   constructor(private generateForm: GenerateFormStructureService) { }
 
   ngOnInit() {
-    console.log(this.controls);
-    
-    this.form = this.generateForm.defineStructure(this.controls);
-   
-    console.log('controls', this.controls);
+    this.form = this.generateForm.defineStructure(this.controls$);
   }
 
   onSubmit() {

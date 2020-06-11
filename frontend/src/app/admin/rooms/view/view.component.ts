@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RoomService } from 'src/app/core/http/room.service';
+import { AdminService } from '../../admin.service';
+import { Observable } from 'rxjs';
+import { Room } from 'src/app/core/models/Room';
 
 @Component({
   selector: 'app-view-rooms',
@@ -8,11 +10,13 @@ import { RoomService } from 'src/app/core/http/room.service';
 })
 export class ViewRoomsComponent implements OnInit {
 
-  rooms: any;
+  rooms$: Observable<Room[]>;
+  loading = true;
 
-  constructor(private roomService: RoomService) {
-    this.rooms = this.roomService.get();
-    this.roomService.get().subscribe(x => console.log('>>', x));
+  constructor(private admin: AdminService) {
+    this.rooms$ = this.admin.getRooms();
+
+    this.admin.getRooms().subscribe(x => this.loading = false);
   }
 
   ngOnInit(): void {

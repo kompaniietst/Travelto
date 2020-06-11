@@ -1,0 +1,18 @@
+<form class="example-form">
+    <div *ngIf="control.label" class="label" [ngClass]="{'required': control.required }">
+        {{control.label}}
+    </div>
+    <mat-form-field class="example-full-width" floatLabel="never">
+      <input 
+          [type]="control.type"
+          matInput
+          [placeholder]="control.placeholder"
+          [formControl]="myControl"
+          [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option.label}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>

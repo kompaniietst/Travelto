@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
       <div class="container">
         <mat-tab-group animationDuration="0ms">
             <mat-tab label="View your rooms">
-            <!--<app-view-rooms></app-view-rooms>-->
+              <app-view-rooms></app-view-rooms>
             </mat-tab>
             <mat-tab label="Add new room">
                 <app-add-room></app-add-room>

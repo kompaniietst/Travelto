@@ -1,6 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HotelService } from 'src/app/core/http/hotel.service';
+import { Room } from 'src/app/core/models/Room';
+import { AdminService } from '../../admin.service';
+import { Hotel } from 'src/app/core/models/Hotel';
+import { Amenity } from 'src/app/core/models/Amenity';
+// import { HotelService } from 'src/app/core/http/hotel.service';
 
+class HoteInfo {
+  _id: string;
+  name: string;
+  stars: number;
+}
 @Component({
   selector: 'app-room-item',
   templateUrl: './item.component.html',
@@ -8,15 +17,32 @@ import { HotelService } from 'src/app/core/http/hotel.service';
 })
 export class RoomItemComponent implements OnInit {
 
-  @Input() item;
-  hotelInfo;
+  @Input() item: Room;
+  hotelInfo: HoteInfo;
+  loading = true;
+  amenities: Amenity[];
 
-  constructor(private hotelService: HotelService) {
+  constructor(
+    private admin: AdminService
+  ) {
+    this.admin.getAmenities()
+      .subscribe((x: Amenity[]) => this.amenities = x)
   }
 
   ngOnInit(): void {
-    this.hotelService.getById(this.item?.hotelId)
-      .subscribe(x => this.hotelInfo = x)
+    this.loading = true;
+
+    this.admin.getHotelById(this.item.hotel_id)
+      .subscribe((x: Hotel) => {
+
+        this.loading = false;
+
+        this.hotelInfo = {
+          _id: x._id,
+          name: x.name,
+          stars: x.stars
+        }
+      })
   }
 
 }

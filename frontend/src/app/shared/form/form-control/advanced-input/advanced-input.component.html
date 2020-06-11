@@ -23,7 +23,7 @@
     <!-- </div> -->
 
     <!-- <div *ngIf="defineControlType(control)=='formArray'"> -->
-    <div *ngIf="control.controlType == 'checkbox'">
+    <!-- <div *ngIf="control.controlType == 'checkbox'">
         <div *ngIf="control.label" class="label" [ngClass]="{'required': control.required }">
             {{control.label}}
         </div>
@@ -34,28 +34,48 @@
                 {{ control.options[i].label }}
             </mat-checkbox>
         </div>
-    </div>
+    </div> -->
     <!-- </div> -->
 
+    <!-- ADDRESS -->
+    <!-- ADDRESS -->
     <div *ngIf="defineControlType(control) == 'formGroup'">
-        <div [formGroupName]="control.key" *ngFor="let item of control.options; trackBy: trackById" class="{{ item.key }} input">
-            <ng-container *ngIf="!item.options; then controlIsInput else controlIsArray"></ng-container>
+        <div [formGroupName]="control.key" *ngFor="let item of control.options; trackBy: trackById"
+            class="{{ item.key }} input">
 
-            <ng-template #controlIsInput>
-                <div *ngIf="item.label" class="label" [ngClass]="{'required': item.required }">
-                    {{ item.label }}
-                </div>
-                <input type="text" [formControlName]="item.key" [placeholder]="item.placeholder">
-            </ng-template>
+            <div [ngSwitch]="item.controlType">
 
-            <ng-template #controlIsArray>
-                <div *ngIf="item.label" class="label" [ngClass]="{'required': item.required }">
-                    {{ item.label }}
+                <div *ngSwitchCase="'input'">
+                    <ng-container *ngIf="!item.options; then controlIsInput else controlIsArray"></ng-container>
+
+                    <ng-template #controlIsInput>
+                        <div *ngIf="item.label" class="label" [ngClass]="{'required': item.required }">
+                            {{ item.label }}
+                        </div>
+
+                        <input type="text" [formControlName]="item.key" [placeholder]="item.placeholder">
+
+                    </ng-template>
+
+                    <ng-template #controlIsArray>
+                        <div class="d_flex align_center">
+                            <div *ngIf="item.label" class="label" [ngClass]="{'required': item.required }">
+                                {{ item.label }}
+                            </div>
+                            <div formArrayName="map" *ngFor="let _ of item.options; trackBy: trackById; let i = index">
+                                <input type="text" [formControlName]="i" [type]="item.type"
+                                    [placeholder]="item.options[i].placeholder">
+                            </div>
+                        </div>
+                    </ng-template>
                 </div>
-                <div formArrayName="map" *ngFor="let _ of item.options; trackBy: trackById; let i = index">
-                    <input type="text" [formControlName]="i" [placeholder]="item.options[i].placeholder">
+
+                <div *ngSwitchCase="'dropdown'">
+                    <app-dropdown formControlName="city" [control]="item"></app-dropdown>
                 </div>
-            </ng-template>
+
+            </div>
+
         </div>
     </div>
 </div>

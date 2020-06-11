@@ -1,3 +1,7 @@
-<div *ngFor="let item of rooms | async">
+<div *ngIf="loading" class="spinner_container">
+    <mat-spinner strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner>
+</div>
+
+<div *ngFor="let item of rooms$ | async">
     <app-room-item [item]="item"></app-room-item>
 </div>

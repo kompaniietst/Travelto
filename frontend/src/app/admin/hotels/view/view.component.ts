@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HotelService } from 'src/app/core/http/hotel.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { AdminService } from '../../admin.service';
+import { Hotel } from 'src/app/core/models/Hotel';
 
 @Component({
   selector: 'app-view-hotels',
@@ -10,18 +11,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ViewHotelsComponent implements OnInit {
 
-  hotels: Observable<any>;
-
+  hotels$: Observable<Hotel[]>;
+  loading = false;
 
   constructor(
-    private hotelService: HotelService,
+    private admin: AdminService,
     private route: ActivatedRoute
   ) {
 
-    this.hotels = this.hotelService.get();
-    this.hotelService.get().subscribe(x => console.log('>>', x));
-
-
+    this.hotels$ = this.admin.getHotels();
+    this.admin.getHotels().subscribe(x => this.loading = false);
   }
 
   ngOnInit(): void { }

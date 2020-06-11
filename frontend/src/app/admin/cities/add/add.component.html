@@ -1,0 +1,10 @@
+<h2 class="header_title">Add city</h2>
+
+<app-form [controls$]="formStructure$" 
+    (valueChange)="onSubmit($event)" 
+    buttonName="Add" 
+    [showSpinner]="showSpinner"
+    class="attach_hotel_form">
+</app-form>
+
+<app-alert-message class="text_center"></app-alert-message>

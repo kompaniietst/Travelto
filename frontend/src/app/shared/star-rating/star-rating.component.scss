@@ -1,0 +1,13 @@
+span{
+    color: rgba(255, 177, 0, 0.2);
+    .checked{
+        color: rgb(255, 177, 0);
+    }
+}
+:host{
+    &.grayscale{
+        span{
+            filter: grayscale(1);
+        }
+    }
+}

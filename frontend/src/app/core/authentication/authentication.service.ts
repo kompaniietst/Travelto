@@ -18,12 +18,12 @@ export class AuthenticationService {
 
   readonly URL = environment.apiUrl;
 
-  currUserBehaviorSubject: BehaviorSubject<User> = new BehaviorSubject(new User());
+  currUserBehaviorSubject: BehaviorSubject<User> = new BehaviorSubject();
   currUser: Observable<User>;
 
   constructor(private http: HttpClient) {
 
-    this.currUserBehaviorSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currUser')))
+    // this.currUserBehaviorSubject = new BehaviorSubject<User[]>(JSON.parse(localStorage.getItem('currUser')))
     this.currUser = this.currUserBehaviorSubject.asObservable();
   }
 

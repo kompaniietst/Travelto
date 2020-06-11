@@ -52,7 +52,10 @@
 /* FormCOntrol */
 .input {
     span {
-        color: red;
+        // color: red;
+    }
+    span.mat-form-field-ripple {
+        color: unset;
     }
     input,
     textarea {
@@ -78,4 +81,3 @@
     }
 }
 /*  */
-

@@ -1,38 +1,45 @@
 import { Injectable } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Control } from '../models/Control';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GenerateFormStructureService {
 
-  defineStructure(controls: Control[]) {
+  defineStructure(controls$: Observable<Control[]>) {
 
     let group = {};
+ 
+    controls$.subscribe(x => {
 
-    controls.forEach(control => {
 
-      switch (control.controlType) {
+      x.forEach((control: Control) => {
 
-        case 'input': group[control.key] = control.required
-          ? new FormControl(control.value || '', Validators.required)
-          : new FormControl(control.value || '');
-          break;
+        switch (control.controlType) {
 
-        case 'radio': group[control.key] = this.defineRadioValue(control.options);
-          break;
+          case 'input': group[control.key] = control.required
+            ? new FormControl(control.value || '', Validators.required)
+            : new FormControl(control.value || '');
+            break;
 
-        default:
-          group[control.key] = control.required
-            ? new FormControl({ value: this.defineValue(control), disabled: control.disabled } || '', Validators.required)
-            : new FormControl({ value: this.defineValue(control), disabled: control.disabled } || '');
+          case 'radio': group[control.key] = this.defineRadioValue(control.options);
+            break;
 
-          break;
-      }
+          default:
+            group[control.key] = control.required
+              ? new FormControl({ value: this.defineValue(control), disabled: control.disabled } || '', Validators.required)
+              : new FormControl({ value: this.defineValue(control), disabled: control.disabled } || '');
+
+            break;
+        }
+      })
+
     })
+    
+    return new FormGroup(group);
 
-    return new FormGroup(group)
   }
 
   defineRadioValue(options) {
@@ -42,6 +49,5 @@ export class GenerateFormStructureService {
 
   defineValue(control) {
     return control.options ? [] : null
-
   }
 }

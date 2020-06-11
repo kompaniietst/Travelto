@@ -3,15 +3,18 @@
     <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
 
     <div class="controls_container">
-        <app-form-control *ngFor="let control of controls; trackBy: trackById" 
-            [control]="control" 
-            [form]="form"
-            class="item form_group">
+        <app-form-control *ngFor="let control of controls$ | async; trackBy: trackById" [control]="control"
+            [form]="form" class="item form_group">
         </app-form-control>
 
         <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
 
-        <button *ngIf="buttonName" type="submit" class="item btn btn-orange w_100">{{ buttonName }}</button>
+        <button *ngIf="buttonName" type="submit" class="item btn btn-orange w_100">
+            <span>
+                <mat-spinner *ngIf="showSpinner" strokeWidth="3" diameter="20"></mat-spinner>
+            </span>
+            {{ buttonName }}
+        </button>
     </div>
 
     <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
