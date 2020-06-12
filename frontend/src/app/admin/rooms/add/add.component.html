@@ -1,5 +1,6 @@
 <h2 class="header_title">New room</h2>
 
+<app-alert-message></app-alert-message>
 <app-form *ngIf="formStructure$" 
     [controls$]="formStructure$" 
     (valueChange)="onSubmit($event)" 
@@ -7,5 +8,3 @@
     [showSpinner]="showSpinner"
     class="attach_room_form">
 </app-form>
-
-<app-alert-message></app-alert-message>

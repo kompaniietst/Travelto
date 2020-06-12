@@ -1,5 +1,12 @@
 @import "src/assets/sass/abstracts/variables.scss";
 
+:host {
+    margin: 50px 0;
+    display: block;
+    border: $border;
+    padding: 20px 30px;
+    border-radius: 3px;
+}
 .block {
     margin: 20px 0;
     &.images {
@@ -21,7 +28,7 @@
     &.amenities {
         flex-wrap: wrap;
         display: flex;
-        width: 70%;
+        width: 57%;
         .amenity {
             width: 33.3%;
             align-items: center;

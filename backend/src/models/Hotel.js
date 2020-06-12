@@ -17,10 +17,14 @@ const hotelSchema = mongoose.Schema({
     },
     address: {
         city: {
-            type: String,
+            type: mongoose.Schema.ObjectId,
             trim: true
         },
         street: {
+            type: String,
+            trim: true
+        },
+        houseNumber: {
             type: String,
             trim: true
         },
@@ -34,6 +38,7 @@ const hotelSchema = mongoose.Schema({
     images: [],
 
     amenities: []
+    
 })
 
 hotelSchema.pre('save', async function (next) {

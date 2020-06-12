@@ -29,7 +29,7 @@ export class HotelService {
     return this.http.get<Hotel[]>(`${this.URL}/hotels`)
   }
 
-  getHotelById(hotel_id:string): Observable<Hotel> {
+  getHotelBy(hotel_id: string): Observable<Hotel> {
     return this.http.get<Hotel>(`${this.URL}/hotels/${hotel_id}`)
   }
 }

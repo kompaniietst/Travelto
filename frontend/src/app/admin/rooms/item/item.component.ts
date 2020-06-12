@@ -32,7 +32,7 @@ export class RoomItemComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
 
-    this.admin.getHotelById(this.item.hotel_id)
+    this.admin.getHotelBy(this.item.hotel_id)
       .subscribe((x: Hotel) => {
 
         this.loading = false;

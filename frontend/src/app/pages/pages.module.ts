@@ -11,6 +11,7 @@ import { FavoriteComponent } from './profile/favorite/favorite.component';
 
 import { SharedModule } from '../shared/shared.module';
 import { PersonalComponent } from './profile/personal/personal.component';
+import { HotelComponent } from './hotel/hotel.component';
 
 
 const routes: Routes = []
@@ -22,7 +23,7 @@ const COMPONENTS = [
   PersonalComponent,
   OrdersComponent,
   FavoriteComponent,
-  
+  HotelComponent,
 ];
 
 const MODULES = [

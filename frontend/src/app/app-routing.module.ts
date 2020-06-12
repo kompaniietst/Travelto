@@ -11,7 +11,7 @@ import { HotelsComponent } from './admin/hotels/hotels.component';
 import { RoomsComponent } from './admin/rooms/rooms.component';
 import { AmenitiesComponent } from './admin/amenities/amenities.component';
 import { CitiesComponent } from './admin/cities/cities.component';
-
+import { HotelComponent } from './pages/hotel/hotel.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -26,32 +26,18 @@ const routes: Routes = [
     ]
   },
   { path: 'personal', component: PersonalComponent },
-
   {
     path: 'admin', component: AdminComponent,
     children: [
       { path: '', redirectTo: 'hotels', pathMatch: 'full' },
-      {
-        path: 'amenities', component: AmenitiesComponent,
-        // resolve: { amenities: AmenitiesResolver }
-      },
-      {
-        path: 'hotels', component: HotelsComponent,
-        // resolve: { amenities: AmenitiesResolver }
-      },
-      {
-        path: 'rooms', component: RoomsComponent,
-        //   resolve: {
-        //     amenities: AmenitiesResolver,
-        //     hotels: HotelsResolver,
-        //   }
-      },
-      {
-        path: 'cities', component: CitiesComponent,
-        // resolve: { amenities: AmenitiesResolver }
-      },
+      { path: 'amenities', component: AmenitiesComponent },
+      { path: 'hotels', component: HotelsComponent },
+      { path: 'rooms', component: RoomsComponent },
+      { path: 'cities', component: CitiesComponent },
     ]
   },
+
+  { path: 'hotel/:id', component: HotelComponent },
 
   { path: '**', component: NotfoundComponent },
 ];

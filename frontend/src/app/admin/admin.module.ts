@@ -24,6 +24,7 @@ import { ViewCitiesComponent } from './cities/view/view.component';
 import { ViewRoomsComponent } from './rooms/view/view.component';
 import { RoomItemComponent } from './rooms/item/item.component';
 import { StarRatingComponent } from '../shared/star-rating/star-rating.component';
+import { CoreModule } from '../core/core.module';
 
 const routes: Routes = []
 
@@ -46,7 +47,9 @@ const COMPONENTS = [
 
   CitiesComponent,
   AddCitiesComponent,
-  ViewCitiesComponent
+  ViewCitiesComponent,
+
+  // ReversePipe
 
 ];
 
@@ -61,7 +64,7 @@ const MODULES = [
   SharedModule,
 
   RouterModule.forRoot(routes),
-  SharedModule,
+  CoreModule,
 ];
 
 @NgModule({

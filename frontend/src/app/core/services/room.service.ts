@@ -11,16 +11,8 @@ import { Room } from '../models/Room';
 export class RoomService {
 
   readonly URL = environment.apiUrl;
-  // private hotelSubject: BehaviorSubject<any>;
-  // private bookingSubject: BehaviorSubject<any>;
-  // bookings: Observable<any>;
 
-  // get bookingsValue() {
-  // }
-
-  constructor(private http: HttpClient) {
-    // this.hotelSubject = new BehaviorSubject(JSON.parse(localStorage.getItem("hotels")));
-  }
+  constructor(private http: HttpClient) { }
 
   register(room: Room): Observable<Room> {
     return this.http.post<Room>(`${this.URL}/rooms`, room)
@@ -28,5 +20,9 @@ export class RoomService {
 
   get(): Observable<Room[]> {
     return this.http.get<Room[]>(`${this.URL}/rooms`)
+  }
+
+  getRoomsByHotel(id: string): Observable<Room[]> {
+    return this.http.get<Room[]>(`${this.URL}/roomsByHotel/${id}`)
   }
 }

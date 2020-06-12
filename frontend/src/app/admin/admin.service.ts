@@ -39,9 +39,11 @@ export class AdminService {
     return this.hotelService.get();
   }
 
-  getHotelById(hotel_id: string): Observable<Hotel> {
-    return this.hotelService.getHotelById(hotel_id);
+  getHotelBy(hotel_id: string): Observable<Hotel> {
+    return this.hotelService.getHotelBy(hotel_id);
   }
+
+
 
   registerAmenity(amenity: Amenity): Observable<Amenity> {
     return this.http
@@ -54,6 +56,8 @@ export class AdminService {
       .get<Amenity[]>(`${this.URL}/amenities`)
   }
 
+
+
   registerCity(city: City): Observable<City> {
     return this.http
       .post<City>(`${this.URL}/cities`, city)
@@ -64,6 +68,8 @@ export class AdminService {
     return this.http
       .get<City[]>(`${this.URL}/cities`)
   }
+
+
 
   registerRoom(room: Room): Observable<Room> {
     console.log('RRR', room);
@@ -76,6 +82,11 @@ export class AdminService {
     return this.roomService.get()
       .pipe(delay(1500))
   }
+
+  getRoomsByHotel(id: string): Observable<Room[]> {
+    return this.roomService.getRoomsByHotel(id);
+  }
+
 
   uploadImages(route, imageData) {
     return this.http.post(`${this.URL}/images/${route}`, imageData)

@@ -45,7 +45,7 @@ export class AddHotelComponent implements OnInit {
         required: true
       }),
 
-      
+
       new Control({
         controlType: 'input',
         key: 'stars',
@@ -53,7 +53,7 @@ export class AddHotelComponent implements OnInit {
         placeholder: 'Stars amount:',
         required: true
       }),
-      
+
       new Control({
         controlType: 'input',
         key: 'description',
@@ -122,6 +122,8 @@ export class AddHotelComponent implements OnInit {
   }
 
   onSubmit(hotel: Hotel) {
+    console.log('hot', hotel);
+
     this.showSpinner = true;
     this.admin.registerHotel(hotel)
       .subscribe(

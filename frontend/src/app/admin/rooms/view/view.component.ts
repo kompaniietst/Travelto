@@ -15,7 +15,6 @@ export class ViewRoomsComponent implements OnInit {
 
   constructor(private admin: AdminService) {
     this.rooms$ = this.admin.getRooms();
-
     this.admin.getRooms().subscribe(x => this.loading = false);
   }
 

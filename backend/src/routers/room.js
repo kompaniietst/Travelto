@@ -21,11 +21,35 @@ router.post('/rooms', async (req, res) => {
 
 router.get('/rooms', async (req, res) => {
 
-
-
     const rooms = await Room.find();
 
-    if (!rooms) return res.status(401).send({ error: 'Room are empty' })
+    if (!rooms) return res.status(401).send('Room are empty')
+
+    res.send(rooms)
+
+})
+
+// router.get('/rooms/:id', async (req, res) => {
+//     console.log(req.params);
+//     console.log(req.body);
+
+//     const id = req.params.id;
+//     const rooms = await Room.findOne({ hotel_id: id });
+
+//     if (!rooms) return res.status(401).send('Room are empty')
+
+//     res.send(rooms)
+
+// })
+
+router.get('/roomsByHotel/:id', async (req, res) => {
+    console.log(req.params);
+    console.log(req.body);
+
+    const id = req.params.id;
+    const rooms = await Room.find({ hotel_id: id });
+
+    if (!rooms) return res.status(401).send('Room are empty')
 
     res.send(rooms)
 

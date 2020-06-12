@@ -32,7 +32,8 @@ export class FormComponent implements OnInit {
 
   onSubmit() {
     this.valueChange.emit(this.form.value);
-    console.log('in form conmpopent', this.form.value);
+    this.form = this.generateForm.defineStructure(this.controls$);
+    window.scrollTo(0, 0);
   }
 
   trackById(index, item) {

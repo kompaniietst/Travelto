@@ -8,11 +8,13 @@ import { HeaderComponent } from './shared/header/header.component';
 import { SharedModule } from '../shared/shared.module';
 
 import { HttpClientModule } from '@angular/common/http';
+import { ReversePipe } from './pipes/reverse.pipe';
 
 const routes: Routes = []
 
 const COMPONENTS = [
-  HeaderComponent
+  HeaderComponent,
+  ReversePipe,
 ];
 
 const MODULES = [

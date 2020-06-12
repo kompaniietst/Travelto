@@ -1,0 +1,119 @@
+<div *ngIf="hotel">
+
+
+    <div class="container">
+        <div class="inner_page_header">
+            <h1>
+                {{ hotel.name }}
+                <app-star-rating *ngIf="hotel.stars" [starRating]="hotel.stars"></app-star-rating>
+            </h1>
+            <div class="place" *ngIf="hotel.address.city">
+                <span></span>
+                {{ hotel.address.city }}, {{ hotel.address.street }} {{ hotel.address.houseNumber }}
+                <a routerLink="." fragment="address" class="place">
+                    <strong>Посмотреть на карте</strong>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section" *ngIf="hotel.description.length > 0">
+            <div class="title"><strong>Описание:</strong></div>
+            {{ hotel.description }}
+        </div>
+
+
+        <!-- Rooms -->
+        <div class="section">
+            <div *ngIf="(rooms$ | async)?.length == 0">
+                No rooms yes
+            </div>
+            <div class="title">
+                <strong>Выберите номер:</strong>
+            </div>
+            <div class="list">
+                <div *ngFor="let item of rooms$ | async" class="item">
+
+                    <h4>{{ item.name }}</h4>
+
+                    <div class="item_container">
+                        <div class="img">
+                            <!-- <app-carousel [id]="item?._id" [imgs]="item?.images" [config]="carouselConfigRooms"
+                                class="advanced">
+                            </app-carousel> -->
+                        </div>
+                        <div class="center_block">
+                            <div *ngFor="let amenity of item?.amenities">
+                                {{ amenity }}
+                            </div>
+                        </div>
+                        <div class="end_block">
+
+
+
+
+
+                            <div class="details">
+                                <div class="price text_center">
+                                    <span class="blue">
+                                        <strong>
+                                            {{ item?.price | currency}} <span class="currency">$</span>
+                                        </strong>
+                                    </span> / night </div>
+                                <div class="buttons ng-star-inserted">
+                                    <button class="btn btn-blue w_100 ng-star-inserted">
+                                        <span>Выбран</span>
+                                    </button>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- end rooms -->
+
+
+        <div class="section">
+            <div class="title">
+                <strong>Удобства, предоставляемые отелем</strong>
+            </div>
+            <div class="list_amenities">
+                <!-- <div *ngFor="let amenity of hotelAmenities; trackBy: trackById; let i = index"
+                class="hotel_amenity">
+                <div class="img" [ngClass]="{'active': hotel?.amenities[i] != amenity._id}">
+                    <img [src]="amenity.images[0]" alt="">
+                </div>
+                <strong>{{ amenity.label }}</strong>
+
+            </div> -->
+            </div>
+        </div>
+
+        <div class="section" id="address">
+            <div class="title"><strong>Расположение</strong></div>
+            <div class="place"><span></span>{{ hotel?.address.city }},
+                {{ hotel?.address.street }}</div>
+            <!-- <app-google-maps [zoom]="9" [mapLat]="mapLat" [mapLng]="mapLng">
+            <ng-template let-google="google" let-map="map">
+                <app-google-map-marker *ngFor="let marker of markers" [google]="google" [map]="map"
+                    [lat]="marker.lat" [lng]="marker.lng">
+                </app-google-map-marker>
+            </ng-template>
+        </app-google-maps> -->
+
+        </div>
+    </div>
+</div>

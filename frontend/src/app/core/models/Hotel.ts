@@ -8,6 +8,7 @@ export class Hotel {
     address: {
         city: string;
         street: string;
+        houseNumber: string;
         disctrict: string;
     }
     map: number[];

@@ -1,5 +1,7 @@
 const express = require("express");
 const Hotel = require('../models/Hotel')
+const City = require('../models/City')
+const Room = require('../models/Room')
 const router = express.Router();
 
 router.post('/hotels', async (req, res) => {
@@ -18,11 +20,37 @@ router.post('/hotels', async (req, res) => {
 
 router.get('/hotels', async (req, res) => {
 
-    const hotels = await Hotel.find();
+    const hotels = await Hotel.find()
 
-    if (!hotels) return res.status(401).send({ error: 'Hotels are empty' })
 
-    res.send(hotels)
+    var r = await Hotel.aggregate([
+        {
+            $lookup: {
+                from: "cities",
+                localField: "address.city",
+                foreignField: "_id",
+                as: "city"
+            }
+        },
+        {
+            $project: {
+                name: 1,
+                stars: 1,
+                description: 1,
+                map: 1,
+                images: 1,
+                amenities: 1,
+                address: {
+                    city: { "$arrayElemAt": ["$city", 0] },
+                    street: 1,
+                    houseNumber: 1,
+                    disctrict: 1
+                }
+            }
+          },
+    ])
+
+    res.send(r)
 })
 
 router.get('/hotels/:id', async (req, res) => {
@@ -31,9 +59,7 @@ router.get('/hotels/:id', async (req, res) => {
     console.log(req.params);
     console.log(req.body);
 
-    const hotel = await Hotel.findOne({  _id: id })
-    // const hotel = await Hotel.findOne({  _id: "5edabde015563b1ed0058862" })
-    // const hotels = await Hotel.find();
+    const hotel = await Hotel.findOne({ _id: id })
 
     if (!hotel) return res.status(401).send({ error: 'Hotel not found' })
 

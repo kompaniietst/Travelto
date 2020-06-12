@@ -4,8 +4,8 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const roomSchema = mongoose.Schema({
-    hotel_Id: {
-        type: String,
+    hotel_id: {
+        type: mongoose.Schema.ObjectId,
         trim: true
     },
     name: {

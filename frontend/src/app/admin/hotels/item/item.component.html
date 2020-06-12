@@ -1,11 +1,14 @@
 <div class="block d_flex align_center justify_content_between">
     <div class="name">
-        <strong><a>{{ item.name }}</a></strong>
+        <strong><a routerLink="/hotel/{{ item._id }}">{{ item.name }}</a></strong>
         <app-star-rating [starRating]="item.stars"></app-star-rating>
     </div>
     <div>
-        <div class="place"><span></span>{{ item.address.city }}, {{ item.address.street }}
-            {{ item.address.houseNumber }}</div>
+        <div class="place"><span></span>
+            {{ item.address.city.label }}, 
+            {{ item.address.street }}
+            {{ item.address.houseNumber }}
+        </div>
     </div>
 </div>
 
@@ -25,5 +28,3 @@
         {{ amenity.label }}
     </div>
 </div>
-
-<hr>

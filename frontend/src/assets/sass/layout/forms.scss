@@ -391,7 +391,19 @@ button.mat-menu-item {
 // }
 .form {
     .mat-form-field-infix {
+        position: relative;
         border-top: 0;
+        &:before {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-bottom: 1.5px solid $color;
+            border-right: 1.5px solid $color;
+            top: 48%;
+            transform: translate(0, -50%) rotate(45deg);
+            right: 14px;
+        }
         .form_group .mat-input-element {
             margin: 0;
         }
