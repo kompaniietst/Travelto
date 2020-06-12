@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdminService } from '../../admin.service';
 import { Amenity } from 'src/app/core/models/Amenity';
+import { Hotel } from 'src/app/core/models/Hotel';
 
 @Component({
   selector: 'app-hotel-item',
@@ -29,5 +30,18 @@ export class HotelItemComponent implements OnInit {
     this.hotelAmenities = allAmenities
       .filter((a: Amenity) => this.item.amenities
         .some((x: Amenity) => x == a._id));
+  }
+
+  edit(_id: string, hotel: Hotel) {
+
+    console.log('EDIT', hotel);
+
+
+    // this.admin.editHotel(_id, hotel)
+    //   .subscribe((x: Hotel) => console.log('edited h',x))
+  }
+
+  rem(_id: string) {
+
   }
 }

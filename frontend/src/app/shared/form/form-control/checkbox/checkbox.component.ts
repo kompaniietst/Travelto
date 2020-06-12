@@ -50,6 +50,16 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
     (this.form.get(this.control.key) as FormArray).removeAt(i);
   }
 
+  public cleanControl() {
+
+    var formArray = this.form.get(this.control.key) as FormArray;
+
+    this.control.options.filter(o => o.checked)
+      .forEach(o => o.checked = false);
+
+    formArray.clear();
+  }
+
   trackById(index, item) {
     return item.id;
   }

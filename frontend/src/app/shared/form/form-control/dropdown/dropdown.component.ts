@@ -62,4 +62,12 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
     return option?.label;
   }
 
+  cleanControl(){
+    // this.filteredOptions = this.myControl.valueChanges
+    //   .pipe(
+    //     startWith(''),
+    //     map(value => ''));
+
+    this.myControl.setValue('')
+  }
 }

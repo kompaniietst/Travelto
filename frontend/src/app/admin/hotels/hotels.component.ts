@@ -5,6 +5,9 @@ import { Component, OnInit } from '@angular/core';
   template: `
     <div class="container">
       <mat-tab-group animationDuration="0ms">
+          <mat-tab label="Add new hotel">
+              <app-add-hotel></app-add-hotel>
+          </mat-tab>
           <mat-tab label="View your hotels">
               <app-view-hotels></app-view-hotels>
           </mat-tab>

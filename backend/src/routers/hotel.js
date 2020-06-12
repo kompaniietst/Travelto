@@ -18,6 +18,33 @@ router.post('/hotels', async (req, res) => {
     }
 })
 
+router.put('/hotels/:id', async (req, res) => {
+
+    console.log(req.body, req.params);
+
+    const id = req.params.id;
+
+    User.findByIdAndUpdate({ _id: id }, req.body, { new: true },
+        function (err, result) {
+            console.log(result);
+            
+            if (err) throw err;
+            res.json(result);
+        });
+
+    // try {
+    //     const hotel = new Hotel(req.body)
+    //     await hotel.save()
+
+    //     res.status(201).send({ hotel })
+    // }
+    // catch (error) {
+    //     console.log(error);
+
+    //     res.status(400).send(error.message)
+    // }
+})
+
 router.get('/hotels', async (req, res) => {
 
     const hotels = await Hotel.aggregate([

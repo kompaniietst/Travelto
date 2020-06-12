@@ -39,11 +39,13 @@ export class AdminService {
     return this.hotelService.get();
   }
 
-  getHotelBy(hotel_id: string): Observable<Hotel> {
-    return this.hotelService.getHotelBy(hotel_id);
+  getHotelBy(_id: string): Observable<Hotel> {
+    return this.hotelService.getHotelBy(_id);
   }
 
-
+  editHotel(_id: string, hotel: Hotel): Observable<Hotel> {
+    return this.hotelService.editHotel(_id, hotel);
+  }
 
   registerAmenity(amenity: Amenity): Observable<Amenity> {
     return this.http

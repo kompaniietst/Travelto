@@ -5,7 +5,7 @@
     </div>
     <div>
         <div class="place"><span></span>
-            {{ item.address.city.label }}, 
+            {{ item.address.city.label }},
             {{ item.address.street }}
             {{ item.address.houseNumber }}
         </div>
@@ -27,4 +27,9 @@
         <img [src]="amenity.image" alt="">
         {{ amenity.label }}
     </div>
+</div>
+
+<div class="control_buttons">
+    <button class="edit" (click)="edit(item._id, item)">Edit</button>
+    <button class="rem" (click)="rem(item._id)">remove</button>
 </div>

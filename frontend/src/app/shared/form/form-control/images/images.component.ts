@@ -26,7 +26,7 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
   })
 
   selectedFiles: File[] = [];
-  imagesToShow = [];
+  public imagesToShow = [];
 
   readonly URL = environment.apiUrl;
 
@@ -50,7 +50,7 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
 
   upload(event) {
     var formData = new FormData();
-    this.selectedFiles = event.target.files;
+    var selectedFiles = event.target.files;
 
     this.showImages(event);
 
@@ -88,6 +88,10 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
     //     event.container.data,
     //     event.previousIndex, event.currentIndex);
     // }
+  }
+
+  cleanControl(){
+    this.imagesToShow = [];
   }
 
   removeImage(i: number) {

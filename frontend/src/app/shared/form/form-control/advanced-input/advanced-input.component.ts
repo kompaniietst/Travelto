@@ -1,7 +1,8 @@
-import { Component, OnInit, forwardRef, Input } from '@angular/core';
+import { Component, OnInit, forwardRef, Input, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatFormFieldControl } from '@angular/material/form-field';
+import { DropdownComponent } from '../dropdown/dropdown.component';
 
 @Component({
   selector: 'app-advanced-input',
@@ -17,6 +18,8 @@ export class AdvancedInputComponent implements OnInit, ControlValueAccessor {
 
   @Input() control: any;
   form: FormGroup = new FormGroup({})
+
+  @ViewChild(DropdownComponent) dropdownComponentRef: DropdownComponent;
 
   constructor() { }
 
