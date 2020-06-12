@@ -20,10 +20,7 @@ router.post('/hotels', async (req, res) => {
 
 router.get('/hotels', async (req, res) => {
 
-    const hotels = await Hotel.find()
-
-
-    var r = await Hotel.aggregate([
+    const hotels = await Hotel.aggregate([
         {
             $lookup: {
                 from: "cities",
@@ -47,10 +44,10 @@ router.get('/hotels', async (req, res) => {
                     disctrict: 1
                 }
             }
-          },
+        },
     ])
 
-    res.send(r)
+    res.send(hotels)
 })
 
 router.get('/hotels/:id', async (req, res) => {

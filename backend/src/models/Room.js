@@ -22,7 +22,7 @@ const roomSchema = mongoose.Schema({
     },
     specials: [],
     images: [],
-    amenities: []
+    amenities: [{ type: mongoose.Schema.ObjectId }]
 })
 
 roomSchema.pre('save', async function (next) {
