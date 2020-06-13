@@ -1,35 +1,58 @@
-<div class="block d_flex align_center justify_content_between">
+<template #entrycontainer></template>
+
+<div *ngIf="!editHotel">
+    <div class="block d_flex align_center justify_content_between">
+        <div class="name">
+            <strong><a routerLink="/hotel/{{ item._id }}">{{ item.name }}</a></strong>
+            <app-star-rating [starRating]="item.stars"></app-star-rating>
+        </div>
+        <div>
+            <div class="place"><span></span>
+                <!-- <span *ngIf="item.address.city.label != undefined">{{ item.address.city.label }},</span> -->
+                <!-- <span *ngIf="!item.address.city?.label">{{ item.address.city }},</span> -->
+                {{ item.address.city }}
+                {{ item.address.street }}
+                {{ item.address.houseNumber }}
+            </div>
+        </div>
+    </div>
+
+    <div class="block">
+        {{ item.description }}
+    </div>
+
+    <div class="block images">
+        <div *ngFor="let img of item.images" class="img">
+            <img [src]="img" alt="">
+        </div>
+    </div>
+
+    <div *ngIf="hotelAmenities" class="block amenities">
+        <div *ngFor="let amenity of hotelAmenities" class="amenity">
+            <!-- <img [src]="amenity.image" alt=""> -->
+            {{ amenity.label }}
+        </div>
+    </div>
+
+    <div class="control_buttons">
+        <button class="edit" (click)="edit(item._id, item)" class="btn">Edit</button>
+        <button class="rem" (click)="rem(item._id)" class="btn">Remove</button>
+    </div>
+</div>
+
+<div *ngIf="editHotel">
     <div class="name">
         <strong><a routerLink="/hotel/{{ item._id }}">{{ item.name }}</a></strong>
         <app-star-rating [starRating]="item.stars"></app-star-rating>
     </div>
-    <div>
-        <div class="place"><span></span>
-            {{ item.address.city.label }},
-            {{ item.address.street }}
-            {{ item.address.houseNumber }}
-        </div>
-    </div>
-</div>
 
-<div class="block">
-    {{ item.description }}
-</div>
+    <app-form 
+        [controls$]="formStructure$"  
+        [defaultData]="item" 
+        (valueChange)="onSubmit($event)" 
+        buttonName="Update" 
+        class="edit_form">
+    </app-form>
 
-<div class="block images">
-    <div *ngFor="let img of item.images" class="img">
-        <img [src]="img" alt="">
-    </div>
-</div>
-
-<div *ngIf="hotelAmenities" class="block amenities">
-    <div *ngFor="let amenity of hotelAmenities" class="amenity">
-        <img [src]="amenity.image" alt="">
-        {{ amenity.label }}
-    </div>
-</div>
-
-<div class="control_buttons">
-    <button class="edit" (click)="edit(item._id, item)">Edit</button>
-    <button class="rem" (click)="rem(item._id)">remove</button>
+    <a (click)="cancelEdit()" class="cancel">Cancel</a>
 </div>

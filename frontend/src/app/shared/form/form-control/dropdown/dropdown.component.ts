@@ -35,9 +35,11 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
   }
   registerOnTouched(fn: any): void { }
 
-
   ngOnInit(): void {
-    this.myControl.valueChanges.subscribe(x => console.log('=', x, x._id))
+    if (this.control.value) {
+      this.myControl.setValue(this.control.value)
+    }
+
 
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
@@ -62,7 +64,7 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
     return option?.label;
   }
 
-  cleanControl(){
+  cleanControl() {
     // this.filteredOptions = this.myControl.valueChanges
     //   .pipe(
     //     startWith(''),

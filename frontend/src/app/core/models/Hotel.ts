@@ -10,8 +10,8 @@ export class Hotel {
         street: string;
         houseNumber: string;
         disctrict: string;
+        map: number[];
     }
-    map: number[];
     images: string[];
     amenities: Amenity[];
 }

@@ -29,8 +29,22 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
   setDisabledState?(isDisabled: boolean): void { }
 
   ngOnInit(): void {
+    var checkedItems = [];
+
+    if (this.control.value) {
+      this.control.options
+        .filter(checkbox => this.control.value
+          .some(checked_id => checked_id == checkbox._id))
+        .forEach(checkbox => checkbox.checked = true);
+
+      checkedItems = this.control.value.map((checkbox_id: string) => new FormControl(checkbox_id))
+
+    }
+
     (this.form as FormGroup)
-      .addControl(this.control.key, new FormArray([]));
+      .addControl(this.control.key, new FormArray(checkedItems));
+
+
   }
 
   onCheckboxChange(checked: boolean, id, index: number) {

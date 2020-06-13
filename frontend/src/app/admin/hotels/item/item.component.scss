@@ -56,3 +56,20 @@ a {
     margin-right: 10px;
     color: black;
 }
+.cancel {
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+    color: $color;
+    cursor: pointer;
+}
+.control_buttons {
+    justify-content: flex-end;
+    display: flex;
+    .btn {
+        font-size: 11px;
+        margin-left: 10px;
+        height: 33px;
+        color: #414141;
+    }
+}

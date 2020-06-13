@@ -1,7 +1,7 @@
 export class Control {
     controlType: string;
     key: string;
-    value: string;
+    value: any;
     label: string;
     placeholder?: string;
     type: string;
@@ -12,7 +12,7 @@ export class Control {
     constructor(options: {
         controlType?: string;
         key?: string;
-        value?: string;
+        value?: any;
         label?: string;
         placeholder?: string;
         type?: string;

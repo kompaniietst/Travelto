@@ -3,6 +3,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor, FormGroup, FormControl, FormAr
 import { Observable } from 'rxjs';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { DropdownComponent } from '../dropdown/dropdown.component';
+import { log } from 'util';
 
 @Component({
   selector: 'app-advanced-input',
@@ -57,22 +58,28 @@ export class AdvancedInputComponent implements OnInit, ControlValueAccessor {
           switch (this.defineControlType(c)) {
 
             case 'formControl':
+
+
               (this.form.get(this.control.key) as FormGroup)
-                .addControl(c.key, new FormControl(null));
+                .addControl(c.key, new FormControl(c.value || null));
               break;
 
             case 'formArray':
-              console.log("CITY", c.controlType);
 
-              if (c.controlType == "input") {
+              if (c.controlType == "input") {      // MAP
+                var map = [new FormControl(),new FormControl()];
+
+                
+
+                if (c.value) {
+                  
+                  map = c.value.map(v => new FormControl(v))
+                }
 
                 (this.form.get(this.control.key) as FormGroup)
-                  .addControl(c.key, new FormArray([]));
+                  .addControl(c.key, new FormArray(map));
 
-                c.options.forEach(o => {
-                  ((this.form.get(this.control.key) as FormGroup).controls[c.key] as FormArray)
-                    .push(new FormControl(null))
-                });
+                
               }
 
 
@@ -104,7 +111,7 @@ export class AdvancedInputComponent implements OnInit, ControlValueAccessor {
         break;
     }
 
-    console.log('--FORM', this.form);
+
 
   }
 

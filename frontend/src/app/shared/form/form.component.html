@@ -2,7 +2,7 @@
 
     <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
 
-    <div class="controls_container">
+    <div class="controls_container" *ngIf="controls$ | async">
         <!-- <app-form-control *ngFor="let control of controls$ | async; trackBy: trackById" [control]="control"
             [form]="form" class="item form_group">
         </app-form-control> -->

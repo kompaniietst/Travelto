@@ -237,7 +237,9 @@ mat-radio-group {
 .mat-checkbox.mat-accent .mat-checkbox-frame {
     border: 1px solid #9c9c9c;
 }
-
+.mat-checkbox{
+    font-family: $font_regular;
+}
 .e-input-group.e-control-wrapper.e-date-range-wrapper {
     border: none;
 }

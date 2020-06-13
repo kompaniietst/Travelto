@@ -43,7 +43,8 @@ export class AdminService {
     return this.hotelService.getHotelBy(_id);
   }
 
-  editHotel(_id: string, hotel: Hotel): Observable<Hotel> {
+  editHotel(_id: string, hotel: Hotel): Observable<Hotel> {  
+    console.log('in serv',_id, hotel);
     return this.hotelService.editHotel(_id, hotel);
   }
 

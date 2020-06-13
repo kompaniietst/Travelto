@@ -46,7 +46,10 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
 
   setDisabledState?(isDisabled: boolean): void { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    // console.log('CONTROL', this.control);
+    this.imagesToShow = this.control.value
+  }
 
   upload(event) {
     var formData = new FormData();
@@ -90,7 +93,7 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
     // }
   }
 
-  cleanControl(){
+  cleanControl() {
     this.imagesToShow = [];
   }
 
