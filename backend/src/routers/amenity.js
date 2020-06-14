@@ -16,6 +16,33 @@ router.post('/amenities', async (req, res) => {
     }
 })
 
+router.put('/amenities/:id', async (req, res) => {
+
+    console.log(req.body, req.params);
+
+    const id = req.params.id;
+
+    Amenity.findByIdAndUpdate({ _id: id }, req.body, { new: true },
+        function (err, result) {
+            console.log(result);
+            
+            if (err) throw err;
+            res.json(result);
+        });
+
+    // try {
+    //     const hotel = new Hotel(req.body)
+    //     await hotel.save()
+
+    //     res.status(201).send({ hotel })
+    // }
+    // catch (error) {
+    //     console.log(error);
+
+    //     res.status(400).send(error.message)
+    // }
+})
+
 router.get('/amenities', async (req, res) => {
 
     const amenities = await Amenity.find();

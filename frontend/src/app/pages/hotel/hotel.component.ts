@@ -33,7 +33,11 @@ export class HotelComponent implements OnInit {
 
     this.admin
       .getHotelBy(this.id)
-      .subscribe((h: Hotel) => this.hotel = h)
+      .subscribe((h: Hotel) => {
+        this.hotel = h
+        console.log(this.hotel);
+      }
+      )
 
 
     this.rooms$ = this.admin
@@ -70,7 +74,8 @@ export class HotelComponent implements OnInit {
   };
 
   ngOnInit(): void {
-
+    console.log(this.hotel);
+    
     this.rooms$ = this.admin
       .getRoomsByHotel(this.id)
 
@@ -78,7 +83,7 @@ export class HotelComponent implements OnInit {
       .subscribe(h => console.log(h),
         er => console.log(er))
 
-    console.log(this.id);
+   
 
 
   }

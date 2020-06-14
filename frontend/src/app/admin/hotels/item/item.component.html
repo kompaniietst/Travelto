@@ -29,7 +29,7 @@
 
     <div *ngIf="hotelAmenities" class="block amenities">
         <div *ngFor="let amenity of hotelAmenities" class="amenity">
-            <!-- <img [src]="amenity.image" alt=""> -->
+            <img [src]="amenity.image" alt="">
             {{ amenity.label }}
         </div>
     </div>

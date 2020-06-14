@@ -22,7 +22,7 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
   @Input() control: Control;
 
   form: FormGroup = new FormGroup({
-    // array: new FormArray([])
+    // formKey: new FormArray([])
   })
 
   selectedFiles: File[] = [];
@@ -40,7 +40,7 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
   writeValue(obj: any): void { }
 
   registerOnChange(fn: any): void {
-    this.form.controls.array.valueChanges.subscribe(fn)
+    this.form.controls.formKey.valueChanges.subscribe(fn)
   }
 
   registerOnTouched(fn: any): void { }
@@ -49,29 +49,28 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {
     var defaultData = this.control.value;
-    console.log('GGGGG',defaultData);
-    this.form.addControl('array', new FormArray([]))
+    console.log('GGGGG', defaultData);
 
     if (defaultData && Array.isArray(defaultData)) { // form multiple images
       this.imagesToShow = defaultData;
 
+      this.form.addControl('formKey', new FormArray([]))
 
       defaultData.forEach(x => {
-        (this.form.get('array') as FormArray)
+        (this.form.get('formKey') as FormArray)
           .push(new FormControl(x))
       })
       return;
     }
 
     if (defaultData) {
-      // this.form.addControl('array', new FormControl(defaultData))  // form single images
-      (this.form.get('array') as FormArray)
-          .push(new FormControl(defaultData))
+      this.form.addControl('formKey', new FormControl(defaultData)); // form single images
+
       this.imagesToShow = [defaultData];
       return
     }
 
-    this.form.addControl('array', new FormArray([]))
+    this.form.addControl('formKey', new FormArray([]))
   }
 
   upload(event) {
@@ -92,10 +91,28 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
         (x: any) => {
           console.log('load', x);
           this.showSpinner = false;
-          x.forEach((img: any) => {
-            (this.form.get('array') as FormArray)
-              .push(new FormControl(`${this.URL}/images/${this.control.type}/` + img));
-          });
+
+          var defaultData = this.control.value;
+          console.log('DEFAULT', this.control.value);
+
+
+          if (defaultData && Array.isArray(defaultData)) { // form multiple images
+            this.imagesToShow = defaultData;
+
+            x.forEach((img: any) => {
+              (this.form.get('formKey') as FormArray)
+                .push(new FormControl(`${this.URL}/images/${this.control.type}/` + img));
+            });
+            return;
+          }
+
+          if (defaultData) {
+            console.log('FORM', this.form, x);
+            this.form.get('formKey').setValue(`${this.URL}/images/${this.control.type}/` + x[0].filename)
+            return
+          }
+
+
         },
         err => console.log(err))
   }
@@ -111,25 +128,13 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
     });
   }
 
-  onDrop(event: CdkDragDrop<string[]>) {
-    // if (event.previousContainer === event.container) {
-    //   moveItemInArray(event.container.data,
-    //     event.previousIndex,
-    //     event.currentIndex);
-    // } else {
-    //   transferArrayItem(event.previousContainer.data,
-    //     event.container.data,
-    //     event.previousIndex, event.currentIndex);
-    // }
-  }
-
   cleanControl() {
     this.imagesToShow = [];
   }
 
   removeImage(i: number) {
     this.imagesToShow.splice(i, 1);
-    (this.form.get('array') as FormArray).removeAt(i);
+    (this.form.get('formKey') as FormArray).removeAt(i);
   }
 
   trackById(index, item) {

@@ -1,9 +1,10 @@
-.mat-spinner{
+.mat-spinner {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
-}            .remove {
+    transform: translate(-50%, -50%);
+}
+.remove {
     position: absolute;
     width: 35px;
     height: 35px;
@@ -11,7 +12,6 @@
     border-radius: 50px;
     right: 12px;
     top: 12px;
-    cursor: pointer;
     display: flex;
     cursor: pointer;
     justify-content: center;

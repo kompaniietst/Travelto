@@ -60,6 +60,14 @@ export class AdminService {
       .get<Amenity[]>(`${this.URL}/amenities`)
   }
 
+  editAmenity(_id: string, amenity: Amenity): Observable<Amenity> {
+    console.log('in serv', _id, amenity);
+
+    return this.http.put<Amenity>(`${this.URL}/amenities/${_id}`, amenity)
+
+    // return this.hotelService.editAmenity(_id, amenity)
+    //   .pipe(delay(1500))
+  }
 
 
   registerCity(city: City): Observable<City> {

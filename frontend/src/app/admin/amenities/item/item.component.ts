@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Amenity } from 'src/app/core/models/Amenity';
 import { Control } from 'src/app/core/models/Control';
 import { Observable, of } from 'rxjs';
+import { AdminService } from '../../admin.service';
+import { AlertMessageService } from 'src/app/core/services/alert-message.service';
 
 @Component({
   selector: 'app-amenity-item',
@@ -16,7 +18,9 @@ export class AmenityItemComponent implements OnInit {
   showSpinner = false;
   editItem: boolean = false;
 
-  constructor() { }
+  constructor(private admin: AdminService,
+    private alert: AlertMessageService
+  ) { }
 
   ngOnInit(): void { }
 
@@ -63,20 +67,20 @@ export class AmenityItemComponent implements OnInit {
   }
 
   onSubmit(formData: any) {
-    // this.showSpinner = true;
-    // console.log('on edit', formData);
-    // this.admin.editHotel(this.item._id, formData)
-    //   .subscribe(
-    //     x => {
-    //       console.log('sss', x);
-    //       this.alert.success("Item is successfuly edit");
-    //       this.showSpinner = false;
-    //       setTimeout(() => {
-    //         this.editItem = false
-    //       }, 1500);
-    //     },
-    //     err => console.log(err)
-    //   )
+    this.showSpinner = true;
+    console.log('on edit', formData);
+    this.admin.editAmenity(this.item._id, formData)
+      .subscribe(
+        x => {
+          console.log('sss', x);
+          this.alert.success("Item is successfuly updated");
+          this.showSpinner = false;
+          setTimeout(() => {
+            this.editItem = false
+          }, 1500);
+        },
+        err => console.log(err)
+      )
   }
 
 }

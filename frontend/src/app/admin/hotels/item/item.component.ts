@@ -176,7 +176,7 @@ export class HotelItemComponent<T> implements OnInit {
       .subscribe(
         x => {
           console.log('sss', x);
-          this.alert.success("Item is successfuly edit");
+          this.alert.success("Item is successfuly updated");
           this.showSpinner = false;
           setTimeout(() => {
             this.editItem = false
