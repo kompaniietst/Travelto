@@ -1,6 +1,10 @@
 <div [formGroup]="form" class="">
     <div class="upload_button">
-        <input type="file" [placeholder]="control.placeholder" multiple #imageInputs (change)="upload($event)">
+        <input type="file" 
+            [placeholder]="control.placeholder" 
+            multiple 
+            #imageInputs 
+            (change)="upload($event)">
         <div>
             <span></span>
             Upload images
@@ -11,7 +15,8 @@
         [cdkDropListData]="selectedFiles" (cdkDropListDropped)="onDrop($event)">
         <mat-card *ngFor="let item of imagesToShow; trackBy: trackById; index as i" cdkDrag>
             <div class="remove" (click)="removeImage(i)"><span class="icon icon_trash"></span></div>
-           <img [src]="item" alt="">
+            <mat-spinner *ngIf="showSpinner" strokeWidth="3" diameter="20"></mat-spinner>
+            <img [src]="item" alt="">
         </mat-card>
     </div>
 </div>

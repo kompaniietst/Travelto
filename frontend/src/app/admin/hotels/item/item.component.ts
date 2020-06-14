@@ -6,10 +6,11 @@ import { Hotel } from 'src/app/core/models/Hotel';
 import { FormComponent } from 'src/app/shared/form/form.component';
 import { TestComponent } from 'src/app/test/test.component';
 import { ConvertToFormStructureService } from 'src/app/core/services/convert-to-form-structure.service';
-import { of, forkJoin } from 'rxjs';
+import { of, forkJoin, Observable } from 'rxjs';
 import { Control } from 'src/app/core/models/Control';
 import { City } from 'src/app/core/models/City';
 import { log } from 'util';
+import { AlertMessageService } from 'src/app/core/services/alert-message.service';
 
 @Component({
   selector: 'app-hotel-item',
@@ -23,13 +24,15 @@ export class HotelItemComponent<T> implements OnInit {
   hotelAmenities: Amenity[];
   allAmenities: Amenity[];
 
-  formStructure$
+  formStructure$: Observable<Control[]>;
+  showSpinner = false;
+  editItem: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private admin: AdminService,
-    private resolver: ComponentFactoryResolver,
+    private alert: AlertMessageService,
     private converToForm: ConvertToFormStructureService<T>
   ) {
     this.admin.getAmenities()
@@ -55,13 +58,10 @@ export class HotelItemComponent<T> implements OnInit {
         .some((x: Amenity) => x == a._id));
   }
 
-  editHotel: boolean = false;
-  controls$
+
 
   edit(_id: string, hotel: Hotel) {
-
-    this.editHotel = true;
-
+    this.editItem = true;
   }
 
   initFormStructure(amenities: Amenity[], cities: City[]) {
@@ -166,14 +166,22 @@ export class HotelItemComponent<T> implements OnInit {
   }
 
   cancelEdit() {
-    this.editHotel = false;
+    this.editItem = false;
   }
 
   onSubmit(formData: any) {
+    this.showSpinner = true;
     console.log('on edit', formData);
     this.admin.editHotel(this.item._id, formData)
       .subscribe(
-        x => this.editHotel = false,
+        x => {
+          console.log('sss', x);
+          this.alert.success("Item is successfuly edit");
+          this.showSpinner = false;
+          setTimeout(() => {
+            this.editItem = false
+          }, 1500);
+        },
         err => console.log(err)
       )
   }

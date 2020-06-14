@@ -62,7 +62,7 @@
                             <div *ngIf="item.label" class="label" [ngClass]="{'required': item.required }">
                                 {{ item.label }}
                             </div>
-                            <div formArrayName="map" *ngFor="let _ of item.options; trackBy: trackById; let i = index">
+                            <div [formArrayName]="item.key" *ngFor="let _ of item.options; trackBy: trackById; let i = index">
                                 <input type="text" [formControlName]="i" [type]="item.type"
                                     [placeholder]="item.options[i].placeholder">
                             </div>

@@ -52,7 +52,8 @@ function uploadImages(folderName) {
 
 app.use('/images/hotels', express.static(__dirname + '/uploads/hotels'));
 app.post('/images/hotels', uploadImages('hotels').array('files'), function (req, res, next) {
-    res.send(req.files);
+    const files = req.files.map(f => f.filename);
+    res.send(files);
 });
 
 app.use('/images/rooms', express.static(__dirname + '/uploads/rooms'));

@@ -25,6 +25,7 @@ import { ViewRoomsComponent } from './rooms/view/view.component';
 import { RoomItemComponent } from './rooms/item/item.component';
 import { StarRatingComponent } from '../shared/star-rating/star-rating.component';
 import { CoreModule } from '../core/core.module';
+import { AmenityItemComponent } from './amenities/item/item.component';
 
 const routes: Routes = []
 
@@ -44,6 +45,7 @@ const COMPONENTS = [
   AmenitiesComponent,
   AddAmenitiesComponent,
   ViewAmenitiesComponent,
+  AmenityItemComponent,
 
   CitiesComponent,
   AddCitiesComponent,
@@ -68,7 +70,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, AmenityItemComponent],
   imports: [...MODULES],
   exports: [...COMPONENTS]
 })

@@ -237,7 +237,7 @@ mat-radio-group {
 .mat-checkbox.mat-accent .mat-checkbox-frame {
     border: 1px solid #9c9c9c;
 }
-.mat-checkbox{
+.mat-checkbox {
     font-family: $font_regular;
 }
 .e-input-group.e-control-wrapper.e-date-range-wrapper {
@@ -410,12 +410,17 @@ button.mat-menu-item {
             margin: 0;
         }
     }
-    .mat-form-field-appearance-legacy .mat-form-field-label {
-        top: 50%;
-        left: 10px;
-        position: relative;
-        transform: translate(0, -50%);
-        font-family: $font_regular;
+    .mat-form-field-appearance-legacy {
+        .mat-form-field-label {
+            top: 50%;
+            left: 10px;
+            position: relative;
+            transform: translate(0, -50%);
+            font-family: $font_regular;
+        }
+        .mat-form-field-wrapper {
+            padding: 0;
+        }
     }
 }
 input[type="number"]::-webkit-inner-spin-button {

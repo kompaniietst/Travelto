@@ -4,11 +4,6 @@
     No amenities yet
 </div>
 
-<div class="items">
-    <div *ngFor="let item of amenities$ | async" class="item">
-        <div class="img">
-            <img [src]="item.image" alt="">
-        </div>
-        <div class="label">{{ item.label }}</div>
-    </div>
+<div *ngFor="let item of amenities$ | async">
+    <app-amenity-item [item]="item"></app-amenity-item>
 </div>

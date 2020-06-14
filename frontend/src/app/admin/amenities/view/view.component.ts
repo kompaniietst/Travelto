@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
 import { HttpClient } from '@angular/common/http';
 import { AdminService } from '../../admin.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Amenity } from 'src/app/core/models/Amenity';
+import { Control } from 'src/app/core/models/Control';
 
 @Component({
   selector: 'app-view-amenities',
@@ -16,13 +17,10 @@ export class ViewAmenitiesComponent implements OnInit {
 
   constructor(
     private admin: AdminService,
-    private alert: AlertMessageService,
-    private http: HttpClient
   ) {
 
     this.amenities$ = this.admin.getAmenities();
   }
 
   ngOnInit(): void { }
-
 }

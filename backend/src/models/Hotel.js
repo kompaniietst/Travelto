@@ -32,13 +32,13 @@ const hotelSchema = mongoose.Schema({
             type: String,
             trim: true
         },
+        map: [0, 0],
     },
-    map: [],
 
     images: [],
 
     amenities: []
-    
+
 })
 
 hotelSchema.pre('save', async function (next) {

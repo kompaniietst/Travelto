@@ -20,31 +20,31 @@ export class AddAmenitiesComponent implements OnInit {
   ) { }
 
 
-  formStructure$ = of([
+  // formStructure$ = of([
 
-    new Control({
-      controlType: 'input',
-      key: 'label',
-      placeholder: 'Label:',
-    }),
+  //   new Control({
+  //     controlType: 'input',
+  //     key: 'label',
+  //     placeholder: 'Label:',
+  //   }),
 
-    new Control({
-      controlType: 'radio',
-      key: 'checked',
-      placeholder: 'Checked:',
-      options: [
-        { id: 0, label: 'Not checked', checked: true },
-        { id: 1, label: 'Checked', checked: false },
-      ]
-    }),
+  //   new Control({
+  //     controlType: 'radio',
+  //     key: 'checked',
+  //     placeholder: 'Checked:',
+  //     options: [
+  //       { id: 0, label: 'Not checked', checked: true },
+  //       { id: 1, label: 'Checked', checked: false },
+  //     ]
+  //   }),
 
-    new Control({
-      controlType: 'images',
-      key: 'images',
-      type: "amenities",
-      options: []
-    }),
-  ])
+  //   new Control({
+  //     controlType: 'images',
+  //     key: 'images',
+  //     type: "amenities",
+  //     options: []
+  //   }),
+  // ])
 
   onSubmit(formData) {
     this.showSpinner = true;

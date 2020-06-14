@@ -22,17 +22,18 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
   @Input() control: Control;
 
   form: FormGroup = new FormGroup({
-    array: new FormArray([])
+    // array: new FormArray([])
   })
 
   selectedFiles: File[] = [];
   public imagesToShow = [];
 
   readonly URL = environment.apiUrl;
+  showSpinner = false;
+  currId: string;
 
   constructor(
     private router: Router,
-    private http: HttpClient,
     private admin: AdminService
   ) { }
 
@@ -47,8 +48,30 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
   setDisabledState?(isDisabled: boolean): void { }
 
   ngOnInit(): void {
-    // console.log('CONTROL', this.control);
-    this.imagesToShow = this.control.value
+    var defaultData = this.control.value;
+    console.log('GGGGG',defaultData);
+    this.form.addControl('array', new FormArray([]))
+
+    if (defaultData && Array.isArray(defaultData)) { // form multiple images
+      this.imagesToShow = defaultData;
+
+
+      defaultData.forEach(x => {
+        (this.form.get('array') as FormArray)
+          .push(new FormControl(x))
+      })
+      return;
+    }
+
+    if (defaultData) {
+      // this.form.addControl('array', new FormControl(defaultData))  // form single images
+      (this.form.get('array') as FormArray)
+          .push(new FormControl(defaultData))
+      this.imagesToShow = [defaultData];
+      return
+    }
+
+    this.form.addControl('array', new FormArray([]))
   }
 
   upload(event) {
@@ -57,17 +80,24 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
 
     this.showImages(event);
 
-    for (const file of this.selectedFiles) {
+    for (const file of event.target.files) {
       formData.append('files', file)
     }
 
+    console.log('this.control.type', this.control.type);
+
+    this.showSpinner = true;
     this.admin.uploadImages(this.control.type, formData)
-      .subscribe((x: any) => {
-        x.forEach((img: any) => {
-          (this.form.get('array') as FormArray)
-            .push(new FormControl(`${this.URL}/images/${this.control.type}/` + img.filename));
-        });
-      })
+      .subscribe(
+        (x: any) => {
+          console.log('load', x);
+          this.showSpinner = false;
+          x.forEach((img: any) => {
+            (this.form.get('array') as FormArray)
+              .push(new FormControl(`${this.URL}/images/${this.control.type}/` + img));
+          });
+        },
+        err => console.log(err))
   }
 
   showImages(event) {

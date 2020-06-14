@@ -43,9 +43,10 @@ export class AdminService {
     return this.hotelService.getHotelBy(_id);
   }
 
-  editHotel(_id: string, hotel: Hotel): Observable<Hotel> {  
-    console.log('in serv',_id, hotel);
-    return this.hotelService.editHotel(_id, hotel);
+  editHotel(_id: string, hotel: Hotel): Observable<Hotel> {
+    console.log('in serv', _id, hotel);
+    return this.hotelService.editHotel(_id, hotel)
+      .pipe(delay(1500))
   }
 
   registerAmenity(amenity: Amenity): Observable<Amenity> {
@@ -91,8 +92,8 @@ export class AdminService {
   }
 
 
-  uploadImages(route, imageData) {
-    return this.http.post(`${this.URL}/images/${route}`, imageData)
+  uploadImages(path: string, imageData) {
+    return this.http.post(`${this.URL}/images/${path}`, imageData)
       .pipe(delay(1500))
   }
 }

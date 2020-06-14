@@ -47,15 +47,25 @@ export class FormComponent<T> implements OnInit {
     this.controls$.subscribe(x => console.log(x))
     this.form = this.generateForm.defineStructure(this.controls$);
 
+    console.log(this.form);
+
     if (this.defaultData) {
+
+      console.log(this.defaultData);
 
       for (const key of Object.keys(this.defaultData)) {
         var value = this.defaultData[key];
 
-        if (key == '_id') continue 
+        if (key == '_id') continue
+
+        // console.log('-------');
+        // console.log(key);
 
         this.form.get(key).setValue(value)
       }
+
+      console.log('f', this.form);
+
     }
 
 

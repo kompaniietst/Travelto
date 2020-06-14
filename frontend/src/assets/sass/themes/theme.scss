@@ -1,4 +1,4 @@
-@import 'src/assets/sass/abstracts/variables.scss';
+@import "src/assets/sass/abstracts/variables.scss";
 html,
 body {
     height: 100%;
@@ -184,4 +184,21 @@ form {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: $color;
+}
+.control_buttons {
+    justify-content: flex-end;
+    display: flex;
+    .btn {
+        font-size: 11px;
+        margin-left: 10px;
+        height: 33px;
+        color: #414141;
+    }
+}
+.cancel {
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+    color: $color;
+    cursor: pointer;
 }
