@@ -8,15 +8,15 @@
     border-radius: 3px;
 }
 .block {
-    margin: 20px 0;
+    margin: 26px 0;
     &.images {
         display: flex;
         flex-wrap: wrap;
         .img {
-            width: 15%;
-            height: 100px;
+            width: 25%;
+            height: 154px;
             overflow: hidden;
-            margin-right: 1px;
+            padding-right: 1px;
             margin-bottom: 1px;
             img {
                 height: 100%;
@@ -28,12 +28,22 @@
     &.amenities {
         flex-wrap: wrap;
         display: flex;
-        width: 57%;
         .amenity {
-            width: 33.3%;
             align-items: center;
             display: flex;
-            font-size: 12px;
+            font-size: 14px;
+            margin: 6px 35px 6px 0;
+            color: grey;
+            position: relative;
+            &:before {
+                content: "";
+                position: absolute;
+                width: 5px;
+                height: 5px;
+                background: #565656;
+                right: -18px;
+                border-radius: 8px;
+            }
             img {
                 width: 16px;
                 height: auto;

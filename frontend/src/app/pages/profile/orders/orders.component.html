@@ -43,10 +43,10 @@
             <div class="button">
                 <div class="place"><span></span>{{ room.hotel_address.city }}, {{ room.hotel_address.street }}</div>
                 <div class="text_center">
-                    {{ room.price | currency }} <span class="currency">$</span> x {{ room.nightCount }} nights <br>
+                    {{ room.price | customCurrency }} <span class="currency">$</span> x {{ room.nightCount }} nights <br>
                     <div class="price">
                         <span class="blue">
-                            <strong>{{ room.price * room.nightCount  | currency }} 
+                            <strong>{{ room.price * room.nightCount  | customCurrency }} 
                                 <span class="currency">$</span></strong>
                         </span>
                     </div>

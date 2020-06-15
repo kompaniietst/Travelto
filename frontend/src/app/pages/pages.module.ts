@@ -26,6 +26,7 @@ const COMPONENTS = [
   OrdersComponent,
   FavoriteComponent,
   HotelComponent,
+
 ];
 
 const MODULES = [
@@ -34,7 +35,7 @@ const MODULES = [
 
   MatProgressSpinnerModule,
   SlickCarouselModule,
-  
+
   RouterModule.forRoot(routes),
   SharedModule,
 ]

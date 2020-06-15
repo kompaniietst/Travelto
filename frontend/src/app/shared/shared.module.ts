@@ -33,6 +33,7 @@ import { CheckboxComponent } from './form/form-control/checkbox/checkbox.compone
 import { StarRatingComponent } from './star-rating/star-rating.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { SpecialComponent } from './special/special.component';
 
 
 const routes: Routes = []
@@ -53,7 +54,8 @@ const COMPONENTS = [
   WrapperComponent,
   StarRatingComponent,
   CarouselComponent,
-  FeedbackComponent
+  FeedbackComponent,
+  SpecialComponent
 ];
 
 const MODULES = [
@@ -79,7 +81,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, StarRatingComponent, CarouselComponent, FeedbackComponent],
+  declarations: [...COMPONENTS, StarRatingComponent, CarouselComponent, FeedbackComponent, SpecialComponent],
   imports: [...MODULES],
   exports: [...COMPONENTS,
     FormsModule, ReactiveFormsModule

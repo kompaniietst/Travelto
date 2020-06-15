@@ -1,4 +1,4 @@
-<div class="block d_flex align_center justify_content_between">
+<div class="block d_flex flex_wrap align_center justify_content_between">
     <div class="name">
         <strong><a>{{ item.name }}</a></strong>
     </div>
@@ -19,6 +19,7 @@
 </div>
 
 <div class="block images">
+    <app-special [specials]="item.specials"></app-special>
     <div *ngFor="let img of item.images" class="img">
         <img [src]="img" alt="">
     </div>

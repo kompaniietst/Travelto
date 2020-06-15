@@ -1,19 +1,7 @@
-
-
-
-
-
-
-
-
 .currency {
     font-family: "Arial";
     font-size: 90%;
 }
-
-
-
-
 
 .rating {
     font-size: 16px;
@@ -34,7 +22,7 @@
 .place {
     font-size: 13px;
     color: #484848;
-
+    font-family: $font_regular;
     span {
         background: url(src/assets/images/icons/form/map.svg) no-repeat left;
         background-size: 13px;

@@ -1,3 +1,30 @@
+@import "src/assets/sass/abstracts/variables.scss";
+.mainscreen {
+    position: relative;
+    .inner_page_header {
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        transform: translate(0, -50%);
+        h1 {
+            color: white;
+            font-size: 47px;
+        }
+        .place {
+            color: white;
+            font-size: 16px;
+            display: flex;
+            span {
+                filter: grayscale(1) brightness(0) invert(1);
+                padding-left: 27px;
+                opacity: 0.5;
+                transform: scale(1.5);
+                margin-left: 10px;
+                display: block;
+            }
+        }
+    }
+}
 .page_inner_description {
     width: 100%;
 }
@@ -39,10 +66,11 @@
     border-radius: 3px;
     margin: 0 0 10px;
     padding: 14px;
+    width: 50%;
     .img {
         flex: 2;
         height: 200px;
-        width: 300px;
+        width: 270px;
     }
     .center_block {
         flex: 7;
@@ -52,9 +80,15 @@
         flex: 3;
         border-left: 1px solid #dedede;
         padding-left: 16px;
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: space-between;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
+        .buttons {
+            margin: 16px 10px 22px;
+        }
     }
 }
 h4 {
@@ -65,7 +99,11 @@ h4 {
 .item_container {
     display: flex;
 }
-.feedbacks{
+.feedbacks {
     margin: 0 -10px;
     display: flex;
+}
+h4 {
+    font-size: 17px;
+    font-family: $font_bold;
 }

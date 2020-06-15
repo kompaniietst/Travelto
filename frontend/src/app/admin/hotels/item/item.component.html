@@ -19,16 +19,15 @@
         {{ item.description }}
     </div>
 
-    <div class="block images">
-        <div *ngFor="let img of item.images" class="img">
-            <img [src]="img" alt="">
+    <div class="block amenities">
+        <div *ngFor="let amenity of item.amenities" class="amenity">
+            {{ amenity.label }}
         </div>
     </div>
 
-    <div class="block amenities">
-        <div *ngFor="let amenity of item.amenities" class="amenity">
-            <img [src]="amenity.image" alt="">
-            {{ amenity.label }}
+    <div class="block images">
+        <div *ngFor="let img of item.images" class="img">
+            <img [src]="img" alt="">
         </div>
     </div>
 

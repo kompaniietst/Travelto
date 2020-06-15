@@ -1,26 +1,28 @@
 <div *ngIf="hotel">
-    <div class="container">
-        <div class="inner_page_header">
-            <h1>
-                {{ hotel.name }}
-                <app-star-rating *ngIf="hotel.stars" [starRating]="hotel.stars"></app-star-rating>
-            </h1>
-            <div class="place" *ngIf="hotel.address.city">
-                <span></span>
-                {{ hotel.address.city.label }}, {{ hotel.address.street }} {{ hotel.address.houseNumber }}
-                <a routerLink="." fragment="address" class="place">
-                    <strong>Посмотреть на карте</strong>
-                </a>
+    
+    <div class="mainscreen">
+        <div class="container">
+            <div class="inner_page_header">
+                <h1>
+                    {{ hotel.name }}
+                    <app-star-rating *ngIf="hotel.stars"
+                        [starRating]="hotel.stars">
+                    </app-star-rating>
+                </h1>
+                <div class="place" *ngIf="hotel.address.city">
+                    <span></span>
+                    {{ hotel.address.city.label }}, {{ hotel.address.street }} {{ hotel.address.houseNumber }}
+                </div>
             </div>
         </div>
-    </div>
 
-    <app-carousel 
-        [slides]="hotel.images" 
-        [config]="carouselConfig"
-        needCountSlides="true"
-        class="hotel"
-    ></app-carousel>
+        <app-carousel 
+            [slides]="hotel.images" 
+            [config]="carouselConfig"
+            needCountSlides="true"
+            class="hotel">
+        </app-carousel>
+    </div>
 
     <div class="container">
         <div class="section" *ngIf="hotel.description.length > 0">
@@ -31,39 +33,41 @@
 
         <!-- Rooms -->
         <div class="section">
-            <div *ngIf="(rooms$ | async).length == 0">
+            <div *ngIf="(rooms$ | async)?.length == 0">
                 No rooms yes
             </div>
             <div class="title">
                 <strong>Выберите номер:</strong>
             </div>
             <div class="list">
-                <div *ngFor="let item of rooms$ | async" class="item">
+                <div *ngFor="let room of rooms$ | async" class="item">
 
-                    <h4>{{ item.name }}</h4>
+                    <h4>{{ room.name }}</h4>
 
                     <div class="item_container">
                         <div class="img">
-                            <!-- <app-carousel [id]="item._id" [imgs]="item.images" [config]="carouselConfigRooms"
-                                class="advanced">
-                            </app-carousel> -->
+                            <app-special [specials]="room.specials"></app-special>
+
+                            <app-carousel [id]="room._id" 
+                                [slides]="room.images" 
+                                [config]="carouselConfigRooms"
+                                class="hotel_room">
+                            </app-carousel>
                         </div>
                         <div class="center_block">
-                            <div *ngFor="let amenity of item.amenities">
-                                {{ amenity }}
-                            </div>
+                         <!--    // amenities? -->
                         </div>
                         <div class="end_block">
 
 
 
 
-<!-- 
+
                             <div class="details">
                                 <div class="price text_center">
                                     <span class="blue">
                                         <strong>
-                                            {{ item.price | currency}} <span class="currency">$</span>
+                                            {{ room.price }} <span class="currency">$</span>
                                         </strong>
                                     </span> / night </div>
                                 <div class="buttons ng-star-inserted">
@@ -71,7 +75,7 @@
                                         <span>Выбран</span>
                                     </button>
                                 </div>
-                            </div> -->
+                            </div>
 
 
 

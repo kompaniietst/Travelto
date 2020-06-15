@@ -1,0 +1,28 @@
+:host {
+    position: absolute;
+    z-index: 1;
+
+    .special {
+        margin: 4px;
+        padding: 7px 12px;
+        display: table;
+        font-weight: bold;
+        font-size: 13px;
+        border-radius: 3px;
+    }
+    .discount {
+        background: #f8c130;
+        border: 1px solid #f8c130;
+        color: white;
+    }
+    .recommend {
+        color: #409f2a;
+        background: #eefbeb;
+        border: 1px solid #6bc456;
+    }
+    .bestprice {
+        color: #af73b0;
+        background: #fbf3fb;
+        border: 1px solid #c78ec8;
+    }
+}

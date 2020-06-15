@@ -1,0 +1,12 @@
+<div *ngFor="let item of specials; trackBy: trackById;" class="special"
+    [ngClass]="{ 'discount': item._id==1, 'recommend': item._id==2, 'bestprice': item._id==3 }">
+
+    <ng-container *ngIf="item.id == 1, else default">
+        - {{ item.label }} %
+    </ng-container>
+    
+    <ng-template #default>
+        {{ item.label }}
+    </ng-template>
+
+</div>

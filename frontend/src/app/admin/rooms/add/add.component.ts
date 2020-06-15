@@ -42,6 +42,7 @@ export class AddRoomComponent implements OnInit {
   ngOnInit(): void { }
 
   initFormStructure(amenities: Amenity[], hotels: { _id: string, label: string }[]) {
+    
     this.formStructure$ = of([
       new Control({
         controlType: 'dropdown',
