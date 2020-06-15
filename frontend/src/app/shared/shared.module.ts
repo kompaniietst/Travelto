@@ -8,6 +8,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AlertMessageComponent } from './alert-message/alert-message.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
@@ -30,6 +31,7 @@ import { DropdownComponent } from './form/form-control/dropdown/dropdown.compone
 import { RadioFinalComponent } from './form/form-control/radio-final/radio-final.component';
 import { CheckboxComponent } from './form/form-control/checkbox/checkbox.component';
 import { StarRatingComponent } from './star-rating/star-rating.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 
 const routes: Routes = []
@@ -39,7 +41,6 @@ const COMPONENTS = [
   ProfileTriggerComponent,
   AlertMessageComponent,
   SidebarComponent,
-
   NavbarComponent,
   FormComponent,
   FormControlComponent,
@@ -50,6 +51,7 @@ const COMPONENTS = [
   CheckboxComponent,
   WrapperComponent,
   StarRatingComponent,
+  CarouselComponent
 ];
 
 const MODULES = [
@@ -69,12 +71,13 @@ const MODULES = [
   MatProgressSpinnerModule,
 
   FormsModule, ReactiveFormsModule,
+  SlickCarouselModule,
 
   RouterModule.forRoot(routes)
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, StarRatingComponent],
+  declarations: [...COMPONENTS, StarRatingComponent, CarouselComponent],
   imports: [...MODULES],
   exports: [...COMPONENTS,
     FormsModule, ReactiveFormsModule

@@ -15,6 +15,13 @@
         </div>
     </div>
 
+    <app-carousel 
+        [slides]="hotel.images" 
+        [config]="carouselConfig"
+        needCountSlides="true"
+        class="hotel"
+    ></app-carousel>
+
     <div class="container">
         <div class="section" *ngIf="hotel.description.length > 0">
             <div class="title"><strong>Описание:</strong></div>
@@ -51,7 +58,7 @@
 
 
 
-
+<!-- 
                             <div class="details">
                                 <div class="price text_center">
                                     <span class="blue">
@@ -64,7 +71,7 @@
                                         <span>Выбран</span>
                                     </button>
                                 </div>
-                            </div>
+                            </div> -->
 
 
 

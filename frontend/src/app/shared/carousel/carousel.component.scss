@@ -1,0 +1,44 @@
+:host {
+    &.hotel {
+        .slick-slide {
+            height: 460px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+    .count_slides {
+        background: rgba(0, 0, 0, 0.47);
+        border-radius: 66px;
+        position: absolute;
+        bottom: 15px;
+        z-index: 1;
+        color: white;
+        padding: 5px 15px;
+        margin-bottom: 30px;
+        left: 60px;
+    }
+}
+
+:host .carousel ::ng-deep {
+    .slick-slide {
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .slick-prev {
+        left: 60px;
+        z-index: 1;
+    }
+    .slick-next {
+        right: 60px;
+    }
+    .slick-prev:before,
+    .slick-next:before {
+        font-size: 36px;
+    }
+}

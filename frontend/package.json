@@ -22,7 +22,10 @@
     "@angular/platform-browser-dynamic": "~9.1.10",
     "@angular/router": "~9.1.10",
     "angular-material": "^1.1.22",
+    "jquery": "^3.5.1",
+    "ngx-slick-carousel": "^0.5.1",
     "rxjs": "~6.5.4",
+    "slick-carousel": "^1.8.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

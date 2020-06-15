@@ -13,6 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PersonalComponent } from './profile/personal/personal.component';
 import { HotelComponent } from './hotel/hotel.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 
 const routes: Routes = []
@@ -32,7 +33,8 @@ const MODULES = [
   CommonModule,
 
   MatProgressSpinnerModule,
-
+  SlickCarouselModule,
+  
   RouterModule.forRoot(routes),
   SharedModule,
 ]

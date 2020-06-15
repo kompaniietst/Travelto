@@ -68,6 +68,7 @@ export class HotelComponent implements OnInit {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
+    arrows: true
   };
 
   carouselConfigRooms = {
