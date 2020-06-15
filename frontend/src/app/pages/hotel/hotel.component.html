@@ -105,6 +105,16 @@
             </div>
         </div>
 
+        <div class="section" *ngIf="hotel.feedbacks && hotel.feedbacks.length > 0">
+            <div class="title"><strong>Отзывы</strong></div>
+            <div class="d_flex flex_wrap" class="feedbacks">
+                <app-feedback *ngFor="let feedback of hotel.feedbacks; trackBy: trackById;" 
+                    [feedback]="feedback"
+                    class="hotel">
+                </app-feedback>
+            </div>
+        </div>
+
         <div class="section" id="address">
             <div class="title"><strong>Расположение</strong></div>
             <div class="place"><span></span>{{ hotel.address.city.label }},

@@ -1,0 +1,30 @@
+:host {
+    width: 50%;
+    padding: 0 10px;
+    .border{
+        background: #ffffff;
+        border: 1px solid #e5e5e5;
+        border-radius: 3px;
+        padding: 30px;
+        display: flex;
+        margin-bottom: 20px;
+        height: 100%;
+        a {
+            font-size: 14px;
+            color: #0098db;
+            border-bottom: 1px solid #0098db;
+        }
+        .info {
+            flex: 1;
+        }
+        .text {
+            flex: 2;
+            .hotel_name {
+                padding-bottom: 15px;
+            }
+        }
+        &.hotel{
+            width: 50%;
+        }
+    }
+}
