@@ -42,7 +42,7 @@ export class AddRoomComponent implements OnInit {
   ngOnInit(): void { }
 
   initFormStructure(amenities: Amenity[], hotels: { _id: string, label: string }[]) {
-    
+
     this.formStructure$ = of([
       new Control({
         controlType: 'dropdown',
@@ -103,16 +103,16 @@ export class AddRoomComponent implements OnInit {
 
   onSubmit(room: Room) {
     this.showSpinner = true;
-    // this.admin.registerRoom(room)
-    //   .subscribe(
-    //     (_: Room) => {
-    //       this.showSpinner = false;
-    //       console.log('respRoom', _);
-    //       //this.router.navigate([`/room/${_._id}`])
-    //       this.alert.success('Item is successfully added');
-    //     },
-    //     err => this.alert.error(err.error)
-    //   )
+    this.admin.registerRoom(room)
+      .subscribe(
+        (_: Room) => {
+          this.showSpinner = false;
+          console.log('respRoom', _);
+          //this.router.navigate([`/room/${_._id}`])
+          this.alert.success('Item is successfully added');
+        },
+        err => this.alert.error(err.error)
+      )
 
   }
 

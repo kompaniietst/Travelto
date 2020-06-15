@@ -14,6 +14,7 @@ import { PersonalComponent } from './profile/personal/personal.component';
 import { HotelComponent } from './hotel/hotel.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { RoomComponent } from './room/room.component';
 
 
 const routes: Routes = []
@@ -26,7 +27,7 @@ const COMPONENTS = [
   OrdersComponent,
   FavoriteComponent,
   HotelComponent,
-
+  RoomComponent
 ];
 
 const MODULES = [
