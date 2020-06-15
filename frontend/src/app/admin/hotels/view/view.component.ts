@@ -28,7 +28,6 @@ export class ViewHotelsComponent implements OnInit {
       .subscribe(
         (x: Hotel[]) => {
           this.loading = false
-          // console.log('X',x)
         }, 
         err => console.log(err));
   }

@@ -46,7 +46,8 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
         startWith(''),
         map(value => this._filter(value)));
 
-    this.myControl.valueChanges.subscribe(x => this.onChange(x._id))
+    this.myControl.valueChanges.subscribe(x => this.onChange(x))
+    this.myControl.valueChanges.subscribe(x => console.log(x))
   }
 
   private _filter(value: string) {
@@ -62,14 +63,5 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
 
   displayFn(option) {
     return option?.label;
-  }
-
-  cleanControl() {
-    // this.filteredOptions = this.myControl.valueChanges
-    //   .pipe(
-    //     startWith(''),
-    //     map(value => ''));
-
-    this.myControl.setValue('')
   }
 }

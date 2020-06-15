@@ -1,15 +1,10 @@
-import { Component, OnInit, Input, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { Amenity } from 'src/app/core/models/Amenity';
 import { Hotel } from 'src/app/core/models/Hotel';
-import { FormComponent } from 'src/app/shared/form/form.component';
-import { TestComponent } from 'src/app/test/test.component';
-import { ConvertToFormStructureService } from 'src/app/core/services/convert-to-form-structure.service';
-import { of, forkJoin, Observable } from 'rxjs';
+import { of, Observable, forkJoin } from 'rxjs';
 import { Control } from 'src/app/core/models/Control';
 import { City } from 'src/app/core/models/City';
-import { log } from 'util';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
 
 @Component({
@@ -21,44 +16,29 @@ export class HotelItemComponent<T> implements OnInit {
 
   @Input() item: Hotel;
 
-  // hotelAmenities: Amenity[];
-  allAmenities: Amenity[];
-
   formStructure$: Observable<Control[]>;
   showSpinner = false;
   editItem: boolean = false;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private admin: AdminService,
-    private alert: AlertMessageService,
-    private converToForm: ConvertToFormStructureService<T>
+    private alert: AlertMessageService
   ) {
-    this.admin.getAmenities()
-      .subscribe((x: Amenity[]) => this.allAmenities = x);
-
 
     forkJoin(
-      this.admin.getAmenities(),
+      this.admin.getAmenities(),       // get cities and amenities from the server to form form structure
       this.admin.getCities()
     )
       .subscribe(x => {
-        if (this.item) this.initFormStructure(x[0], x[1])
+        console.log('ac', x)
+        var amenities = x[0] as Amenity[];
+        var cities = x[1] as City[];
+
+        this.initFormStructure(amenities, cities);
       })
   }
 
-  ngOnInit(): void {
-    // console.log('item', this.item);
-  }
-
-  // initAllAmenities(allAmenities) {
-  //   this.hotelAmenities = allAmenities
-  //     .filter((a: Amenity) => this.item.amenities
-  //       .some((x: Amenity) => x == a._id));
-  // }
-
-
+  ngOnInit(): void { }
 
   edit(_id: string, hotel: Hotel) {
     this.editItem = true;
@@ -154,14 +134,10 @@ export class HotelItemComponent<T> implements OnInit {
         key: 'amenities',
         label: 'Choose amenities:',
         value: this.item.amenities,
-        options: this.allAmenities,
+        options: amenities,
       }),
 
     ])
-  }
-
-  rem(_id: string) {
-
   }
 
   cancelEdit() {
@@ -175,11 +151,11 @@ export class HotelItemComponent<T> implements OnInit {
       .subscribe(
         x => {
           console.log('sss', x);
+
           this.alert.success("Item is successfuly updated");
+
           this.showSpinner = false;
-          setTimeout(() => {
-            this.editItem = false
-          }, 1500);
+          setTimeout(() => { this.editItem = false }, 1500);
         },
         err => console.log(err)
       )

@@ -48,32 +48,34 @@ router.put('/hotels/:id', async (req, res) => {
 
 router.get('/hotels', async (req, res) => {
 
-    const hotels = await Hotel.aggregate([
-        {
-            $lookup: {
-                from: "cities",
-                localField: "address.city",
-                foreignField: "_id",
-                as: "city"
-            }
-        },
-        {
-            $project: {
-                name: 1,
-                stars: 1,
-                description: 1,
-                images: 1,
-                amenities: 1,
-                address: {
-                    city: { "$arrayElemAt": ["$city", 0] },
-                    street: 1,
-                    houseNumber: 1,
-                    disctrict: 1,
-                    map: 1,
-                }
-            }
-        },
-    ])
+    const hotels = await Hotel.find();
+
+    // const hotels = await Hotel.aggregate([
+    //     {
+    //         $lookup: {
+    //             from: "cities",
+    //             localField: "address.city",
+    //             foreignField: "_id",
+    //             as: "city"
+    //         }
+    //     },
+    //     {
+    //         $project: {
+    //             name: 1,
+    //             stars: 1,
+    //             description: 1,
+    //             images: 1,
+    //             amenities: 1,
+    //             address: {
+    //                 city: { "$arrayElemAt": ["$city", 0] },
+    //                 street: 1,
+    //                 houseNumber: 1,
+    //                 disctrict: 1,
+    //                 map: 1,
+    //             }
+    //         }
+    //     },
+    // ])
 
     res.send(hotels)
 })

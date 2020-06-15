@@ -8,9 +8,7 @@
         </div>
         <div>
             <div class="place"><span></span>
-                <!-- <span *ngIf="item.address.city.label != undefined">{{ item.address.city.label }},</span> -->
-                <!-- <span *ngIf="!item.address.city?.label">{{ item.address.city }},</span> -->
-                {{ item.address.city }}
+                {{ item.address.city.label }},
                 {{ item.address.street }}
                 {{ item.address.houseNumber }}
             </div>
@@ -36,7 +34,7 @@
 
     <div class="control_buttons">
         <button class="edit" (click)="edit(item._id, item)" class="btn">Edit</button>
-        <button class="rem" (click)="rem(item._id)" class="btn">Remove</button>
+        <!-- <button class="rem" (click)="rem(item._id)" class="btn">Remove</button> -->
     </div>
 </div>
 
