@@ -48,7 +48,9 @@ export class FormComponent<T> implements OnInit {
       for (const key of Object.keys(this.defaultData)) {
         var value = this.defaultData[key];
 
-        if (key == '_id' || key == '__v') continue
+        if (key == '_id' || key == 'feedbacks' || key == '__v') continue
+
+        console.log('key', key, this.form.get(key));
 
         this.form.get(key).setValue(value)
       }
