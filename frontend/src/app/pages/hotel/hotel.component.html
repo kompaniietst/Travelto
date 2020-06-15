@@ -1,6 +1,4 @@
 <div *ngIf="hotel">
-
-
     <div class="container">
         <div class="inner_page_header">
             <h1>
@@ -9,7 +7,7 @@
             </h1>
             <div class="place" *ngIf="hotel.address.city">
                 <span></span>
-                {{ hotel.address.city }}, {{ hotel.address.street }} {{ hotel.address.houseNumber }}
+                {{ hotel.address.city.label }}, {{ hotel.address.street }} {{ hotel.address.houseNumber }}
                 <a routerLink="." fragment="address" class="place">
                     <strong>Посмотреть на карте</strong>
                 </a>
@@ -26,7 +24,7 @@
 
         <!-- Rooms -->
         <div class="section">
-            <div *ngIf="(rooms$ | async)?.length == 0">
+            <div *ngIf="(rooms$ | async).length == 0">
                 No rooms yes
             </div>
             <div class="title">
@@ -39,12 +37,12 @@
 
                     <div class="item_container">
                         <div class="img">
-                            <!-- <app-carousel [id]="item?._id" [imgs]="item?.images" [config]="carouselConfigRooms"
+                            <!-- <app-carousel [id]="item._id" [imgs]="item.images" [config]="carouselConfigRooms"
                                 class="advanced">
                             </app-carousel> -->
                         </div>
                         <div class="center_block">
-                            <div *ngFor="let amenity of item?.amenities">
+                            <div *ngFor="let amenity of item.amenities">
                                 {{ amenity }}
                             </div>
                         </div>
@@ -58,7 +56,7 @@
                                 <div class="price text_center">
                                     <span class="blue">
                                         <strong>
-                                            {{ item?.price | currency}} <span class="currency">$</span>
+                                            {{ item.price | currency}} <span class="currency">$</span>
                                         </strong>
                                     </span> / night </div>
                                 <div class="buttons ng-star-inserted">
@@ -91,21 +89,19 @@
                 <strong>Удобства, предоставляемые отелем</strong>
             </div>
             <div class="list_amenities">
-                <!-- <div *ngFor="let amenity of hotelAmenities; trackBy: trackById; let i = index"
-                class="hotel_amenity">
-                <div class="img" [ngClass]="{'active': hotel?.amenities[i] != amenity._id}">
-                    <img [src]="amenity.images[0]" alt="">
+                <div *ngFor="let amenity of amenities; trackBy: trackById; let i = index" class="hotel_amenity">
+                    <div class="img" [ngClass]="{'active': ifActiveAmenity(amenity._id)}">
+                        <img [src]="amenity.image" alt="">
+                    </div>
+                    <strong>{{ amenity.label }}</strong>
                 </div>
-                <strong>{{ amenity.label }}</strong>
-
-            </div> -->
             </div>
         </div>
 
         <div class="section" id="address">
             <div class="title"><strong>Расположение</strong></div>
-            <div class="place"><span></span>{{ hotel?.address.city }},
-                {{ hotel?.address.street }}</div>
+            <div class="place"><span></span>{{ hotel.address.city.label }},
+                {{ hotel.address.street }}</div>
             <!-- <app-google-maps [zoom]="9" [mapLat]="mapLat" [mapLng]="mapLng">
             <ng-template let-google="google" let-map="map">
                 <app-google-map-marker *ngFor="let marker of markers" [google]="google" [map]="map"
@@ -116,4 +112,10 @@
 
         </div>
     </div>
+</div>
+
+<app-alert-message></app-alert-message>
+
+<div *ngIf="loading" class="spinner_container">
+    <mat-spinner strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner>
 </div>

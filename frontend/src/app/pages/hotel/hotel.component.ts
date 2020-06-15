@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { AdminService } from 'src/app/admin/admin.service';
 import { Hotel } from 'src/app/core/models/Hotel';
 import { Room } from 'src/app/core/models/Room';
+import { AlertMessageService } from 'src/app/core/services/alert-message.service';
+import { Amenity } from 'src/app/core/models/Amenity';
 
 @Component({
   selector: 'app-hotel',
@@ -14,11 +16,12 @@ export class HotelComponent implements OnInit {
 
   id: string = this.route.snapshot.params.id;
   hotel: Hotel;
-
+  loading = true;
   // breadcrumbs: string[] = ['All hotels', 'Hotel preview'];
   // hotelAmenities;
 
   rooms$: Observable<Room[]>;
+  amenities: Amenity[];
   // mapLat;
   // mapLng;
   // markers = [];
@@ -28,6 +31,7 @@ export class HotelComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private admin: AdminService,
+    private alert: AlertMessageService
   ) {
     console.log(this.id);
 
@@ -36,11 +40,13 @@ export class HotelComponent implements OnInit {
       .subscribe(
         (h: Hotel) => {
           this.hotel = h
-          console.log('HOTEl',this.hotel);
+          console.log('HOTEl', this.hotel);
+          this.loading = false
         },
-        err => console.log(err)
-      )
+        err => this.alert.error(err.error))
 
+    this.admin.getAmenities()
+      .subscribe((x: Amenity[]) => this.amenities = x)
 
     // this.rooms$ = this.admin
     //   .getRoomsByHotel(this.id);
@@ -83,11 +89,12 @@ export class HotelComponent implements OnInit {
     this.admin.getRoomsByHotel(this.id)
       .subscribe(h => console.log(h),
         er => console.log(er))
-
-
-
-
   }
+
+  ifActiveAmenity(_id: string) {
+    return this.hotel.amenities.some(a => a._id == _id)
+  }
+
   trackById(index, item) {
     return item.id;
   }

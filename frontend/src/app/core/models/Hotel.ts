@@ -6,7 +6,10 @@ export class Hotel {
     stars: number;
     description: string;
     address: {
-        city: string;
+        city: {
+            _id?: string;
+            label: string;
+        }
         street: string;
         houseNumber: string;
         disctrict: string;

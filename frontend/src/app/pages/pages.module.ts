@@ -12,6 +12,7 @@ import { FavoriteComponent } from './profile/favorite/favorite.component';
 import { SharedModule } from '../shared/shared.module';
 import { PersonalComponent } from './profile/personal/personal.component';
 import { HotelComponent } from './hotel/hotel.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 const routes: Routes = []
@@ -29,6 +30,8 @@ const COMPONENTS = [
 const MODULES = [
   BrowserModule,
   CommonModule,
+
+  MatProgressSpinnerModule,
 
   RouterModule.forRoot(routes),
   SharedModule,

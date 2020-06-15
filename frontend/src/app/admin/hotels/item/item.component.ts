@@ -24,18 +24,10 @@ export class HotelItemComponent<T> implements OnInit {
     private admin: AdminService,
     private alert: AlertMessageService
   ) {
-
     forkJoin(
       this.admin.getAmenities(),       // get cities and amenities from the server to form form structure
       this.admin.getCities()
-    )
-      .subscribe(x => {
-        console.log('ac', x)
-        var amenities = x[0] as Amenity[];
-        var cities = x[1] as City[];
-
-        this.initFormStructure(amenities, cities);
-      })
+    ).subscribe(x => this.initFormStructure(x[0] as Amenity[], x[1] as City[]))
   }
 
   ngOnInit(): void { }
