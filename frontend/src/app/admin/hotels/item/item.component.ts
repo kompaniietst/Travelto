@@ -21,7 +21,7 @@ export class HotelItemComponent<T> implements OnInit {
 
   @Input() item: Hotel;
 
-  hotelAmenities: Amenity[];
+  // hotelAmenities: Amenity[];
   allAmenities: Amenity[];
 
   formStructure$: Observable<Control[]>;
@@ -36,7 +36,7 @@ export class HotelItemComponent<T> implements OnInit {
     private converToForm: ConvertToFormStructureService<T>
   ) {
     this.admin.getAmenities()
-      .subscribe((x: Amenity[]) => this.initAllAmenities(x));
+      .subscribe((x: Amenity[]) => this.allAmenities = x);
 
 
     forkJoin(
@@ -52,11 +52,11 @@ export class HotelItemComponent<T> implements OnInit {
     // console.log('item', this.item);
   }
 
-  initAllAmenities(allAmenities) {
-    this.hotelAmenities = allAmenities
-      .filter((a: Amenity) => this.item.amenities
-        .some((x: Amenity) => x == a._id));
-  }
+  // initAllAmenities(allAmenities) {
+  //   this.hotelAmenities = allAmenities
+  //     .filter((a: Amenity) => this.item.amenities
+  //       .some((x: Amenity) => x == a._id));
+  // }
 
 
 
@@ -147,7 +147,6 @@ export class HotelItemComponent<T> implements OnInit {
         key: 'images',
         type: 'hotels',
         value: this.item.images,
-        options: []
       }),
 
       new Control({
@@ -155,7 +154,7 @@ export class HotelItemComponent<T> implements OnInit {
         key: 'amenities',
         label: 'Choose amenities:',
         value: this.item.amenities,
-        options: amenities,
+        options: this.allAmenities,
       }),
 
     ])

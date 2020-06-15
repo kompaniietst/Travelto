@@ -3,6 +3,7 @@ const Hotel = require('../models/Hotel')
 const City = require('../models/City')
 const Room = require('../models/Room')
 const router = express.Router();
+const mongoose = require('mongoose')
 
 router.post('/hotels', async (req, res) => {
     try {
@@ -27,7 +28,7 @@ router.put('/hotels/:id', async (req, res) => {
     Hotel.findByIdAndUpdate({ _id: id }, req.body, { new: true },
         function (err, result) {
             console.log(result);
-            
+
             if (err) throw err;
             res.json(result);
         });
@@ -78,16 +79,66 @@ router.get('/hotels', async (req, res) => {
 })
 
 router.get('/hotels/:id', async (req, res) => {
+    const ObjectId = mongoose.Types.ObjectId;
+    var id = req.params.id;
+    // var id = req.params.id.map(function (el) { return mongoose.Types.ObjectId(el) })
+    var id = mongoose.Types.ObjectId(req.params.id)
 
-    var id = req.params.id
     console.log(req.params);
     console.log(req.body);
 
     const hotel = await Hotel.findOne({ _id: id })
 
-    if (!hotel) return res.status(401).send({ error: 'Hotel not found' })
 
-    res.send(hotel)
+    const hotels = await Hotel.aggregate([
+        {
+            $match: { _id: ObjectId('5ee411f702536f545c34ea24') }
+        },
+        // {
+        //     $lookup: {
+        //         from: "cities",
+        //         localField: "address.city",
+        //         foreignField: "_id",
+        //         as: "city"
+        //     }
+        // },
+        {
+            $lookup: {
+                "from": "amenities",
+                "let": { "amenities2": "$amenities2" },
+                "pipeline": [
+                    { "$match": { "$expr": { "$in": ["$_id", "$$amenities"] } } }
+                ],
+                "as": "output"
+            }
+        },
+        {
+            $project: {
+                name: 1,
+                stars: 1,
+                description: 1,
+                images: 1,
+                amenities: 1,
+                output: { "$arrayElemAt": ["$output", 0] },
+                output2: { "$arrayElemAt": ["$amenities2", 0] },
+                address: {
+                    // city: { "$arrayElemAt": ["$city", 0] },
+                    street: 1,
+                    houseNumber: 1,
+                    disctrict: 1,
+                    map: 1,
+                }
+            }
+        },
+    ])
+
+    // var h = hotels.find(x => x._id == id)
+
+    // if (!h) return res.status(401).send({ error: 'Hotel not found' })
+    // if (!hotel) return res.status(401).send({ error: 'Hotel not found' })
+
+    res.send(hotels[0])
+    // res.send(hotel)
 })
 
 module.exports = router

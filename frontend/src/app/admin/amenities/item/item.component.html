@@ -10,14 +10,14 @@
     </div>
 </div>
 
-<div *ngIf="editItem">
+<div *ngIf="editItem" class="editItem_container">
     <app-form 
         [controls$]="formStructure$"  
         [defaultData]="item" 
         (valueChange)="onSubmit($event)" 
         buttonName="Update" 
         [showSpinner]="showSpinner"
-        class="edit_form">
+        class="edit_amenity_form">
     </app-form>
     <app-alert-message></app-alert-message>
 

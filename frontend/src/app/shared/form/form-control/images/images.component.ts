@@ -21,11 +21,9 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
 
   @Input() control: Control;
 
-  form: FormGroup = new FormGroup({
-    // formKey: new FormArray([])
-  })
+  form: FormGroup = new FormGroup({})
 
-  selectedFiles: File[] = [];
+  eventTargetFiles: File[] = [];
   public imagesToShow = [];
 
   readonly URL = environment.apiUrl;
@@ -45,13 +43,11 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
 
   registerOnTouched(fn: any): void { }
 
-  setDisabledState?(isDisabled: boolean): void { }
-
   ngOnInit(): void {
     var defaultData = this.control.value;
     console.log('GGGGG', defaultData);
 
-    if (defaultData && Array.isArray(defaultData)) { // form multiple images
+    if (this.defaultDataExist() && Array.isArray(this.defaultDataExist())) { // form multiple images
       this.imagesToShow = defaultData;
 
       this.form.addControl('formKey', new FormArray([]))
@@ -63,7 +59,7 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
       return;
     }
 
-    if (defaultData) {
+    if (this.defaultDataExist()) {
       this.form.addControl('formKey', new FormControl(defaultData)); // form single images
 
       this.imagesToShow = [defaultData];
@@ -73,9 +69,13 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
     this.form.addControl('formKey', new FormArray([]))
   }
 
+  defaultDataExist() {
+    return this.control.value;
+  }
+
   upload(event) {
     var formData = new FormData();
-    var selectedFiles = event.target.files;
+    this.eventTargetFiles = event.target.files;
 
     this.showImages(event);
 
@@ -83,35 +83,37 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
       formData.append('files', file)
     }
 
-    console.log('this.control.type', this.control.type);
+    this.sendImagesToServer(formData);
+  }
+
+  sendImagesToServer(formData) {
 
     this.showSpinner = true;
+    
     this.admin.uploadImages(this.control.type, formData)
       .subscribe(
-        (x: any) => {
-          console.log('load', x);
+        (resp: any) => {
           this.showSpinner = false;
 
           var defaultData = this.control.value;
-          console.log('DEFAULT', this.control.value);
 
-
-          if (defaultData && Array.isArray(defaultData)) { // form multiple images
+          if (this.defaultDataExist() && Array.isArray(this.defaultDataExist())) { // form multiple images
             this.imagesToShow = defaultData;
 
-            x.forEach((img: any) => {
+            resp.forEach((img: any) => {
               (this.form.get('formKey') as FormArray)
                 .push(new FormControl(`${this.URL}/images/${this.control.type}/` + img));
             });
             return;
           }
 
-          if (defaultData) {
-            console.log('FORM', this.form, x);
-            this.form.get('formKey').setValue(`${this.URL}/images/${this.control.type}/` + x[0].filename)
+          if (this.defaultDataExist()) {
+            this.form.get('formKey').setValue(`${this.URL}/images/${this.control.type}/` + resp[0].filename)
             return
           }
 
+          (this.form.get('formKey') as FormArray)
+            .push(new FormControl(`${this.URL}/images/${this.control.type}/` + resp[0].filename));
 
         },
         err => console.log(err))
@@ -126,10 +128,6 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
       });
       reader.readAsDataURL(file);
     });
-  }
-
-  cleanControl() {
-    this.imagesToShow = [];
   }
 
   removeImage(i: number) {

@@ -15,6 +15,7 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
 
   @Input() control: any;
   form: FormGroup = new FormGroup({})
+  defaultData: any;
 
   constructor() { }
 
@@ -26,52 +27,62 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
 
   registerOnTouched(fn: any): void { }
 
-  setDisabledState?(isDisabled: boolean): void { }
-
   ngOnInit(): void {
-    var checkedItems = [];
+    console.log('this.control.value', this.control.value);
 
-    if (this.control.value) {
+    this.defaultData = this.control.value;
+
+    if (this.defaultDataExist()) {
+
+      (this.form as FormGroup)                      // if defaultDataExist fill FormArray with FormControls
+        .addControl(this.control.key, new FormArray(
+          this.defaultData.map(d => new FormControl(d))
+        ));
+
       this.control.options
-        .filter(checkbox => this.control.value
-          .some(checked_id => checked_id == checkbox._id))
-        .forEach(checkbox => checkbox.checked = true);
+        .forEach(o => {                              // turn property "checked" of selected checboxes to true
+          if (this.defaultData.some(d => o._id == d._id))
+            o.checked = true
+        })
+      console.log('------F', this.form);
 
-      checkedItems = this.control.value.map((checkbox_id: string) => new FormControl(checkbox_id))
-
+      return;
     }
 
     (this.form as FormGroup)
-      .addControl(this.control.key, new FormArray(checkedItems));
-
-
+      .addControl(this.control.key, new FormArray([]));
   }
 
-  onCheckboxChange(checked: boolean, id, index: number) {
+  onCheckboxChange(checked: boolean, id, index: number, item) { // on select checkbox
     checked
-      ? this.addControl(id, index)
-      : this.removeControl(index);
+      ? this.addControl(item, index)
+      : this.removeControl(index, id);
   }
 
-
-  public addControl(id, i: number) {
-    (this.form.get(this.control.key) as FormArray).push(new FormControl(id));
+  public addControl(item, i: number) {
+    (this.form.get(this.control.key) as FormArray).push(new FormControl(item));
     this.control.options[i].checked = true;
+
+    console.log(this.form);
+    
   }
 
-  public removeControl(i: number) {
+  public removeControl(i: number, id) {
+    console.error('rem', i, 'id ', id, this.control.key, this.control.options);
+    console.log('f', this.form);
+
+    var index = (this.form.get(this.control.key) as FormArray).controls
+      .findIndex(c => c.value._id == id)
+
+    console.log('index', index);
+
+
     this.control.options[i].checked = false;
-    (this.form.get(this.control.key) as FormArray).removeAt(i);
+    (this.form.get(this.control.key) as FormArray).removeAt(index);
   }
 
-  public cleanControl() {
-
-    var formArray = this.form.get(this.control.key) as FormArray;
-
-    this.control.options.filter(o => o.checked)
-      .forEach(o => o.checked = false);
-
-    formArray.clear();
+  defaultDataExist() {
+    return this.control.value ? true : false;
   }
 
   trackById(index, item) {

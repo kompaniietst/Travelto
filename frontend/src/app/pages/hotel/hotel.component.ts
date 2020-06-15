@@ -33,26 +33,28 @@ export class HotelComponent implements OnInit {
 
     this.admin
       .getHotelBy(this.id)
-      .subscribe((h: Hotel) => {
-        this.hotel = h
-        console.log(this.hotel);
-      }
-      )
-
-
-    this.rooms$ = this.admin
-      .getRoomsByHotel(this.id);
-
-    this.admin
-      .getRoomsByHotel(this.id)
       .subscribe(
-        resp => {
-          console.log('room', resp);
+        (h: Hotel) => {
+          this.hotel = h
+          console.log('HOTEl',this.hotel);
         },
-        error => {
-          console.log(error);
-        }
+        err => console.log(err)
       )
+
+
+    // this.rooms$ = this.admin
+    //   .getRoomsByHotel(this.id);
+
+    // this.admin
+    //   .getRoomsByHotel(this.id)
+    //   .subscribe(
+    //     resp => {
+    //       console.log('room', resp);
+    //     },
+    //     error => {
+    //       console.log(error);
+    //     }
+    //   )
   }
 
   needCountSlides: boolean = true;
@@ -74,8 +76,7 @@ export class HotelComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    console.log(this.hotel);
-    
+
     this.rooms$ = this.admin
       .getRoomsByHotel(this.id)
 
@@ -83,7 +84,7 @@ export class HotelComponent implements OnInit {
       .subscribe(h => console.log(h),
         er => console.log(er))
 
-   
+
 
 
   }

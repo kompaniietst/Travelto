@@ -64,7 +64,7 @@ export class FormComponent<T> implements OnInit {
         this.form.get(key).setValue(value)
       }
 
-      console.log('f', this.form);
+      // console.log('f', this.form);
 
     }
 
@@ -79,12 +79,12 @@ export class FormComponent<T> implements OnInit {
 
   }
 
-  resetForm() {
-    this.form = this.generateForm.defineStructure(this.controls$);
-    this.imagesComponentRef.cleanControl();
-    this.checkboxComponentRef.cleanControl();
-    this.advancedInputComponentRef.dropdownComponentRef.cleanControl();
-  }
+  // resetForm() {
+  //   this.form = this.generateForm.defineStructure(this.controls$);
+  //   this.imagesComponentRef.cleanControl();
+  //   this.checkboxComponentRef.cleanControl();
+  //   this.advancedInputComponentRef.dropdownComponentRef.cleanControl();
+  // }
 
   trackById(index, item) {
     return item.id;

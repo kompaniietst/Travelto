@@ -12,7 +12,7 @@
     </div>
 
     <div formArrayName="formKey" class="images_container" cdkDropList #todoList="cdkDropList"
-        [cdkDropListData]="selectedFiles">
+        [cdkDropListData]="eventTargetFiles">
         <mat-card *ngFor="let item of imagesToShow; trackBy: trackById; index as i" cdkDrag>
             <div class="remove" (click)="removeImage(i)"><span class="icon icon_trash"></span></div>
             <mat-spinner *ngIf="showSpinner" strokeWidth="3" diameter="20"></mat-spinner>
