@@ -1,0 +1,43 @@
+<h4><a routerLink="/room/{{ room._id }}">{{ room.name }}</a></h4>
+
+<div class="item_container">
+    <div class="img">
+        <app-special 
+            [specials]="room.specials">
+        </app-special>
+
+        <app-carousel 
+            [id]="room._id" 
+            [slides]="room.images" 
+            [config]="carouselConfigRooms">
+        </app-carousel>
+    </div>
+
+    <div class="center_block">
+        <ul>
+            <li *ngFor="let item of room.textFeatures" class="feature">
+                {{ item }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="end_block">
+        <div class="details">
+            <div class="price text_center">
+                <span class="blue">
+                    <strong>
+                        {{ room.price }} <span class="currency">$</span>
+                    </strong>
+                </span> / night </div>
+            <div class="buttons">
+                <button class="btn btn-orange w_100">
+                    <span>Choose your room</span>
+                </button>
+                <!-- <button class="btn btn-blue w_100">
+                    <span>Выбран</span>
+                </button> -->
+            </div>
+        </div>
+    </div>
+
+</div>

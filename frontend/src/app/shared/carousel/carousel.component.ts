@@ -21,11 +21,11 @@ export class CarouselComponent implements OnInit {
   constructor() { }
 
   slickInit(e) {
-    console.log('slick initialized');
+    // console.log('slick initialized');
   }
 
   breakpoint(e) {
-    console.log('breakpoint');
+    // console.log('breakpoint');
   }
 
   afterChange(e) {
@@ -33,7 +33,7 @@ export class CarouselComponent implements OnInit {
   }
 
   beforeChange(e) {
-    console.log('beforeChange');
+    // console.log('beforeChange');
   }
 
   countSlides() {

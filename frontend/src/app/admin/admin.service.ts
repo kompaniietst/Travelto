@@ -49,6 +49,14 @@ export class AdminService {
       .pipe(delay(1500))
   }
 
+  gethotelInfoByRoom(_id: string): Observable<Hotel> {
+    console.log('id',_id);
+    
+    return this.hotelService.gethotelInfoByRoom(_id);
+  }
+
+  //--------------------------------------------------------
+
   registerAmenity(amenity: Amenity): Observable<Amenity> {
     return this.http
       .post<Amenity>(`${this.URL}/amenities`, amenity)
@@ -64,6 +72,7 @@ export class AdminService {
     return this.http.put<Amenity>(`${this.URL}/amenities/${_id}`, amenity)
   }
 
+  //--------------------------------------------------------
 
   registerCity(city: City): Observable<City> {
     return this.http
@@ -76,17 +85,14 @@ export class AdminService {
       .get<City[]>(`${this.URL}/cities`)
   }
 
-
+  //--------------------------------------------------------
 
   registerRoom(room: Room): Observable<Room> {
-    console.log('RRR', room);
-
     return this.roomService.register(room)
       .pipe(delay(1500))
   }
 
   editRoom(_id: string, room: Room): Observable<Room> {
-    console.log('in serv', _id, room);
     return this.roomService.editRoom(_id, room)
       .pipe(delay(1500))
   }
@@ -95,26 +101,19 @@ export class AdminService {
     return this.roomService.get()
       .pipe(delay(1500))
   }
+  
+  getRoomBy(_id: string): Observable<Room> {
+    return this.roomService.getRoomBy(_id);
+  }
 
   getRoomsByHotel(id: string): Observable<Room[]> {
     return this.roomService.getRoomsByHotel(id);
   }
 
+  //--------------------------------------------------------
 
   uploadImages(path: string, imageData) {
     return this.http.post(`${this.URL}/images/${path}`, imageData)
       .pipe(delay(1500))
   }
-
-
-  registerRoomDetails(details: any): Observable<any> {
-    return this.http
-      .post<any>(`${this.URL}/roomDetails`, details)
-      .pipe(delay(1500))
-  }
-
-  // getAmenities(): Observable<Amenity[]> {
-  //   return this.http
-  //     .get<Amenity[]>(`${this.URL}/amenities`)
-  // }
 }

@@ -44,6 +44,8 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
   registerOnTouched(fn: any): void { }
 
   ngOnInit(): void {
+    console.log('Deafult', this.control.value);
+
     var defaultData = this.control.value;
 
     if (this.defaultDataExist() && Array.isArray(this.defaultDataExist())) { // form multiple images
@@ -89,7 +91,8 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
 
     this.showSpinner = true;
 
-    console.log('bef server', this.control.value, this.control.type, formData);
+    console.log('bef server', this.control.value);
+    console.log('type ', this.control.type);
 
     this.admin.uploadImages(this.control.type, formData)
       .subscribe(
@@ -114,14 +117,15 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
             return;
           }
 
-          // if (this.defaultDataExist()) {
-          //   this.form.get('formKey').setValue(`${this.URL}/images/${this.control.type}/` + resp[0].filename)
-          //   return
-          // }
+          if (this.defaultDataExist()) {
+            this.form.get('formKey').setValue(`${this.URL}/images/${this.control.type}/` + resp[0].filename)
+            return
+          }
 
-          // (this.form.get('formKey') as FormArray)
-          //   .push(new FormControl(`${this.URL}/images/${this.control.type}/` + resp[0].filename));
-
+          resp.forEach(img => {
+            (this.form.get('formKey') as FormArray)
+              .push(new FormControl(`${this.URL}/images/${this.control.type}/` + img));
+          })
         },
         err => console.log(err))
   }

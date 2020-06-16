@@ -47,20 +47,6 @@ export class HotelComponent implements OnInit {
 
     this.admin.getAmenities()
       .subscribe((x: Amenity[]) => this.amenities = x)
-
-    // this.rooms$ = this.admin
-    //   .getRoomsByHotel(this.id);
-
-    // this.admin
-    //   .getRoomsByHotel(this.id)
-    //   .subscribe(
-    //     resp => {
-    //       console.log('room', resp);
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     }
-    //   )
   }
 
   needCountSlides: boolean = true;
@@ -71,24 +57,13 @@ export class HotelComponent implements OnInit {
     arrows: true
   };
 
-  carouselConfigRooms = {
-    speed: 700,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
-    needLink: true,
-    arrows: true,
-    autoplay: true,
-    draggable: true,
-  };
-
   ngOnInit(): void {
 
-    this.rooms$ = this.admin
-      .getRoomsByHotel(this.id)
+    this.rooms$ = this.admin.getRoomsByHotel(this.id)
 
     this.admin.getRoomsByHotel(this.id)
-      .subscribe(h => console.log(h),
+      .subscribe(
+        r => console.log('after r', r),
         er => console.log(er))
   }
 

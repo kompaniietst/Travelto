@@ -12,6 +12,7 @@ import { RoomsComponent } from './admin/rooms/rooms.component';
 import { AmenitiesComponent } from './admin/amenities/amenities.component';
 import { CitiesComponent } from './admin/cities/cities.component';
 import { HotelComponent } from './pages/hotel/hotel.component';
+import { RoomComponent } from './pages/room/room.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -38,6 +39,7 @@ const routes: Routes = [
   },
 
   { path: 'hotel/:id', component: HotelComponent },
+  { path: 'room/:id', component: RoomComponent },
 
   { path: '**', component: NotfoundComponent },
 ];

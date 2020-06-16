@@ -1,7 +1,7 @@
 <div *ngIf="!editItem">
     <div class="block d_flex flex_wrap align_center justify_content_between">
         <div class="name">
-            <strong><a>{{ item.name }}</a></strong>
+            <strong><a routerLink="/room/{{ item._id }}">{{ item.name }}</a></strong>
         </div>
         <div *ngIf="hotelInfo">
             <strong><a routerLink="/hotel/{{ hotelInfo._id }}">{{ hotelInfo.name }}</a></strong>
@@ -43,13 +43,8 @@
         <strong><a routerLink="/hotel/{{ item._id }}">{{ item.name }}</a></strong>
     </div>
 
-    <app-form 
-        [controls$]="formStructure$" 
-        [defaultData]="item" 
-        (valueChange)="onSubmit($event)" 
-        buttonName="Update"
-        [showSpinner]="showSpinner" 
-        class="edit_room_form">
+    <app-form [controls$]="formStructure$" [defaultData]="item" (valueChange)="onSubmit($event)" buttonName="Update"
+        [showSpinner]="showSpinner" class="edit_room_form">
     </app-form>
     <app-alert-message></app-alert-message>
 

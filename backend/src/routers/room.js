@@ -53,25 +53,25 @@ router.get('/rooms', async (req, res) => {
 
 })
 
-// router.get('/rooms/:id', async (req, res) => {
-//     console.log(req.params);
-//     console.log(req.body);
+router.get('/rooms/:id', async (req, res) => {
+    console.log(req.params);
+    console.log(req.body);
 
-//     const id = req.params.id;
-//     const rooms = await Room.findOne({ hotel_info: id });
+    const id = req.params.id;
+    const room = await Room.findOne({ _id: id });
 
-//     if (!rooms) return res.status(401).send('Room are empty')
+    if (!room) return res.status(400).send('Room is not exist')
 
-//     res.send(rooms)
+    res.send(room)
 
-// })
+})
 
 router.get('/roomsByHotel/:id', async (req, res) => {
     console.log(req.params);
     console.log(req.body);
 
     const id = req.params.id;
-    const rooms = await Room.find({ hotel_info: id });
+    const rooms = await Room.find({ hotel_id: id });
 
     if (!rooms) return res.status(401).send('Room are empty')
 

@@ -1,11 +1,12 @@
 <div *ngIf="hotel">
-    
+
     <div class="mainscreen">
         <div class="container">
             <div class="inner_page_header">
                 <h1>
                     {{ hotel.name }}
-                    <app-star-rating *ngIf="hotel.stars"
+                    <app-star-rating 
+                        *ngIf="hotel.stars"
                         [starRating]="hotel.stars">
                     </app-star-rating>
                 </h1>
@@ -18,8 +19,8 @@
 
         <app-carousel 
             [slides]="hotel.images" 
-            [config]="carouselConfig"
-            needCountSlides="true"
+            [config]="carouselConfig" 
+            needCountSlides="true" 
             class="hotel">
         </app-carousel>
     </div>
@@ -32,68 +33,17 @@
 
 
         <!-- Rooms -->
-        <div class="section">
-            <div *ngIf="(rooms$ | async)?.length == 0">
-                No rooms yes
-            </div>
+        <div class="section room"  *ngIf="(rooms$ | async)?.length > 0">
             <div class="title">
                 <strong>Выберите номер:</strong>
             </div>
             <div class="list">
                 <div *ngFor="let room of rooms$ | async" class="item">
-
-                    <h4>{{ room.name }}</h4>
-
-                    <div class="item_container">
-                        <div class="img">
-                            <app-special [specials]="room.specials"></app-special>
-
-                            <app-carousel [id]="room._id" 
-                                [slides]="room.images" 
-                                [config]="carouselConfigRooms"
-                                class="hotel_room">
-                            </app-carousel>
-                        </div>
-                        <div class="center_block">
-                         <!--    // amenities? -->
-                        </div>
-                        <div class="end_block">
-
-
-
-
-
-                            <div class="details">
-                                <div class="price text_center">
-                                    <span class="blue">
-                                        <strong>
-                                            {{ room.price }} <span class="currency">$</span>
-                                        </strong>
-                                    </span> / night </div>
-                                <div class="buttons ng-star-inserted">
-                                    <button class="btn btn-blue w_100 ng-star-inserted">
-                                        <span>Выбран</span>
-                                    </button>
-                                </div>
-                            </div>
-
-
-
-
-
-
-
-
-
-
-                        </div>
-                    </div>
+                    <app-card [room]="room" class="hotel"></app-card>
                 </div>
             </div>
         </div>
-
         <!-- end rooms -->
-
 
         <div class="section">
             <div class="title">
@@ -112,8 +62,7 @@
         <div class="section" *ngIf="hotel.feedbacks && hotel.feedbacks.length > 0">
             <div class="title"><strong>Отзывы</strong></div>
             <div class="d_flex flex_wrap" class="feedbacks">
-                <app-feedback *ngFor="let feedback of hotel.feedbacks; trackBy: trackById;" 
-                    [feedback]="feedback"
+                <app-feedback *ngFor="let feedback of hotel.feedbacks; trackBy: trackById;" [feedback]="feedback"
                     class="hotel">
                 </app-feedback>
             </div>
@@ -138,5 +87,9 @@
 <app-alert-message></app-alert-message>
 
 <div *ngIf="loading" class="spinner_container">
-    <mat-spinner strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner>
+    <mat-spinner 
+        strokeWidth="4" 
+        diameter="30" 
+        class="blue_spinner">
+    </mat-spinner>
 </div>

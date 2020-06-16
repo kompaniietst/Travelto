@@ -14,89 +14,61 @@ import { Amenity } from 'src/app/core/models/Amenity';
 })
 export class RoomComponent implements OnInit {
 
-  // id: string = this.route.snapshot.params.id;
-  // hotel: Hotel;
-  // loading = true;
-  // // breadcrumbs: string[] = ['All hotels', 'Hotel preview'];
-  // // hotelAmenities;
+  id: string = this.route.snapshot.params.id;
+  room: Room;
+  hotel: Hotel;
 
-  // rooms$: Observable<Room[]>;
+  loading = true;
+  // // breadcrumbs: string[] = ['All hotels', 'Hotel preview'];
+
   // amenities: Amenity[];
   // // mapLat;
   // // mapLng;
   // // markers = [];
 
-  // // loading = true;
+  carouselConfig = {
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: true,
+    arrows: true
+  };
 
   constructor(
-    // private route: ActivatedRoute,
-    // private admin: AdminService,
-    // private alert: AlertMessageService
+    private route: ActivatedRoute,
+    private admin: AdminService,
+    private alert: AlertMessageService
   ) {
-    // console.log(this.id);
 
-    // this.admin
-    //   .getHotelBy(this.id)
-    //   .subscribe(
-    //     (h: Hotel) => {
-    //       this.hotel = h
-    //       console.log('HOTEl', this.hotel);
-    //       this.loading = false
-    //     },
-    //     err => this.alert.error(err.error))
+    this.admin
+      .getRoomBy(this.id)
+      .subscribe(
+        (r: Room) => {
+          this.room = r
+          console.log('Room', this.room);
+          this.loading = false;
 
-    // this.admin.getAmenities()
-    //   .subscribe((x: Amenity[]) => this.amenities = x)
-
-    // // this.rooms$ = this.admin
-    // //   .getRoomsByHotel(this.id);
-
-    // // this.admin
-    // //   .getRoomsByHotel(this.id)
-    // //   .subscribe(
-    // //     resp => {
-    // //       console.log('room', resp);
-    // //     },
-    // //     error => {
-    // //       console.log(error);
-    // //     }
-    // //   )
+          this.getHotelInfo(r.hotel_id);
+        },
+        err => this.alert.error(err.error))
   }
 
-  // needCountSlides: boolean = true;
-  // carouselConfig = {
-  //   slidesToShow: 3,
-  //   slidesToScroll: 1,
-  //   autoplay: true,
-  //   arrows: true
-  // };
+  ngOnInit(): void { }
 
-  // carouselConfigRooms = {
-  //   speed: 700,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
-  //   needLink: true,
-  //   arrows: true,
-  //   autoplay: true,
-  //   draggable: true,
-  // };
-
-  ngOnInit(): void {
-
-    // this.rooms$ = this.admin
-    //   .getRoomsByHotel(this.id)
-
-    // this.admin.getRoomsByHotel(this.id)
-    //   .subscribe(h => console.log(h),
-    //     er => console.log(er))
+  getHotelInfo(hotel_id) {
+    this.admin
+      .gethotelInfoByRoom(hotel_id)
+      .subscribe(
+        (resp: Hotel) => {
+          this.hotel = resp;
+          console.log('room by hotel', resp);
+        },
+        error => {
+          console.log(error);
+        }
+      )
   }
 
-  // ifActiveAmenity(_id: string) {
-  //   return this.hotel.amenities.some(a => a._id == _id)
-  // }
-
-  // trackById(index, item) {
-  //   return item.id;
-  // }
+  trackById(index, item) {
+    return item.id;
+  }
 }

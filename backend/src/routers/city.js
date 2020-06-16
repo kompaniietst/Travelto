@@ -2,7 +2,7 @@ const express = require("express");
 const City = require('../models/City')
 const router = express.Router();
 
-router.post('/cities', async (req, res) => {  
+router.post('/cities', async (req, res) => {
     try {
         const city = new City(req.body)
         await city.save()
@@ -24,5 +24,7 @@ router.get('/cities', async (req, res) => {
 
     res.send(cities)
 })
+
+
 
 module.exports = router

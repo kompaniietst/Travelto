@@ -77,4 +77,18 @@ router.get('/hotels/:id', async (req, res) => {
 
 })
 
+
+router.get('/hotelInfoByRoom/:id', async (req, res) => {
+    console.log(req.params);
+    console.log(req.body);
+
+    const id = req.params.id;
+    const hotel = await Hotel.findOne({ _id: id });
+
+    if (!hotel) return res.status(401).send('Hotel is not exist')
+
+    res.send(hotel)
+
+})
+
 module.exports = router

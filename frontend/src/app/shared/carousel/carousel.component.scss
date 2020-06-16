@@ -1,4 +1,6 @@
 :host {
+    display: block;
+    position: relative;
     &.hotel {
         .slick-slide {
             height: calc(100vh - 149px);
@@ -8,6 +10,8 @@
                 object-fit: cover;
             }
         }
+    }
+    &.room {
     }
     .count_slides {
         background: rgba(0, 0, 0, 0.47);
@@ -44,29 +48,8 @@
     }
 }
 
-:host.hotel_room ::ng-deep {
-    .slick-slide {
-        height: 200px;
-    }
-    .carousel {
-        .slick-next {
-            right: 20px;
-        }
-        .slick-prev {
-            left: 20px;
-        }
-        .slick-prev:before,
-        .slick-next:before {
-            font-size: 20px;
-        }
-    }
-}
-
 :host.hotel ::ng-deep {
     .carousel {
-        .slick-prev {
-            z-index: -1;
-        }
         .slick-slide {
             position: relative;
             &:before {
@@ -74,7 +57,7 @@
                 position: absolute;
                 width: 100%;
                 height: 100%;
-                background: rgba(6, 0, 43, 0.39);
+                background: linear-gradient(to bottom, rgba(6, 0, 43, 0.1), rgba(6, 0, 43, 0.4));
             }
         }
     }

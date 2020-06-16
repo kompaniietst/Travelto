@@ -24,7 +24,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormComponent } from './form/form.component';
-import { FormControlComponent } from './form/form-control/form-control.component';
 import { AdvancedInputComponent } from './form/form-control/advanced-input/advanced-input.component';
 import { ImagesComponent } from './form/form-control/images/images.component';
 import { DropdownComponent } from './form/form-control/dropdown/dropdown.component';
@@ -35,6 +34,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { SpecialComponent } from './special/special.component';
 import { TextFeaturesComponent } from './form/form-control/text-features/text-features.component';
+import { CardComponent } from './card/card.component';
 
 
 const routes: Routes = []
@@ -46,7 +46,6 @@ const COMPONENTS = [
   SidebarComponent,
   NavbarComponent,
   FormComponent,
-  FormControlComponent,
   AdvancedInputComponent,
   ImagesComponent,
   DropdownComponent,
@@ -61,7 +60,8 @@ const COMPONENTS = [
   CarouselComponent,
   FeedbackComponent,
   SpecialComponent,
-  TextFeaturesComponent
+  TextFeaturesComponent,
+  CardComponent
 ];
 
 const MODULES = [
@@ -87,7 +87,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, CardComponent],
   imports: [...MODULES],
   exports: [...COMPONENTS,
     FormsModule, ReactiveFormsModule

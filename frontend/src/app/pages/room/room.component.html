@@ -1,1 +1,70 @@
-room
+<div *ngIf="room && hotel">
+
+    <div class="mainscreen">
+        <div class="container">
+            <div class="inner_page_header">
+                <h1>
+                    {{ room.name }}
+                </h1>
+                <h3>
+                    <a routerLink="/hotel/{{ hotel._id }}">{{ hotel.name }}</a>
+                    <app-star-rating *ngIf="hotel.stars" [starRating]="hotel.stars">
+                    </app-star-rating>
+                </h3>
+                <div class="place" *ngIf="hotel.address.city">
+                    <span></span>
+                    {{ hotel.address.city.label }}, {{ hotel.address.street }} {{ hotel.address.houseNumber }}
+                </div>
+            </div>
+        </div>
+
+        <app-carousel 
+            [slides]="room.images" 
+            [config]="carouselConfig" 
+            needCountSlides="true" 
+            class="room">
+        </app-carousel>
+
+        <div class="container">
+            <div class="section" *ngIf="room.description.length > 0">
+                <div class="title"><strong>Описание:</strong></div>
+                {{ room.description }}
+            </div>
+
+            <div class="section">
+                <div class="title">
+                    <strong>Room features</strong>
+                </div>
+                <div class="list_amenities">
+                    <div *ngFor="let item of room.textFeatures; trackBy: trackById;" class="feature">
+                        <strong>{{ item }}</strong>
+                    </div>
+                </div>
+            </div>
+    
+            
+            <div class="section" id="address">
+                <div class="title"><strong>Расположение</strong></div>
+                <div class="place"><span></span>{{ hotel.address.city.label }},
+                    {{ hotel.address.street }}</div>
+                <!-- <app-google-maps [zoom]="9" [mapLat]="mapLat" [mapLng]="mapLng">
+                <ng-template let-google="google" let-map="map">
+                    <app-google-map-marker *ngFor="let marker of markers" [google]="google" [map]="map"
+                        [lat]="marker.lat" [lng]="marker.lng">
+                    </app-google-map-marker>
+                </ng-template>
+            </app-google-maps> -->
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div *ngIf="loading" class="spinner_container">
+    <mat-spinner 
+        strokeWidth="4" 
+        diameter="30" 
+        class="blue_spinner">
+    </mat-spinner>
+</div>

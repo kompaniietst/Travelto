@@ -23,17 +23,10 @@ export class AddRoomComponent implements OnInit {
     private alert: AlertMessageService
   ) {
 
-    forkJoin(
-      this.admin.getAmenities(),
-      this.admin.getHotels()
-    )
+    this.admin.getHotels()
       .subscribe(x => {
-        var amenities = x[0];
-
-        var hotels = x[1]
-          .map(h => { return { _id: h._id, label: h.name } })
-
-        this.initFormStructure(amenities, hotels)
+        var hotels = x.map(h => { return { _id: h._id, label: h.name } })
+        this.initFormStructure(hotels)
       })
   }
 
@@ -41,7 +34,7 @@ export class AddRoomComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  initFormStructure(amenities: Amenity[], hotels: { _id: string, label: string }[]) {
+  initFormStructure(hotels: { _id: string, label: string }[]) {
 
     this.formStructure$ = of([
       new Control({
