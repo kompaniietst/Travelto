@@ -45,7 +45,6 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {
     var defaultData = this.control.value;
-    console.log('GGGGG', defaultData);
 
     if (this.defaultDataExist() && Array.isArray(this.defaultDataExist())) { // form multiple images
       this.imagesToShow = defaultData;
@@ -89,7 +88,9 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
   sendImagesToServer(formData) {
 
     this.showSpinner = true;
-    
+
+    console.log('bef server', this.control.value, this.control.type, formData);
+
     this.admin.uploadImages(this.control.type, formData)
       .subscribe(
         (resp: any) => {
@@ -97,23 +98,29 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
 
           var defaultData = this.control.value;
 
+          console.log('resp ', resp);
+
           if (this.defaultDataExist() && Array.isArray(this.defaultDataExist())) { // form multiple images
             this.imagesToShow = defaultData;
 
             resp.forEach((img: any) => {
+              console.log('foreach img', img, `${this.URL}/images/${this.control.type}/` + img);
+
               (this.form.get('formKey') as FormArray)
                 .push(new FormControl(`${this.URL}/images/${this.control.type}/` + img));
             });
+            console.log('form', this.form);
+
             return;
           }
 
-          if (this.defaultDataExist()) {
-            this.form.get('formKey').setValue(`${this.URL}/images/${this.control.type}/` + resp[0].filename)
-            return
-          }
+          // if (this.defaultDataExist()) {
+          //   this.form.get('formKey').setValue(`${this.URL}/images/${this.control.type}/` + resp[0].filename)
+          //   return
+          // }
 
-          (this.form.get('formKey') as FormArray)
-            .push(new FormControl(`${this.URL}/images/${this.control.type}/` + resp[0].filename));
+          // (this.form.get('formKey') as FormArray)
+          //   .push(new FormControl(`${this.URL}/images/${this.control.type}/` + resp[0].filename));
 
         },
         err => console.log(err))

@@ -1,9 +1,19 @@
 const mongoose = require('mongoose')
-const validator = require('validator')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+// const validator = require('validator')
+// const bcrypt = require('bcryptjs')
+// const jwt = require('jsonwebtoken')
 
 const roomSchema = mongoose.Schema({
+    // hotel_info: {
+    //     _id: {
+    //         type: mongoose.Schema.ObjectId,
+    //         trim: true
+    //     },
+    //     label: {
+    //         type: String,
+    //         trim: true
+    //     }
+    // },
     hotel_id: {
         type: mongoose.Schema.ObjectId,
         trim: true
@@ -22,7 +32,8 @@ const roomSchema = mongoose.Schema({
     },
     specials: [],
     images: [],
-    amenities: [{ type: mongoose.Schema.ObjectId }]
+    textFeatures: []
+    // amenities: [{ type: mongoose.Schema.ObjectId }]
 })
 
 roomSchema.pre('save', async function (next) {

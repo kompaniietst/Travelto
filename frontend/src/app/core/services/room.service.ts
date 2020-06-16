@@ -25,4 +25,8 @@ export class RoomService {
   getRoomsByHotel(id: string): Observable<Room[]> {
     return this.http.get<Room[]>(`${this.URL}/roomsByHotel/${id}`)
   }
+
+  editRoom(_id: string, room: Room): Observable<Room> {
+    return this.http.put<Room>(`${this.URL}/rooms/${_id}`, room)
+  }
 }

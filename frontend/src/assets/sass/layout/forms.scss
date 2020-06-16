@@ -5,6 +5,7 @@
         span {
             width: 20px;
             height: 20px;
+            margin-left: -28px;
         }
     }
 }
@@ -324,20 +325,11 @@ button.mat-menu-item {
     margin-left: -7px;
 }
 
-// .mat-progress-spinner .circle,
-// .mat-spinner .circle {
-//     stroke: $color;
-// }
 .mat-progress-spinner .circle,
 .mat-spinner .circle {
     stroke: red;
 }
 
-// .mat-progress-spinner.white circle,
-// .mat-spinner.white circle {
-//     stroke: white;
-// }
-/* drop & down */
 .dropdown_img {
     width: 233px;
     height: 200px;
@@ -367,30 +359,6 @@ button.mat-menu-item {
         border: 0;
     }
 }
-
-// .mat-autocomplete-panel.mat-autocomplete-visible {
-//     margin-top: -28px;
-// }
-// .mat-checkbox-label {
-//     font-family: $font_regular;
-// }
-// .input .mat-form-field-label-wrapper {
-//     font-family: $font_regular;
-//     color: #000;
-//     .mat-form-field-label {
-//         height: 100%;
-//         display: flex;
-//         align-items: center;
-//         padding-left: 10px;
-//         color: grey;
-//     }
-// }
-// .mat-form-field-infix {
-//     border-top: 0;
-//     .mat-input-element{
-//         margin: 0;
-//     }
-// }
 .form {
     .mat-form-field-infix {
         position: relative;

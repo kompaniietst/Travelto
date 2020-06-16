@@ -32,7 +32,7 @@ export class HotelItemComponent<T> implements OnInit {
 
   ngOnInit(): void { }
 
-  edit(_id: string, hotel: Hotel) {
+  edit(_id: string) {
     this.editItem = true;
   }
 

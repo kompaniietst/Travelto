@@ -11,9 +11,8 @@ export class SpecialComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-  
+  ngOnInit(): void { }
+
   trackById(index, item) {
     return item.id;
   }

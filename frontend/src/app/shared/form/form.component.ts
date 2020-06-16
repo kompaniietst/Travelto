@@ -50,7 +50,7 @@ export class FormComponent<T> implements OnInit {
 
         if (key == '_id' || key == 'feedbacks' || key == '__v') continue
 
-        console.log('key', key, this.form.get(key));
+        // console.log('key', key, this.form.get(key));
 
         this.form.get(key).setValue(value)
       }

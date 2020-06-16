@@ -34,6 +34,7 @@ import { StarRatingComponent } from './star-rating/star-rating.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { SpecialComponent } from './special/special.component';
+import { TextFeaturesComponent } from './form/form-control/text-features/text-features.component';
 
 
 const routes: Routes = []
@@ -55,7 +56,12 @@ const COMPONENTS = [
   StarRatingComponent,
   CarouselComponent,
   FeedbackComponent,
-  SpecialComponent
+  SpecialComponent,
+  StarRatingComponent,
+  CarouselComponent,
+  FeedbackComponent,
+  SpecialComponent,
+  TextFeaturesComponent
 ];
 
 const MODULES = [
@@ -81,7 +87,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, StarRatingComponent, CarouselComponent, FeedbackComponent, SpecialComponent],
+  declarations: [...COMPONENTS],
   imports: [...MODULES],
   exports: [...COMPONENTS,
     FormsModule, ReactiveFormsModule

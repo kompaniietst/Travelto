@@ -46,7 +46,7 @@ export class AddRoomComponent implements OnInit {
     this.formStructure$ = of([
       new Control({
         controlType: 'dropdown',
-        key: 'hotel_id',
+        key: 'hotel_info',
         label: 'Select hotel name',
         options: hotels,
         required: true
@@ -74,14 +74,10 @@ export class AddRoomComponent implements OnInit {
       }),
 
       new Control({
-        controlType: 'checkbox',
-        key: 'specials',
-        label: 'Choose specials:',
-        options: [
-          { _id: "1", label: "25%" },
-          { _id: "2", label: "Рекомендуем" },
-          { _id: "3", label: "Лучшая цена" }
-        ],
+        controlType: 'textFeatures',
+        key: 'textFeatures',
+        label: 'Add features to this room:',
+        placeholder: 'Field:',
       }),
 
       new Control({
@@ -93,11 +89,14 @@ export class AddRoomComponent implements OnInit {
 
       new Control({
         controlType: 'checkbox',
-        key: 'amenities',
-        label: 'Choose amenities:',
-        options: amenities,
+        key: 'specials',
+        label: 'Choose specials:',
+        options: [
+          { _id: "1", label: "25%" },
+          { _id: "2", label: "Рекомендуем" },
+          { _id: "3", label: "Лучшая цена" }
+        ],
       }),
-
     ])
   }
 

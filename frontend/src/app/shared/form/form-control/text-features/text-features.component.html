@@ -1,0 +1,17 @@
+<div *ngIf="control.label" class="label" [ngClass]="{'required': control.required }">
+    {{ control.label }}
+</div>
+<div [formGroup]="form">
+    <div [formArrayName]="control.key" *ngFor="let item of controls; let i = index" class="item">
+        <input type="text" [formControlName]="i" [placeholder]="control.placeholder">
+
+        <div *ngIf="(controls.length - 1) == i">
+            <div class="plus" (click)="addField()"></div>
+        </div>
+
+        <div>
+            <div class="remove" (click)="removeField(i)"></div>
+        </div>
+
+    </div>
+</div>

@@ -9,7 +9,7 @@
 
         <!--  -->
     
-        <div *ngFor="let control of controls$ | async; trackBy: trackById">
+        <ng-container *ngFor="let control of controls$ | async; trackBy: trackById">
 
             <!-- <ng-container [formGroup]="form"> -->
             <ng-container [ngSwitch]="control.controlType">
@@ -43,13 +43,25 @@
                     </app-checkbox>
                 </ng-container>
 
+                <ng-container *ngSwitchCase="'textFeatures'">
+                    <app-text-features 
+                        [formControlName]="control.key" 
+                        [control]="control" 
+                        class="{{ control.controlType }} input">
+                    </app-text-features>
+                </ng-container>
+
                 <ng-container *ngSwitchCase="'images'">
                     <app-images [formControlName]="control.key" [control]="control"
                         class="{{ control.controlType }} {{ control.key }}"></app-images>
                 </ng-container>
 
                 <ng-container *ngSwitchCase="'dropdown'">
-                    <app-dropdown [formControlName]="control.key" [control]="control"></app-dropdown>
+                    <app-dropdown 
+                        [formControlName]="control.key" 
+                        [control]="control" 
+                        class="{{ control.controlType }}">
+                    </app-dropdown>
                 </ng-container>
 
                 <ng-container *ngSwitchCase="'radio'">
@@ -59,7 +71,7 @@
 
             </ng-container>
             <!-- </ng-container> -->
-        </div>
+        </ng-container>
         <!--  -->
 
         <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>

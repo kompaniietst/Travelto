@@ -1,33 +1,57 @@
-<div class="block d_flex flex_wrap align_center justify_content_between">
+<div *ngIf="!editItem">
+    <div class="block d_flex flex_wrap align_center justify_content_between">
+        <div class="name">
+            <strong><a>{{ item.name }}</a></strong>
+        </div>
+        <div *ngIf="hotelInfo">
+            <strong><a routerLink="/hotel/{{ hotelInfo._id }}">{{ hotelInfo.name }}</a></strong>
+            <app-star-rating [starRating]="hotelInfo.stars"></app-star-rating>
+        </div>
+    </div>
+
+    <div class="block">
+        <div class="price">
+            <strong>{{ item.price }} <span class="currency">$</span></strong> / night
+        </div>
+    </div>
+
+    <div class="block">
+        {{ item.description }}
+    </div>
+
+    <div class="block images">
+        <app-special [specials]="item.specials"></app-special>
+        <div *ngFor="let img of item.images" class="img">
+            <img [src]="img" alt="">
+        </div>
+    </div>
+
+    <div class="block textFeatures">
+        <div *ngFor="let field of item.textFeatures" class="amenity">
+            - {{ field }}
+        </div>
+    </div>
+
+    <div class="control_buttons">
+        <button class="edit" (click)="edit(item._id)" class="btn">Edit</button>
+        <!-- <button class="rem" (click)="rem(item._id)" class="btn">Remove</button> -->
+    </div>
+</div>
+
+<div *ngIf="editItem">
     <div class="name">
-        <strong><a>{{ item.name }}</a></strong>
+        <strong><a routerLink="/hotel/{{ item._id }}">{{ item.name }}</a></strong>
     </div>
-    <div *ngIf="hotelInfo">
-        <strong><a routerLink="/hotel/{{ hotelInfo._id }}">{{ hotelInfo.name }}</a></strong>
-        <app-star-rating [starRating]="hotelInfo.stars"></app-star-rating>
-    </div>
-</div>
 
-<div class="block">
-    <div class="price">
-        <strong>{{ item.price }} <span class="currency">$</span></strong> / night
-    </div>
-</div>
+    <app-form 
+        [controls$]="formStructure$" 
+        [defaultData]="item" 
+        (valueChange)="onSubmit($event)" 
+        buttonName="Update"
+        [showSpinner]="showSpinner" 
+        class="edit_room_form">
+    </app-form>
+    <app-alert-message></app-alert-message>
 
-<div class="block">
-    {{ item.description }}
-</div>
-
-<div class="block images">
-    <app-special [specials]="item.specials"></app-special>
-    <div *ngFor="let img of item.images" class="img">
-        <img [src]="img" alt="">
-    </div>
-</div>
-
-<div class="block amenities">
-    <div *ngFor="let amenity of amenities" class="amenity">
-        <img [src]="amenity.image" alt="">
-        {{ amenity.label }}
-    </div>
+    <a (click)="cancelEdit()" class="cancel">Cancel</a>
 </div>

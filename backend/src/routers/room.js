@@ -4,9 +4,6 @@ const router = express.Router();
 
 router.post('/rooms', async (req, res) => {
     try {
-        console.log(req.body);
-
-
         const room = new Room(req.body)
         await room.save()
 
@@ -17,6 +14,33 @@ router.post('/rooms', async (req, res) => {
 
         res.status(400).send(error.message)
     }
+})
+
+router.put('/rooms/:id', async (req, res) => {
+
+    console.log(req.body, req.params);
+
+    const id = req.params.id;
+
+    Room.findByIdAndUpdate({ _id: id }, req.body, { new: true },
+        function (err, result) {
+            console.log(result);
+
+            if (err) throw err;
+            res.json(result);
+        });
+
+    // try {
+    //     const hotel = new Hotel(req.body)
+    //     await hotel.save()
+
+    //     res.status(201).send({ hotel })
+    // }
+    // catch (error) {
+    //     console.log(error);
+
+    //     res.status(400).send(error.message)
+    // }
 })
 
 router.get('/rooms', async (req, res) => {
@@ -34,7 +58,7 @@ router.get('/rooms', async (req, res) => {
 //     console.log(req.body);
 
 //     const id = req.params.id;
-//     const rooms = await Room.findOne({ hotel_id: id });
+//     const rooms = await Room.findOne({ hotel_info: id });
 
 //     if (!rooms) return res.status(401).send('Room are empty')
 
@@ -47,34 +71,7 @@ router.get('/roomsByHotel/:id', async (req, res) => {
     console.log(req.body);
 
     const id = req.params.id;
-    const rooms = await Room.find({ hotel_id: id });
-
-    // var r = rooms.aggregate([
-    //     {
-    //         $lookup: {
-    //             from: "amenities",
-    //             localField: "address.city",
-    //             foreignField: "_id",
-    //             as: "city"
-    //         }
-    //     },
-    //     {
-    //         $project: {
-    //             name: 1,
-    //             stars: 1,
-    //             description: 1,
-    //             map: 1,
-    //             images: 1,
-    //             amenities: 1,
-    //             address: {
-    //                 city: { "$arrayElemAt": ["$city", 0] },
-    //                 street: 1,
-    //                 houseNumber: 1,
-    //                 disctrict: 1
-    //             }
-    //         }
-    //     },
-    // ])
+    const rooms = await Room.find({ hotel_info: id });
 
     if (!rooms) return res.status(401).send('Room are empty')
 

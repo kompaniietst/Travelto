@@ -61,12 +61,7 @@ export class AdminService {
   }
 
   editAmenity(_id: string, amenity: Amenity): Observable<Amenity> {
-    console.log('in serv', _id, amenity);
-
     return this.http.put<Amenity>(`${this.URL}/amenities/${_id}`, amenity)
-
-    // return this.hotelService.editAmenity(_id, amenity)
-    //   .pipe(delay(1500))
   }
 
 
@@ -90,6 +85,12 @@ export class AdminService {
       .pipe(delay(1500))
   }
 
+  editRoom(_id: string, room: Room): Observable<Room> {
+    console.log('in serv', _id, room);
+    return this.roomService.editRoom(_id, room)
+      .pipe(delay(1500))
+  }
+
   getRooms(): Observable<Room[]> {
     return this.roomService.get()
       .pipe(delay(1500))
@@ -104,4 +105,16 @@ export class AdminService {
     return this.http.post(`${this.URL}/images/${path}`, imageData)
       .pipe(delay(1500))
   }
+
+
+  registerRoomDetails(details: any): Observable<any> {
+    return this.http
+      .post<any>(`${this.URL}/roomDetails`, details)
+      .pipe(delay(1500))
+  }
+
+  // getAmenities(): Observable<Amenity[]> {
+  //   return this.http
+  //     .get<Amenity[]>(`${this.URL}/amenities`)
+  // }
 }
