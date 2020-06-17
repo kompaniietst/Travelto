@@ -3,7 +3,7 @@
     border: 1px solid #0098db;
     box-shadow: 0px 0px 15px rgba(25, 154, 210, 0.29);
     border-radius: 3px;
-    margin: 0 0 10px;
+    margin: 0 0 20px;
     padding: 14px;
     display: block;
     color: #484848;
@@ -39,7 +39,7 @@
             display: flex;
             border-radius: 50px;
             margin-right: 9px;
-            margin-top: 9px;
+            margin-top: 11px;
             align-items: center;
             justify-content: center;
             img {
@@ -88,6 +88,9 @@
                 }
             }
         }
+        ul{
+            margin: 10px -3px;
+        }
     }
     .more {
         color: $color;
@@ -109,4 +112,15 @@
     .carousel .slick-prev {
         z-index: -1;
     }
+}
+:host.hotel ::ng-deep {
+    .carousel {
+        .slick-next,
+        .slick-prev {
+            z-index: 1;
+        }
+    }
+}
+.btn.btn-grey-outline {
+    margin-top: 5px;
 }

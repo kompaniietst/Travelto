@@ -17,6 +17,7 @@ export class CardComponent implements OnInit {
   @Input() limit: number = -1;
   // @Input() configThumbnails;
 
+
   carouselConfigRooms = {
     speed: 700,
     slidesToShow: 1,
@@ -38,7 +39,7 @@ export class CardComponent implements OnInit {
     draggable: true,
     focusOnSelect: true,
   };
-  
+
   constructor(
     private hotelService: HotelService
   ) { }

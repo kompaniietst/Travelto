@@ -4,7 +4,7 @@
     .inner_page_header {
         position: absolute;
         z-index: 1;
-        bottom: 46px;
+        top: 50%;
         transform: translate(-50%, -50%);
         left: 50%;
         text-align: center;
@@ -12,19 +12,22 @@
             color: white;
             position: relative;
             font-size: 39px;
+            flex-direction: column;
+            display: flex;
             &::before {
                 content: "";
                 position: absolute;
-                width: 99%;
-                height: 131px;
+                width: 137%;
+                height: 190px;
                 background: black;
                 z-index: -1;
                 border-radius: 100px;
-                filter: blur(47px);
-                top: 56%;
+                -webkit-filter: blur(47px);
+                filter: blur(61px);
+                top: 66%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                opacity: 0.3;
+                opacity: 0.4;
             }
         }
         .place {

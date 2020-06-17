@@ -21,6 +21,9 @@
                 <app-star-rating [starRating]="hotel.stars"></app-star-rating>
             </div>
             <ng-content select=".header_templ_center"></ng-content>
+            <div class="place"><span></span>
+                {{ hotel.address.city.label }}, {{ hotel.address.street }} {{ hotel.address.houseNumber }}
+            </div>
             <ul>
                 <li *ngFor="let item of room.textFeatures | limit:limit" class="feature">
                     {{ item }}
@@ -34,7 +37,6 @@
             </ul>
             <div class="amenities">
                 <div *ngFor="let item of hotel.amenities">
-                    <!-- {{ item.label }} -->
                     <img [src]="item.image" [alt]="item.label">
                 </div>
             </div>

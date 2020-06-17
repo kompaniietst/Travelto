@@ -288,7 +288,7 @@
             margin-bottom: 30px;
             font-size: 20px;
         }
-        .checkboxes-container {
+        .checkboxes_container {
             display: flex;
             flex-wrap: wrap;
             .mat-checkbox {
@@ -382,7 +382,7 @@
             margin-bottom: 30px;
             font-size: 20px;
         }
-        .checkboxes-container {
+        .checkboxes_container {
             display: flex;
             flex-wrap: wrap;
             .mat-checkbox {
@@ -446,7 +446,7 @@
     .checkbox {
         display: block;
         margin: 20px 0;
-        .checkboxes-container {
+        .checkboxes_container {
             display: flex;
             flex-wrap: wrap;
             .mat-checkbox {
@@ -588,5 +588,18 @@
     .textFeatures {
         display: block;
         clear: both;
+    }
+}
+
+/* Filter form, sidebar */
+
+:host.filter_form ::ng-deep .form {
+    padding: 20px;
+    .checkbox {
+        display: block;
+        margin: 20px 0;
+    }
+    .checkboxes_container {
+        margin: 10px 0;
     }
 }

@@ -1,19 +1,25 @@
-<div class="container" *ngIf="rooms$">
+<div class="container">
     <div class="d_flex">
-        <app-sidebar>
-            sideb
-            <br>sdfsdf
-            sideb
-            <br>sdfsdf
-            sideb
-            <br>sdfsdf
+        <app-sidebar class="sidebar">
+            <div class="title">
+                <strong>Filter:</strong>
+            </div>
+            <app-form 
+                *ngIf="formStructure$"
+                [controls$]="formStructure$" 
+                (valueChange)="onSubmit($event)" 
+                class="filter_form">
+            </app-form>
         </app-sidebar>
         <app-wrapper class="wrapper">
+            <div class="title">
+                <strong>Founded {{ (rooms$ | async)?.length }} options:</strong>
+            </div>
             <ng-container *ngFor="let room of rooms$ | async">
                 <app-card 
                     [room]="room" 
                     class="catalog"
-                    limit="3">
+                    limit="5">
                     <div class="header_templ_center">
                         <h3><a routerLink="/room/{{ room._id }}">{{ room.name }}</a></h3>
                     </div>

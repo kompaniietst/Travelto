@@ -2,23 +2,44 @@
 a {
     color: $color;
 }
+
+h3 {
+    font-family: $font_bold;
+    margin: 3px 0 5px;
+    font-size: 1.3em;
+    a {
+        color: black;
+    }
+}
+.title {
+    font-size: 1.2rem;
+    color: #484848;
+    margin: 10px 0 0;
+}
 .wrapper {
     width: 100%;
 }
+.sidebar ::ng-deep {
+    max-width: 300px;
+    .checkboxes_container {
+        .mat-checkbox {
+            display: block;
+        }
+    }
+}
 .catalog ::ng-deep {
     .carousel {
-        height: 200px;
+        height: 180px;
         width: 300px;
         overflow: hidden;
     }
     .center_block {
         padding: 0 20px;
     }
-}
-h3 {
-    font-family: $font_bold;
-    margin: 3px 0 11px;
-    a {
-        color: black;
+    .thumbnail_slider,
+    .thumbnail_slider .slick-slide {
+        height: 54px;
+        margin-right: 1px;
+        margin-top: 1px;
     }
 }
