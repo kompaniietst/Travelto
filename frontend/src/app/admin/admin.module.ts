@@ -26,6 +26,7 @@ import { RoomItemComponent } from './rooms/item/item.component';
 import { StarRatingComponent } from '../shared/star-rating/star-rating.component';
 import { CoreModule } from '../core/core.module';
 import { AmenityItemComponent } from './amenities/item/item.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 const routes: Routes = []
 
@@ -68,6 +69,7 @@ const MODULES = [
 
   RouterModule.forRoot(routes),
   CoreModule,
+  PipesModule
 ];
 
 @NgModule({

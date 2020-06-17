@@ -6,6 +6,7 @@ import { Amenity } from 'src/app/core/models/Amenity';
 import { Observable, of } from 'rxjs';
 import { Control } from 'src/app/core/models/Control';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
+import { CustomCurrencyPipe } from 'src/app/pipes/customCurrency.pipe';
 
 class HoteInfo {
   _id: string;
@@ -16,7 +17,8 @@ class HoteInfo {
 @Component({
   selector: 'app-room-item',
   templateUrl: './item.component.html',
-  styleUrls: ['./item.component.scss']
+  styleUrls: ['./item.component.scss'],
+  providers: [CustomCurrencyPipe]
 })
 export class RoomItemComponent implements OnInit {
 

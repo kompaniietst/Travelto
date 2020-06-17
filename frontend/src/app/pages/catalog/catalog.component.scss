@@ -19,6 +19,13 @@ h3 {
 .wrapper {
     width: 100%;
 }
+.btn.btn-grey-outline {
+    margin-top: 5px;
+}
+.price {
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
 .sidebar ::ng-deep {
     max-width: 300px;
     .checkboxes_container {
@@ -41,5 +48,16 @@ h3 {
         height: 54px;
         margin-right: 1px;
         margin-top: 1px;
+    }
+}
+.filter_form ::ng-deep {
+    .dropdown {
+        .mat-input-element {
+            border: 1px solid #d6e7f0;
+            padding: 15px 10px;
+            border-radius: 3px;
+            margin: 12px 0;
+            width: 100%;
+        }
     }
 }

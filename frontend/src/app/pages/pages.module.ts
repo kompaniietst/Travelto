@@ -18,6 +18,7 @@ import { RoomComponent } from './room/room.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CoreModule } from '../core/core.module';
 import { AboutComponent } from './about/about.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 const routes: Routes = []
@@ -44,6 +45,7 @@ const MODULES = [
 
   RouterModule.forRoot(routes),
   SharedModule,
+  PipesModule
 ]
 
 @NgModule({

@@ -9,7 +9,7 @@
 
             <app-carousel 
                 [id]="room._id" 
-                [slides]="room.images" 
+                [slides]="slides" 
                 [config]="carouselConfigRooms"
                 [thumbnailsConfig]="thumbnailsConfig">
             </app-carousel>
@@ -25,7 +25,7 @@
                 {{ hotel.address.city.label }}, {{ hotel.address.street }} {{ hotel.address.houseNumber }}
             </div>
             <ul>
-                <li *ngFor="let item of room.textFeatures | limit:limit" class="feature">
+                <li *ngFor="let item of room.textFeatures | limit:limit; trackBy: trackById;" class="feature">
                     {{ item }}
                 </li>
                 <li *ngIf="limit > 0" class="more feature" (click)="showMore()">
@@ -36,7 +36,7 @@
                 </li>
             </ul>
             <div class="amenities">
-                <div *ngFor="let item of hotel.amenities">
+                <div *ngFor="let item of hotel.amenities; trackBy: trackById">
                     <img [src]="item.image" [alt]="item.label">
                 </div>
             </div>
@@ -44,19 +44,7 @@
 
         <div class="end_block">
             <div class="details">
-                <div class="price text_center">
-                    <span class="blue">
-                        <strong>
-                            {{ room.price }} <span class="currency">$</span>
-                        </strong>
-                    </span> / night </div>
-                <div class="buttons">
-                    <button class="btn btn-orange w_100">Choose your room</button>
-                    <button class="btn btn-grey-outline w_100" routerLink="/hotel/{{ hotel._id }}">About hotel</button>
-                    <!-- <button class="btn btn-blue w_100">
-                        <span>Выбран</span>
-                    </button> -->
-                </div>
+                <ng-content select=".end_block"></ng-content>
             </div>
         </div>
 

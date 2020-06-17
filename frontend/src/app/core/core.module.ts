@@ -9,14 +9,14 @@ import { SharedModule } from '../shared/shared.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ReversePipe } from '../pipes/reverse.pipe';
-import { CustomCurrencyPipe } from '../pipes/customCurrency.pipe';
+// import { CustomCurrencyPipe } from '../pipes/customCurrency.pipe';
 
 const routes: Routes = []
 
 const COMPONENTS = [
   HeaderComponent,
   ReversePipe,
-  CustomCurrencyPipe,
+  // CustomCurrencyPipe,
 ];
 
 const MODULES = [

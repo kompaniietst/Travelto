@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, forkJoin } from 'rxjs';
 import { Room } from 'src/app/core/models/Room';
 import { RoomService } from 'src/app/core/services/room.service';
 import { Control } from 'src/app/core/models/Control';
 import { AmenitiesService } from 'src/app/core/services/amenities.service';
 import { Amenity } from 'src/app/core/models/Amenity';
 import { NgControl } from '@angular/forms';
+import { CitiesService } from 'src/app/core/services/cities.service';
+import { City } from 'src/app/core/models/City';
+import { CustomCurrencyPipe } from 'src/app/pipes/customCurrency.pipe';
 
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
-  styleUrls: ['./catalog.component.scss']
+  styleUrls: ['./catalog.component.scss'],
+  providers: [CustomCurrencyPipe]
 })
 export class CatalogComponent implements OnInit {
 
@@ -20,17 +24,28 @@ export class CatalogComponent implements OnInit {
 
   constructor(
     private roomService: RoomService,
-    private amenitiesService: AmenitiesService
+    private amenitiesService: AmenitiesService,
+    private citiesService: CitiesService
   ) {
     this.rooms$ = this.roomService.get();
     // this.roomService.get().subscribe(x => console.log('x', x));
-    this.amenitiesService.get().subscribe((x: Amenity[]) => this.initFormStructure(x));
+    forkJoin(
+      this.citiesService.get(),
+      this.amenitiesService.get()
+    ).subscribe(x => this.initFormStructure(x[0], x[1]));
   }
 
-  initFormStructure(amenities: Amenity[]) {
+  initFormStructure(cities: City[], amenities: Amenity[]) {
     console.log('A', amenities);
 
     this.formStructure$ = of([
+      new Control({
+        controlType: 'dropdown',
+        key: 'city',
+        label: 'City:',
+        placeholder: 'Choose the city',
+        options: cities,
+      }),
       new Control({
         controlType: 'checkbox',
         key: 'specials',
@@ -65,5 +80,9 @@ export class CatalogComponent implements OnInit {
 
   onSubmit(formData) {
 
+  }
+
+  trackById(index, item) {
+    return item.id;
   }
 }

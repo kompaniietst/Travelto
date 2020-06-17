@@ -16,7 +16,7 @@ export class CardComponent implements OnInit {
   @Input() hotel: Hotel;
   @Input() limit: number = -1;
   // @Input() configThumbnails;
-
+  slides: string[];
 
   carouselConfigRooms = {
     speed: 700,
@@ -45,12 +45,18 @@ export class CardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     this.hotelService.gethotelInfoByRoom(this.room.hotel_id)
       .subscribe((x: Hotel) => {
-        console.log('hhh', x);
-        this.hotel = x
+        this.hotel = x;
+        var hotelImages = x.images.slice(0, x.images.length -1)
+        this.slides = [...hotelImages, ...this.room.images];
       })
   }
 
   showMore() { }
+
+  trackById(index, item) {
+    return item.id;
+  }
 }

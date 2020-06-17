@@ -6,11 +6,13 @@ import { Hotel } from 'src/app/core/models/Hotel';
 import { Room } from 'src/app/core/models/Room';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
 import { Amenity } from 'src/app/core/models/Amenity';
+import { CustomCurrencyPipe } from 'src/app/pipes/customCurrency.pipe';
 
 @Component({
   selector: 'app-hotel',
   templateUrl: './hotel.component.html',
-  styleUrls: ['./hotel.component.scss']
+  styleUrls: ['./hotel.component.scss'],
+  providers: [CustomCurrencyPipe]
 })
 export class HotelComponent implements OnInit {
 
@@ -29,14 +31,14 @@ export class HotelComponent implements OnInit {
   // loading = true;
 
   needCountSlides: boolean = true;
-  
+
   carouselConfig = {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     arrows: true
   };
-  
+
   constructor(
     private route: ActivatedRoute,
     private admin: AdminService,

@@ -8,6 +8,7 @@
           matInput
           [placeholder]="control.placeholder"
           [formControl]="myControl"
+          value="dsdsd"
           [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">

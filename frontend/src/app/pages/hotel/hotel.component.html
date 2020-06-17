@@ -37,7 +37,7 @@
                 <strong>Выберите номер:</strong>
             </div>
             <div class="list">
-                <div *ngFor="let room of rooms$ | async" class="item">
+                <div *ngFor="let room of rooms$ | async; trackBy: trackById" class="item">
                     <app-card 
                         [room]="room" 
                         class="hotel">
@@ -45,6 +45,19 @@
                             <h4>
                                 <a routerLink="/room/{{ room._id }}">{{ room.name }}</a>
                             </h4>
+                            <div class="price text_center">
+                                <span class="blue">
+                                    <strong>
+                                        {{ room.price | customCurrency  }} <span class="currency">$</span>
+                                    </strong>
+                                </span> / night
+                            </div>
+                        </div>
+
+                        <div class="end_block">
+                            <div class="buttons">
+                                <button class="btn btn-orange w_100">Choose your room</button>
+                            </div>
                         </div>
                     </app-card>
                 </div>

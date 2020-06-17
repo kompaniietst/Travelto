@@ -8,7 +8,7 @@
     (afterChange)="afterChange($event)"
     (beforeChange)="beforeChange($event)">
 
-    <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+    <div ngxSlickItem *ngFor="let slide of slides; trackBy: trackById" class="slide">
         <img src="{{ slide }}" alt="" width="100%">
     </div>
 </ngx-slick-carousel>
