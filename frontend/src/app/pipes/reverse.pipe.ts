@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Room } from '../models/Room';
+import { Room } from '../core/models/Room';
 import { Observable } from 'rxjs';
 
 @Pipe({

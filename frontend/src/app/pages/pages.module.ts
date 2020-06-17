@@ -15,6 +15,9 @@ import { HotelComponent } from './hotel/hotel.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { RoomComponent } from './room/room.component';
+import { CatalogComponent } from './catalog/catalog.component';
+import { CoreModule } from '../core/core.module';
+import { AboutComponent } from './about/about.component';
 
 
 const routes: Routes = []
@@ -27,7 +30,9 @@ const COMPONENTS = [
   OrdersComponent,
   FavoriteComponent,
   HotelComponent,
-  RoomComponent
+  RoomComponent,
+  CatalogComponent,
+  AboutComponent
 ];
 
 const MODULES = [
@@ -42,7 +47,7 @@ const MODULES = [
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS,],
+  declarations: [...COMPONENTS, CatalogComponent, AboutComponent,],
   imports: [...MODULES],
   exports: [...COMPONENTS]
 })

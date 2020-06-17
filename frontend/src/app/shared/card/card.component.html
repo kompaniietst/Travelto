@@ -1,43 +1,62 @@
-<h4><a routerLink="/room/{{ room._id }}">{{ room.name }}</a></h4>
+<ng-content select=".header_templ_top"></ng-content>
 
-<div class="item_container">
-    <div class="img">
-        <app-special 
-            [specials]="room.specials">
-        </app-special>
+<div *ngIf="hotel">
+    <div class="item_container">
+        <div class="img">
+            <app-special 
+                [specials]="room.specials">
+            </app-special>
 
-        <app-carousel 
-            [id]="room._id" 
-            [slides]="room.images" 
-            [config]="carouselConfigRooms">
-        </app-carousel>
-    </div>
+            <app-carousel 
+                [id]="room._id" 
+                [slides]="room.images" 
+                [config]="carouselConfigRooms"
+                [thumbnailsConfig]="thumbnailsConfig">
+            </app-carousel>
+        </div>
 
-    <div class="center_block">
-        <ul>
-            <li *ngFor="let item of room.textFeatures" class="feature">
-                {{ item }}
-            </li>
-        </ul>
-    </div>
-
-    <div class="end_block">
-        <div class="details">
-            <div class="price text_center">
-                <span class="blue">
+        <div class="center_block">
+            <div class="hotel_name">
+                <a routerLink="/hotel/{{ hotel._id }}"><strong>{{ hotel.name }}</strong></a>
+                <app-star-rating [starRating]="hotel.stars"></app-star-rating>
+            </div>
+            <ng-content select=".header_templ_center"></ng-content>
+            <ul>
+                <li *ngFor="let item of room.textFeatures | limit:limit" class="feature">
+                    {{ item }}
+                </li>
+                <li *ngIf="limit > 0" class="more feature" (click)="showMore()">
                     <strong>
-                        {{ room.price }} <span class="currency">$</span>
+                        <span>... </span>
+                        <span>show more</span>
                     </strong>
-                </span> / night </div>
-            <div class="buttons">
-                <button class="btn btn-orange w_100">
-                    <span>Choose your room</span>
-                </button>
-                <!-- <button class="btn btn-blue w_100">
-                    <span>Выбран</span>
-                </button> -->
+                </li>
+            </ul>
+            <div class="amenities">
+                <div *ngFor="let item of hotel.amenities">
+                    <!-- {{ item.label }} -->
+                    <img [src]="item.image" [alt]="item.label">
+                </div>
             </div>
         </div>
-    </div>
 
+        <div class="end_block">
+            <div class="details">
+                <div class="price text_center">
+                    <span class="blue">
+                        <strong>
+                            {{ room.price }} <span class="currency">$</span>
+                        </strong>
+                    </span> / night </div>
+                <div class="buttons">
+                    <button class="btn btn-orange w_100">Choose your room</button>
+                    <button class="btn btn-grey-outline w_100" routerLink="/hotel/{{ hotel._id }}">About hotel</button>
+                    <!-- <button class="btn btn-blue w_100">
+                        <span>Выбран</span>
+                    </button> -->
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>

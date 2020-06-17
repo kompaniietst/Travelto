@@ -8,7 +8,6 @@
         transform: translate(-50%, -50%);
         left: 50%;
         text-align: center;
-
         h1 {
             color: white;
             position: relative;
@@ -109,7 +108,9 @@
         }
     }
 }
-
+a {
+    color: $color;
+}
 h4 {
     margin-top: 2px;
     border-bottom: 1px solid #dedede;

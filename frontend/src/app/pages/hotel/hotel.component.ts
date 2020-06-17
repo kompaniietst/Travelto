@@ -28,6 +28,15 @@ export class HotelComponent implements OnInit {
 
   // loading = true;
 
+  needCountSlides: boolean = true;
+  
+  carouselConfig = {
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    arrows: true
+  };
+  
   constructor(
     private route: ActivatedRoute,
     private admin: AdminService,
@@ -49,13 +58,6 @@ export class HotelComponent implements OnInit {
       .subscribe((x: Amenity[]) => this.amenities = x)
   }
 
-  needCountSlides: boolean = true;
-  carouselConfig = {
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    arrows: true
-  };
 
   ngOnInit(): void {
 

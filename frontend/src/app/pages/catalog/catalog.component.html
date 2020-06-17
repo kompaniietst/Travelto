@@ -1,0 +1,24 @@
+<div class="container" *ngIf="rooms$">
+    <div class="d_flex">
+        <app-sidebar>
+            sideb
+            <br>sdfsdf
+            sideb
+            <br>sdfsdf
+            sideb
+            <br>sdfsdf
+        </app-sidebar>
+        <app-wrapper class="wrapper">
+            <ng-container *ngFor="let room of rooms$ | async">
+                <app-card 
+                    [room]="room" 
+                    class="catalog"
+                    limit="3">
+                    <div class="header_templ_center">
+                        <h3><a routerLink="/room/{{ room._id }}">{{ room.name }}</a></h3>
+                    </div>
+                </app-card>
+            </ng-container>
+        </app-wrapper>
+    </div>
+</div>

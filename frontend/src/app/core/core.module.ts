@@ -8,8 +8,8 @@ import { HeaderComponent } from './shared/header/header.component';
 import { SharedModule } from '../shared/shared.module';
 
 import { HttpClientModule } from '@angular/common/http';
-import { ReversePipe } from './pipes/reverse.pipe';
-import { CustomCurrencyPipe } from './pipes/customCurrency.pipe';
+import { ReversePipe } from '../pipes/reverse.pipe';
+import { CustomCurrencyPipe } from '../pipes/customCurrency.pipe';
 
 const routes: Routes = []
 

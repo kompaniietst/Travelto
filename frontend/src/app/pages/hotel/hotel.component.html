@@ -39,7 +39,15 @@
             </div>
             <div class="list">
                 <div *ngFor="let room of rooms$ | async" class="item">
-                    <app-card [room]="room" class="hotel"></app-card>
+                    <app-card 
+                        [room]="room" 
+                        class="hotel">
+                        <div class="header_templ_center">
+                            <h4>
+                                <a routerLink="/room/{{ room._id }}">{{ room.name }}</a>
+                            </h4>
+                        </div>
+                    </app-card>
                 </div>
             </div>
         </div>

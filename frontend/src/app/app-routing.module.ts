@@ -13,10 +13,14 @@ import { AmenitiesComponent } from './admin/amenities/amenities.component';
 import { CitiesComponent } from './admin/cities/cities.component';
 import { HotelComponent } from './pages/hotel/hotel.component';
 import { RoomComponent } from './pages/room/room.component';
+import { CatalogComponent } from './pages/catalog/catalog.component';
+import { AboutComponent } from './pages/about/about.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'catalog', component: CatalogComponent },
+  { path: 'about', component: AboutComponent },
   {
     path: 'profile/:id', component: ProfileComponent,
     children: [

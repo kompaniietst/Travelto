@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { AdminService } from '../../admin.service';
 import { Hotel } from 'src/app/core/models/Hotel';
-import { ReversePipe } from 'src/app/core/pipes/reverse.pipe';
+import { ReversePipe } from 'src/app/pipes/reverse.pipe';
 
 @Component({
   selector: 'app-view-hotels',

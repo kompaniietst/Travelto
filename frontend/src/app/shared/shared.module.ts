@@ -35,6 +35,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { SpecialComponent } from './special/special.component';
 import { TextFeaturesComponent } from './form/form-control/text-features/text-features.component';
 import { CardComponent } from './card/card.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 const routes: Routes = []
@@ -82,6 +83,8 @@ const MODULES = [
 
   FormsModule, ReactiveFormsModule,
   SlickCarouselModule,
+
+  PipesModule,
 
   RouterModule.forRoot(routes)
 ];

@@ -8,13 +8,13 @@
     display: block;
     color: #484848;
     font-family: $font_regular;
-    height: 100%;
+    // height: 100%;
     h4 {
         font-family: $font_bold;
         font-size: 17px;
-        a {
-            color: $color;
-        }
+    }
+    a {
+        color: $color;
     }
     .feature {
         border: 1px solid #c1e1ef;
@@ -27,6 +27,28 @@
         display: flex;
         align-items: center;
         font-size: 13px;
+    }
+    .amenities {
+        display: flex;
+        clear: both;
+        flex-wrap: wrap;
+        div {
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid $color_orange;
+            display: flex;
+            border-radius: 50px;
+            margin-right: 9px;
+            margin-top: 9px;
+            align-items: center;
+            justify-content: center;
+            img {
+                width: 100%;
+                height: auto;
+                max-height: 22px;
+                max-width: 22px;
+            }
+        }
     }
     &.hotel {
         .item_container {
@@ -45,5 +67,46 @@
             padding-top: 10px;
             margin-bottom: 10px;
         }
+    }
+    &.catalog {
+        border: $border;
+        box-shadow: none;
+        .item_container {
+            display: flex;
+        }
+        .end_block {
+            border-left: $border;
+            padding-left: 20px;
+            min-width: 197px;
+            position: relative;
+            .details {
+                top: 50%;
+                position: absolute;
+                transform: translate(0, -50%);
+                .price {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+    .more {
+        color: $color;
+        cursor: pointer;
+        span:nth-child(2) {
+            border-bottom: 1px solid #0098db;
+        }
+    }
+    .hotel_name {
+        margin-top: 8px;
+        a {
+            padding-right: 10px;
+            color: $text_color;
+        }
+    }
+}
+:host.catalog ::ng-deep {
+    .carousel .slick-next,
+    .carousel .slick-prev {
+        z-index: -1;
     }
 }
