@@ -37,53 +37,8 @@ export class FormComponent<T> implements OnInit {
   constructor(
     private generateForm: GenerateFormStructureService,
     private filterTabsService: FilterTabsService
-  ) {
+  ) {}
 
-    if (this.form != undefined)
-      console.log('NOT UNDEF');
-  }
-/* 
-    this.filterTabsService.getRemovedTabID()
-      .subscribe(x => {
-        console.log(' ');
-        console.log('TABS CHANGE', x);
-
-        // var i = (this.form.get('amenities') as FormArray).controls
-        //   .findIndex(c => c.value._id == x);
-
-        // console.log((this.form.get('amenities') as FormArray).controls);
-
-
-
-this.unc(x);
-        
-        console.log('FORM', this.form);
-
-
-
-
-        // console.log(this.form);
-
-        // var index = (this.form.get('amenities') as FormArray).controls
-        //   .findIndex(c => c.value._id == x);
-
-        // console.log(index);
-
-        // console.log((this.form.get('amenities') as FormArray).value);
-
-
-
-        // this.checkboxComponentRef.removeControl(x)
-      }, err => console.log(err))
-
-    // this.filterTabsService.getRemovedTabID().subscribe(x => console.log('GET', x))
-
-  }
-
-  unc(x){
-    console.log('X',x);
-    this.checkboxComponentRef.removeControl(x)
-  } */
   ngOnInit() {
 
     this.controls$.subscribe(x => console.log(x))
@@ -96,13 +51,9 @@ this.unc(x);
 
         if (key == '_id' || key == 'feedbacks' || key == '__v') continue
 
-        // console.log('key', key, this.form.get(key));
-
         this.form.get(key).setValue(value)
       }
     }
-
-    console.log('===', (this.form.get('amenities')));
 
   }
 

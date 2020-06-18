@@ -28,7 +28,6 @@ export class FilterTabsService {
     this.removedTabID.next(_id); // set id of removed element
 
     var i = this.tabs.findIndex(t => t._id == _id);
-    console.log('i',i);
     
     this.tabs.splice(i, 1)
 

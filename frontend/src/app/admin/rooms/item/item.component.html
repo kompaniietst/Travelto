@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div class="block">
+    <div class="block" *ngIf="item.price">
         <div class="price">
             <strong>{{ item.price| customCurrency }} <span class="currency">$</span></strong> / night
         </div>

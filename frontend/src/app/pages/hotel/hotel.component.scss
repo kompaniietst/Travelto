@@ -157,3 +157,8 @@ h4 {
         display: none !important;
     }
 }
+.header_templ_center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

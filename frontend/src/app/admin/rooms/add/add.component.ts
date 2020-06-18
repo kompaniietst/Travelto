@@ -39,8 +39,9 @@ export class AddRoomComponent implements OnInit {
     this.formStructure$ = of([
       new Control({
         controlType: 'dropdown',
-        key: 'hotel_info',
+        key: 'hotel_id',
         label: 'Select hotel name',
+        placeholder: 'Choose hotel',
         options: hotels,
         required: true
       }),

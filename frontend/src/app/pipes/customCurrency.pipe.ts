@@ -6,8 +6,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CustomCurrencyPipe implements PipeTransform {
 
   transform(value: number): unknown {
-    return value.toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    if (value)
+      return value.toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   }
 
 }

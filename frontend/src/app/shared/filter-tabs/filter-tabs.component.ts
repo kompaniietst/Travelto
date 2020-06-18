@@ -16,7 +16,6 @@ export class FilterTabsComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterTabs = this.filterTabsService.get()
-    this.filterTabsService.get().subscribe(x=>console.log('tabs',x))
   }
 
   removeTab(_id: string) {
