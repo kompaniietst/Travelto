@@ -3,6 +3,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor, FormGroup, FormControl, FormAr
 import { startWith, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MatFormFieldControl } from '@angular/material/form-field';
+import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 
 @Component({
   selector: 'app-dropdown',
@@ -26,7 +27,19 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
 
   filteredOptions: Observable<any>;
 
-  constructor() { }
+  constructor(private filterTabsService: FilterTabsService) {
+
+    this.myControl.valueChanges.subscribe(x => {            // set filter tab
+      if (x) this.filterTabsService.set(x)                  // TODO remove from tabs, if uncheck
+    })
+
+    this.filterTabsService.getRemovedTabID()                // uncheck checkbox after removing of filter tab
+      .subscribe((tab_id: string) => {
+        if (this.control && this.myControl?.value?._id == tab_id) {
+          this.myControl.reset();
+        }
+      })
+  }
 
   writeValue(obj: any): void { }
 
@@ -40,13 +53,13 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
       this.myControl.setValue(this.control.value)
     }
 
-
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filter(value)));
 
     this.myControl.valueChanges.subscribe(x => this.onChange(x))
+
     this.myControl.valueChanges.subscribe(x => console.log(x))
   }
 

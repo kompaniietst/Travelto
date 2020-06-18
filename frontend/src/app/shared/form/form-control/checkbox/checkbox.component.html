@@ -6,7 +6,7 @@
         <mat-checkbox 
             [formArrayName]="control.key"
             *ngFor="let item of control.options; trackBy: trackById; let i = index"
-            (change)="onCheckboxChange($event.checked, item._id, i, item)" 
+            (change)="onCheckboxChange($event.checked, i, item)" 
             [checked]="item.checked">
 
             <span *ngIf="control.options[i]._id == 1; else default">

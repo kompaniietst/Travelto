@@ -1,5 +1,6 @@
 import { Component, OnInit, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR, FormGroup, FormArray, FormControl, ControlValueAccessor } from '@angular/forms';
+import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 
 @Component({
   selector: 'app-checkbox',
@@ -17,7 +18,14 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
   form: FormGroup = new FormGroup({})
   defaultData: any;
 
-  constructor() { }
+  constructor(private filterTabsService: FilterTabsService) {
+
+    this.filterTabsService.getRemovedTabID()          // uncheck checkbox after removing of filter tab
+      .subscribe((tab_id: string) => {
+        if (this.control)
+          this.removeControl(tab_id)
+      })
+  }
 
   writeValue(obj: any): void { }
 
@@ -50,10 +58,12 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
       .addControl(this.control.key, new FormArray([]));
   }
 
-  onCheckboxChange(checked: boolean, _id: string, i: number, item: any) { // on select checkbox
+  onCheckboxChange(checked: boolean, i: number, item: any) { // on select checkbox
     checked
       ? this.addControl(item, i)
-      : this.removeControl(i, _id);
+      : this.removeControl(item._id);
+
+    this.setFilterTabs(checked, item);
   }
 
   public addControl(item: any, i: number) {
@@ -61,16 +71,30 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
     this.control.options[i].checked = true;
   }
 
-  public removeControl(i: number, _id) {
-    var currControlIndex = (this.form.get(this.control.key) as FormArray).controls
-      .findIndex(c => c.value._id == _id)
+  public removeControl(_id) {
 
-    this.control.options[i].checked = false;
-    (this.form.get(this.control.key) as FormArray).removeAt(currControlIndex);
+    // remove control from Form
+    var controlIndex = (this.form.get(this.control.key) as FormArray).controls.findIndex(c => c.value._id == _id)
+
+    if (controlIndex != -1)
+      (this.form.get(this.control.key) as FormArray).removeAt(controlIndex);
+
+    // change "checked" state of curr checbox
+    var controlOptIndex = this.control.options.findIndex(c => c._id == _id)
+
+    if (controlOptIndex != -1)
+      this.control.options[controlOptIndex].checked = false;
+
   }
 
   defaultDataExist() {
     return this.control.value ? true : false;
+  }
+
+  setFilterTabs(checked: boolean, item: any) {
+    checked
+      ? this.filterTabsService.set(item)
+      : this.filterTabsService.remove(item._id);
   }
 
   trackById(index, item) {

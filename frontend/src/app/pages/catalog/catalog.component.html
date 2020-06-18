@@ -15,6 +15,9 @@
             <div class="title">
                 <strong>Founded {{ (rooms$ | async)?.length }} options:</strong>
             </div>
+
+            <app-filter-tabs></app-filter-tabs>
+
             <ng-container *ngFor="let room of rooms$ | async; trackBy: trackById">
                 <app-card 
                     [room]="room" 

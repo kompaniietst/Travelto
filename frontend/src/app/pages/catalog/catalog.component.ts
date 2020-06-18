@@ -5,10 +5,10 @@ import { RoomService } from 'src/app/core/services/room.service';
 import { Control } from 'src/app/core/models/Control';
 import { AmenitiesService } from 'src/app/core/services/amenities.service';
 import { Amenity } from 'src/app/core/models/Amenity';
-import { NgControl } from '@angular/forms';
 import { CitiesService } from 'src/app/core/services/cities.service';
 import { City } from 'src/app/core/models/City';
 import { CustomCurrencyPipe } from 'src/app/pipes/customCurrency.pipe';
+import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 
 @Component({
   selector: 'app-catalog',
@@ -25,10 +25,10 @@ export class CatalogComponent implements OnInit {
   constructor(
     private roomService: RoomService,
     private amenitiesService: AmenitiesService,
-    private citiesService: CitiesService
+    private citiesService: CitiesService,
   ) {
+
     this.rooms$ = this.roomService.get();
-    // this.roomService.get().subscribe(x => console.log('x', x));
     forkJoin(
       this.citiesService.get(),
       this.amenitiesService.get()
@@ -36,7 +36,6 @@ export class CatalogComponent implements OnInit {
   }
 
   initFormStructure(cities: City[], amenities: Amenity[]) {
-    console.log('A', amenities);
 
     this.formStructure$ = of([
       new Control({
@@ -64,16 +63,6 @@ export class CatalogComponent implements OnInit {
 
     ]);
   }
-  // thumbnailsConfig = {
-  //   speed: 300,
-  //   slidesToShow: 4,
-  //   slidesToScroll: 1,
-  //   cssEase: 'linear',
-  //   autoplay: true,
-  //   arrows: false,
-  //   draggable: true,
-  //   focusOnSelect: true,
-  // };
 
   ngOnInit(): void {
   }

@@ -21,10 +21,6 @@ export class CarouselComponent implements OnInit {
   @Input() thumbnailsConfig;
 
 
-
-
-
-
   // this.carouselConfig["asNavFor"] = ".carousel.thumbnail" + this.room.id;
   // this.thumbnailsConfig["asNavFor"] = ".carousel.img" + this.room.id;
 
@@ -46,14 +42,10 @@ export class CarouselComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('config', this.config);
-
-
     if (this.thumbnailsConfig && this.id) {
       this.config["asNavFor"] = ".carousel.thumbnail" + this.id;
       this.thumbnailsConfig["asNavFor"] = ".carousel.img" + this.id;
     }
-
   }
 
   trackById(index, item) {

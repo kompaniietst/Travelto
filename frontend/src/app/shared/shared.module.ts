@@ -36,7 +36,7 @@ import { SpecialComponent } from './special/special.component';
 import { TextFeaturesComponent } from './form/form-control/text-features/text-features.component';
 import { CardComponent } from './card/card.component';
 import { PipesModule } from '../pipes/pipes.module';
-import { FilterTabComponent } from './filter-tab/filter-tab.component';
+import { FilterTabsComponent } from './filter-tabs/filter-tabs.component';
 
 
 const routes: Routes = []
@@ -63,7 +63,8 @@ const COMPONENTS = [
   FeedbackComponent,
   SpecialComponent,
   TextFeaturesComponent,
-  CardComponent
+  CardComponent, 
+  FilterTabsComponent
 ];
 
 const MODULES = [
@@ -91,7 +92,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, CardComponent, FilterTabComponent],
+  declarations: [...COMPONENTS, CardComponent],
   imports: [...MODULES],
   exports: [...COMPONENTS,
     FormsModule, ReactiveFormsModule

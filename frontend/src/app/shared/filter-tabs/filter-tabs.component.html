@@ -1,0 +1,4 @@
+<div *ngFor="let tab of filterTabs | async; trackBy: trackById;" class="tab">
+    <small>{{ tab.label }} </small>
+    <div class="rem" (click)="removeTab(tab._id)">&times;</div>
+</div>

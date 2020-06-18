@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, TemplateRef, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormArray } from '@angular/forms';
 import { GenerateFormStructureService } from 'src/app/core/services/generate-form-structure.service';
 import { Control } from 'src/app/core/models/Control';
 import { Observable } from 'rxjs';
@@ -7,6 +7,7 @@ import { ImagesComponent } from './form-control/images/images.component';
 import { CheckboxComponent } from './form-control/checkbox/checkbox.component';
 import { AdvancedInputComponent } from './form-control/advanced-input/advanced-input.component';
 import { ConvertToFormStructureService } from 'src/app/core/services/convert-to-form-structure.service';
+import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 
 @Component({
   selector: 'app-form',
@@ -27,17 +28,62 @@ export class FormComponent<T> implements OnInit {
 
   @Output() valueChange = new EventEmitter();
 
-  @ViewChild(ImagesComponent) imagesComponentRef: ImagesComponent;
+  // @ViewChild(ImagesComponent) imagesComponentRef: ImagesComponent;
   @ViewChild(CheckboxComponent) checkboxComponentRef: CheckboxComponent;
-  @ViewChild(AdvancedInputComponent) advancedInputComponentRef: AdvancedInputComponent;
+  // @ViewChild(AdvancedInputComponent) advancedInputComponentRef: AdvancedInputComponent;
 
   form: FormGroup;
 
   constructor(
     private generateForm: GenerateFormStructureService,
-    private convertToForm: ConvertToFormStructureService<T>
-  ) { }
+    private filterTabsService: FilterTabsService
+  ) {
 
+    if (this.form != undefined)
+      console.log('NOT UNDEF');
+  }
+/* 
+    this.filterTabsService.getRemovedTabID()
+      .subscribe(x => {
+        console.log(' ');
+        console.log('TABS CHANGE', x);
+
+        // var i = (this.form.get('amenities') as FormArray).controls
+        //   .findIndex(c => c.value._id == x);
+
+        // console.log((this.form.get('amenities') as FormArray).controls);
+
+
+
+this.unc(x);
+        
+        console.log('FORM', this.form);
+
+
+
+
+        // console.log(this.form);
+
+        // var index = (this.form.get('amenities') as FormArray).controls
+        //   .findIndex(c => c.value._id == x);
+
+        // console.log(index);
+
+        // console.log((this.form.get('amenities') as FormArray).value);
+
+
+
+        // this.checkboxComponentRef.removeControl(x)
+      }, err => console.log(err))
+
+    // this.filterTabsService.getRemovedTabID().subscribe(x => console.log('GET', x))
+
+  }
+
+  unc(x){
+    console.log('X',x);
+    this.checkboxComponentRef.removeControl(x)
+  } */
   ngOnInit() {
 
     this.controls$.subscribe(x => console.log(x))
@@ -55,6 +101,9 @@ export class FormComponent<T> implements OnInit {
         this.form.get(key).setValue(value)
       }
     }
+
+    console.log('===', (this.form.get('amenities')));
+
   }
 
   onSubmit() {

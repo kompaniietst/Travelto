@@ -1,0 +1,23 @@
+:host {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -5px;
+    .tab {
+        border: 1px solid #e5e5e5;
+        border-radius: 3px;
+        padding: 5px 30px 5px 10px;
+        margin: 0 5px 10px;
+        position: relative;
+        .rem {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translate(0, -50%);
+            right: 6px;
+            width: 20px;
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+        }
+    }
+}
