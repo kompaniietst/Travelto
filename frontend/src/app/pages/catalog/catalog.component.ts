@@ -29,6 +29,7 @@ export class CatalogComponent implements OnInit {
   ) {
 
     this.rooms$ = this.roomService.get();
+    
     forkJoin(
       this.citiesService.get(),
       this.amenitiesService.get()

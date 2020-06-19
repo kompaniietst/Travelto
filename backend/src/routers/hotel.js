@@ -70,7 +70,6 @@ router.get('/hotels/:id', async (req, res) => {
         res.status(200).send(hotel)
     }
     catch (error) {
-        console.log(error);
 
         res.status(400).send("Hotel is not exist")
     }
@@ -79,8 +78,6 @@ router.get('/hotels/:id', async (req, res) => {
 
 
 router.get('/hotelInfoByRoom/:id', async (req, res) => {
-    console.log(req.params);
-    console.log(req.body);
 
     const id = req.params.id;
     const hotel = await Hotel.findOne({ _id: id });

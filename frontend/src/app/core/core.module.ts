@@ -8,15 +8,12 @@ import { HeaderComponent } from './shared/header/header.component';
 import { SharedModule } from '../shared/shared.module';
 
 import { HttpClientModule } from '@angular/common/http';
-import { ReversePipe } from '../pipes/reverse.pipe';
-// import { CustomCurrencyPipe } from '../pipes/customCurrency.pipe';
+import { PipesModule } from '../pipes/pipes.module';
 
 const routes: Routes = []
 
 const COMPONENTS = [
   HeaderComponent,
-  ReversePipe,
-  // CustomCurrencyPipe,
 ];
 
 const MODULES = [
@@ -27,6 +24,7 @@ const MODULES = [
   HttpClientModule,
   FormsModule,
   ReactiveFormsModule,
+  PipesModule,
 
   RouterModule.forRoot(routes)
 ];
