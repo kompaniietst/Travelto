@@ -23,20 +23,20 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
 
   onChange = (val) => { }
 
-  myControl = new FormControl();
+  formControl = new FormControl();
 
   filteredOptions: Observable<any>;
 
   constructor(private filterTabsService: FilterTabsService) {
 
-    this.myControl.valueChanges.subscribe(x => {            // set filter tab
+    this.formControl.valueChanges.subscribe(x => {            // set filter tab
       if (x) this.filterTabsService.set(x)                  // TODO remove from tabs, if uncheck
     })
 
     this.filterTabsService.getRemovedTabID()                // uncheck checkbox after removing of filter tab
       .subscribe((tab_id: string) => {
-        if (this.control && this.myControl?.value?._id == tab_id) {
-          this.myControl.reset();
+        if (this.control && this.formControl?.value?._id == tab_id) {
+          this.formControl.reset();
         }
       })
   }
@@ -50,17 +50,17 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {
     if (this.control.value) {
-      this.myControl.setValue(this.control.value)
+      this.formControl.setValue(this.control.value)
     }
 
-    this.filteredOptions = this.myControl.valueChanges
+    this.filteredOptions = this.formControl.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filter(value)));
 
-    this.myControl.valueChanges.subscribe(x => this.onChange(x))
+    this.formControl.valueChanges.subscribe(x => this.onChange(x))
 
-    this.myControl.valueChanges.subscribe(x => console.log(x))
+    this.formControl.valueChanges.subscribe(x => console.log(x))
   }
 
   private _filter(value: string) {

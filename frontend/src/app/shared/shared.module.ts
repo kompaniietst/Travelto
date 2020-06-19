@@ -37,7 +37,9 @@ import { TextFeaturesComponent } from './form/form-control/text-features/text-fe
 import { CardComponent } from './card/card.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { FilterTabsComponent } from './filter-tabs/filter-tabs.component';
+import { SliderRangeComponent } from './form/form-control/slider-range/slider-range.component';
 
+import { NouisliderModule } from 'ng2-nouislider';
 
 const routes: Routes = []
 
@@ -64,7 +66,8 @@ const COMPONENTS = [
   SpecialComponent,
   TextFeaturesComponent,
   CardComponent, 
-  FilterTabsComponent
+  FilterTabsComponent,
+  SliderRangeComponent
 ];
 
 const MODULES = [
@@ -82,6 +85,8 @@ const MODULES = [
   MatInputModule,
   MatRadioModule,
   MatProgressSpinnerModule,
+  
+  NouisliderModule,
 
   FormsModule, ReactiveFormsModule,
   SlickCarouselModule,
@@ -92,7 +97,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, CardComponent],
+  declarations: [...COMPONENTS, CardComponent, SliderRangeComponent],
   imports: [...MODULES],
   exports: [...COMPONENTS,
     FormsModule, ReactiveFormsModule

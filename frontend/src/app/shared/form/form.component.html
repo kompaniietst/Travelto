@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
-
+<!-- <app-slider-range></app-slider-range> -->
     <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
 
     <div class="controls_container" *ngIf="controls$ | async">
@@ -13,6 +13,15 @@
 
             <!-- <ng-container [formGroup]="form"> -->
             <ng-container [ngSwitch]="control.controlType">
+
+                <ng-container *ngSwitchCase="'sliderRange'">
+                    <app-slider-range 
+                        [formControlName]="control.key" 
+                        [control]="control"
+                        class="{{ control.controlType }}">
+                    </app-slider-range>
+                </ng-container>
+
 
                 <ng-container *ngSwitchCase="'input' || 'textarea'">
                     <div class="{{ control.controlType }} {{ control.key }}">

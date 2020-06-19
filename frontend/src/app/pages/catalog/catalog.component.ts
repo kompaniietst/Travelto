@@ -29,7 +29,7 @@ export class CatalogComponent implements OnInit {
   ) {
 
     this.rooms$ = this.roomService.get();
-    
+
     forkJoin(
       this.citiesService.get(),
       this.amenitiesService.get()
@@ -40,9 +40,15 @@ export class CatalogComponent implements OnInit {
 
     this.formStructure$ = of([
       new Control({
+        controlType: 'sliderRange',
+        key: 'price',
+        value: [50, 400]
+        // placeholder: 'Choose the city',
+        // options: cities,
+      }),
+      new Control({
         controlType: 'dropdown',
         key: 'city',
-        label: 'City:',
         placeholder: 'Choose the city',
         options: cities,
       }),

@@ -1,0 +1,30 @@
+@import "src/assets/sass/abstracts/variables.scss";
+:host {
+    border-bottom: 1px solid $border_gray;
+    display: block;
+    margin-bottom: 7px;
+    padding-bottom: 15px;
+}
+
+:host ::ng-deep {
+    .noUi-horizontal .noUi-handle {
+        width: 18px;
+        height: 18px;
+    }
+    .noUi-handle {
+        border: 1px solid #d9d9d9;
+        border-radius: 50px;
+    }
+    .noUi-target {
+        background: #dfdfdf;
+        border-radius: 8px;
+        border: none;
+        box-shadow: none;
+    }
+    .noUi-horizontal {
+        height: 6px;
+    }
+    .noUi-connect {
+        background: $color;
+    }
+}
