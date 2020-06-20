@@ -16,9 +16,8 @@ export class CardComponent implements OnInit {
   @Input() hotel: Hotel;
   @Input() limit: number;
   @Input() quantity: number;
-  // @Input() configThumbnails;
   slides: string[];
-  showbutton: boolean = true;
+  showbutton: boolean = false;
 
   carouselConfigRooms = {
     speed: 700,
@@ -47,7 +46,7 @@ export class CardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.checkLimitItems();
+    if (this.limit) this.showbutton = true;
 
     this.hotelService.gethotelInfoByRoom(this.room.hotel_id)
       .subscribe((x: Hotel) => {
@@ -61,18 +60,11 @@ export class CardComponent implements OnInit {
     if (this.limit && !this.quantity) {
       this.limit = this.room.textFeatures.length;
       this.showbutton = false;
-      return
+      return;
     }
-    
-    this.limit && this.quantity
-    ? this.limit = this.room.textFeatures.length
-    : this.limit = +this.limit + +this.quantity;
-    
-    // this.checkLimitItems();
-  }
 
-  checkLimitItems() {
-    if (!this.limit) this.showbutton = false;
+    if (this.limit && this.quantity)
+      this.limit = +this.limit + +this.quantity;
 
     if (this.limit == this.room.textFeatures.length || this.limit > this.room.textFeatures.length)
       this.showbutton = false

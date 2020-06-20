@@ -23,7 +23,7 @@
             <ng-content select=".header_templ_center"></ng-content>
             <div class="place"><span></span>
                 {{ hotel.address.city.label }}, {{ hotel.address.street }} {{ hotel.address.houseNumber }}
-            </div>{{room.textFeatures.length}} {{limit}} {{quantity}}
+            </div>
             <ul>
                 <li *ngFor="let item of room.textFeatures | limit:limit; trackBy: trackById;" class="feature">
                     {{ item }}
