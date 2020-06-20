@@ -7,7 +7,7 @@ import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router) { }
+  constructor(public router: Router) { }
 
   ngOnInit(): void { }
 }
