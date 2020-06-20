@@ -7,6 +7,7 @@ import { Room } from 'src/app/core/models/Room';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
 import { Amenity } from 'src/app/core/models/Amenity';
 import { CustomCurrencyPipe } from 'src/app/pipes/customCurrency.pipe';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-hotel',
@@ -39,6 +40,13 @@ export class HotelComponent implements OnInit {
     arrows: true
   };
 
+  mapApiKey = environment.mapApiKey;
+
+  markers = [];
+  mapLat: number;
+  mapLng: number;
+
+
   constructor(
     private route: ActivatedRoute,
     private admin: AdminService,
@@ -52,7 +60,8 @@ export class HotelComponent implements OnInit {
         (h: Hotel) => {
           this.hotel = h
           console.log('HOTEl', this.hotel);
-          this.loading = false
+          this.loading = false;
+          this.defineMapData();
         },
         err => this.alert.error(err.error))
 
@@ -62,6 +71,8 @@ export class HotelComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+
 
     this.rooms$ = this.admin.getRoomsByHotel(this.id)
 
@@ -73,6 +84,14 @@ export class HotelComponent implements OnInit {
 
   ifActiveAmenity(_id: string) {
     return this.hotel.amenities.some(a => a._id == _id)
+  }
+
+  defineMapData() {
+    this.markers = [
+      { lat: +this.hotel.address.map[0], lng: +this.hotel.address.map[1] },
+    ];
+    this.mapLat = +this.hotel.address.map[0];
+    this.mapLng = +this.hotel.address.map[1];
   }
 
   trackById(index, item) {

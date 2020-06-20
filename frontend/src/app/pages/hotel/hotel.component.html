@@ -1,5 +1,5 @@
 <div *ngIf="hotel">
-
+    
     <div class="mainscreen">
         <div class="container">
             <div class="inner_page_header">
@@ -90,16 +90,26 @@
 
         <div class="section" id="address">
             <div class="title"><strong>Расположение</strong></div>
-            <div class="place"><span></span>{{ hotel.address.city.label }},
-                {{ hotel.address.street }}</div>
-            <!-- <app-google-maps [zoom]="9" [mapLat]="mapLat" [mapLng]="mapLng">
-            <ng-template let-google="google" let-map="map">
-                <app-google-map-marker *ngFor="let marker of markers" [google]="google" [map]="map"
-                    [lat]="marker.lat" [lng]="marker.lng">
-                </app-google-map-marker>
-            </ng-template>
-        </app-google-maps> -->
 
+            <div class="place">
+                <span></span>
+                {{ hotel.address.city.label }},
+                {{ hotel.address.street }} 
+                {{ hotel.address.houseNumber }}
+            </div>
+            
+            <app-google-maps 
+                [key]="mapApiKey" 
+                [zoom]="9" 
+                [mapLat]="mapLat" 
+                [mapLng]="mapLng">
+                <ng-template let-google="google" let-map="map">
+                    <app-google-map-marker *ngFor="let marker of markers; trackBy: trackById" [google]="google" [map]="map"
+                        [lat]="marker.lat" 
+                        [lng]="marker.lng">
+                    </app-google-map-marker>
+                </ng-template>
+            </app-google-maps>
         </div>
     </div>
 </div>

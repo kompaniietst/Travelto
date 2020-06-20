@@ -6,6 +6,7 @@ import { Hotel } from 'src/app/core/models/Hotel';
 import { Room } from 'src/app/core/models/Room';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
 import { Amenity } from 'src/app/core/models/Amenity';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-room',
@@ -19,12 +20,6 @@ export class RoomComponent implements OnInit {
   hotel: Hotel;
 
   loading = true;
-  // // breadcrumbs: string[] = ['All hotels', 'Hotel preview'];
-
-  // amenities: Amenity[];
-  // // mapLat;
-  // // mapLng;
-  // // markers = [];
 
   carouselConfig = {
     slidesToShow: 2,
@@ -32,6 +27,12 @@ export class RoomComponent implements OnInit {
     autoplay: true,
     arrows: true
   };
+
+  mapApiKey = environment.mapApiKey;
+
+  markers = [];
+  mapLat: number;
+  mapLng: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -61,11 +62,21 @@ export class RoomComponent implements OnInit {
         (resp: Hotel) => {
           this.hotel = resp;
           console.log('room by hotel', resp);
+          
+          this.defineMapData();
         },
         error => {
           console.log(error);
         }
       )
+  }
+
+  defineMapData() {
+    this.markers = [
+      { lat: +this.hotel.address.map[0], lng: +this.hotel.address.map[1] },
+    ];
+    this.mapLat = +this.hotel.address.map[0];
+    this.mapLng = +this.hotel.address.map[1];
   }
 
   trackById(index, item) {

@@ -40,6 +40,8 @@ import { FilterTabsComponent } from './filter-tabs/filter-tabs.component';
 import { SliderRangeComponent } from './form/form-control/slider-range/slider-range.component';
 
 import { NouisliderModule } from 'ng2-nouislider';
+import { GoogleMapsComponent } from './form/form-control/google-maps/google-maps.component';
+import { GoogleMapMarkerComponent } from './form/form-control/google-maps/google-map-marker/google-map-marker.component';
 
 const routes: Routes = []
 
@@ -67,7 +69,9 @@ const COMPONENTS = [
   TextFeaturesComponent,
   CardComponent, 
   FilterTabsComponent,
-  SliderRangeComponent
+  SliderRangeComponent,
+  GoogleMapsComponent,
+  GoogleMapMarkerComponent
 ];
 
 const MODULES = [
@@ -97,7 +101,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, CardComponent, SliderRangeComponent],
+  declarations: [...COMPONENTS],
   imports: [...MODULES],
   exports: [...COMPONENTS,
     FormsModule, ReactiveFormsModule

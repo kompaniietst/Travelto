@@ -19,7 +19,6 @@ import { TestComponent } from './test/test.component';
   declarations: [
     AppComponent,
     TestComponent,
-
   ],
   imports: [
     BrowserModule,

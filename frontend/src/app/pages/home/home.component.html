@@ -1,1 +1,18 @@
 home
+<br>
+<br>
+<br>
+
+
+<app-google-maps 
+    [key]="mapApiKey" 
+    [zoom]="9" 
+    [mapLat]="mapLat" 
+    [mapLng]="mapLng">
+    <ng-template let-google="google" let-map="map">
+        <app-google-map-marker *ngFor="let marker of markers; trackBy: trackById" [google]="google" [map]="map"
+            [lat]="marker.lat" 
+            [lng]="marker.lng">
+        </app-google-map-marker>
+    </ng-template>
+</app-google-maps>

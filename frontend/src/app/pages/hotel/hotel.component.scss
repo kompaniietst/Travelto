@@ -88,26 +88,6 @@
         .item {
             width: 50%;
             padding: 15px;
-            // .img {
-            //     flex: 2;
-            //     height: 200px;
-            //     width: 270px;
-            // }
-            // .center_block {
-            //     flex: 7;
-            //     padding: 0 20px;
-            // }
-            // .end_block {
-            //     flex: 3;
-            //     border-left: 1px solid #dedede;
-            //     padding-left: 16px;
-            //     display: flex;
-            //     flex-direction: column;
-            //     justify-content: center;
-            //     .buttons {
-            //         margin: 16px 10px 22px;
-            //     }
-            // }
         }
     }
 }
@@ -161,4 +141,7 @@ h4 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.place {
+    margin-bottom: 20px;
 }
