@@ -42,6 +42,7 @@ import { SliderRangeComponent } from './form/form-control/slider-range/slider-ra
 import { NouisliderModule } from 'ng2-nouislider';
 import { GoogleMapsComponent } from './form/form-control/google-maps/google-maps.component';
 import { GoogleMapMarkerComponent } from './form/form-control/google-maps/google-map-marker/google-map-marker.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
 
 const routes: Routes = []
 
@@ -71,7 +72,8 @@ const COMPONENTS = [
   FilterTabsComponent,
   SliderRangeComponent,
   GoogleMapsComponent,
-  GoogleMapMarkerComponent
+  GoogleMapMarkerComponent,
+  SubscriptionComponent
 ];
 
 const MODULES = [

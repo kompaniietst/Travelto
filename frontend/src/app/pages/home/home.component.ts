@@ -32,14 +32,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  defineMapData() {
-    this.markers = [
-      { lat: +this.hotel.address.map[0], lng: +this.hotel.address.map[1] },
-    ];
-    this.mapLat = +this.hotel.address.map[0];
-    this.mapLng = +this.hotel.address.map[1];
-  }
-
   trackById(index, item) {
     return item.id;
   }

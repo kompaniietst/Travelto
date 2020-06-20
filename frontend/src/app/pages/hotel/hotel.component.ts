@@ -72,8 +72,6 @@ export class HotelComponent implements OnInit {
 
   ngOnInit(): void {
 
-
-
     this.rooms$ = this.admin.getRoomsByHotel(this.id)
 
     this.admin.getRoomsByHotel(this.id)

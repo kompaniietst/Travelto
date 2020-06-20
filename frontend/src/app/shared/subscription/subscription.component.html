@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="form">
+        <app-form 
+            [controls$]="formStructure$"
+            [headerTemplate]="headerTemplate"
+            [footerTemplate]="footerTemplate"  
+            buttonName="Подписаться" 
+            class="form_subscription">
+            <ng-template #headerTemplate>
+                <div class="headerTemplate">
+                    <h2>Новостная рассылка</h2>
+                    <p>Подписка на новости, акции и скидки </p>
+                </div>
+            </ng-template>
+            <ng-template #footerTemplate>
+                <p>Нажимая «Подписаться», вы соглашаетесь с правилами использования сервиса и обработки персональных данных</p>
+            </ng-template>
+        </app-form>
+    </div>
+</div>
