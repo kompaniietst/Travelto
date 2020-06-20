@@ -1,4 +1,4 @@
-<form class="example-form">
+<form>
     <div *ngIf="control.label" class="label" [ngClass]="{'required': control.required }">
         {{control.label}}
     </div>
@@ -11,7 +11,7 @@
           value="dsdsd"
           [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        <mat-option *ngFor="let option of filteredOptions | async; trackBy: trackById;" [value]="option">
           {{option.label}}
         </mat-option>
       </mat-autocomplete>

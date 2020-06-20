@@ -43,6 +43,7 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { GoogleMapsComponent } from './form/form-control/google-maps/google-maps.component';
 import { GoogleMapMarkerComponent } from './form/form-control/google-maps/google-map-marker/google-map-marker.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
+import { MainScreenComponent } from './main-screen/main-screen.component';
 
 const routes: Routes = []
 
@@ -73,7 +74,8 @@ const COMPONENTS = [
   SliderRangeComponent,
   GoogleMapsComponent,
   GoogleMapMarkerComponent,
-  SubscriptionComponent
+  SubscriptionComponent,
+  MainScreenComponent
 ];
 
 const MODULES = [
@@ -103,7 +105,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, MainScreenComponent],
   imports: [...MODULES],
   exports: [...COMPONENTS,
     FormsModule, ReactiveFormsModule

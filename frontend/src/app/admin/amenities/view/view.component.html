@@ -4,6 +4,6 @@
     No amenities yet
 </div>
 
-<div *ngFor="let item of amenities$ | async">
+<div *ngFor="let item of amenities$ | async; trackBy: trackById">
     <app-amenity-item [item]="item"></app-amenity-item>
 </div>

@@ -21,13 +21,13 @@
 
     <div class="block images">
         <app-special [specials]="item.specials"></app-special>
-        <div *ngFor="let img of item.images" class="img">
+        <div *ngFor="let img of item.images; trackBy: trackById" class="img">
             <img [src]="img" alt="">
         </div>
     </div>
 
     <div class="block textFeatures">
-        <div *ngFor="let field of item.textFeatures" class="amenity">
+        <div *ngFor="let field of item.textFeatures; trackBy: trackById" class="amenity">
             - {{ field }}
         </div>
     </div>

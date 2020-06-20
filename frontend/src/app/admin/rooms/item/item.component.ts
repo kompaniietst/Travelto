@@ -142,4 +142,8 @@ export class RoomItemComponent implements OnInit {
         err => console.log(err)
       )
   }
+  
+  trackById(index, item) {
+    return item.id;
+  }
 }

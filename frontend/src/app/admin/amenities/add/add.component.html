@@ -1,6 +1,7 @@
 <h2 class="header_title">Add amenities</h2>
 
-<app-form [controls$]="formStructure$" 
+<app-form 
+    [controls$]="formStructure$" 
     (valueChange)="onSubmit($event)" 
     buttonName="Add" 
     class="attach_amenity_form">

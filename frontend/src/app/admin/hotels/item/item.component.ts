@@ -47,8 +47,6 @@ export class HotelItemComponent<T> implements OnInit {
         placeholder: 'Name:',
         required: true
       }),
-
-
       new Control({
         controlType: 'input',
         key: 'stars',
@@ -151,5 +149,9 @@ export class HotelItemComponent<T> implements OnInit {
         },
         err => console.log(err)
       )
+  }
+  
+  trackById(index, item) {
+    return item.id;
   }
 }

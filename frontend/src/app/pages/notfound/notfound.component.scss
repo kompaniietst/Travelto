@@ -1,10 +1,14 @@
+:host {
+    min-height: calc(100% - 240px);
+    display: block;
+}
 .not_found {
     position: absolute;
     text-align: center;
     font-family: "Gotham Pro Bold";
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     .number {
         color: #0098db;
         font-size: 150px;

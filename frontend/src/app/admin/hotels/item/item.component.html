@@ -18,13 +18,13 @@
     </div>
 
     <div class="block amenities">
-        <div *ngFor="let amenity of item.amenities" class="amenity">
+        <div *ngFor="let amenity of item.amenities; trackBy: trackById" class="amenity">
             {{ amenity.label }}
         </div>
     </div>
 
     <div class="block images">
-        <div *ngFor="let img of item.images" class="img">
+        <div *ngFor="let img of item.images; trackBy: trackById" class="img">
             <img [src]="img" alt="">
         </div>
     </div>

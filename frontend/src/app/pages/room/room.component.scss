@@ -1,5 +1,8 @@
 @import "src/assets/sass/abstracts/variables.scss";
-
+:host {
+    min-height: calc(100% - 240px);
+    display: block;
+}
 h1 {
     color: $text_color;
     margin-bottom: 6px;
@@ -85,4 +88,7 @@ h3 {
 }
 .place {
     margin-bottom: 20px;
+}
+.address {
+    padding-bottom: 0;
 }

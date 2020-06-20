@@ -31,4 +31,8 @@ export class RadioFinalComponent implements OnInit, ControlValueAccessor {
   onSelect(i) {
     this.onChange(i);
   }
+  
+  trackById(index, item) {
+    return item.id;
+  }
 }

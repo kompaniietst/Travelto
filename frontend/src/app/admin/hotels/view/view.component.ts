@@ -34,4 +34,7 @@ export class ViewHotelsComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  trackById(index, item) {
+    return item.id;
+  }
 }

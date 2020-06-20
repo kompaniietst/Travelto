@@ -19,5 +19,8 @@ export class ViewCitiesComponent implements OnInit {
   }
 
   ngOnInit(): void { }
-
+  
+  trackById(index, item) {
+    return item.id;
+  }
 }

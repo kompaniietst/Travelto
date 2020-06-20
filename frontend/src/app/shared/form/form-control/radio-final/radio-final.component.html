@@ -1,6 +1,12 @@
 <mat-radio-group>
-    <mat-radio-button color="primary" class="example-radio-button" *ngFor="let item of control.options; let i = index"
-        [value]="i" name="radio" [checked]="control.options[i].checked" (change)="onSelect(i)">
+    <mat-radio-button 
+        color="primary" 
+        class="example-radio-button" 
+        *ngFor="let item of control.options; let i = index; trackBy: trackById;"
+        [value]="i" 
+        name="radio" 
+        [checked]="control.options[i].checked" 
+        (change)="onSelect(i)">
         {{ control.options[i].label }}
     </mat-radio-button>
 </mat-radio-group>

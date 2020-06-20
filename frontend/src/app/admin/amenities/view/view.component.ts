@@ -23,4 +23,8 @@ export class ViewAmenitiesComponent implements OnInit {
   }
 
   ngOnInit(): void { }
+  
+  trackById(index, item) {
+    return item.id;
+  }
 }

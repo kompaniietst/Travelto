@@ -36,12 +36,11 @@ export class FormComponent<T> implements OnInit {
 
   constructor(
     private generateForm: GenerateFormStructureService,
-    private filterTabsService: FilterTabsService
-  ) {}
+  ) { }
 
   ngOnInit() {
 
-    this.controls$.subscribe(x => console.log(x))
+    this.controls$.subscribe(x => console.log('CONTROLS: ', x))
     this.form = this.generateForm.defineStructure(this.controls$);
 
     if (this.defaultData) {

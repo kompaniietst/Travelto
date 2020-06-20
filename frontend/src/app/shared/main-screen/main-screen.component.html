@@ -1,0 +1,15 @@
+<div class="main-screen">
+    <div class="container">
+        <div class="headers">
+            <h1>Забронируйте уникальное<br> жилье быстро и просто</h1>
+            <p>Лучший способ арендовать квартиру </p>
+        </div>
+        <app-form
+            *ngIf="formStructure$"
+            [controls$]="formStructure$"
+            class="home_form_search"
+            (valueChange)="onSubmit($event)"
+            buttonName="Начать поиск">
+        </app-form>
+    </div>
+</div>

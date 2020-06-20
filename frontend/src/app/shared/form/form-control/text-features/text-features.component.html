@@ -2,7 +2,7 @@
     {{ control.label }}
 </div>
 <div [formGroup]="form">
-    <div [formArrayName]="control.key" *ngFor="let item of controls; let i = index" class="item">
+    <div [formArrayName]="control.key" *ngFor="let item of controls; let i = index; trackBy: trackById;" class="item">
         <input type="text" [formControlName]="i" [placeholder]="control.placeholder">
 
         <div *ngIf="(controls.length - 1) == i">

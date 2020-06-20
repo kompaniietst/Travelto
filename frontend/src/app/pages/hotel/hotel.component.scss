@@ -1,4 +1,8 @@
 @import "src/assets/sass/abstracts/variables.scss";
+:host {
+    min-height: calc(100% - 240px);
+    display: block;
+}
 .mainscreen {
     position: relative;
     .inner_page_header {
@@ -144,4 +148,7 @@ h4 {
 }
 .place {
     margin-bottom: 20px;
+}
+.address {
+    padding-bottom: 0;
 }

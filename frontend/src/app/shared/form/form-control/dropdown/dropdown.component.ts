@@ -77,4 +77,8 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
   displayFn(option) {
     return option?.label;
   }
+  
+  trackById(index, item) {
+    return item.id;
+  }
 }

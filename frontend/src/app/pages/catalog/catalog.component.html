@@ -1,4 +1,4 @@
-<div class="container" *ngIf="rooms$ && formStructure$">
+<div class="container" *ngIf="(rooms$ | async)?.length">
     <div class="d_flex">
         <app-sidebar class="sidebar">
             <div class="title">

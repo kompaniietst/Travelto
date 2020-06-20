@@ -21,4 +21,7 @@ export class ViewRoomsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  trackById(index, item) {
+    return item.id;
+  }
 }

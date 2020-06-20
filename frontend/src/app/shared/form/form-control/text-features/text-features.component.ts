@@ -55,4 +55,8 @@ export class TextFeaturesComponent implements OnInit, ControlValueAccessor {
   defaultDataExist() {
     return this.control.value ? true : false;
   }
+  
+  trackById(index, item) {
+    return item.id;
+  }
 }
