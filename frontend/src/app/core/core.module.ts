@@ -9,11 +9,13 @@ import { SharedModule } from '../shared/shared.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { PipesModule } from '../pipes/pipes.module';
+import { FooterComponent } from './shared/footer/footer.component';
 
 const routes: Routes = []
 
 const COMPONENTS = [
   HeaderComponent,
+  FooterComponent
 ];
 
 const MODULES = [
@@ -30,7 +32,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, FooterComponent],
   imports: [...MODULES],
   exports: [...COMPONENTS]
 })

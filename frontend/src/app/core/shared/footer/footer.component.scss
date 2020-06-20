@@ -1,0 +1,33 @@
+:host {
+    .footer {
+        background: #0c5987;
+        padding: 50px 0 30px;
+        color: white;
+        line-height: 25px;
+        line-height: 33px;
+        a {
+            color: white;
+            border-bottom: 1px solid #3b7ea6;
+            text-decoration: none;
+        }
+        hr {
+            border: none;
+            border-bottom: 1px solid #3b7ea6;
+            margin: 40px 0 20px;
+        }
+        .logo {
+            filter: brightness(0) invert(1);
+            float: left;
+            margin-right: 44px;
+        }
+        p {
+            line-height: 23px;
+            padding-top: 35px;
+        }
+    }
+    &.admin_page {
+        .footer {
+            margin-top: 60px;
+        }
+    }
+}
