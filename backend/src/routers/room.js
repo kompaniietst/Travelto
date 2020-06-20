@@ -54,8 +54,6 @@ router.get('/rooms', async (req, res) => {
 })
 
 router.get('/rooms/:id', async (req, res) => {
-    console.log(req.params);
-    console.log(req.body);
 
     const id = req.params.id;
     const room = await Room.findOne({ _id: id });
@@ -67,8 +65,6 @@ router.get('/rooms/:id', async (req, res) => {
 })
 
 router.get('/roomsByHotel/:id', async (req, res) => {
-    console.log(req.params);
-    console.log(req.body);
 
     const id = req.params.id;
     const rooms = await Room.find({ hotel_id: id });

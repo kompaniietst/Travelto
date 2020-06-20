@@ -69,7 +69,6 @@ export class HotelComponent implements OnInit {
       .subscribe((x: Amenity[]) => this.amenities = x)
   }
 
-
   ngOnInit(): void {
 
     this.rooms$ = this.admin.getRoomsByHotel(this.id)
