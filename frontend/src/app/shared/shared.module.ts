@@ -46,9 +46,10 @@ import { GoogleMapMarkerComponent } from './form/form-control/google-maps/google
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { DateTimePickerComponent } from './form/form-control/date-time-picker/date-time-picker.component';
+import { PexComponent } from './form/form-control/pex/pex.component';
+import { CounterComponent } from './form/form-control/counter/counter.component';
 
 const routes: Routes = []
-
 
 const COMPONENTS = [
   ProfileTriggerComponent,
@@ -77,7 +78,9 @@ const COMPONENTS = [
   GoogleMapsComponent,
   GoogleMapMarkerComponent,
   SubscriptionComponent,
-  MainScreenComponent
+  MainScreenComponent,
+  PexComponent,
+  CounterComponent
 ];
 
 const MODULES = [
@@ -109,7 +112,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, MainScreenComponent, DateTimePickerComponent],
+  declarations: [...COMPONENTS, MainScreenComponent, DateTimePickerComponent, PexComponent, CounterComponent],
   imports: [...MODULES],
   exports: [...COMPONENTS,
     FormsModule, ReactiveFormsModule

@@ -17,16 +17,17 @@
             display: flex;
             justify-content: space-between;
             .btn {
-                width: 100%;
+                width: 25%;
             }
             .dateTimePicker,
+            .pex,
             .dropdown,
             .input {
-                width: 100%;
+                width: 25%;
                 border-right: 1px solid #d6d6d6;
                 margin: 0;
                 div {
-                    height: 100%;
+                    align-items: center;
                 }
                 input {
                     border: none;
@@ -58,9 +59,9 @@
                     }
                 }
             }
-            .dateTimePicker{
+            .dateTimePicker {
                 position: relative;
-                &:before{
+                &:before {
                     content: "";
                     position: absolute;
                     width: 25px;

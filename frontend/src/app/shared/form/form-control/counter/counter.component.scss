@@ -1,0 +1,40 @@
+@import "src/assets/sass/abstracts/variables.scss";
+:host {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    width: 85px;
+    .button {
+        background: $color;
+        height: 26px;
+        width: 26px;
+        border-radius: 3px;
+        line-height: 0;
+        padding: 0;
+        cursor: pointer;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
+        color: #ffffff;
+        border: none;
+        font-size: 28px;
+        &.up:before {
+            content: "+";
+        }
+        &.down:before {
+            content: "-";
+        }
+    }
+    input {
+        background: #f0f0f0;
+        padding: 3px 0;
+        border-radius: 2px;
+    }
+    &.count_ages {
+        padding: 8px 0px;
+        width: 85px;
+        .button {
+            box-shadow: none;
+            background: #ededed;
+            color: #a0a0a0;
+        }
+    }
+}

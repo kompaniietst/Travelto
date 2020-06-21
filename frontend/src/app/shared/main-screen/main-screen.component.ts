@@ -43,9 +43,10 @@ export class MainScreenComponent implements OnInit {
         placeholder: 'Check in - check out',
       }),
       new Control({
-        controlType: 'input',
+        controlType: 'pex',
         key: 'pex',
         placeholder: 'Guests:',
+        value: { adults: 2, children: 0 }
       })
     ])
   }
@@ -53,12 +54,16 @@ export class MainScreenComponent implements OnInit {
   onSubmit(formData: any) {
     console.log('formData', formData);
 
-    // const queryParams: Params = {
-    //   city: formData.city._id,
-    //   date: formData.date,
-    //   pex: formData.pex
-    // };
+    const queryParams: Params = {};
 
-    // this.router.navigate(['catalog'], { queryParams: queryParams })
+    if (formData.city)
+      queryParams["placeId"] = formData.city._id;
+
+    if (formData.date) {
+      queryParams["checkIn"] = formData.date[0];
+      queryParams["checkOut"] = formData.date[1];
+    }
+
+    this.router.navigate(['catalog'], { queryParams: queryParams })
   }
 }

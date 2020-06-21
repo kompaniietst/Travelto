@@ -22,6 +22,14 @@
                     </app-date-time-picker>
                 </ng-container>
 
+                <ng-container *ngSwitchCase="'pex'">
+                    <app-pex
+                        [formControlName]="control.key" 
+                        [control]="control"
+                        class="{{ control.controlType }}">
+                    </app-pex>
+                </ng-container>
+
                 <ng-container *ngSwitchCase="'input' || 'textarea'">
                     <div class="{{ control.controlType }} {{ control.key }}">
                         <div *ngIf="control.label" class="label" [ngClass]="{'required': control.required }">

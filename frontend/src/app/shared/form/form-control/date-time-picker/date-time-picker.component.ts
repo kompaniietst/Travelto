@@ -25,7 +25,8 @@ export class DateTimePickerComponent implements OnInit, ControlValueAccessor {
   registerOnChange(fn: any): void {
     this.formControl.valueChanges
       .pipe(
-        map(d => [d.startDate.toDate(), d.endDate.toDate()])
+        map(d => [d.startDate.format("DD.MM.YYYY"), d.endDate.format("DD.MM.YYYY")])
+        // map(d => [d.startDate.toDate(), d.endDate.toDate()])
       )
       .subscribe(fn)
   }
@@ -35,7 +36,5 @@ export class DateTimePickerComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void { }
 
-  onChangeDateTimePicker(e) {
-
-  }
+  onChangeDateTimePicker(e) {}
 }

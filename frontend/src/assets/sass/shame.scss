@@ -28,7 +28,8 @@
         td {
             &.start-date,
             &.end-date.in-range,
-            &.in-range {
+            &.in-range,
+            &:hover {
                 span {
                     background: $color;
                     color: white;
@@ -38,11 +39,6 @@
                     align-items: center;
                     justify-content: center;
                     margin: auto;
-                }
-            }
-            &.in-range {
-                span {
-                    // background: #0098dbab;
                 }
             }
             &.off {

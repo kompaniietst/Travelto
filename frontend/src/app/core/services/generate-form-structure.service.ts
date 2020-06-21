@@ -11,7 +11,7 @@ export class GenerateFormStructureService {
   defineStructure(controls$: Observable<Control[]>) {
 
     let group = {};
- 
+
     controls$.subscribe(x => {
 
 
@@ -22,6 +22,12 @@ export class GenerateFormStructureService {
           case 'input': group[control.key] = control.required
             ? new FormControl(control.value || '', Validators.required)
             : new FormControl(control.value || '');
+            break;
+
+          case 'pex': group[control.key] = new FormControl(control.value || null);
+            break;
+
+          case 'dropdown': group[control.key] = new FormControl(control.value || null);
             break;
 
           case 'radio': group[control.key] = this.defineRadioValue(control.options);
@@ -37,7 +43,7 @@ export class GenerateFormStructureService {
       })
 
     })
-    
+
     return new FormGroup(group);
 
   }

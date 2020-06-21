@@ -1,15 +1,15 @@
 <div class="main-screen">
     <div class="container">
         <div class="headers">
-            <h1>Забронируйте уникальное<br> жилье быстро и просто</h1>
-            <p>Лучший способ арендовать квартиру </p>
+            <h1>Book unique appartment<br> quickly and easily</h1>
+            <p>The best way to rent the room</p>
         </div>
         <app-form
             *ngIf="formStructure$"
             [controls$]="formStructure$"
             class="home_form_search"
             (valueChange)="onSubmit($event)"
-            buttonName="Начать поиск">
+            buttonName="Start search">
         </app-form>
     </div>
 </div>
