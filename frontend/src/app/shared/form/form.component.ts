@@ -8,6 +8,7 @@ import { CheckboxComponent } from './form-control/checkbox/checkbox.component';
 import { AdvancedInputComponent } from './form-control/advanced-input/advanced-input.component';
 import { ConvertToFormStructureService } from 'src/app/core/services/convert-to-form-structure.service';
 import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-form',
@@ -18,15 +19,17 @@ import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 export class FormComponent<T> implements OnInit {
 
   @Input() controls$: Observable<Control[]>;
-  @Input() defaultData: any;
   @Input() buttonName: string;
   @Input() showSpinner: string;
+  @Input() defaultData: any;
 
   @Input() headerTemplate: TemplateRef<any>;
   @Input() contentTemplate: TemplateRef<any>;
   @Input() footerTemplate: TemplateRef<any>;
 
   @Output() valueChange = new EventEmitter();
+
+  lsData: any;
 
   // @ViewChild(ImagesComponent) imagesComponentRef: ImagesComponent;
   @ViewChild(CheckboxComponent) checkboxComponentRef: CheckboxComponent;
@@ -36,7 +39,12 @@ export class FormComponent<T> implements OnInit {
 
   constructor(
     private generateForm: GenerateFormStructureService,
-  ) { }
+    private ls: LocalStorageService
+  ) {
+    this.ls.get().subscribe(x => this.lsData = x);
+    this.ls.get().subscribe(x => console.log('ls in form', x));
+
+  }
 
   ngOnInit() {
 
@@ -54,6 +62,18 @@ export class FormComponent<T> implements OnInit {
       }
     }
 
+    if (this.lsData) {
+      console.log(' ');
+      console.log(' ');
+      console.log(' ');
+      //  if there are data in the LocalStorage
+      for (const key of Object.keys(this.lsData)) {
+        if (this.form.get(key))
+          this.form.get(key).setValue(this.lsData[key])
+      }
+    }
+
+    console.log('////////////', this.form);
   }
 
   onSubmit() {

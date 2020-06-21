@@ -61,4 +61,7 @@ export class PexComponent implements OnInit, ControlValueAccessor {
       .removeAt((this.form.get('ages') as FormArray).controls.length - 1)
   }
 
+  trackById(index, item) {
+    return item.id;
+  }
 }

@@ -1,3 +1,4 @@
+@import 'src/assets/sass/abstracts/variables.scss';
 :host {
     background: url(src/assets/images/main.png) no-repeat top center;
     padding-bottom: 40px;
@@ -71,6 +72,20 @@
                     transform: translate(0, -50%);
                     background: url(src/assets/images/icons/form/calendar.svg) no-repeat center;
                     background-size: 100%;
+                }
+            }
+            .pex {
+                position: relative;
+                &:after {
+                    content: "";
+                    position: absolute;
+                    width: 10px;
+                    height: 10px;
+                    border-bottom: 1.5px solid $color;
+                    border-right: 1.5px solid $color;
+                    top: 48%;
+                    transform: translate(0, -50%) rotate(45deg);
+                    right: 22px;
                 }
             }
         }

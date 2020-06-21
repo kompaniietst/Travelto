@@ -5,6 +5,7 @@ import { CitiesService } from 'src/app/core/services/cities.service';
 import { Hotel } from 'src/app/core/models/Hotel';
 import { City } from 'src/app/core/models/City';
 import { Params, Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-main-screen',
@@ -17,7 +18,8 @@ export class MainScreenComponent implements OnInit {
 
   constructor(
     private citiesService: CitiesService,
-    private router: Router) {
+    private router: Router,
+    private ls: LocalStorageService) {
 
     this.citiesService.get()
       .subscribe((x: City[]) => {
@@ -64,6 +66,7 @@ export class MainScreenComponent implements OnInit {
       queryParams["checkOut"] = formData.date[1];
     }
 
+    this.ls.set(formData);
     this.router.navigate(['catalog'], { queryParams: queryParams })
   }
 }

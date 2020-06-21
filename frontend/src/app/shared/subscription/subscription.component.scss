@@ -1,3 +1,4 @@
+@import 'src/assets/sass/abstracts/variables.scss';
 :host {
     background: url(src/assets/images/subscription.jpg) no-repeat center;
     padding: 50px 0;
@@ -5,6 +6,10 @@
     margin-top: 90px;
     display: block;
     background-size: cover;
+    h2 {
+        font-family: $font_bold;
+        font-size: 24px;
+    }
     .headerTemplate {
         text-align: center;
         h2 {

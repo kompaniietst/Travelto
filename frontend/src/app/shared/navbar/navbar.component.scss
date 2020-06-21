@@ -1,26 +1,37 @@
+@import "src/assets/sass/abstracts/variables.scss";
 :host {
-    display: block;
-    color: white;
-    background: #0098db;
-    justify-content: space-between;
-    align-items: center;
-    a {
+    .menu {
+        display: block;
         color: white;
+        background: #0098db;
+        justify-content: space-between;
+        align-items: center;
     }
+
     ul {
         display: flex;
-        min-height: 56px;
-        align-items: center;
-        width: 100%;
+        height: 56px;
         justify-content: space-between;
         li {
             text-align: center;
             cursor: pointer;
+            a {
+                color: white;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
             span {
                 position: relative;
                 width: 1px;
                 height: 30px;
                 display: block;
+                height: 100%;
+                display: block;
+                opacity: 0.4;
+
                 &:before {
                     content: "";
                     position: absolute;
@@ -30,14 +41,82 @@
                     height: 100%;
                 }
             }
+            &.separator {
+                justify-content: center;
+                display: flex;
+            }
         }
     }
     .container {
         display: block;
         width: 100%;
         justify-content: space-between;
-        &.search{
+        &.search {
             display: flex;
+        }
+    }
+}
+
+.form_container {
+    background: #eef9fc;
+    padding: 11px 0;
+    .catalog_form_search {
+        display: flex;
+    }
+}
+.catalog_form_search ::ng-deep {
+    .form {
+        width: 100%;
+        .controls_container {
+            display: flex;
+            justify-content: space-between;
+            .dropdown,
+            .pex,
+            .dateTimePicker,
+            .btn {
+                width: 25%;
+            }
+            .dropdown,
+            .pex,
+            .dateTimePicker {
+                background: white;
+                border-radius: 5px;
+                border: 1px solid #e4e7eaa6;
+            }
+            .dropdown {
+                position: relative;
+                padding-left: 52px;
+                &:before {
+                    content: "";
+                    position: absolute;
+                    width: 25px;
+                    height: 31px;
+                    left: 15px;
+                    top: 50%;
+                    transform: translate(0, -50%);
+                    background: url(src/assets/images/icons/form/map.svg);
+                    background-size: 100%;
+                }
+                form,
+                input,
+                .mat-form-field-wrapper {
+                    height: 100%;
+                }
+            }
+            .pex {
+                position: relative;
+                &:after {
+                    content: "";
+                    position: absolute;
+                    width: 10px;
+                    height: 10px;
+                    border-bottom: 1.5px solid $color;
+                    border-right: 1.5px solid $color;
+                    top: 45%;
+                    transform: translate(0, -50%) rotate(45deg);
+                    right: 22px;
+                }
+            }
         }
     }
 }

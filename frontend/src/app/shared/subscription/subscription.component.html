@@ -4,16 +4,16 @@
             [controls$]="formStructure$"
             [headerTemplate]="headerTemplate"
             [footerTemplate]="footerTemplate"  
-            buttonName="Подписаться" 
+            buttonName="Subscribe" 
             class="form_subscription">
             <ng-template #headerTemplate>
                 <div class="headerTemplate">
-                    <h2>Новостная рассылка</h2>
-                    <p>Подписка на новости, акции и скидки </p>
+                    <h2>Subscription</h2>
+                    <p>Subscribe to news, promotions and discounts</p>
                 </div>
             </ng-template>
             <ng-template #footerTemplate>
-                <p>Нажимая «Подписаться», вы соглашаетесь с правилами использования сервиса и обработки персональных данных</p>
+                <p class="text_center">Clicking "Subscribe", you agree to the terms of use of the service and the processing of personal data</p>
             </ng-template>
         </app-form>
     </div>

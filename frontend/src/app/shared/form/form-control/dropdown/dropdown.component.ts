@@ -4,6 +4,7 @@ import { startWith, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
+import { City } from 'src/app/core/models/City';
 
 @Component({
   selector: 'app-dropdown',
@@ -20,6 +21,7 @@ import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 export class DropdownComponent implements OnInit, ControlValueAccessor {
 
   @Input() control: any;
+  @Input() lsData: City;
 
   onChange = (val) => { }
 
@@ -29,7 +31,7 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
 
   constructor(private filterTabsService: FilterTabsService) {
 
-    this.formControl.valueChanges.subscribe(x => {            // set filter tab
+    this.formControl.valueChanges.subscribe(x => {          // set filter tab
       if (x) this.filterTabsService.set(x)                  // TODO remove from tabs, if uncheck
     })
 
@@ -49,8 +51,15 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
   registerOnTouched(fn: any): void { }
 
   ngOnInit(): void {
+    console.log('lsData', this.lsData);
+
+
     if (this.control.value) {
       this.formControl.setValue(this.control.value)
+    }
+
+    if (this.lsData) {
+      this.formControl.setValue(this.lsData)
     }
 
     this.filteredOptions = this.formControl.valueChanges
@@ -77,7 +86,7 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
   displayFn(option) {
     return option?.label;
   }
-  
+
   trackById(index, item) {
     return item.id;
   }

@@ -1,4 +1,10 @@
-:host{
+@import 'src/assets/sass/abstracts/variables.scss';
+:host {
     min-height: calc(100% - 240px);
     display: block;
+}
+h2 {
+    font-family: $font_bold;
+    font-size: 24px;
+    margin-bottom: 40px;
 }

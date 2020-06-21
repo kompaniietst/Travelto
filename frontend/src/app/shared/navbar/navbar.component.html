@@ -1,13 +1,29 @@
-<div class="container">
-    <ul>
-        <li><a href routerLink="/">Home</a></li>
-        <li><span></span></li>
-        <li><a href routerLink="/catalog">Choose hotel</a></li>
-        <li><span></span></li>
-        <li><a href routerLink="/about">About us</a></li>
-        <li><span></span></li>
-        <li><a href>Some page</a></li>
-        <li><span></span></li>
-        <li><a href routerLink="/admin/hotels">+ Add hotel</a></li>
-    </ul>
+<div class="menu">
+    <div class="container">
+        <ul>
+            <li class="separator"><span></span></li>
+            <li><a href routerLink="/">Home</a></li>
+            <li class="separator"><span></span></li>
+            <li><a href routerLink="/catalog">Choose hotel</a></li>
+            <li class="separator"><span></span></li>
+            <li><a href routerLink="/about">About us</a></li>
+            <li class="separator"><span></span></li>
+            <li><a href>Some page</a></li>
+            <li class="separator"><span></span></li>
+            <li><a href routerLink="/admin/hotels">+ Add hotel</a></li>
+            <li class="separator"><span></span></li>
+        </ul>
+    </div>
+</div>
+
+<div class="form_container" *ngIf="router.url.includes('/catalog')">
+    <div class="container">
+        <app-form
+            *ngIf="formStructure$"
+            [controls$]="formStructure$"
+            class="catalog_form_search"
+            (valueChange)="onSubmit($event)"
+            buttonName="Start search">
+        </app-form>
+    </div>
 </div>

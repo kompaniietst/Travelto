@@ -13,7 +13,7 @@ export class SubscriptionComponent implements OnInit {
     new Control({
       controlType: 'input',
       key: 'email',
-      placeholder: 'введите ваш email',
+      placeholder: 'Enter your email',
     })
   ]);
 
