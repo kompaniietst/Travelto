@@ -9,6 +9,8 @@ import { AlertMessageComponent } from './alert-message/alert-message.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { NouisliderModule } from 'ng2-nouislider';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
@@ -39,11 +41,11 @@ import { PipesModule } from '../pipes/pipes.module';
 import { FilterTabsComponent } from './filter-tabs/filter-tabs.component';
 import { SliderRangeComponent } from './form/form-control/slider-range/slider-range.component';
 
-import { NouisliderModule } from 'ng2-nouislider';
 import { GoogleMapsComponent } from './form/form-control/google-maps/google-maps.component';
 import { GoogleMapMarkerComponent } from './form/form-control/google-maps/google-map-marker/google-map-marker.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
+import { DateTimePickerComponent } from './form/form-control/date-time-picker/date-time-picker.component';
 
 const routes: Routes = []
 
@@ -69,7 +71,7 @@ const COMPONENTS = [
   FeedbackComponent,
   SpecialComponent,
   TextFeaturesComponent,
-  CardComponent, 
+  CardComponent,
   FilterTabsComponent,
   SliderRangeComponent,
   GoogleMapsComponent,
@@ -81,6 +83,8 @@ const COMPONENTS = [
 const MODULES = [
   BrowserModule,
   CommonModule,
+  FormsModule, ReactiveFormsModule,
+  SlickCarouselModule,
 
   MatButtonModule, // material
   MatMenuModule,
@@ -93,11 +97,11 @@ const MODULES = [
   MatInputModule,
   MatRadioModule,
   MatProgressSpinnerModule,
-  
-  NouisliderModule,
 
-  FormsModule, ReactiveFormsModule,
-  SlickCarouselModule,
+  NouisliderModule,
+  NgxDaterangepickerMd.forRoot(),
+
+
 
   PipesModule,
 
@@ -105,7 +109,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, MainScreenComponent],
+  declarations: [...COMPONENTS, MainScreenComponent, DateTimePickerComponent],
   imports: [...MODULES],
   exports: [...COMPONENTS,
     FormsModule, ReactiveFormsModule

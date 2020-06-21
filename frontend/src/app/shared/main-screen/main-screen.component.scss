@@ -19,6 +19,7 @@
             .btn {
                 width: 100%;
             }
+            .dateTimePicker,
             .dropdown,
             .input {
                 width: 100%;
@@ -31,9 +32,22 @@
                     border: none;
                     margin: 0;
                     height: 100%;
+                    width: 100%;
                 }
             }
             .dropdown {
+                position: relative;
+                &:before {
+                    content: "";
+                    position: absolute;
+                    width: 25px;
+                    height: 31px;
+                    left: 15px;
+                    top: 50%;
+                    transform: translate(0, -50%);
+                    background: url(src/assets/images/icons/form/map.svg);
+                    background-size: 100%;
+                }
                 form {
                     height: 100%;
                     .mat-form-field {
@@ -42,6 +56,20 @@
                     input {
                         height: 100%;
                     }
+                }
+            }
+            .dateTimePicker{
+                position: relative;
+                &:before{
+                    content: "";
+                    position: absolute;
+                    width: 25px;
+                    height: 31px;
+                    left: 15px;
+                    top: 50%;
+                    transform: translate(0, -50%);
+                    background: url(src/assets/images/icons/form/calendar.svg) no-repeat center;
+                    background-size: 100%;
                 }
             }
         }

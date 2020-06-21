@@ -34,11 +34,11 @@ export class MainScreenComponent implements OnInit {
       new Control({
         controlType: 'dropdown',
         key: 'city',
-        placeholder: 'Расположение отеля',
+        placeholder: 'Destination place',
         options: cities
       }),
       new Control({
-        controlType: 'input',
+        controlType: 'dateTimePicker',
         key: 'date',
         placeholder: 'Check in - check out',
       }),
@@ -51,12 +51,14 @@ export class MainScreenComponent implements OnInit {
   }
 
   onSubmit(formData: any) {
-    const queryParams: Params = {
-      city: formData.city._id,
-      date: formData.date,
-      pex: formData.pex
-    };
+    console.log('formData', formData);
 
-    this.router.navigate(['catalog'], { queryParams: queryParams })
+    // const queryParams: Params = {
+    //   city: formData.city._id,
+    //   date: formData.date,
+    //   pex: formData.pex
+    // };
+
+    // this.router.navigate(['catalog'], { queryParams: queryParams })
   }
 }

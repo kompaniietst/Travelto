@@ -1,17 +1,9 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
-<!-- <app-slider-range></app-slider-range> -->
     <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
 
     <div class="controls_container" *ngIf="controls$ | async">
-        <!-- <app-form-control *ngFor="let control of controls$ | async; trackBy: trackById" [control]="control"
-            [form]="form" class="item form_group">
-        </app-form-control> -->
-
-        <!--  -->
-    
         <ng-container *ngFor="let control of controls$ | async; trackBy: trackById">
 
-            <!-- <ng-container [formGroup]="form"> -->
             <ng-container [ngSwitch]="control.controlType">
 
                 <ng-container *ngSwitchCase="'sliderRange'">
@@ -22,6 +14,13 @@
                     </app-slider-range>
                 </ng-container>
 
+                <ng-container *ngSwitchCase="'dateTimePicker'">
+                    <app-date-time-picker 
+                        [formControlName]="control.key" 
+                        [control]="control"
+                        class="{{ control.controlType }}">
+                    </app-date-time-picker>
+                </ng-container>
 
                 <ng-container *ngSwitchCase="'input' || 'textarea'">
                     <div class="{{ control.controlType }} {{ control.key }}">
@@ -29,26 +28,37 @@
                             {{ control.label }}
                         </div>
                         <div *ngIf="control.type == 'number'">
-                            <input type="number" [formControlName]="control.key" [placeholder]="control.placeholder">
-                        </div>
-                        <div *ngIf="control.type != 'number'">
-                            <input *ngIf="control.type != 'textarea'" [formControlName]="control.key"
+                            <input type="number" 
+                                [formControlName]="control.key" 
                                 [placeholder]="control.placeholder">
                         </div>
-                        <textarea *ngIf="control.type == 'textarea'" type="text" [formControlName]="control.key"
+                        <div *ngIf="control.type != 'number'">
+                            <input *ngIf="control.type != 'textarea'" 
+                                [formControlName]="control.key"
+                                [placeholder]="control.placeholder">
+                        </div>
+                        <textarea
+                            *ngIf="control.type == 'textarea'" 
+                            type="text" 
+                            [formControlName]="control.key"
                             [placeholder]="control.placeholder">
-                </textarea>
+                        </textarea>
                     </div>
                 </ng-container>
 
                 <ng-container *ngSwitchCase="'address'">
-                    <app-advanced-input [formControlName]="control.key" [control]="control"
+                    <app-advanced-input 
+                        [formControlName]="control.key" 
+                        [control]="control"
                         class="{{ control.controlType }}">
                     </app-advanced-input>
                 </ng-container>
 
                 <ng-container *ngSwitchCase="'checkbox'">
-                    <app-checkbox [formControlName]="control.key" [control]="control" class="{{ control.controlType }}">
+                    <app-checkbox 
+                        [formControlName]="control.key" 
+                        [control]="control" 
+                        class="{{ control.controlType }}">
                     </app-checkbox>
                 </ng-container>
 
@@ -61,8 +71,11 @@
                 </ng-container>
 
                 <ng-container *ngSwitchCase="'images'">
-                    <app-images [formControlName]="control.key" [control]="control"
-                        class="{{ control.controlType }} {{ control.key }}"></app-images>
+                    <app-images 
+                        [formControlName]="control.key" 
+                        [control]="control"
+                        class="{{ control.controlType }} {{ control.key }}">
+                    </app-images>
                 </ng-container>
 
                 <ng-container *ngSwitchCase="'dropdown'">
@@ -74,14 +87,15 @@
                 </ng-container>
 
                 <ng-container *ngSwitchCase="'radio'">
-                    <app-radio-final *ngIf="control.key == 'checked'" [control]="control"
-                        [formControlName]="control.key"></app-radio-final>
+                    <app-radio-final 
+                        *ngIf="control.key == 'checked'" 
+                        [control]="control"
+                        [formControlName]="control.key">
+                    </app-radio-final>
                 </ng-container>
 
             </ng-container>
-            <!-- </ng-container> -->
         </ng-container>
-        <!--  -->
 
         <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
 
@@ -94,7 +108,5 @@
     </div>
 
     <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
-
     <ng-content select=".btn"></ng-content>
-
 </form>

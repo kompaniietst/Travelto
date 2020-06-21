@@ -27,4 +27,12 @@
     .noUi-connect {
         background: $color;
     }
+    .noUi-handle:after,
+    .noUi-handle:before {
+        background: none;
+    }
+    .noUi-handle {
+        background: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
 }
