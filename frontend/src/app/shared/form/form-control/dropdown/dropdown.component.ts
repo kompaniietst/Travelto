@@ -31,16 +31,16 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
 
   constructor(private filterTabsService: FilterTabsService) {
 
-    this.formControl.valueChanges.subscribe(x => {          // set filter tab
-      if (x) this.filterTabsService.set(x)                  // TODO remove from tabs, if uncheck
-    })
+    // this.formControl.valueChanges.subscribe(x => {          // set filter tab
+    //   if (x) this.filterTabsService.set(x)                  // TODO remove from tabs, if uncheck
+    // })
 
-    this.filterTabsService.getRemovedTabID()                // uncheck checkbox after removing of filter tab
-      .subscribe((tab_id: string) => {
-        if (this.control && this.formControl?.value?._id == tab_id) {
-          this.formControl.reset();
-        }
-      })
+    // this.filterTabsService.getRemovedTabID()                // uncheck checkbox after removing of filter tab
+    //   .subscribe((tab_id: string) => {
+    //     if (this.control && this.formControl?.value?._id == tab_id) {
+    //       this.formControl.reset();
+    //     }
+    //   })
   }
 
   writeValue(obj: any): void { }

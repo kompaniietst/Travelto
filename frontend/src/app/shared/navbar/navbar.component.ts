@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private citiesService: CitiesService,
-    private router: Router
+    public router: Router
   ) {
     this.citiesService.get()
       .subscribe((x: City[]) => {

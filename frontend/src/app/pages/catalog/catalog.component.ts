@@ -30,27 +30,17 @@ export class CatalogComponent implements OnInit {
 
     this.rooms$ = this.roomService.get();
 
-    forkJoin(
-      this.citiesService.get(),
-      this.amenitiesService.get()
-    ).subscribe(x => this.initFormStructure(x[0], x[1]));
+    this.amenitiesService.get()
+      .subscribe((x:Amenity[]) => this.initFormStructure(x));
   }
 
-  initFormStructure(cities: City[], amenities: Amenity[]) {
+  initFormStructure(amenities: Amenity[]) {
 
     this.formStructure$ = of([
       new Control({
         controlType: 'sliderRange',
         key: 'price',
         value: [50, 400]
-        // placeholder: 'Choose the city',
-        // options: cities,
-      }),
-      new Control({
-        controlType: 'dropdown',
-        key: 'city',
-        placeholder: 'Choose the city',
-        options: cities,
       }),
       new Control({
         controlType: 'checkbox',
