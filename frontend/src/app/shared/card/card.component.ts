@@ -13,7 +13,6 @@ import { HotelService } from 'src/app/core/services/hotel.service';
 export class CardComponent implements OnInit {
 
   @Input() room: Room;
-  @Input() hotel: Hotel;
   @Input() limit: number;
   @Input() quantity: number;
   slides: string[];
@@ -41,19 +40,11 @@ export class CardComponent implements OnInit {
     focusOnSelect: true,
   };
 
-  constructor(
-    private hotelService: HotelService
-  ) { }
+  constructor(private hotelService: HotelService) { }
 
   ngOnInit(): void {
     if (this.limit) this.showbutton = true;
-
-    this.hotelService.gethotelInfoByRoom(this.room.hotel_id)
-      .subscribe((x: Hotel) => {
-        this.hotel = x;
-        var hotelImages = x.images.slice(0, x.images.length - 1)
-        this.slides = [...hotelImages, ...this.room.images];
-      })
+    this.slides = [...this.room.hotel.images, ...this.room.images];
   }
 
   showMore() {

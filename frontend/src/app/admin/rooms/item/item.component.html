@@ -3,10 +3,8 @@
         <div class="name">
             <strong><a routerLink="/room/{{ item._id }}">{{ item.name }}</a></strong>
         </div>
-        <div *ngIf="hotelInfo">
-            <strong><a routerLink="/hotel/{{ hotelInfo._id }}">{{ hotelInfo.name }}</a></strong>
-            <app-star-rating [starRating]="hotelInfo.stars"></app-star-rating>
-        </div>
+        <strong><a routerLink="/hotel/{{ item.hotel._id }}">{{ item.hotel.name }}</a></strong>
+        <app-star-rating [starRating]="item.hotel.stars"></app-star-rating>
     </div>
 
     <div class="block" *ngIf="item.price">

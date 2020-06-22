@@ -23,7 +23,7 @@ class HoteInfo {
 export class RoomItemComponent implements OnInit {
 
   @Input() item: Room;
-  hotelInfo: HoteInfo;
+  // hotelInfo: HoteInfo;
   loading = true;
   amenities: Amenity[];
 
@@ -119,11 +119,11 @@ export class RoomItemComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
 
-    this.admin.getHotelBy(this.item.hotel_id)
-      .subscribe((x: Hotel) => {
-        this.loading = false;
-        this.hotelInfo = { _id: x._id, name: x.name, stars: x.stars } as HoteInfo;
-      })
+    // this.admin.getHotelBy(this.item.hotel_id)
+    //   .subscribe((x: Hotel) => {
+    //     this.loading = false;
+    //     // this.hotelInfo = { _id: x._id, name: x.name, stars: x.stars } as HoteInfo;
+    //   })
   }
 
   onSubmit(formData: any) {

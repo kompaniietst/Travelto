@@ -1,4 +1,4 @@
-<div *ngIf="room && hotel">
+<div *ngIf="room">
 
     <div class="mainscreen">
         <div class="container">
@@ -7,13 +7,13 @@
                     {{ room.name }}
                 </h1>
                 <h3>
-                    <a routerLink="/hotel/{{ hotel._id }}">{{ hotel.name }}</a>
-                    <app-star-rating *ngIf="hotel.stars" [starRating]="hotel.stars">
+                    <a routerLink="/hotel/{{ room.hotel._id }}">{{ room.hotel.name }}</a>
+                    <app-star-rating *ngIf="room.hotel.stars" [starRating]="room.hotel.stars">
                     </app-star-rating>
                 </h3>
-                <div class="place" *ngIf="hotel.address.city">
+                <div class="place" *ngIf="room.hotel.address.city">
                     <span></span>
-                    {{ hotel.address.city.label }}, {{ hotel.address.street }} {{ hotel.address.houseNumber }}
+                    {{ room.hotel.address.city.label }}, {{ room.hotel.address.street }} {{ room.hotel.address.houseNumber }}
                 </div>
             </div>
         </div>
@@ -53,9 +53,9 @@
     
                 <div class="place">
                     <span></span>
-                    {{ hotel.address.city.label }},
-                    {{ hotel.address.street }} 
-                    {{ hotel.address.houseNumber }}
+                    {{ room.hotel.address.city.label }},
+                    {{ room.hotel.address.street }} 
+                    {{ room.hotel.address.houseNumber }}
                 </div>
                 
                 <app-google-maps 

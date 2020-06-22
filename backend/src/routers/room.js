@@ -1,8 +1,15 @@
 const express = require("express");
 const Room = require('../models/Room')
+const Hotel = require('../models/Hotel')
+const mongoose = require('mongoose')
 const router = express.Router();
 
 router.post('/rooms', async (req, res) => {
+
+    console.log(req.body);
+
+    var hotel = await Hotel.findOne({ _id: req.body.hotel_id._id })
+
     try {
         const room = new Room(req.body)
         await room.save()
@@ -43,7 +50,7 @@ router.put('/rooms/:id', async (req, res) => {
     // }
 })
 
-router.get('/rooms', async (req, res) => {
+/* router.get('/rooms', async (req, res) => {
 
     const rooms = await Room.find();
 
@@ -51,11 +58,32 @@ router.get('/rooms', async (req, res) => {
 
     res.send(rooms)
 
-})
+}) */
 
-router.get('/fullrooms', async (req, res) => {
+router.get('/rooms', async (req, res) => {
 
-    const rooms = await Room.find();
+    const rooms = await Room.aggregate([
+        {
+            $lookup: {
+                from: "hotels",
+                localField: "hotel_id",
+                foreignField: "_id",
+                as: "hotel"
+            }
+        },
+        {
+            $project: {
+                _id: 1,
+                name: 1,
+                description: 1,
+                price: 1,
+                specials: 1,
+                images: 1,
+                textFeatures: 1,
+                hotel: { "$arrayElemAt": [ "$hotel", 0 ] }
+            }
+        },
+    ]);
 
     if (!rooms) return res.status(401).send('Room are empty')
 
@@ -66,13 +94,51 @@ router.get('/fullrooms', async (req, res) => {
 router.get('/rooms/:id', async (req, res) => {
 
     const id = req.params.id;
-    const room = await Room.findOne({ _id: id });
+    // const room = await Room.findOne({ _id: id });
+    const ObjectId = mongoose.Types.ObjectId;
 
-    if (!room) return res.status(400).send('Room is not exist')
+    console.log(ObjectId(id));
+    
+    const rooms = await Room.aggregate([
+        { $match: { _id: ObjectId(id) }},
+        {
+            $lookup: {
+                from: "hotels",
+                localField: "hotel_id",
+                foreignField: "_id",
+                as: "hotel"
+            }
+        },
+        {
+            $project: {
+                _id: 1,
+                name: 1,
+                description: 1,
+                price: 1,
+                specials: 1,
+                images: 1,
+                textFeatures: 1,
+                hotel: { "$arrayElemAt": [ "$hotel", 0 ] }
+            }
+        },
+    ]);
 
-    res.send(room)
+    if (!rooms) return res.status(400).send('Room is not exist')
+
+    res.send(rooms[0])
 
 })
+
+// router.get('/rooms/:id', async (req, res) => {
+
+//     const id = req.params.id;
+//     const room = await Room.findOne({ _id: id });
+
+//     if (!room) return res.status(400).send('Room is not exist')
+
+//     res.send(room)
+
+// })
 
 router.get('/roomsByHotel/:id', async (req, res) => {
 

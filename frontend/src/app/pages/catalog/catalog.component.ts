@@ -33,15 +33,28 @@ export class CatalogComponent implements OnInit {
     private filterTabsService: FilterTabsService
   ) {
 
-    this.rooms$ = this.roomService.getFull();
+    this.rooms$ = this.roomService.get();
+    // this.filteredRooms$ = this.roomService.getFull();
+
+    this.roomService.get()
+      .subscribe(r => {
+        console.log(' ');
+        console.log(' ');
+        console.log('FROM SERV ROOMS', r);
+
+        console.log(' ');
+        console.log(' ');
+        console.log(' ');
+
+      })
 
     this.filterTabsService.getFilters()
       .subscribe((x: FilterItem[]) => {
-        if (!x) {
+        console.log('=X', x);
+        if (!x || x.length == 0) {
           this.filteredRooms$ = this.rooms$;
           return;
         }
-        console.log('X', x);
 
         this.filterRooms(x);
       })

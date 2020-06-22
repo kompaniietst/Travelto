@@ -1,6 +1,6 @@
 <ng-content select=".header_templ_top"></ng-content>
 
-<div *ngIf="hotel">
+<div>
     <div class="item_container">
         <div class="img">
             <app-special 
@@ -17,12 +17,12 @@
 
         <div class="center_block">
             <div class="hotel_name">
-                <a routerLink="/hotel/{{ hotel._id }}"><strong>{{ hotel.name }}</strong></a>
-                <app-star-rating [starRating]="hotel.stars"></app-star-rating>
+                <a routerLink="/hotel/{{ room.hotel._id }}"><strong>{{ room.hotel.name }}</strong></a>
+                <app-star-rating [starRating]="room.hotel.stars"></app-star-rating>
             </div>
             <ng-content select=".header_templ_center"></ng-content>
             <div class="place"><span></span>
-                {{ hotel.address.city.label }}, {{ hotel.address.street }} {{ hotel.address.houseNumber }}
+                {{ room.hotel.address.city.label }}, {{ room.hotel.address.street }} {{ room.hotel.address.houseNumber }}
             </div>
             <ul>
                 <li *ngFor="let item of room.textFeatures | limit:limit; trackBy: trackById;" class="feature">
@@ -35,9 +35,8 @@
                     </strong>
                 </li>
             </ul>
-            <!-- <mat-icon matTooltip="My tooltip">delete</mat-icon> -->
             <div class="amenities">
-                <div *ngFor="let item of hotel.amenities; trackBy: trackById">
+                <div *ngFor="let item of room.hotel.amenities; trackBy: trackById">
                     <img [src]="item.image" [alt]="item.label" [matTooltip]="item.label">
                 </div>
             </div>
