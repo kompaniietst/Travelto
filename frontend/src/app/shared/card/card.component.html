@@ -35,9 +35,10 @@
                     </strong>
                 </li>
             </ul>
+            <!-- <mat-icon matTooltip="My tooltip">delete</mat-icon> -->
             <div class="amenities">
                 <div *ngFor="let item of hotel.amenities; trackBy: trackById">
-                    <img [src]="item.image" [alt]="item.label">
+                    <img [src]="item.image" [alt]="item.label" [matTooltip]="item.label">
                 </div>
             </div>
         </div>

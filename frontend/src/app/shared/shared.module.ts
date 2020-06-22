@@ -20,6 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ProfileTriggerComponent } from './profile-trigger/profile-trigger.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -100,6 +101,7 @@ const MODULES = [
   MatInputModule,
   MatRadioModule,
   MatProgressSpinnerModule,
+  MatTooltipModule,
 
   NouisliderModule,
   NgxDaterangepickerMd.forRoot(),

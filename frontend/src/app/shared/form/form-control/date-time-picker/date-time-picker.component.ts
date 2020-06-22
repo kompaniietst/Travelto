@@ -4,6 +4,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import * as moment from 'moment';
 import { Control } from 'src/app/core/models/Control';
 import { map } from 'rxjs/operators';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-date-time-picker',
@@ -20,14 +21,19 @@ export class DateTimePickerComponent implements OnInit, ControlValueAccessor {
   @Input() control: Control;
   formControl = new FormControl();
 
-  constructor() { }
+  constructor(private ls: LocalStorageService) {
+
+    this.ls.get().subscribe(x => {                // if date exists in localstorage
+      this.formControl.setValue({
+        startDate: moment(x.date[0]),
+        endDate: moment(x.date[1])
+      });
+    })
+  }
 
   registerOnChange(fn: any): void {
     this.formControl.valueChanges
-      .pipe(
-        map(d => [d.startDate.format("DD.MM.YYYY"), d.endDate.format("DD.MM.YYYY")])
-        // map(d => [d.startDate.toDate(), d.endDate.toDate()])
-      )
+      .pipe(map(d => [d.startDate.toDate(), d.endDate.toDate()]))
       .subscribe(fn)
   }
 
@@ -36,5 +42,5 @@ export class DateTimePickerComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void { }
 
-  onChangeDateTimePicker(e) {}
+  onChangeDateTimePicker(e) { }
 }

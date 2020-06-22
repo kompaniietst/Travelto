@@ -22,6 +22,10 @@ export class RoomService {
     return this.http.get<Room[]>(`${this.URL}/rooms`)
   }
 
+  getFull(): Observable<Room[]> {
+    return this.http.get<Room[]>(`${this.URL}/fullrooms`)
+  }
+
   getRoomsByHotel(id: string): Observable<Room[]> {
     return this.http.get<Room[]>(`${this.URL}/roomsByHotel/${id}`)
   }

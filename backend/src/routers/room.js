@@ -53,6 +53,16 @@ router.get('/rooms', async (req, res) => {
 
 })
 
+router.get('/fullrooms', async (req, res) => {
+
+    const rooms = await Room.find();
+
+    if (!rooms) return res.status(401).send('Room are empty')
+
+    res.send(rooms)
+
+})
+
 router.get('/rooms/:id', async (req, res) => {
 
     const id = req.params.id;

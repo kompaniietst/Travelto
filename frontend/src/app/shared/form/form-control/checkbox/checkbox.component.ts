@@ -93,7 +93,12 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
 
   setFilterTabs(checked: boolean, item: any) {
     checked
-      ? this.filterTabsService.set(item)
+      ? this.filterTabsService
+        .setFilter({
+          _id: item._id,
+          type: this.control.key,
+          label: item.label
+        })
       : this.filterTabsService.remove(item._id);
   }
 

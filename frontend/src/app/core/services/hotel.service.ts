@@ -38,7 +38,7 @@ export class HotelService {
   }
 
   gethotelInfoByRoom(_id: string): Observable<Hotel> {
-    console.log('id', _id);
+    // console.log('id', _id);
 
     return this.http.get<Hotel>(`${this.URL}/hotelInfoByRoom/${_id}`)
   }

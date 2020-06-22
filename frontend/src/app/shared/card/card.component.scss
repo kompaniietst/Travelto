@@ -130,3 +130,11 @@
         }
     }
 }
+::ng-deep .mat-tooltip {
+    color: $text_color!important;
+    font-size: 12px;
+    font-family: $font_regular;
+    border: 1px solid #c1e1ef;
+    border-radius: 2px;
+    background: #f8fdff;
+}

@@ -6,10 +6,10 @@ export class Room {
     name: string;
     description: string;
     price: number;
-    specials: {
-        id: number;
-        name: string;
-    }
+    specials: [{
+        _id: string;
+        label: string;
+    }]
     images: string[];
     amenities: Amenity[];
     textFeatures: [];

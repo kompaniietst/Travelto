@@ -15,12 +15,12 @@ export class FilterTabsService {
     this.removedTabID = new BehaviorSubject();
   }
 
-  set(obj: any) {
+  setFilter(obj: any) {
     this.tabs.push(obj);
     this.tabsSubject.next(this.tabs);
   }
 
-  get() {
+  getFilters() {
     return this.tabsSubject.asObservable()
   }
 

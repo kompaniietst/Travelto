@@ -1,4 +1,4 @@
-<div class="container" *ngIf="(rooms$ | async)?.length">
+<div class="container">
     <div class="d_flex">
         <app-sidebar class="sidebar">
             <div class="title">
@@ -14,12 +14,12 @@
         </app-sidebar>
         <app-wrapper class="wrapper">
             <div class="title">
-                <strong>Founded {{ (rooms$ | async)?.length }} options:</strong>
+                <strong>Founded {{ (filteredRooms$ | async)?.length }} options:</strong>
             </div>
 
             <app-filter-tabs></app-filter-tabs>
 
-            <ng-container *ngFor="let room of rooms$ | async | reverse; trackBy: trackById">
+            <ng-container *ngFor="let room of filteredRooms$ | async | reverse; trackBy: trackById">
                 <app-card 
                     [room]="room" 
                     class="catalog"
@@ -43,6 +43,8 @@
                     </div>
                 </app-card>
             </ng-container>
+
+            <!-- <div *ngIf="!(filteredRooms$ | async) || (filteredRooms$ | async)?.length == 0">No rooms.</div> -->
         </app-wrapper>
     </div>
 </div>
