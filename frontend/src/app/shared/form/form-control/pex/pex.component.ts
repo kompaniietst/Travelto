@@ -33,7 +33,6 @@ export class PexComponent implements OnInit, ControlValueAccessor {
   registerOnTouched(fn: any): void { }
 
   ngOnInit(): void {
-    console.log(this.control);
 
     this.form.addControl('adults', new FormControl(this.control.value.adults));
     this.form.addControl('children', new FormControl(this.control.value.children));

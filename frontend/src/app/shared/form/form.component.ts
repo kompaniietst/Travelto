@@ -41,9 +41,7 @@ export class FormComponent<T> implements OnInit {
     private generateForm: GenerateFormStructureService,
     private ls: LocalStorageService
   ) {
-    this.ls.get().subscribe(x => this.lsData = x);
-    this.ls.get().subscribe(x => console.log('ls in form', x));
-
+    this.ls.get().subscribe(x => this.lsData = x);                           // get localstorage data
   }
 
   ngOnInit() {
@@ -53,10 +51,12 @@ export class FormComponent<T> implements OnInit {
 
     if (this.defaultData) {
       console.log('==defaultData==', this.defaultData);
+      console.log('==form==', this.form);
 
       for (const key of Object.keys(this.defaultData)) {
         var value = this.defaultData[key];
-
+        console.log(key, value);
+        
         if (key == '_id' || key == 'feedbacks' || key == '__v') continue
 
         this.form.get(key).setValue(value)
@@ -73,12 +73,11 @@ export class FormComponent<T> implements OnInit {
       }
     }
 
-    console.log('////////////', this.form);
   }
 
   onSubmit() {
     this.valueChange.emit(this.form.value);
-    console.log(this.form.value);
+    console.log('form.value',this.form.value);
     // this.resetForm();
   }
 

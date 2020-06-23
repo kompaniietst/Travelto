@@ -2,6 +2,7 @@ import { Component, OnInit, Input, forwardRef } from '@angular/core';
 import { NouisliderModule } from 'ng2-nouislider';
 import { FormControl, NG_VALUE_ACCESSOR, ControlValueAccessor, FormGroup, FormArray } from '@angular/forms';
 import { Control } from 'src/app/core/models/Control';
+import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 
 @Component({
   selector: 'app-slider-range',
@@ -20,7 +21,7 @@ export class SliderRangeComponent implements OnInit, ControlValueAccessor {
 
   form: FormGroup = new FormGroup({});
 
-  constructor() { }
+  constructor(private filterTabsService: FilterTabsService) { }
 
   get formControl() {
     return this.form.get(this.control.key);
@@ -28,7 +29,7 @@ export class SliderRangeComponent implements OnInit, ControlValueAccessor {
 
   registerOnChange(fn: any): void {
     this.form.get(this.control.key).valueChanges.subscribe(fn)
-    this.form.get(this.control.key).valueChanges.subscribe(x=> this.range = x)
+
   }
 
   writeValue(obj: any): void { }
@@ -37,6 +38,11 @@ export class SliderRangeComponent implements OnInit, ControlValueAccessor {
   ngOnInit(): void {
     this.form.addControl(this.control.key, new FormControl(this.control.value))
     this.range = this.control.value;
+
+    this.form.get(this.control.key).valueChanges.subscribe(x => {
+      this.range = x;
+      this.filterTabsService.setPriceFilter(x);
+    })
   }
 
 }

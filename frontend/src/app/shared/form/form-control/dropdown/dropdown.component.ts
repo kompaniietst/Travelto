@@ -29,19 +29,7 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
 
   filteredOptions: Observable<any>;
 
-  constructor(private filterTabsService: FilterTabsService) {
-
-    // this.formControl.valueChanges.subscribe(x => {          // set filter tab
-    //   if (x) this.filterTabsService.set(x)                  // TODO remove from tabs, if uncheck
-    // })
-
-    // this.filterTabsService.getRemovedTabID()                // uncheck checkbox after removing of filter tab
-    //   .subscribe((tab_id: string) => {
-    //     if (this.control && this.formControl?.value?._id == tab_id) {
-    //       this.formControl.reset();
-    //     }
-    //   })
-  }
+  constructor() { }
 
   writeValue(obj: any): void { }
 
@@ -51,8 +39,6 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
   registerOnTouched(fn: any): void { }
 
   ngOnInit(): void {
-    console.log('lsData', this.lsData);
-
 
     if (this.control.value) {
       this.formControl.setValue(this.control.value)
@@ -68,8 +54,6 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
         map(value => this._filter(value)));
 
     this.formControl.valueChanges.subscribe(x => this.onChange(x))
-
-    this.formControl.valueChanges.subscribe(x => console.log(x))
   }
 
   private _filter(value: string) {

@@ -37,6 +37,7 @@ export class HotelItemComponent<T> implements OnInit {
   }
 
   initFormStructure(amenities: Amenity[], cities: City[]) {
+console.log('in ITEM',this.item.address.city);
 
     this.formStructure$ = of([
 
@@ -103,7 +104,7 @@ export class HotelItemComponent<T> implements OnInit {
             key: 'map',
             label: 'Map coordinates:',
             required: true,
-            value: this.item.address.map,
+            value: this.item.address.map || [0,0],
             options: [
               { placeholder: 'latitude' },
               { placeholder: 'longitude' }

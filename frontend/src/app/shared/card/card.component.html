@@ -1,6 +1,5 @@
 <ng-content select=".header_templ_top"></ng-content>
 
-<div>
     <div class="item_container">
         <div class="img">
             <app-special 
@@ -10,20 +9,20 @@
             <app-carousel 
                 [id]="room._id" 
                 [slides]="slides" 
-                [config]="carouselConfigRooms"
+                [config]="config"
                 [thumbnailsConfig]="thumbnailsConfig">
             </app-carousel>
         </div>
 
         <div class="center_block">
-            <div class="hotel_name">
+            <!-- <div class="hotel_name">
                 <a routerLink="/hotel/{{ room.hotel._id }}"><strong>{{ room.hotel.name }}</strong></a>
                 <app-star-rating [starRating]="room.hotel.stars"></app-star-rating>
-            </div>
+            </div> -->
             <ng-content select=".header_templ_center"></ng-content>
-            <div class="place"><span></span>
+            <!-- <div class="place"><span></span>
                 {{ room.hotel.address.city.label }}, {{ room.hotel.address.street }} {{ room.hotel.address.houseNumber }}
-            </div>
+            </div> -->
             <ul>
                 <li *ngFor="let item of room.textFeatures | limit:limit; trackBy: trackById;" class="feature">
                     {{ item }}
@@ -49,4 +48,3 @@
         </div>
 
     </div>
-</div>

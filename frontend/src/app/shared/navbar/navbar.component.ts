@@ -21,8 +21,6 @@ export class NavbarComponent implements OnInit {
   ) {
     this.citiesService.get()
       .subscribe((x: City[]) => {
-        console.log('x', x);
-
         this.initFormStructure(x)
       });
   }

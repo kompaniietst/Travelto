@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import { PipesModule } from '../pipes/pipes.module';
+
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
@@ -12,13 +15,11 @@ import { FavoriteComponent } from './profile/favorite/favorite.component';
 import { SharedModule } from '../shared/shared.module';
 import { PersonalComponent } from './profile/personal/personal.component';
 import { HotelComponent } from './hotel/hotel.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { RoomComponent } from './room/room.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CoreModule } from '../core/core.module';
 import { AboutComponent } from './about/about.component';
-import { PipesModule } from '../pipes/pipes.module';
 
 
 const routes: Routes = []

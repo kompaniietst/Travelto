@@ -156,11 +156,12 @@ form {
     justify-content: center;
     padding-top: 21px;
     overflow: hidden;
-    .mat-progress-spinner.blue_spinner circle,
-    .mat-spinner.blue_spinner circle {
-        stroke: $color;
-    }
 }
+.mat-progress-spinner.blue_spinner circle,
+.mat-spinner.blue_spinner circle {
+    stroke: $color;
+}
+/*  */
 .no_items {
     padding: 30px 0;
     text-align: center;

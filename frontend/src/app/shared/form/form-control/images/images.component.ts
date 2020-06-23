@@ -44,7 +44,7 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
   registerOnTouched(fn: any): void { }
 
   ngOnInit(): void {
-    console.log('Deafult', this.control.value);
+    // console.log('Deafult', this.control.value);
 
     var defaultData = this.control.value;
 

@@ -59,6 +59,7 @@ export class AdvancedInputComponent implements OnInit, ControlValueAccessor {
 
             case 'formControl':
 
+              console.log('c', c);
 
               (this.form.get(this.control.key) as FormGroup)
                 .addControl(c.key, new FormControl(c.value || null));
@@ -67,26 +68,26 @@ export class AdvancedInputComponent implements OnInit, ControlValueAccessor {
             case 'formArray':
 
               if (c.controlType == "input") {      // MAP
-                var map = [new FormControl(),new FormControl()];
+                var map = [new FormControl(), new FormControl()];
 
-                
+
 
                 if (c.value) {
-                  
+
                   map = c.value.map(v => new FormControl(v))
                 }
 
                 (this.form.get(this.control.key) as FormGroup)
                   .addControl(c.key, new FormArray(map));
 
-                
+
               }
 
 
               if (c.controlType == "dropdown") {
 
                 (this.form.get(this.control.key) as FormGroup)
-                  .addControl(c.key, new FormControl());
+                  .addControl(c.key, new FormControl(c.value));
 
               }
 

@@ -4,6 +4,8 @@ const Hotel = require('../models/Hotel')
 const mongoose = require('mongoose')
 const router = express.Router();
 
+const ObjectId = mongoose.Types.ObjectId;
+
 router.post('/rooms', async (req, res) => {
 
     console.log(req.body);
@@ -95,7 +97,7 @@ router.get('/rooms/:id', async (req, res) => {
 
     const id = req.params.id;
     // const room = await Room.findOne({ _id: id });
-    const ObjectId = mongoose.Types.ObjectId;
+    
 
     console.log(ObjectId(id));
     
@@ -143,7 +145,32 @@ router.get('/rooms/:id', async (req, res) => {
 router.get('/roomsByHotel/:id', async (req, res) => {
 
     const id = req.params.id;
-    const rooms = await Room.find({ hotel_id: id });
+    // const rooms = await Room.find({ hotel_id: id });
+
+    const rooms = await Room.aggregate([
+        { $match: { hotel_id: ObjectId(id) }},
+        {
+            $lookup: {
+                from: "hotels",
+                localField: "hotel_id",
+                foreignField: "_id",
+                as: "hotel"
+            }
+        },
+        {
+            $project: {
+                _id: 1,
+                name: 1,
+                description: 1,
+                price: 1,
+                specials: 1,
+                images: 1,
+                textFeatures: 1,
+                hotel: { "$arrayElemAt": [ "$hotel", 0 ] }
+            }
+        },
+    ]);
+
 
     if (!rooms) return res.status(401).send('Room are empty')
 

@@ -31,14 +31,26 @@ export class HotelComponent implements OnInit {
 
   // loading = true;
 
-  needCountSlides: boolean = true;
 
+  
+  needCountSlides: boolean = true;
   carouselConfig = {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     arrows: true
   };
+  carouselConfigRooms = {
+    speed: 700,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
+    needLink: true,
+    arrows: true,
+    autoplay: true,
+    draggable: true,
+  };
+
 
   mapApiKey = environment.mapApiKey;
 
@@ -61,6 +73,7 @@ export class HotelComponent implements OnInit {
           this.hotel = h
           console.log('HOTEl', this.hotel);
           this.loading = false;
+          this.getRooms();
           this.defineMapData();
         },
         err => this.alert.error(err.error))
@@ -71,13 +84,18 @@ export class HotelComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  getRooms() {
     this.rooms$ = this.admin.getRoomsByHotel(this.id)
 
     this.admin.getRoomsByHotel(this.id)
       .subscribe(
         r => console.log('after r', r),
         er => console.log(er))
+
   }
+
 
   ifActiveAmenity(_id: string) {
     return this.hotel.amenities.some(a => a._id == _id)

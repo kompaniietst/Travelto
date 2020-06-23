@@ -10,14 +10,27 @@ export class FilterTabsService {
   private removedTabID: BehaviorSubject<string>;
   public tabs = [];
 
+  private priceRangeSubject: BehaviorSubject<number[]>;
+
   constructor() {
     this.tabsSubject = new BehaviorSubject();
     this.removedTabID = new BehaviorSubject();
+    this.priceRangeSubject = new BehaviorSubject();
   }
 
   setFilter(obj: any) {
+    console.log('tab',obj);
+    
     this.tabs.push(obj);
     this.tabsSubject.next(this.tabs);
+  }
+
+  setPriceFilter(arr: any) {
+    this.priceRangeSubject.next(arr);
+  }
+
+  getPriceFilter() {
+    return this.priceRangeSubject.asObservable()
   }
 
   getFilters() {

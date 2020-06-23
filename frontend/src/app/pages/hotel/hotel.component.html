@@ -40,7 +40,8 @@
                 <div *ngFor="let room of rooms$ | async; trackBy: trackById" class="item">
                     <app-card 
                         [room]="room" 
-                        class="hotel">
+                        class="hotel"
+                        [config]="carouselConfigRooms">
                         <div class="header_templ_center">
                             <h4>
                                 <a routerLink="/room/{{ room._id }}">{{ room.name }}</a>
@@ -50,7 +51,7 @@
                                     <strong>
                                         {{ room.price | customCurrency  }} <span class="currency">$</span>
                                     </strong>
-                                </span> / night
+                                </span><br> night
                             </div>
                         </div>
 

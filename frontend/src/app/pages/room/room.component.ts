@@ -47,6 +47,7 @@ export class RoomComponent implements OnInit {
           this.room = r
           console.log('Room', this.room);
           this.loading = false;
+          this.defineMapData();
         },
         err => this.alert.error(err.error))
   }

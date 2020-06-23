@@ -90,8 +90,20 @@
         flex-wrap: wrap;
         margin: 0 -15px;
         .item {
-            width: 50%;
+            width: 33.3%;
             padding: 15px;
+            .price {
+                background: $color;
+                padding: 10px;
+                font-size: 10px;
+                color: white;
+                line-height: 15px;
+                padding-top: 11px;
+                white-space: nowrap;
+                .blue {
+                    color: white;
+                }
+            }
         }
     }
 }
@@ -151,4 +163,21 @@ h4 {
 }
 .address {
     padding-bottom: 0;
+}
+.item ::ng-deep .hotel .carousel {
+    .slick-slide {
+        height: 240px;
+    }
+    .slick-next {
+        right: 28px;
+        &:before {
+            font-size: 27px;
+        }
+    }
+    .slick-prev {
+        left: 28px;
+        &:before {
+            font-size: 27px;
+        }
+    }
 }

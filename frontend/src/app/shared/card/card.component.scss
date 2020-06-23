@@ -22,11 +22,11 @@
         background: #f8fdff;
         padding: 5px 10px;
         float: left;
-        margin: 5px;
-        height: 35px;
+        margin: 3px;
+        height: 32px;
         display: flex;
         align-items: center;
-        font-size: 13px;
+        font-size: 12px;
     }
     .amenities {
         display: flex;
@@ -51,10 +51,11 @@
         }
     }
     &.hotel {
+        height: 100%;
         .item_container {
             display: flex;
             flex-direction: column;
-            height: calc(100% - 42px);
+            height: 100%;
             .end_block {
                 clear: both;
                 margin-top: auto;
@@ -62,7 +63,11 @@
         }
         ul {
             float: left;
-            margin-bottom: 15px;
+        }
+        .feature {
+            font-size: 11px;
+            height: 28px;
+            margin: 3px;
         }
     }
     &.catalog {
@@ -108,13 +113,6 @@
             border-bottom: 1px solid #0098db;
         }
     }
-    .hotel_name {
-        margin-top: 8px;
-        a {
-            padding-right: 10px;
-            color: $text_color;
-        }
-    }
 }
 :host.catalog ::ng-deep {
     .carousel .slick-next,
@@ -131,7 +129,7 @@
     }
 }
 ::ng-deep .mat-tooltip {
-    color: $text_color!important;
+    color: $text_color !important;
     font-size: 12px;
     font-family: $font_regular;
     border: 1px solid #c1e1ef;
