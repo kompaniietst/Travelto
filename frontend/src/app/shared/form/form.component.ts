@@ -52,6 +52,7 @@ export class FormComponent<T> implements OnInit {
     this.form = this.generateForm.defineStructure(this.controls$);
 
     if (this.defaultData) {
+      console.log('==defaultData==', this.defaultData);
 
       for (const key of Object.keys(this.defaultData)) {
         var value = this.defaultData[key];
@@ -63,11 +64,10 @@ export class FormComponent<T> implements OnInit {
     }
 
     if (this.lsData) {
-      console.log(' ');
-      console.log(' ');
-      console.log(' ');
+     
       //  if there are data in the LocalStorage
       for (const key of Object.keys(this.lsData)) {
+
         if (this.form.get(key))
           this.form.get(key).setValue(this.lsData[key])
       }

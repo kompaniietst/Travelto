@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private hotelService: HotelService,
-    private http: HttpClient
   ) {
     this.hotelService.get()
       .subscribe((x: Hotel[]) =>
@@ -33,9 +32,6 @@ export class HomeComponent implements OnInit {
             }
           })
       )
-
-    this.http.get(`${this.URL}/fullrooms`)
-      .subscribe(x => console.log('>>>>>', x))
   }
 
   ngOnInit(): void { }

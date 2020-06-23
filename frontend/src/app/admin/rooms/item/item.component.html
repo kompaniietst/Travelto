@@ -41,7 +41,7 @@
         <strong><a routerLink="/hotel/{{ item._id }}">{{ item.name }}</a></strong>
     </div>
 
-    <app-form [controls$]="formStructure$" [defaultData]="item" (valueChange)="onSubmit($event)" buttonName="Update"
+    <app-form [controls$]="formStructure$" [defaultData]="defaultFormData" (valueChange)="onSubmit($event)" buttonName="Update"
         [showSpinner]="showSpinner" class="edit_room_form">
     </app-form>
     <app-alert-message></app-alert-message>

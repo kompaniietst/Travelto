@@ -30,17 +30,14 @@ export class RoomItemComponent implements OnInit {
   formStructure$: Observable<Control[]>;
   showSpinner = false;
   editItem: boolean = false;
+  defaultFormData: Partial<Room>;
 
   constructor(
     private admin: AdminService,
     private alert: AlertMessageService
   ) {
 
-    this.admin.getHotels()                  // get hotels for editing curr room
-      .subscribe(x => {
-        var hotels = x.map(h => { return { _id: h._id, label: h.name } })
-        this.initFormStructure(hotels)
-      })
+
   }
 
   edit(_id: string) {
@@ -54,7 +51,7 @@ export class RoomItemComponent implements OnInit {
         controlType: 'dropdown',
         key: 'hotel_id',
         label: 'Select hotel name',
-        value: hotels.find(h => h._id == this.item.hotel_id),
+        value: hotels.find(h => h._id == this.item.hotel._id),
         options: hotels,
         required: true
       }),
@@ -119,6 +116,26 @@ export class RoomItemComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
 
+
+    this.admin.getHotels()                  // get hotels for editing curr room
+      .subscribe(x => {
+        console.log('@@@@@@@', this.item.hotel._id);
+
+        var hotels = x.map((h: Hotel) => { return { _id: h._id, label: h.name } })
+        this.initFormStructure(hotels)
+      })
+
+    this.defaultFormData = {
+      // hotel_id: this.item.hotel._id,
+      name: this.item.name,
+      description: this.item.description,
+      price: this.item.price,
+      specials: this.item.specials,
+      textFeatures: this.item.textFeatures,
+      images: this.item.images,
+    }
+      
+
     // this.admin.getHotelBy(this.item.hotel_id)
     //   .subscribe((x: Hotel) => {
     //     this.loading = false;
@@ -142,7 +159,7 @@ export class RoomItemComponent implements OnInit {
         err => console.log(err)
       )
   }
-  
+
   trackById(index, item) {
     return item.id;
   }
