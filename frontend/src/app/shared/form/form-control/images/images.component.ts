@@ -44,7 +44,6 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
   registerOnTouched(fn: any): void { }
 
   ngOnInit(): void {
-    // console.log('Deafult', this.control.value);
 
     var defaultData = this.control.value;
 
@@ -91,9 +90,6 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
 
     this.showSpinner = true;
 
-    console.log('bef server', this.control.value);
-    console.log('type ', this.control.type);
-
     this.admin.uploadImages(this.control.type, formData)
       .subscribe(
         (resp: any) => {
@@ -101,18 +97,13 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
 
           var defaultData = this.control.value;
 
-          console.log('resp ', resp);
-
           if (this.defaultDataExist() && Array.isArray(this.defaultDataExist())) { // form multiple images
             this.imagesToShow = defaultData;
 
             resp.forEach((img: any) => {
-              console.log('foreach img', img, `${this.URL}/images/${this.control.type}/` + img);
-
               (this.form.get('formKey') as FormArray)
                 .push(new FormControl(`${this.URL}/images/${this.control.type}/` + img));
             });
-            console.log('form', this.form);
 
             return;
           }
@@ -132,7 +123,6 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
 
   showImages(event) {
     Array.from(event.target.files).forEach((file: any) => {
-      console.log(file);
       const reader = new FileReader();
       reader.addEventListener('load', (event: any) => {
         this.imagesToShow.push(event.target.result);

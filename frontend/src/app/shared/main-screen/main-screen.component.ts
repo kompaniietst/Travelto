@@ -66,7 +66,7 @@ export class MainScreenComponent implements OnInit {
       queryParams["checkOut"] = formData.date[1];
     }
 
-    this.ls.set(formData);
+    this.ls.saveToLOcalstorage(formData);
     this.router.navigate(['catalog'], { queryParams: queryParams })
   }
 }

@@ -73,19 +73,14 @@ export class CatalogComponent implements OnInit {
     this.amenitiesService.get()
       .subscribe((x: Amenity[]) => this.initFormStructure(x));
 
-    this.filterTabsService.getPriceFilter()
+    this.filterTabsService.getPriceFilter()                      // define values to filter by price
       .subscribe((x) => this.priceFilter = {
         key: "price",
         price: x
       })
 
-    this.localStorageService.onCityChange()
+    this.localStorageService.onCityChange()                      // define values to filter by city
       .subscribe((cityId: string) => {
-        console.log('|||||||||||||||||||||||');
-        
-        console.log('on city change');
-
-
         if (cityId) {
           this.cityFilter = {
             key: "city",

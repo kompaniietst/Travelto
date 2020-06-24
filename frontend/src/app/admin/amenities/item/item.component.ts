@@ -68,7 +68,7 @@ export class AmenityItemComponent implements OnInit {
 
   onSubmit(formData: any) {
     this.showSpinner = true;
-    console.log('on edit', formData);
+    // console.log('on edit', formData);
     this.admin.editAmenity(this.item._id, formData)
       .subscribe(
         x => {

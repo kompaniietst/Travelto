@@ -10,7 +10,7 @@
             [checked]="item.checked">
 
             <span *ngIf="control.options[i]._id == 1; else default">
-                Hotel has <span style="color:red"><strong>discount!</strong></span>
+                Room has <span style="color:red"><strong>discount!</strong></span>
             </span>
             <ng-template #default> {{ control.options[i].label }} </ng-template>
         </mat-checkbox>

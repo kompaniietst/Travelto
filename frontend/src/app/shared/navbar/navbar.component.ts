@@ -51,6 +51,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void { }
   onSubmit(formData: any) {
-    this.ls.set(formData);
+    this.ls.saveToLOcalstorage(formData);
   }
 }

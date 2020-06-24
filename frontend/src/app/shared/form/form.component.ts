@@ -50,12 +50,12 @@ export class FormComponent<T> implements OnInit {
     this.form = this.generateForm.defineStructure(this.controls$);
 
     if (this.defaultData) {
-      console.log('==defaultData==', this.defaultData);
-      console.log('==form==', this.form);
+      // console.log('==defaultData==', this.defaultData);
+      // console.log('==form==', this.form);
 
       for (const key of Object.keys(this.defaultData)) {
         var value = this.defaultData[key];
-        console.log(key, value);
+        // console.log(key, value);
         
         if (key == '_id' || key == 'feedbacks' || key == '__v') continue
 

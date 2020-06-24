@@ -14,7 +14,6 @@ import { LocalStorageService } from 'src/app/core/services/local-storage.service
 export class CardComponent implements OnInit {
 
   @Input() room: Room;
-  @Input() id;
   @Input() limit: number;
   @Input() quantity: number;
   @Input() config: any;
@@ -22,25 +21,9 @@ export class CardComponent implements OnInit {
   slides: string[];
   showbutton: boolean = false;
 
+  constructor(private ls: LocalStorageService) { }
 
-
-  // constructor(private hotelService: HotelService) { }
-  constructor(private ls: LocalStorageService) {
-    this.ls.get()
-      .subscribe((x: any) => {
-        
-        // this.id = x.city._id
-        // console.log('slides', this.slides);
-        
-      })
-    }
-    
-    ngOnInit(): void {
-      console.log('card render ', this.room.hotel.address.city.label);
-      
-      console.log('-------', this.id);
-
-
+  ngOnInit(): void {
 
     if (this.limit) this.showbutton = true;
 

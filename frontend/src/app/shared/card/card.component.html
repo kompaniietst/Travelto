@@ -5,14 +5,9 @@
             <app-special 
                 [specials]="room.specials">
             </app-special>
-<!-- card {{id}} -->
-<!-- 
-<div *ngFor="let item of room.images">
-    {{item}}
-</div> -->
 
             <app-carousel 
-                [id]="id" 
+                [id]="room._id" 
                 [slides]="room.images" 
                 [config]="config"
                 [thumbnailsConfig]="thumbnailsConfig">
@@ -20,14 +15,9 @@
         </div>
 
         <div class="center_block">
-            <!-- <div class="hotel_name">
-                <a routerLink="/hotel/{{ room.hotel._id }}"><strong>{{ room.hotel.name }}</strong></a>
-                <app-star-rating [starRating]="room.hotel.stars"></app-star-rating>
-            </div> -->
+            
             <ng-content select=".header_templ_center"></ng-content>
-            <!-- <div class="place"><span></span>
-                {{ room.hotel.address.city.label }}, {{ room.hotel.address.street }} {{ room.hotel.address.houseNumber }}
-            </div> -->
+           
             <ul>
                 <li *ngFor="let item of room.textFeatures | limit:limit; trackBy: trackById;" class="feature">
                     {{ item }}

@@ -29,34 +29,8 @@ export class CarouselComponent implements OnInit {
     draggable: true,
     focusOnSelect: true,
   };
-  // this.carouselConfig["asNavFor"] = ".carousel.thumbnail" + this.room.id;
-  // this.thumbnailsConfig["asNavFor"] = ".carousel.img" + this.room.id;
 
-
-  constructor(private ls: LocalStorageService) {
- /*    this.ls.get()
-      .subscribe((x: any) => {
-        console.log('*x', x.city._id);
-
-        // this.id = x.city._id;
-
-        console.log(' ');
-        
-        console.log('CAROUSELLLLL');
-
-        // if (this.thumbnailsConfig && this.id) {
-        // this.config["asNavFor"] = ".carousel.thumbnail" + x.city._id;
-        // this.thumbnailsConfig["asNavFor"] = ".carousel.img" + x.city._id;
-
-        console.log('conf, thumb',this.id,this.slides, this.config, this.thumbnailsConfig);
-        // }
-      }) */
-
-    // if (this.thumbnailsConfig && this.id) {
-    //   this.config["asNavFor"] = ".carousel.thumbnail" + this.id;
-    //   this.thumbnailsConfig["asNavFor"] = ".carousel.img" + this.id;
-    // }
-  }
+  constructor(private ls: LocalStorageService) {}
 
   slickInit(e) { }
 
@@ -73,13 +47,11 @@ export class CarouselComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // console.log('>>>>>>>>>>>>>>>>>>>>>>>', this.id);
 
-    // if (this.thumbnailsConfig && this.id) {
-    //   this.config["asNavFor"] = ".carousel.thumbnail" + this.id;
-    //   this.thumbnailsConfig["asNavFor"] = ".carousel.img" + this.id;
-
-    // }
+    if (this.thumbnailsConfig && this.id) {
+      this.config["asNavFor"] = ".carousel.thumbnail" + this.id;
+      this.thumbnailsConfig["asNavFor"] = ".carousel.img" + this.id;
+    }
   }
 
   trackById(index, item) {

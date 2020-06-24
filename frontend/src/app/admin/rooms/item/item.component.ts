@@ -119,7 +119,7 @@ export class RoomItemComponent implements OnInit {
 
     this.admin.getHotels()                  // get hotels for editing curr room
       .subscribe(x => {
-        console.log('@@@@@@@', this.item.hotel._id);
+        // console.log('@@@@@@@', this.item.hotel._id);
 
         var hotels = x.map((h: Hotel) => { return { _id: h._id, label: h.name } })
         this.initFormStructure(hotels)
@@ -145,11 +145,11 @@ export class RoomItemComponent implements OnInit {
 
   onSubmit(formData: any) {
     this.showSpinner = true;
-    console.log('on edit', formData);
+    // console.log('on edit', formData);
     this.admin.editRoom(this.item._id, formData)
       .subscribe(
         x => {
-          console.log('sss', x);
+          // console.log('sss', x);
 
           this.alert.success("Item is successfuly updated");
 

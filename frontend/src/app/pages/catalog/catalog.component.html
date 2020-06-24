@@ -21,11 +21,8 @@
             <ng-container 
                 *ngFor="let room of filteredRooms$ | async | reverse 
                 | filter: priceFilter
-                | filter: cityFilter
-                ; trackBy: trackById">
-         catalog  {{room._id}}     
+                | filter: cityFilter">
                 <app-card 
-                    [id]="room._id"
                     [room]="room" 
                     class="catalog"
                     limit="5"
@@ -58,7 +55,7 @@
                 </app-card>
             </ng-container>
 
-            <div *ngIf="(filteredRooms$ | async)?.length == 0">No rooms.</div>
+            <div *ngIf="(filteredRooms$ | async | reverse | filter:priceFilter | filter: cityFilter)?.length == 0">No rooms.</div>
         </app-wrapper>
     </div>
 </div>

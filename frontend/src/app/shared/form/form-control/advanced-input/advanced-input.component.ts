@@ -59,8 +59,6 @@ export class AdvancedInputComponent implements OnInit, ControlValueAccessor {
 
             case 'formControl':
 
-              console.log('c', c);
-
               (this.form.get(this.control.key) as FormGroup)
                 .addControl(c.key, new FormControl(c.value || null));
               break;

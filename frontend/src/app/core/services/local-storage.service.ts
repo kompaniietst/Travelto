@@ -30,12 +30,15 @@ export class LocalStorageService {
       this.cityIdSubject.next(lsData.city._id)
   }
 
-  set(obj: any) {
+  saveToLOcalstorage(obj: any) {
     localStorage.setItem('searchParams', JSON.stringify(obj))
     this.storageSubject.next(obj);
 
-    if (obj.city)
-      this.cityIdSubject.next(obj.city._id)
+    if (obj.city) this.cityIdSubject.next(obj.city._id)
+  }
+
+  onCityChange(): Observable<string> {
+    return this.cityIdSubject.asObservable();
   }
 
   get(): Observable<any> {
@@ -47,7 +50,4 @@ export class LocalStorageService {
     return this.storageSubject.asObservable();
   }
 
-  onCityChange(): Observable<string> {
-    return this.cityIdSubject.asObservable();
-  }
 }

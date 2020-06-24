@@ -37,7 +37,6 @@ export class HotelItemComponent<T> implements OnInit {
   }
 
   initFormStructure(amenities: Amenity[], cities: City[]) {
-console.log('in ITEM',this.item.address.city);
 
     this.formStructure$ = of([
 
@@ -137,7 +136,6 @@ console.log('in ITEM',this.item.address.city);
 
   onSubmit(formData: any) {
     this.showSpinner = true;
-    console.log('on edit', formData);
     this.admin.editHotel(this.item._id, formData)
       .subscribe(
         x => {
