@@ -16,21 +16,28 @@ export class HomeComponent implements OnInit {
 
   mapApiKey = environment.mapApiKey;
   markers = [];
-  mapLat = 31.780923;
-  mapLng = 35.219538;
+  mapLat = 36;
+  mapLng = 30;
 
   constructor(
     private hotelService: HotelService,
   ) {
     this.hotelService.get()
-      .subscribe((x: Hotel[]) =>
+      .subscribe((x: Hotel[]) =>{
         this.markers = x
           .map(h => {
+           console.log(h._id);
+           
+            
             return {
               lat: +h.address.map[0],
               lng: +h.address.map[1]
             }
-          })
+          }
+          
+          );
+          console.log('this.markers',this.markers);
+        }
       )
   }
 
