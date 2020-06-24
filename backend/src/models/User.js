@@ -29,8 +29,13 @@ const userSchema = mongoose.Schema({
         trim: true
     },
     city: {
-        type: String,
-        trim: true
+        _id: {
+            type: mongoose.Schema.ObjectId,
+        },
+        label: {
+            type: String,
+            trim: true
+        }
     },
     image: {
         type: String,

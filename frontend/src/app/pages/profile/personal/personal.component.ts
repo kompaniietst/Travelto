@@ -3,6 +3,10 @@ import { User } from 'src/app/core/models/User';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { Control } from 'src/app/core/models/Control';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
+import { environment } from 'src/environments/environment';
+import { of, Observable, forkJoin, combineLatest } from 'rxjs';
+import { CitiesService } from 'src/app/core/services/cities.service';
+import { City } from 'src/app/core/models/City';
 
 @Component({
   selector: 'app-personal',
@@ -11,18 +15,40 @@ import { AlertMessageService } from 'src/app/core/services/alert-message.service
 })
 export class PersonalComponent implements OnInit {
 
-
   currUser: User;
-  formStructureControls: Control[];
-  // selectedFile: any;
-  //   id;
-  //   profileImage;
+  formStructureControls$: Observable<Control[]>;
+  profileImage: string;
+  readonly URL = environment.apiUrl;
 
   constructor(
     private auth: AuthenticationService,
-    private alert: AlertMessageService
+    private alert: AlertMessageService,
+    private citiesService: CitiesService
   ) {
-    this.auth.currUser.subscribe((user: User) => this.currUser = user);
+ 
+
+    combineLatest(
+      this.auth.currUser,
+      this.citiesService.get()
+    )
+      .subscribe(x => {
+        this.currUser = x[0];
+        this.profileImage = this.URL + this.currUser.image
+
+        var cities = x[1];
+
+        this.defineFormStructure(cities as City[]);
+        console.log('***', this.currUser);
+      }) /* */
+
+      // this.auth.getUser().complete();
+    // this.auth.currUser.subscribe((user: User) => {
+    //   this.currUser = user;
+    //   console.log('user', user);
+    // });
+
+    console.log('URL', this.URL);
+
     // this.selectedFile = this.currUser.image;
   }
 
@@ -31,7 +57,14 @@ export class PersonalComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.formStructureControls = [
+    // this.profileImage = this.URL + this.currUser.image;
+    // console.log('im', this.profileImage);
+
+  }
+
+  defineFormStructure(cities: City[]) {
+
+    this.formStructureControls$ = of([
 
       new Control({
         controlType: 'input',
@@ -75,26 +108,27 @@ export class PersonalComponent implements OnInit {
       }),
 
       new Control({
-        controlType: 'input',
+        controlType: 'dropdown',
         key: 'city',
         label: 'City:',
         placeholder: 'City:',
         type: 'text',
-        value: this.currUser.city || ''
+        value: this.currUser.city || '',
+        options: cities
       }),
-    ];
+    ]);
   }
 
   //   selectedFiles = [];
   formData: FormData = new FormData();
   upload(event: any) {
-    console.log('event.target',event.target.files[0]);
-    
+    console.log('event.target', event.target.files[0]);
+
     var file = event.target.files[0];
 
     this.formData.append('file', file);
 
-   
+
     console.log('====selectedFiles===', file);
 
     console.log('id', this.currUser._id);
@@ -107,7 +141,7 @@ export class PersonalComponent implements OnInit {
         err => this.alert.error(err.error))
   }
 
-  changeInfo(user: User) {
+  onSubmit(user: User) {
     this.auth.update(this.currUser._id, user)
       .subscribe(
         _ => this.alert.success('Your data is saved'),
