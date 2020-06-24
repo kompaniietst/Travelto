@@ -1,5 +1,6 @@
 <div *ngIf="needCountSlides" class="count_slides">{{ currentSlide }} / {{ countSlides() }}</div>
-
+carousel {{id}}
+<!-- <div  *ngFor="let slide of slides">{{slide}}</div> -->
 <ngx-slick-carousel class="carousel img{{ id }}"
     #slickModal="slick-carousel" 
     [config]="config" 

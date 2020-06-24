@@ -9,6 +9,8 @@ import { CustomCurrencyPipe } from 'src/app/pipes/customCurrency.pipe';
 import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 import { FilterItem } from 'src/app/core/models/FilterItem';
 import { map, delay } from 'rxjs/operators';
+import { City } from 'src/app/core/models/City';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-catalog',
@@ -23,7 +25,8 @@ export class CatalogComponent implements OnInit {
   formStructure$: Observable<Control[]>;
   filteredRooms$: Observable<Room[]>
   showSpinner: boolean = false;
-  byPrice: number[];
+  priceFilter: { key: string, price: number[] };
+  cityFilter: { key: string, cityId: string };
 
   config = {
     speed: 700,
@@ -51,7 +54,8 @@ export class CatalogComponent implements OnInit {
   constructor(
     private roomService: RoomService,
     private amenitiesService: AmenitiesService,
-    private filterTabsService: FilterTabsService
+    private filterTabsService: FilterTabsService,
+    private localStorageService: LocalStorageService
   ) {
 
     this.rooms$ = this.roomService.get();
@@ -70,7 +74,25 @@ export class CatalogComponent implements OnInit {
       .subscribe((x: Amenity[]) => this.initFormStructure(x));
 
     this.filterTabsService.getPriceFilter()
-      .subscribe((x) => this.byPrice = x)
+      .subscribe((x) => this.priceFilter = {
+        key: "price",
+        price: x
+      })
+
+    this.localStorageService.onCityChange()
+      .subscribe((cityId: string) => {
+        console.log('|||||||||||||||||||||||');
+        
+        console.log('on city change');
+
+
+        if (cityId) {
+          this.cityFilter = {
+            key: "city",
+            cityId: cityId
+          }
+        }
+      })
 
   }
 

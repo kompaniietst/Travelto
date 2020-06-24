@@ -3,6 +3,7 @@ import { Room } from 'src/app/core/models/Room';
 import { LimitPipe } from 'src/app/pipes/limit.pipe';
 import { Hotel } from 'src/app/core/models/Hotel';
 import { HotelService } from 'src/app/core/services/hotel.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-card',
@@ -13,6 +14,7 @@ import { HotelService } from 'src/app/core/services/hotel.service';
 export class CardComponent implements OnInit {
 
   @Input() room: Room;
+  @Input() id;
   @Input() limit: number;
   @Input() quantity: number;
   @Input() config: any;
@@ -22,9 +24,24 @@ export class CardComponent implements OnInit {
 
 
 
-  constructor(private hotelService: HotelService) { }
+  // constructor(private hotelService: HotelService) { }
+  constructor(private ls: LocalStorageService) {
+    this.ls.get()
+      .subscribe((x: any) => {
+        
+        // this.id = x.city._id
+        // console.log('slides', this.slides);
+        
+      })
+    }
+    
+    ngOnInit(): void {
+      console.log('card render ', this.room.hotel.address.city.label);
+      
+      console.log('-------', this.id);
 
-  ngOnInit(): void {
+
+
     if (this.limit) this.showbutton = true;
 
     if (!this.thumbnailsConfig) {

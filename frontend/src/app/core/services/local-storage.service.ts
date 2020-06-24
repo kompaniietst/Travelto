@@ -13,6 +13,7 @@ import { City } from '../models/City';
 export class LocalStorageService {
 
   private storageSubject: BehaviorSubject<any> = new BehaviorSubject();
+  private cityIdSubject: BehaviorSubject<string> = new BehaviorSubject();
 
   constructor() {
     if (!localStorage.getItem('searchParams')) {
@@ -21,12 +22,20 @@ export class LocalStorageService {
       return;
     }
 
-    this.storageSubject.next(JSON.parse(localStorage.getItem('searchParams')));
+    var lsData = JSON.parse(localStorage.getItem('searchParams'))
+
+    this.storageSubject.next(lsData);
+
+    if (lsData.city)
+      this.cityIdSubject.next(lsData.city._id)
   }
 
   set(obj: any) {
     localStorage.setItem('searchParams', JSON.stringify(obj))
     this.storageSubject.next(obj);
+
+    if (obj.city)
+      this.cityIdSubject.next(obj.city._id)
   }
 
   get(): Observable<any> {
@@ -36,5 +45,9 @@ export class LocalStorageService {
     // if (localStorage.getItem('searchParams'))
     //   return JSON.parse(localStorage.getItem('searchParams'))
     return this.storageSubject.asObservable();
+  }
+
+  onCityChange(): Observable<string> {
+    return this.cityIdSubject.asObservable();
   }
 }

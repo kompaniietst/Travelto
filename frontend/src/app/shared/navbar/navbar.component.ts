@@ -4,6 +4,7 @@ import { Control } from 'src/app/core/models/Control';
 import { CitiesService } from 'src/app/core/services/cities.service';
 import { Router } from '@angular/router';
 import { City } from 'src/app/core/models/City';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +18,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private citiesService: CitiesService,
-    public router: Router
+    public router: Router,
+    private ls: LocalStorageService
   ) {
     this.citiesService.get()
       .subscribe((x: City[]) => {
@@ -47,6 +49,8 @@ export class NavbarComponent implements OnInit {
     ])
   }
 
-  ngOnInit(): void {}
-  onSubmit(formData:any){}
+  ngOnInit(): void { }
+  onSubmit(formData: any) {
+    this.ls.set(formData);
+  }
 }

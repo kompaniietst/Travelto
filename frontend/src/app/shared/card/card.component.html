@@ -5,10 +5,15 @@
             <app-special 
                 [specials]="room.specials">
             </app-special>
+<!-- card {{id}} -->
+<!-- 
+<div *ngFor="let item of room.images">
+    {{item}}
+</div> -->
 
             <app-carousel 
-                [id]="room._id" 
-                [slides]="slides" 
+                [id]="id" 
+                [slides]="room.images" 
                 [config]="config"
                 [thumbnailsConfig]="thumbnailsConfig">
             </app-carousel>
