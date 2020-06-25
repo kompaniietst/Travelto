@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HotelService } from '../core/services/hotel.service';
 import { environment } from 'src/environments/environment';
@@ -9,6 +9,7 @@ import { City } from '../core/models/City';
 import { delay } from 'rxjs/operators';
 import { Room } from '../core/models/Room';
 import { RoomService } from '../core/services/room.service';
+import { AuthenticationService } from '../core/authentication/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class AdminService {
     private http: HttpClient,
     private hotelService: HotelService,
     private roomService: RoomService,
+
   ) {
 
     // this.amenitiesSubject = new BehaviorSubject(this.getAmenities());
@@ -35,8 +37,8 @@ export class AdminService {
       .pipe(delay(1500))
   }
 
-  getHotels(): Observable<Hotel[]> {
-    return this.hotelService.get();
+  getHotelsBy(currUserId: string): Observable<Hotel[]> {
+    return this.hotelService.getHotelsBy(currUserId as string);
   }
 
   getHotelBy(_id: string): Observable<Hotel> {
@@ -49,11 +51,11 @@ export class AdminService {
       .pipe(delay(1500))
   }
 
-  gethotelInfoByRoom(_id: string): Observable<Hotel> {
-    console.log('id',_id);
-    
-    return this.hotelService.gethotelInfoByRoom(_id);
-  }
+  // gethotelInfoByRoom(_id: string): Observable<Hotel> {
+  //   console.log('id', _id);
+
+  //   return this.hotelService.gethotelInfoByRoom(_id);
+  // }
 
   //--------------------------------------------------------
 
@@ -101,7 +103,14 @@ export class AdminService {
     return this.roomService.get()
       .pipe(delay(1500))
   }
-  
+
+  getRoomsBy(currUserId: string): Observable<Room[]> {
+    console.log(currUserId);
+    
+    return this.roomService.getRoomsBy(currUserId as string)
+      .pipe(delay(1500))
+  }
+
   getRoomBy(_id: string): Observable<Room> {
     return this.roomService.getRoomBy(_id);
   }

@@ -18,5 +18,6 @@ export class Hotel {
     }
     images: string[];
     amenities: Amenity[];
-    feedbacks: Feedback[]
+    feedbacks: Feedback[];
+    creator: string;
 }

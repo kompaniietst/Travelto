@@ -25,6 +25,56 @@ router.post('/rooms', async (req, res) => {
     }
 })
 
+router.post('/roomsBy', async (req, res) => {
+    console.log('req', req);
+    console.log('body', req.body);
+    var c = req.param('creator')
+    console.log('params', c);
+
+    const creator = req.body.creator;
+
+    const rooms = await Room.aggregate([
+        { $match: { creator: ObjectId(creator) }},
+        {
+            $lookup: {
+                from: "hotels",
+                localField: "hotel_id",
+                foreignField: "_id",
+                as: "hotel"
+            }
+        },
+        {
+            $project: {
+                _id: 1,
+                name: 1,
+                description: 1,
+                price: 1,
+                specials: 1,
+                images: 1,
+                textFeatures: 1,
+                hotel: { "$arrayElemAt": [ "$hotel", 0 ] }
+            }
+        },
+    ]);
+
+    if (!rooms) return res.status(400).send('No rooms')
+
+    res.send(rooms);
+
+    // try {
+    //     const hotel = new Hotel(req.body)
+    //     await hotel.save()
+
+    //     res.status(201).send({ hotel })
+    // }
+    // catch (error) {
+    //     console.log(error);
+
+    //     res.status(400).send(error.message)
+    // }
+})
+
+
 router.put('/rooms/:id', async (req, res) => {
 
     console.log(req.body, req.params);

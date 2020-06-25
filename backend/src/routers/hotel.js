@@ -5,6 +5,8 @@ const Room = require('../models/Room')
 const router = express.Router();
 const mongoose = require('mongoose')
 
+const ObjectId = mongoose.Types.ObjectId;
+
 router.post('/hotels', async (req, res) => {
     try {
         const hotel = new Hotel(req.body)
@@ -17,6 +19,34 @@ router.post('/hotels', async (req, res) => {
 
         res.status(400).send(error.message)
     }
+})
+
+// get hotels by params
+router.post('/hotelsBy', async (req, res) => {
+    console.log('req', req);
+    console.log('body', req.body);
+    var c = req.param('creator')
+    console.log('params', c);
+
+    const creator = req.body.creator;
+
+    const hotels = await Hotel.find({ creator: ObjectId(creator) });
+
+    if (!hotels) return res.status(400).send('No hotels')
+
+    res.send(hotels);
+
+    // try {
+    //     const hotel = new Hotel(req.body)
+    //     await hotel.save()
+
+    //     res.status(201).send({ hotel })
+    // }
+    // catch (error) {
+    //     console.log(error);
+
+    //     res.status(400).send(error.message)
+    // }
 })
 
 router.put('/hotels/:id', async (req, res) => {

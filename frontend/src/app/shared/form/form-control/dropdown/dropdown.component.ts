@@ -45,9 +45,9 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
       this.formControl.setValue(this.control.value)
     }
 
-    // if (this.lsData) {
-    //   this.formControl.setValue(this.lsData)
-    // }
+    if (this.lsData && this.control.key == "city") {
+      this.formControl.setValue(this.lsData)
+    }
 
     this.filteredOptions = this.formControl.valueChanges
       .pipe(

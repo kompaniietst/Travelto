@@ -15,6 +15,10 @@ import { HotelComponent } from './pages/hotel/hotel.component';
 import { RoomComponent } from './pages/room/room.component';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { AboutComponent } from './pages/about/about.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { AddHotelComponent } from './admin/hotels/add/add.component';
+import { AddYourHotelComponent } from './pages/add-hotel/add-hotel.component';
+import { RoleGuard } from './core/guards/role.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -31,14 +35,15 @@ const routes: Routes = [
     ]
   },
   { path: 'personal', component: PersonalComponent },
+  { path: 'add-hotel', component: AddYourHotelComponent },
   {
     path: 'admin', component: AdminComponent,
     children: [
       { path: '', redirectTo: 'hotels', pathMatch: 'full' },
-      { path: 'amenities', component: AmenitiesComponent },
-      { path: 'hotels', component: HotelsComponent },
-      { path: 'rooms', component: RoomsComponent },
-      { path: 'cities', component: CitiesComponent },
+      { path: 'amenities', component: AmenitiesComponent, canActivate: [AuthGuard] },
+      { path: 'hotels', component: HotelsComponent, canActivate: [AuthGuard] },
+      { path: 'rooms', component: RoomsComponent, canActivate: [AuthGuard] },
+      { path: 'cities', component: CitiesComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' } },
     ]
   },
 

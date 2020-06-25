@@ -15,9 +15,12 @@ const userSchema = mongoose.Schema({
             }
         }
     },
+    role: {
+        type: String,
+        lowercase: true,
+    },
     phone: {
         type: String,
-        unique: true,
         lowercase: true,
     },
     firstname: {

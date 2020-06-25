@@ -53,4 +53,5 @@ export class NavbarComponent implements OnInit {
   onSubmit(formData: any) {
     this.ls.saveToLOcalstorage(formData);
   }
+  
 }

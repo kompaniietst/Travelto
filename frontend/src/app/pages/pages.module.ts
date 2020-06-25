@@ -20,6 +20,7 @@ import { RoomComponent } from './room/room.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CoreModule } from '../core/core.module';
 import { AboutComponent } from './about/about.component';
+import { AddYourHotelComponent } from './add-hotel/add-hotel.component';
 
 
 const routes: Routes = []
@@ -34,7 +35,8 @@ const COMPONENTS = [
   HotelComponent,
   RoomComponent,
   CatalogComponent,
-  AboutComponent
+  AboutComponent,
+  AddYourHotelComponent
 ];
 
 const MODULES = [
@@ -50,7 +52,7 @@ const MODULES = [
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS, CatalogComponent, AboutComponent,],
+  declarations: [...COMPONENTS],
   imports: [...MODULES],
   exports: [...COMPONENTS]
 })

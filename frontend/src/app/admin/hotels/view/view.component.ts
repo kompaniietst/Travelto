@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
 import { AdminService } from '../../admin.service';
 import { Hotel } from 'src/app/core/models/Hotel';
 import { ReversePipe } from 'src/app/pipes/reverse.pipe';
+import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 
 @Component({
   selector: 'app-view-hotels',
@@ -20,15 +20,20 @@ export class ViewHotelsComponent implements OnInit {
 
   constructor(
     private admin: AdminService,
-    private route: ActivatedRoute
+    private auth: AuthenticationService
   ) {
 
-    this.hotels$ = this.admin.getHotels();
-    this.admin.getHotels()
+    const currUserId = this.auth.getCurrUser()._id;
+
+    this.hotels$ = this.admin.getHotelsBy(currUserId);
+
+    this.admin.getHotelsBy(currUserId)
       .subscribe(
         (x: Hotel[]) => {
-          this.loading = false
-        }, 
+          this.loading = false;
+          console.log('hotels$', x);
+
+        },
         err => console.log(err));
   }
 

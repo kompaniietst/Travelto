@@ -7,7 +7,6 @@ import { Room } from '../core/models/Room';
 export class FilterPipe implements PipeTransform {
 
   transform(rooms: Room[], filter: any): Room[] {
-    // console.log('filter', filter);
 
     if (!filter || !rooms) {
       return rooms
@@ -19,26 +18,10 @@ export class FilterPipe implements PipeTransform {
     }
 
     if (filter.key == 'city') {
-
-      // if (!filter.price) return rooms;
       return rooms.filter(r =>
         r.hotel.address.city._id == filter.cityId
       );
 
-
-
     }
-
-    // return null
   }
-
-  // transform(rooms: Room[], priceFilter: { key: string, price: number[] }): Room[] {
-
-  //   if (!priceFilter?.price || !rooms) {
-  //     return rooms
-  //   }
-  //   console.log('byPrice', priceFilter);
-
-  //   return rooms.filter(v => v.price > priceFilter.price[0] && v.price < priceFilter.price[1]);
-  // }
 }

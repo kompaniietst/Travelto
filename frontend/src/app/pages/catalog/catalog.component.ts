@@ -59,6 +59,7 @@ export class CatalogComponent implements OnInit {
   ) {
 
     this.rooms$ = this.roomService.get();
+    this.roomService.get().subscribe(x => console.log('rs:', x));
 
     this.filterTabsService.getFilters()
       .subscribe((x: FilterItem[]) => {

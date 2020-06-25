@@ -27,14 +27,14 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string) {
-    console.log('login, url',this.URL);
-    
+    console.log('login, url', this.URL);
+
     return this.http.post(`${this.URL}/users/login`, { email, password })
       .pipe(
         map((resp: UserResponse) => {
 
           console.log('resp', resp);
-          
+
           var user = resp.user as User
 
           localStorage.setItem("currUser", JSON.stringify(user));
@@ -45,7 +45,19 @@ export class AuthenticationService {
   }
 
   register(user: User) {
-    return this.http.post(`${this.URL}/users`, user)
+    const newUser = user;
+    newUser["role"] = "member";
+    console.log('newusr', newUser);
+
+    return this.http.post(`${this.URL}/users`, newUser)
+  }
+
+  isAuthorized(): boolean {
+    return !!this.currUserBehaviorSubject.value;
+  }
+
+  getCurrUser(): User {
+    return this.currUserBehaviorSubject.value;
   }
 
   update(_id: string, data: User) {
@@ -55,7 +67,6 @@ export class AuthenticationService {
           localStorage.setItem("currUser", JSON.stringify(user));
           this.currUserBehaviorSubject.next(user)
         }))
-
   }
 
   uploadProfileImage(_id: string, imageData: FormData) {
@@ -63,16 +74,12 @@ export class AuthenticationService {
 
     return this.http.post(`${this.URL}/images/profImages/${_id}`, imageData).
       pipe(
-        map((resp:any) => {
+        map((resp: any) => {
           console.log('RESPONSE ', resp);
-         
-          
-          // var image = this.URL + resp.filename;
-      
+
           this.saveToLocalstorage(resp.filename);
           return resp.filename;
         }))
-
   }
 
   logout() {
@@ -81,8 +88,8 @@ export class AuthenticationService {
   }
 
   saveToLocalstorage(image) {
-    console.log('i',image);
-    
+    console.log('i', image);
+
     var _local = JSON.parse(localStorage.getItem("currUser"));
     _local['image'] = image;
     localStorage.setItem("currUser", JSON.stringify(_local));

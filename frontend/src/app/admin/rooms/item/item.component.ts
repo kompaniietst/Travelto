@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 import { Control } from 'src/app/core/models/Control';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
 import { CustomCurrencyPipe } from 'src/app/pipes/customCurrency.pipe';
+import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 
 class HoteInfo {
   _id: string;
@@ -34,7 +35,8 @@ export class RoomItemComponent implements OnInit {
 
   constructor(
     private admin: AdminService,
-    private alert: AlertMessageService
+    private alert: AlertMessageService,
+    private auth: AuthenticationService
   ) {
 
 
@@ -116,8 +118,10 @@ export class RoomItemComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
 
+    const currUserId = this.auth.getCurrUser()._id;
+    console.log('currUserId', currUserId);
 
-    this.admin.getHotels()                  // get hotels for editing curr room
+    this.admin.getHotelsBy(currUserId)                 // get hotels for editing curr room
       .subscribe(x => {
         // console.log('@@@@@@@', this.item.hotel._id);
 
@@ -134,7 +138,7 @@ export class RoomItemComponent implements OnInit {
       textFeatures: this.item.textFeatures,
       images: this.item.images,
     }
-      
+
 
     // this.admin.getHotelBy(this.item.hotel_id)
     //   .subscribe((x: Hotel) => {
