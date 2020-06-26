@@ -1,0 +1,48 @@
+.popup .mat-dialog-container {
+    transform: none;
+    width: 524px;
+    background: #ffffff;
+    border: 3px solid #0098db;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.38);
+    border-radius: 5px;
+    padding: 30px 61px 45px;
+    position: relative;
+    .label {
+        font-family: $font_bold;
+    }
+    input {
+        background: #ffffff;
+        border: 1px solid #baddf0;
+        border-radius: 3px;
+        padding: 13px;
+        margin: 4px 0 19px;
+        width: 100%;
+        &:focus {
+            outline-color: coral;
+        }
+    }
+    .mat-checkbox-layout {
+        white-space: normal;
+    }
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 10px;
+        width: auto;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        .mat-icon {
+            outline: none;
+            color: #0098db;
+        }
+    }
+    .policy {
+        font-size: 13px;
+        line-height: 18px;
+        margin-bottom: 19px;
+    }
+    .btn {
+        margin-bottom: 20px;
+    }
+}
