@@ -1,0 +1,43 @@
+<div *ngIf="!isAuthorized; else ifAuthorized">
+    <h2 class="text_center">In order to choose the room <br> please, sign in or register</h2>
+    <button [mat-dialog-close]="true" class="close">
+        <mat-icon>close</mat-icon>
+    </button>
+    <button (click)="openLogInModal()" type="submit" class="btn btn-orange w_100">Sign in</button>
+    <button (click)="openRegModal()" type="button" class="btn btn-grey-outline w_100">Create account</button>
+</div>
+
+<ng-template #ifAuthorized>
+    <h2>{{ room.name }}</h2>
+    <button [mat-dialog-close]="true" class="close">
+        <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="price">
+        <span class="blue">{{ room.price | customCurrency }} <span class="currency">$</span></span>
+        <span> / night</span>
+    </div>
+
+    <app-form
+        *ngIf="controls$"
+        [controls$]="controls$"
+        (valueChange)="onSubmit($event)" 
+        [contentTemplate]="contentTemplate"
+        buttonName="Reserve"
+        class="order_form">
+        
+        <ng-template #contentTemplate>
+            <div *ngIf="nightAmount">
+                <div class="d_flex justify_content_between">
+                    <span>{{ room.price | customCurrency }} <span class="currency">$</span> x {{ nightAmount }} nights</span>
+                    <span>{{ room.price * nightAmount  | customCurrency}} <span class="currency">$</span></span>
+                </div>
+                <div class="total d_flex justify_content_between">
+                    <strong>Итого</strong>
+                    <strong class="price">{{ total | customCurrency }} <span class="currency">$</span></strong>
+                </div>
+                <app-alert-message></app-alert-message>
+            </div>
+        </ng-template>
+    </app-form>
+</ng-template>

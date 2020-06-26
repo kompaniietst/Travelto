@@ -1,0 +1,47 @@
+h2 {
+    margin-bottom: 12px;
+}
+.total {
+    margin: 27px 0 25px;
+    .price {
+        font-size: 23px;
+    }
+}
+.order_form {
+    margin-top: 25px;
+    display: block;
+}
+.order_form ::ng-deep {
+    .dateTimePicker {
+        padding: 18px 0;
+        margin: 4px 0 19px;
+        position: relative;
+        input {
+            margin-bottom: 11px;
+            padding: 18px 0 18px 65px;
+        }
+        &:before {
+            content: "";
+            position: absolute;
+            width: 25px;
+            height: 31px;
+            left: 15px;
+            top: 50%;
+            transform: translate(0, -50%);
+            background: url(src/assets/images/icons/form/calendar.svg) no-repeat center;
+            background-size: 100%;
+        }
+    }
+    .pex {
+        display: block;
+        background: #ffffff;
+        border: 1px solid #baddf0;
+        border-radius: 3px;
+        padding: 13px;
+        margin: 4px 0 19px;
+        .btn {
+            margin-bottom: 0;
+        }
+    }
+
+}

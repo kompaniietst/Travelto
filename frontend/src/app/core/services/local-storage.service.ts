@@ -37,6 +37,15 @@ export class LocalStorageService {
     if (obj.city) this.cityIdSubject.next(obj.city._id)
   }
 
+  saveDateToLocalstorage(date){
+    // console.log('date',date);
+    
+    var lsData = JSON.parse(localStorage.getItem('searchParams'));
+    lsData["date"] = date;
+    localStorage.setItem('searchParams', JSON.stringify(lsData));
+    this.storageSubject.next(lsData);
+  }
+
   onCityChange(): Observable<string> {
     return this.cityIdSubject.asObservable();
   }

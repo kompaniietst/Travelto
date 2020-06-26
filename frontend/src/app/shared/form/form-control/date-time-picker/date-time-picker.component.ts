@@ -43,5 +43,7 @@ export class DateTimePickerComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void { }
 
-  onChangeDateTimePicker(e) { }
+  onChangeDateTimePicker(date) {
+    this.ls.saveDateToLocalstorage([date.startDate.toDate(), date.endDate.toDate()])
+  }
 }

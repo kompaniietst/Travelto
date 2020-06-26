@@ -112,3 +112,19 @@
         opacity: 0.5;
     }
 }
+
+.price {
+    font-family: $font_bold;
+    &.blue {
+        background: $color;
+        padding: 10px;
+        font-size: 10px;
+        color: white;
+        line-height: 15px;
+        padding-top: 11px;
+        white-space: nowrap;
+        .blue {
+            color: white;
+        }
+    }
+}

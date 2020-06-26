@@ -1,11 +1,7 @@
-<!-- <ng-container [formGroup]="form"> -->
-    <input type="text" 
-        (change)="onChangeDateTimePicker($event)" 
-        [placeholder]="control.placeholder"
-        ngxDaterangepickerMd
-        [locale]="{applyLabel: 'Confirm', firstDay: 1, format: 'DD.MM.YYYY'}"
-        [formControl]="formControl" 
-        class="form-control"/>
-<!-- </ng-container> -->
-
-<!-- <input [formControl]="formControl"> -->
+<input type="text" 
+    (change)="onChangeDateTimePicker($event)" 
+    [placeholder]="control.placeholder"
+    ngxDaterangepickerMd
+    [locale]="{applyLabel: 'Confirm', firstDay: 1, format: 'DD.MM.YYYY'}"
+    [formControl]="formControl" 
+    class="form-control"/>
