@@ -34,10 +34,12 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
-    const user = this.form.value;
+    const newUser = this.form.value;
+    newUser["role"] = "user";
+    console.log('newusr', newUser);
 
     this.auth
-      .register(user)
+      .register(newUser)
       .subscribe(
         _ => {
           this.alert.success('Thanks for the registration');

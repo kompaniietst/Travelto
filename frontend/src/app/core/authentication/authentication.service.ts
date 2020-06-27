@@ -44,10 +44,8 @@ export class AuthenticationService {
         }))
   }
 
-  register(user: User) {
-    const newUser = user;
-    newUser["role"] = "member";
-    console.log('newusr', newUser);
+  register(newUser: User) {
+    console.log('========', newUser);
 
     return this.http.post(`${this.URL}/users`, newUser)
   }
