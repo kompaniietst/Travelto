@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: 'profile/:id', component: ProfileComponent,
     children: [
-      { path: '', redirectTo: 'personal', pathMatch: 'full' },
+      { path: '', redirectTo: 'orders', pathMatch: 'full' },
       { path: 'personal', component: PersonalComponent },
       { path: 'orders', component: OrdersComponent },
       { path: 'favorite', component: FavoriteComponent }

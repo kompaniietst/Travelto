@@ -1,12 +1,13 @@
-<div class="container">
+<div class="container">{{ currUserRole }}
     <div class="d_flex">
         <app-sidebar>
             <ul class="block">
-                <li routerLinkActive="active" routerLink="personal">Мой профиль</li>
-                <li routerLinkActive="active" routerLink="orders">Мои заказы
+                <li *ngIf="currUserRole == 'user'" routerLinkActive="active" routerLink="orders">My orders
+                <li *ngIf="currUserRole == 'member'" routerLinkActive="active" routerLink="orders">Orders
                     <div class="notification" *ngIf="notification>0"><strong>{{ notification }}</strong></div>
                 </li>
-                <li routerLinkActive="active" routerLink="favorite">Избранное</li>
+                <li *ngIf="currUserRole == 'user'" routerLinkActive="active" routerLink="favorite">Избранное</li>
+                <li routerLinkActive="active" routerLink="personal">Мой профиль</li>
                 <li (click)="logout()">Выйти</li>
             </ul>
         </app-sidebar>

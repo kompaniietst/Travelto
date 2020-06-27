@@ -77,7 +77,7 @@ export class FormComponent<T> implements OnInit {
 
   onSubmit() {
     this.valueChange.emit(this.form.value);
-    console.log('form.value',this.form.value);
+    // console.log('form.value',this.form.value);
     // this.resetForm();
   }
 

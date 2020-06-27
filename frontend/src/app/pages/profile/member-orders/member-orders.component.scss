@@ -1,0 +1,135 @@
+@import "src/assets/sass/abstracts/variables.scss";
+
+h3 {
+    font-family: $font_bold;
+    display: flex;
+    margin-bottom: 9px;
+    line-height: 20px;
+    a {
+        margin-right: 10px;
+    }
+}
+hr {
+    margin: 11px 0;
+}
+// .subtitle {
+//     font-family: $font_bold;
+//     font-size: 18px;
+//     margin-bottom: 20px;
+// }
+.room_container {
+    margin-bottom: 40px;
+    .room {
+        border: $border;
+        font-family: $font_regular;
+        border-radius: 3px;
+        padding: 10px;
+
+        display: flex;
+        .img {
+            height: 181px;
+            position: relative;
+            border-radius: 3px;
+            overflow: hidden;
+            flex: 5;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .info {
+            flex: 7;
+            margin-left: 33px;
+            margin-right: 47px;
+            margin-top: 17px;
+            .pex,
+            .pex span {
+                display: flex;
+            }
+            .pex {
+                padding-top: 7px;
+                .circle {
+                    width: 23px;
+                    height: 23px;
+                    border: 1.5px solid #0098db;
+                    margin: 0 20px 0 10px;
+                    border-radius: 17px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 13px;
+                }
+            }
+            .date {
+                opacity: 0.5;
+            }
+        }
+        .button {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-right: 30px;
+
+            .btn {
+                margin: 8px 0;
+            }
+            .place {
+                margin-bottom: 5px;
+                font-size: 12px;
+            }
+        }
+        a {
+            color: $color;
+            text-decoration: underline;
+            cursor: pointer;
+            &.edit {
+                text-align: center;
+                font-size: 11px;
+            }
+            &.room_name {
+                color: black;
+                font-size: 18px;
+                padding-bottom: 10px;
+                display: block;
+            }
+        }
+    }
+}
+
+.actions {
+    background: $color;
+    color: white;
+    padding: 7px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .btn {
+        width: 25%;
+    }
+}
+
+:host ::ng-deep {
+    .mat-radio-group {
+        display: flex;
+        flex-direction: row;
+        width: 75%;
+        .mat-radio-button {
+            width: 33.3%;
+            .mat-radio-outer-circle {
+                background: white;
+                border: white;
+            }
+        }
+    }
+    .mat-radio-button.mat-accent .mat-radio-inner-circle {
+        background-color: $color_orange;
+    }
+    .mat-radio-label-content {
+        padding-left: 15px;
+    }
+    .mat-radio-button .mat-ripple-element {
+        background-color: #fff;
+    }
+}

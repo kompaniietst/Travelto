@@ -15,18 +15,12 @@ router.post('/hotels', async (req, res) => {
         res.status(201).send({ hotel })
     }
     catch (error) {
-        console.log(error);
-
         res.status(400).send(error.message)
     }
 })
 
 // get hotels by params
 router.post('/hotelsBy', async (req, res) => {
-    console.log('req', req);
-    console.log('body', req.body);
-    var c = req.param('creator')
-    console.log('params', c);
 
     const creator = req.body.creator;
 

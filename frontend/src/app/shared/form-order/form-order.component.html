@@ -27,17 +27,17 @@
         class="order_form">
         
         <ng-template #contentTemplate>
-            <div *ngIf="nightAmount">
+            <div *ngIf="nights">
                 <div class="d_flex justify_content_between">
-                    <span>{{ room.price | customCurrency }} <span class="currency">$</span> x {{ nightAmount }} nights</span>
-                    <span>{{ room.price * nightAmount  | customCurrency}} <span class="currency">$</span></span>
+                    <span>{{ room.price | customCurrency }} <span class="currency">$</span> x {{ nights }} nights</span>
+                    <span>{{ room.price * nights  | customCurrency}} <span class="currency">$</span></span>
                 </div>
                 <div class="total d_flex justify_content_between">
                     <strong>Итого</strong>
                     <strong class="price">{{ total | customCurrency }} <span class="currency">$</span></strong>
                 </div>
-                <app-alert-message></app-alert-message>
             </div>
         </ng-template>
     </app-form>
+    <app-alert-message class="alert"></app-alert-message>
 </ng-template>

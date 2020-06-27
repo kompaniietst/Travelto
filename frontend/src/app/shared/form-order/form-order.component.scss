@@ -1,8 +1,11 @@
+:host {
+    max-width: 450px;
+}
 h2 {
     margin-bottom: 12px;
 }
 .total {
-    margin: 27px 0 25px;
+    margin: 11px 0 30px;
     .price {
         font-size: 23px;
     }
@@ -38,10 +41,14 @@ h2 {
         border: 1px solid #baddf0;
         border-radius: 3px;
         padding: 13px;
-        margin: 4px 0 19px;
+        margin: 4px 0 32px;
         .btn {
             margin-bottom: 0;
         }
     }
-
+}
+.alert {
+    display: block;
+    margin-bottom: 11px;
+    text-align: center;
 }

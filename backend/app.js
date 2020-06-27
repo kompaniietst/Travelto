@@ -19,6 +19,9 @@ const Amenity = require('./src/models/Amenity')
 const cityRouter = require('./src/routers/city')
 const City = require('./src/models/City')
 
+const bookingRouter = require('./src/routers/booking')
+const Booking = require('./src/models/Booking')
+
 const app = express()
 
 app.use(cors())
@@ -28,6 +31,7 @@ app.use(hotelRouter)
 app.use(roomRouter)
 app.use(amenityRouter)
 app.use(cityRouter)
+app.use(bookingRouter)
 
 app.use(cors());
 
