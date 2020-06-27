@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Control } from 'src/app/core/models/Control';
 import { AlertMessageComponent } from 'src/app/shared/alert-message/alert-message.component';
@@ -21,9 +21,8 @@ export class AddYourHotelComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router) {
 
-    this.auth.currUser.subscribe(x => {
-      if (x) this.router.navigate(['/admin/hotels'])
-      console.log('user is');
+    this.auth.currUser.subscribe(x => {                                        // check if user is a member
+      if (x.role == "member") this.router.navigate(['/admin/hotels'])
     })
   }
 
