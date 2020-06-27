@@ -38,14 +38,22 @@ export class FormOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     this.controls$ = this.data.controls;
     this.room = this.data.room;
+    console.log('rr',this.room);
 
     this.total = this.room.price * this.nightAmount
   }
 
   onSubmit(formData: any) {
-    console.log('formOrder', formData);
+
+    var orderData = formData;
+    orderData["cost"] = this.total;
+    orderData["owner"] = this.room.creator;
+
+    console.log('orderData', orderData);
+
   }
 
   openLogInModal() {
@@ -56,7 +64,7 @@ export class FormOrderComponent implements OnInit {
   }
 
   openRegModal() {
-  //  this.dialog.closeAll();
+    //  this.dialog.closeAll();
     this.dialog.open(RegistrationComponent, {
       panelClass: 'popup',
     });

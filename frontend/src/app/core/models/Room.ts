@@ -32,4 +32,5 @@ export class Room {
         amenities: Amenity[];
         feedbacks: Feedback[]
     };
+    creator: string;
 }
