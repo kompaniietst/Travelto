@@ -25,6 +25,14 @@ export class Order {
             houseNumber: number;
         }
     }
-    clientId: string;
+    user: {
+        _id: string;
+        email: string;
+        firstname: string;
+        lastname: string;
+        phone: string;
+    }
+    reservation_date: Date;
+    clientId?: string;
     status: string;
 }

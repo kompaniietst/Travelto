@@ -1,0 +1,77 @@
+<mat-tab-group animationDuration="0ms">
+    <mat-tab label="New orders">
+
+        <div *ngIf="(bookings$ | async)">
+            <div *ngFor="let item of bookings$ | filterByStatus: 'pending' | async; trackBy: trackById"
+                class="room_container">
+                {{item.status}}
+
+                <app-member-order-item [order]="item"></app-member-order-item>
+
+                <div class="actions">
+                    <button class="btn btn-accept" (click)="changeOrderStatus('active',item)">Accept order</button>
+                    <button class="btn btn-completed" (click)="changeOrderStatus('completed',item)">Complete order</button>
+                    <button class="btn btn-canceled" (click)="changeOrderStatus('canceled',item)">Cancel order</button>
+                </div>
+            </div>
+        </div>
+
+    </mat-tab>
+
+    <mat-tab label="Active">
+
+        <div *ngIf="(bookings$ | async)">
+            <div *ngFor="let item of bookings$ | filterByStatus: 'active' | async; trackBy: trackById"
+                class="room_container">
+                {{item.status}}
+
+                <app-member-order-item [order]="item"></app-member-order-item>
+
+                <div class="actions">
+                    <!-- <button class="btn btn-accept" (click)="changeOrderStatus('active',item)">Accept order</button> -->
+                    <button class="btn btn-completed" (click)="changeOrderStatus('completed',item)">Complete order</button>
+                    <button class="btn btn-canceled" (click)="changeOrderStatus('canceled',item)">Cancel order</button>
+                </div>
+            </div>
+        </div>
+
+    </mat-tab>
+
+    <mat-tab label="Completed">
+
+        <div *ngIf="(bookings$ | async)">
+            <div *ngFor="let item of bookings$ | filterByStatus: 'completed' | async; trackBy: trackById"
+                class="room_container">
+                {{item.status}}
+
+                <app-member-order-item [order]="item"></app-member-order-item>
+
+                <div class="actions">
+                    <!-- <button class="btn btn-accept" (click)="changeOrderStatus('active',item)">Accept order</button>
+                    <button class="btn btn-completed" (click)="changeOrderStatus('completed',item)">Complete order</button> -->
+                    <button class="btn btn-canceled" (click)="changeOrderStatus('canceled',item)">Cancel order</button>
+                </div>
+            </div>
+        </div>
+
+    </mat-tab>
+
+    <mat-tab label="Canceled">
+
+        <div *ngIf="(bookings$ | async)">
+            <div *ngFor="let item of bookings$ | filterByStatus: 'canceled' | async; trackBy: trackById"
+                class="room_container">
+                {{item.status}}
+
+                <app-member-order-item [order]="item"></app-member-order-item>
+
+                <!-- <div class="actions">
+                    <button class="btn btn-accept" (click)="changeOrderStatus('active',item)">Accept order</button>
+                    <button class="btn btn-completed" (click)="changeOrderStatus('completed',item)">Complete order</button>
+                    <button class="btn btn-canceled" (click)="changeOrderStatus('canceled',item)">Cancel order</button>
+                </div> -->
+            </div>
+        </div>
+
+    </mat-tab>
+</mat-tab-group>

@@ -18,7 +18,7 @@ import { AuthenticationService } from 'src/app/core/authentication/authenticatio
 export class OrdersComponent implements OnInit {
 
   //   rooms: Room[];
-  bookings$: Observable<Order[]>;
+
   role: string;
 
   //   reservedRooms: Reserved[] = [];
@@ -30,8 +30,8 @@ export class OrdersComponent implements OnInit {
     private booking: BookingService,
     private auth: AuthenticationService
   ) {
-    this.bookings$ = this.booking.get();
-    this.booking.get().subscribe(x => console.log('b', x));
+    // this.bookings$ = this.booking.get();
+    // this.booking.get().subscribe(x => console.log('b', x));
 
     this.role = this.auth.getCurrUser().role;
     //     private roomDataService: RoomDataService) {
@@ -50,7 +50,7 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log('@@@', this.booking.countOrders());
+    // console.log('@@@', this.booking.countOrders());
 
 
     //     // console.log(this.rooms);
@@ -160,7 +160,7 @@ export class OrdersComponent implements OnInit {
     // this.bookingService.changeStatus(id)
     //   .subscribe(x => this.loading = false)
   }
-  
+
   trackById(index, item) {
     return item.id;
   }

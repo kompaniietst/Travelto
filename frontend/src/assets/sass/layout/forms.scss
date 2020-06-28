@@ -338,7 +338,7 @@ button.mat-menu-item {
     display: none;
 }
 .mat-tab-label {
-    font-family: $font_bold;
+    font-family: $font_regular;
     opacity: 1;
 }
 .mat-tab-group.mat-primary .mat-ink-bar,
@@ -394,4 +394,7 @@ button.mat-menu-item {
 }
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
+}
+.mat-body, .mat-body-1, .mat-typography {
+    font-family: $font_regular;
 }

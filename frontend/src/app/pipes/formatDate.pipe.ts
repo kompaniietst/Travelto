@@ -5,7 +5,13 @@ import * as moment from 'moment';
   name: 'formatDate'
 })
 export class formatDatePipe implements PipeTransform {
-  transform(date: any): unknown {
-    return moment(date).format("DD.MM.YYYY")
+  transform(date: any, arg: string): unknown {
+
+    if (date && arg == 'date+time')
+      return moment(date).format("DD.MM.YYYY HH:mm:ss")
+
+    if (date && arg == 'date')
+      return moment(date).format("DD.MM.YYYY")
+
   }
 }

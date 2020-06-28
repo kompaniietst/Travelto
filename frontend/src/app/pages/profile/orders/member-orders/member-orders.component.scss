@@ -1,0 +1,40 @@
+@import "src/assets/sass/abstracts/variables.scss";
+
+.room_container {
+    margin-bottom: 40px;}
+
+.actions {
+    padding: 13px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .btn {
+        width: 17%;
+        margin: 4px 8px;
+        background: white;
+        color: #484848;
+        font-size: 14px;
+        &.btn-accept {
+            border: 2px solid $color_orange;
+        }
+        &.btn-completed {
+            border: 2px solid $color;
+        }
+        &.btn-canceled {
+            border: 2px solid $color_grey;
+        }
+    }
+}
+
+:host ::ng-deep{
+    .mat-tab-header {
+        background: #eef9fc;
+        margin-bottom: 40px;
+        margin-top: 1px;
+    }
+    .mat-tab-label-active {
+        background: $color;
+        opacity: 1;
+        color: white;
+    }
+}

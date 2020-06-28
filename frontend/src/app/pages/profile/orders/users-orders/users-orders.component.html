@@ -1,0 +1,94 @@
+<div *ngIf="( bookings$ | async )?.length == 0">
+    <div class="subtitle">No orders yet.</div>
+</div>
+
+<div class="pending" *ngIf="( bookings$ | filterByStatus: 'pending' | async )?.length > 0">
+    <div class="subtitle">Pending orders</div>
+    <div *ngFor="let item of bookings$ | filterByStatus: 'pending' | async; trackBy: trackById">
+        <app-user-order-item [order]="item"></app-user-order-item>
+    </div>
+</div>
+
+<div class="active" *ngIf="( bookings$ | filterByStatus: 'active' | async )?.length > 0">
+    <div class="subtitle">Active orders</div>
+    <div *ngFor="let item of bookings$ | filterByStatus: 'active' | async; trackBy: trackById">
+        <app-user-order-item [order]="item"></app-user-order-item>
+    </div>
+</div>
+
+<div class="completed" *ngIf="( bookings$ | filterByStatus: 'completed' | async )?.length > 0">
+    <div class="subtitle">Completed orders</div>
+    <div *ngFor="let item of bookings$ | filterByStatus: 'completed' | async; trackBy: trackById">
+        <app-user-order-item [order]="item"></app-user-order-item>
+    </div>
+</div>
+
+<div class="canceled" *ngIf="( bookings$ | filterByStatus: 'canceled' | async )?.length > 0">
+    <div class="subtitle">Canceled orders</div>
+    <div *ngFor="let item of bookings$ | filterByStatus: 'canceled' | async; trackBy: trackById">
+        <app-user-order-item [order]="item"></app-user-order-item>
+    </div>
+</div>
+
+<!-- </div> -->
+<!--
+    <div *ngIf="reservedRooms.length > 0 && (reservedRooms  | filterByState: 'completed').length > 0">
+        <div class="subtitle">Completed</div>
+        <div *ngFor="let room of reservedRooms  | filterByState: 'completed'; trackBy: trackById">
+            <div class="room">
+                <div class="img">
+                    <img [src]="room.imgs[0]" alt="">
+                </div>
+                <div class="info">
+                    <h3>
+                        <a><strong>{{ room.hotel_name }}</strong></a>
+                        <app-star-rating [starRating]="room.stars"></app-star-rating>
+                    </h3>
+                    <strong>{{ room.name}}</strong>
+                    <div>
+                        <span class="date">Date:</span>
+                        {{ room.date.checkin | formatDate : 'date' }} - {{ room.date.checkout | formatDate : 'date' }}
+                    </div>
+                    <strong>{{ room.nightCount }} nights</strong>
+                    <div>
+                        <span *ngIf="room.pex?.adults">{{ room.pex?.adults }} adults</span>
+                        <span *ngIf="room.pex?.adults && room.pex?.infants">, </span>
+                        <span *ngIf="room.pex?.infants">{{ room.pex?.infants }} children</span>
+                    </div>
+                </div>
+                <div class="button">
+                    <div class="place"><span></span>{{ room.hotel_address.city }}, {{ room.hotel_address.street }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div *ngIf="reservedRooms.length > 0 && (reservedRooms  | filterByState: 'canceled').length > 0">
+        <div class="subtitle">Canceled</div>
+        <div *ngFor="let room of reservedRooms  | filterByState: 'canceled'; trackBy: trackById">
+            <div class="room canceled">
+                <div class="img">
+                    <img [src]="room.imgs[0]" alt="">
+                </div>
+                <div class="info">
+                    <h3>
+                        <a><strong>{{ room.hotel_name }}</strong></a>
+                        <app-star-rating [starRating]="room.stars" class="grayscale"></app-star-rating>
+                    </h3>
+                    <strong>{{ room.name}}</strong>
+                    <div>
+                        <span class="date">Date:</span>
+                        {{ room.date.checkin | formatDate : 'date' }} - {{ room.date.checkout | formatDate : 'date' }}
+                    </div>
+                    <div>
+                        <span *ngIf="room.pex?.adults">{{ room.pex?.adults }} adults</span>
+                        <span *ngIf="room.pex?.adults && room.pex?.infants">, </span>
+                        <span *ngIf="room.pex?.infants">{{ room.pex?.infants }} children</span>
+                    </div>
+                </div>
+                <div class="button">
+                    <div class="place"><span></span>{{ room.hotel_address.city }}, {{ room.hotel_address.street }}</div>
+                </div>
+            </div>
+        </div>
+    </div> -->

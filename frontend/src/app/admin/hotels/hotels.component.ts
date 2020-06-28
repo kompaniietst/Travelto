@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-hotels',
   template: `
-    <div class="container">
+    <!-- <div class="container"> -->
       <mat-tab-group animationDuration="0ms">
           <mat-tab label="View your hotels">
               <app-view-hotels></app-view-hotels>
@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
               <app-add-hotel></app-add-hotel>
           </mat-tab>
         </mat-tab-group>
-    </div>
+        <!--</div>-->
   `,
 })
 export class HotelsComponent implements OnInit {

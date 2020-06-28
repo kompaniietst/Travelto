@@ -1,10 +1,11 @@
 @import "src/assets/sass/abstracts/mixins.scss";
 @import "src/assets/sass/abstracts/variables.scss";
-:host{
+:host {
     min-height: calc(100% - 240px);
     display: block;
+    padding-left: 20px;
 }
-h2{
+h2 {
     margin: 60px 0 10px;
 }
 
@@ -36,7 +37,7 @@ ul {
     right: 20px;
     z-index: 1;
     top: 50%;
-    transform: translate(0,-50%);
+    transform: translate(0, -50%);
     border-radius: 20px;
     display: flex;
     align-items: center;

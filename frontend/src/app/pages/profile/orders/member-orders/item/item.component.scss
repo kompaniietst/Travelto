@@ -2,9 +2,9 @@
 
 h3 {
     font-family: $font_bold;
-    display: flex;
-    margin-bottom: 9px;
+    margin-bottom: 2px;
     line-height: 20px;
+    font-size: 14px;
     a {
         margin-right: 10px;
     }
@@ -12,26 +12,29 @@ h3 {
 hr {
     margin: 11px 0;
 }
-// .subtitle {
-//     font-family: $font_bold;
-//     font-size: 18px;
-//     margin-bottom: 20px;
-// }
-.room_container {
-    margin-bottom: 40px;
-    .room {
-        border: $border;
-        font-family: $font_regular;
-        border-radius: 3px;
-        padding: 10px;
 
+.order_container {
+    border: $border;
+    font-family: $font_regular;
+    border-radius: 3px;
+    padding: 10px;
+    .client_info {
+        color: #484848;
+        padding: 8px 0;
+        span {
+            display: inline-block;
+            margin-right: 20px;
+        }
+    }
+
+    .room {
         display: flex;
         .img {
-            height: 181px;
+            height: 156px;
             position: relative;
             border-radius: 3px;
             overflow: hidden;
-            flex: 5;
+            flex: 4;
             img {
                 width: 100%;
                 height: 100%;
@@ -43,6 +46,9 @@ hr {
             margin-left: 33px;
             margin-right: 47px;
             margin-top: 17px;
+            .nights {
+                margin-right: 20px;
+            }
             .pex,
             .pex span {
                 display: flex;
@@ -50,15 +56,15 @@ hr {
             .pex {
                 padding-top: 7px;
                 .circle {
-                    width: 23px;
+                    min-width: 23px;
                     height: 23px;
-                    border: 1.5px solid #0098db;
-                    margin: 0 20px 0 10px;
+                    border: 1.5px solid #d3d3d3;
+                    margin: 0 20px 0 8px;
                     border-radius: 17px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    font-size: 13px;
+                    font-size: 12px;
                 }
             }
             .date {
@@ -90,46 +96,10 @@ hr {
             }
             &.room_name {
                 color: black;
-                font-size: 18px;
+                font-size: 16px;
                 padding-bottom: 10px;
                 display: block;
             }
         }
-    }
-}
-
-.actions {
-    background: $color;
-    color: white;
-    padding: 7px 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .btn {
-        width: 25%;
-    }
-}
-
-:host ::ng-deep {
-    .mat-radio-group {
-        display: flex;
-        flex-direction: row;
-        width: 75%;
-        .mat-radio-button {
-            width: 33.3%;
-            .mat-radio-outer-circle {
-                background: white;
-                border: white;
-            }
-        }
-    }
-    .mat-radio-button.mat-accent .mat-radio-inner-circle {
-        background-color: $color_orange;
-    }
-    .mat-radio-label-content {
-        padding-left: 15px;
-    }
-    .mat-radio-button .mat-ripple-element {
-        background-color: #fff;
     }
 }

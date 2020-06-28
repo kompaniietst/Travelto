@@ -1,9 +1,9 @@
-<div class="container">{{ currUserRole }}
+<div class="container">
     <div class="d_flex">
-        <app-sidebar>
+        <app-sidebar class="ontop">
             <ul class="block">
                 <li *ngIf="currUserRole == 'user'" routerLinkActive="active" routerLink="orders">My orders
-                <li *ngIf="currUserRole == 'member'" routerLinkActive="active" routerLink="orders">Orders
+                <li *ngIf="currUserRole == 'member'" routerLinkActive="active" routerLink="orders">Orders | {{ currUserRole }}
                     <div class="notification" *ngIf="notification>0"><strong>{{ notification }}</strong></div>
                 </li>
                 <li *ngIf="currUserRole == 'user'" routerLinkActive="active" routerLink="favorite">Избранное</li>
@@ -12,9 +12,9 @@
             </ul>
         </app-sidebar>
         <app-wrapper class="wrapper">
-            <div class="container">
+            <!-- <div class="container"> -->
                 <router-outlet></router-outlet>
-            </div>
+            <!-- </div> -->
         </app-wrapper>
     </div>
 </div>

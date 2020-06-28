@@ -17,14 +17,29 @@ export class MemberOrdersComponent implements OnInit {
 
   constructor(
     private booking: BookingService,
-    private auth: AuthenticationService
   ) {
-    this.bookings$ = this.booking.get();
-    this.booking.get().subscribe(x => console.log('b', x));
-
   }
 
   ngOnInit(): void {
+    this.bookings$ = this.booking.getBookings();
+    this.booking.getBookings().subscribe(x => console.log('orders', x));
+    // console.log('OBSS', this.booking.getBookings());
+
+  }
+
+  changeOrderStatus(status: string, item: Order) {
+    // switch (status) {
+    //   case 'active':
+        this.booking.changeOrderStatus(item._id, status, item)
+          .subscribe(
+            x => console.log('_x', x),
+            err => console.log(err)
+          )
+    //     break;
+
+    //   default:
+    //     break;
+    // }
   }
 
   trackById(index, item) {

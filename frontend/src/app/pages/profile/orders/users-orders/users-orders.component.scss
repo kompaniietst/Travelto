@@ -1,0 +1,10 @@
+@import "src/assets/sass/abstracts/variables.scss";
+:host{
+    padding-left: 20px;display: block;
+}
+.subtitle {
+    font-family: $font_bold;
+    font-size: 18px;
+    margin-bottom: 30px;
+    margin-top: 40px;
+}

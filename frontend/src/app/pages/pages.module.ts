@@ -22,8 +22,10 @@ import { RoomComponent } from './room/room.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { AboutComponent } from './about/about.component';
 import { AddYourHotelComponent } from './add-hotel/add-hotel.component';
-import { MemberOrdersComponent } from './profile/member-orders/member-orders.component';
-
+import { MemberOrdersComponent } from './profile/orders/member-orders/member-orders.component';
+import { UsersOrdersComponent } from './profile/orders/users-orders/users-orders.component';
+import { MemberOrderItemComponent } from './profile/orders/member-orders/item/item.component';
+import { UserOrderItemComponent } from './profile/orders/users-orders/item/item.component';
 
 const routes: Routes = []
 
@@ -39,7 +41,10 @@ const COMPONENTS = [
   CatalogComponent,
   AboutComponent,
   AddYourHotelComponent,
-  MemberOrdersComponent
+  MemberOrdersComponent,
+  UsersOrdersComponent,
+  MemberOrderItemComponent,
+  UserOrderItemComponent
 ];
 
 const MODULES = [
@@ -57,7 +62,7 @@ const MODULES = [
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS, MemberOrdersComponent],
+  declarations: [...COMPONENTS],
   imports: [...MODULES],
   exports: [...COMPONENTS]
 })
