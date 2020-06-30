@@ -14,7 +14,7 @@ export class UserOrderItemComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+
   arrayFrom(number: number) {
     return Array.from(Array(number))
   }
@@ -23,5 +23,5 @@ export class UserOrderItemComponent implements OnInit {
     return item.id;
   }
 
-  cancel(_id: string) { }
+
 }

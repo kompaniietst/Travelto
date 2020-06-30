@@ -8,6 +8,7 @@ import { ReversePipe } from './reverse.pipe';
 import { FilterPipe } from './filter.pipe';
 import { formatDatePipe } from './formatDate.pipe';
 import { FilterByStatusPipe } from './filterByStatus.pipe';
+import { CapitalizePipe } from './capitalize.pipe';
 
 
 const COMPONENTS = [
@@ -16,7 +17,8 @@ const COMPONENTS = [
   ReversePipe,
   FilterPipe,
   formatDatePipe,
-  FilterByStatusPipe
+  FilterByStatusPipe,
+  CapitalizePipe
 ];
 
 const MODULES = [
@@ -26,7 +28,7 @@ const MODULES = [
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS, FilterPipe],
+  declarations: [...COMPONENTS, FilterPipe, CapitalizePipe],
   imports: [...MODULES],
   exports: [...COMPONENTS]
 })

@@ -27,20 +27,25 @@ export class MemberOrdersComponent implements OnInit {
 
   }
 
-  changeOrderStatus(status: string, item: Order) {
+  changeOrderStatus(_id: string, status: string) {
     // switch (status) {
     //   case 'active':
-        this.booking.changeOrderStatus(item._id, status, item)
-          .subscribe(
-            x => console.log('_x', x),
-            err => console.log(err)
-          )
+    this.booking.changeOrderStatus(_id, status)
+      .subscribe(
+        x => console.log('changeOrderStatus', x),
+        err => console.log(err)
+      )
     //     break;
 
     //   default:
     //     break;
     // }
   }
+
+  // cancel(_id: string) {
+  //   this.booking.cancelBooking(_id);
+  //   this.inProcess = true;
+  // }
 
   trackById(index, item) {
     return item.id;

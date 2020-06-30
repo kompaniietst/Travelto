@@ -74,7 +74,7 @@ export class FormOrderComponent implements OnInit {
         }
       },
       clientId: this.currUserId,
-      status: "pending"
+      status: "active"
     }
 
     this.booking.register(Object.assign(order, orderData))

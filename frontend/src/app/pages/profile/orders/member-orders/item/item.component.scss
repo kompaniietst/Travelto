@@ -18,15 +18,6 @@ hr {
     font-family: $font_regular;
     border-radius: 3px;
     padding: 10px;
-    .client_info {
-        color: #484848;
-        padding: 8px 0;
-        span {
-            display: inline-block;
-            margin-right: 20px;
-        }
-    }
-
     .room {
         display: flex;
         .img {
@@ -34,7 +25,8 @@ hr {
             position: relative;
             border-radius: 3px;
             overflow: hidden;
-            flex: 4;
+            flex: 3;
+            margin: 10px 0 0 10px;
             img {
                 width: 100%;
                 height: 100%;
@@ -42,10 +34,11 @@ hr {
             }
         }
         .info {
-            flex: 7;
+            flex: 8;
             margin-left: 33px;
             margin-right: 47px;
-            margin-top: 17px;
+            margin-top: 12px;
+            margin-bottom: 12px;
             .nights {
                 margin-right: 20px;
             }
@@ -76,8 +69,7 @@ hr {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            margin-right: 30px;
-
+            margin-right: 15px;
             .btn {
                 margin: 8px 0;
             }
@@ -100,6 +92,20 @@ hr {
                 padding-bottom: 10px;
                 display: block;
             }
+        }
+    }
+}
+:host {
+    &.confirmCancel {
+        .img,
+        .info,
+        .price_block {
+            opacity: 0.7;
+        }
+    }
+    &.active {
+        .order_container {
+            border: 1.5px solid $color;
         }
     }
 }

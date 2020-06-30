@@ -8,11 +8,9 @@ import { map } from 'rxjs/operators';
 })
 export class FilterByStatusPipe implements PipeTransform {
 
-  transform(orders$: Observable<Order[]>, status: string): Observable<Order[]> {
-    return orders$
-      .pipe(
-        map((o: Order[]) => {
-          return o.filter(o => o.status == status)
-        }))
+  transform(orders: Order[], status: string): Order[] {
+    if (!orders)
+      return []
+    return orders.filter(o => o.status == status)
   }
 }

@@ -2,10 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Hotel } from '../models/Hotel';
-import { Room } from '../models/Room';
-import { Amenity } from '../models/Amenity';
-import { City } from '../models/City';
 import { Order } from '../models/Order';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { map } from 'rxjs/operators';
@@ -27,7 +23,7 @@ export class BookingService {
     this.get().subscribe((o: Order[]) => {
       console.log('OO', o);
 
-      this.bookingsSubject.next(o);
+      this.bookingsSubject.next([...o]);
       this.bookings = o;
     })
 
@@ -38,12 +34,28 @@ export class BookingService {
   register(newOrder: Order): Observable<Order> {
     console.log('newOrder', newOrder);
     return this.http.post<Order>(`${this.URL}/bookings`, newOrder)
+      .pipe(map(o => { 
+        console.log('http',o);
+        
+        this.bookings.push(newOrder);
+        this.bookingsSubject.next([...this.bookings]);
+        return o;
+       }))
   }
 
   getBookings() {
     return this.bookingsSubject.asObservable();
-    // return of([1,2,4])
   }
+
+  // cancelBooking(_id:string){
+
+
+  //   this.changeOrderStatus(_id, 'confirmCancel')
+  // }
+
+
+
+  /*                  http               */
 
   get(): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.URL}/bookings`)
@@ -55,12 +67,17 @@ export class BookingService {
     // return this.http.post<Order[]>(`${this.URL}/bookingsByUser`, { params: params })
   }
 
-  changeOrderStatus(_id: string, status: string, order: Order) {
+  changeOrderStatus(_id: string, status: string) {
+    console.log('st', _id, status);
+
     return this.http.patch<Order>(`${this.URL}/bookings/${_id}`, { status: status })
-      .pipe(map(o_ => {
+      .pipe(map(o => {
+        console.log('o=>', o);
+
         this.bookings.find(b => b._id == _id).status = status;
-        this.bookingsSubject.next(this.bookings);
-      }))
+        this.bookingsSubject.next([...this.bookings]);
+      },
+        err => console.log('err', err)))
   }
 
   countOrders() {

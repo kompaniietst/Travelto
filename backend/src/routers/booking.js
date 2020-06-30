@@ -143,6 +143,8 @@ router.patch('/bookings/:id', async (req, res) => {
     const id = req.params.id;
     const prop = req.body
 
+    if (!id) return res.status(400)
+
     Booking.findByIdAndUpdate({ _id: id }, { $set: prop }, { new: true },
         function (err, result) {
             console.log(result);
