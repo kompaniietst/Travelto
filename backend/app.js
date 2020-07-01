@@ -74,7 +74,9 @@ app.post('/images/amenities', uploadImages('amenities').array('files'), function
     res.send(req.files);
 });
 
-
+app.get('/healthcheck',async (req, res) => {
+    res.send("Nope");
+})
 app.use('/images/profImages', express.static(__dirname + '/uploads/profImages'));
 app.post('/images/profImages/:id?', uploadImages('profImages').single('file'), async function (req, res, next) {
 
