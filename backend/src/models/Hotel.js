@@ -39,10 +39,12 @@ const hotelSchema = mongoose.Schema({
         },
         map: [0, 0],
     },
-
     images: [],
-
-    amenities: []
+    amenities: [],
+    creator: {
+        type: mongoose.Schema.ObjectId,
+        trim: true
+    },
 
 })
 

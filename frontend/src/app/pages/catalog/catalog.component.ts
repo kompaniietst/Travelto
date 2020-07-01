@@ -11,6 +11,8 @@ import { FilterItem } from 'src/app/core/models/FilterItem';
 import { map, delay } from 'rxjs/operators';
 import { City } from 'src/app/core/models/City';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FormOrderComponent } from 'src/app/shared/form-order/form-order.component';
 
 @Component({
   selector: 'app-catalog',
@@ -55,10 +57,12 @@ export class CatalogComponent implements OnInit {
     private roomService: RoomService,
     private amenitiesService: AmenitiesService,
     private filterTabsService: FilterTabsService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private dialog: MatDialog,
   ) {
 
     this.rooms$ = this.roomService.get();
+    this.roomService.get().subscribe(x => console.log('rs:', x));
 
     this.filterTabsService.getFilters()
       .subscribe((x: FilterItem[]) => {
@@ -168,4 +172,32 @@ export class CatalogComponent implements OnInit {
   trackById(index, item) {
     return item.id;
   }
+
+  /* ORDER */
+
+  controls$ = of([
+    new Control({
+      controlType: 'dateTimePicker',
+      key: 'date',
+      placeholder: 'Check in - check out',
+    }),
+    new Control({
+      controlType: 'pex',
+      key: 'pex',
+      placeholder: 'Guests:',
+      value: { adults: 2, children: 0 }
+    })
+  ]);
+
+  openFormOrder(room: Room) {
+    const dialogRef = this.dialog.open(FormOrderComponent, {
+      panelClass: 'popup',
+      data: {
+        controls: this.controls$,
+        room: room
+      }
+    });
+  }
+
+
 }

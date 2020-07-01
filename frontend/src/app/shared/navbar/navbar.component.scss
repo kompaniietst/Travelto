@@ -22,6 +22,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                font-family: $font_bold;
             }
             span {
                 position: relative;
@@ -140,6 +141,14 @@
                     right: 22px;
                 }
             }
+        }
+        .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+            // color: #040404;
+            border: none;
+            padding: 0;
+            // border-radius: 3px;
+            margin: 0;
+            // width: 100%;
         }
     }
 }

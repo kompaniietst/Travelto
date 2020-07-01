@@ -1,0 +1,91 @@
+<div class="order_container">
+        
+    <div class="room {{ order.status }}">
+
+        <div class="img">
+            <img [src]="order.image" alt="">
+        </div>
+        <div class="info">
+            <h3>
+                <a><strong>{{ order.hotel.label }}</strong></a>
+                <app-star-rating 
+                    [starRating]="order.hotel.stars">
+                </app-star-rating>
+            </h3>
+            <a routerLink="/room/{{ order.room_id }}" class="room_name">
+                <strong>{{ order.room_name}}</strong></a>
+            <div>
+                <span class="date">Date:</span>
+                {{ order.date[0] | formatDate : 'date' }} - {{ order.date[1] | formatDate : 'date' }}
+            </div>
+            <hr>
+            <div class="d_flex pex">
+                <div class="nights">
+                    <strong>{{ order.nights }} nights</strong>
+                </div>
+                <div *ngIf="order.pex.adults > 0" 
+                    class="d_flex align_center">
+                    Adults: 
+                    <span class="circle">
+                        {{ order.pex.adults }}
+                    </span>
+                </div>
+                <div *ngIf="order.pex.children > 0" class="d_flex align_center">
+                    Children: 
+                    <span class="circle">
+                        {{ order.pex.children }}
+                    </span>
+                </div>
+                <div *ngIf="order.pex.ages.length > 0" class="d_flex align_center">
+                    Ages: 
+                    <span class="circle">
+                        {{ order.pex.ages }}
+                    </span>
+                </div>
+            </div>
+            <hr>
+
+            <div *ngIf="order.user?.firstname">
+                Name: 
+                <strong>{{ order.user.firstname }}</strong>
+            </div>
+            <div *ngIf="order.user?.lastname">
+                <strong>{{ order.user.lastname }}</strong>
+            </div>
+            <div>
+                Email: 
+                <strong>{{ order.user.email }}</strong>
+            </div>
+            <div>
+                Phone: 
+                <strong>{{ order.user.phone }}</strong>
+            </div>
+            <div>
+                <small>
+                    Created: {{ order.reservation_date | formatDate: 'date+time' }}
+                </small>
+            </div>
+        </div>
+        <div class="button">
+            <div class="text_center">
+                <div class="price_block">
+                    {{ order.price | customCurrency }} 
+                    <span class="currency">$</span> 
+                    x {{ order.nights }} nights
+                    <br>
+                    <div class="price">
+                        <span class="blue">
+                            <strong>
+                                {{ order.price * order.nights  | customCurrency }}
+                                <span class="currency">$</span>
+                            </strong>
+                        </span>
+                    </div>
+                </div>
+                <ng-content></ng-content>
+            </div>
+
+        </div>
+    </div>
+
+</div>

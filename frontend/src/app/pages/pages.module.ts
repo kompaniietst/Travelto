@@ -5,6 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { PipesModule } from '../pipes/pipes.module';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatRadioModule } from '@angular/material/radio';
 
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
@@ -18,9 +20,12 @@ import { HotelComponent } from './hotel/hotel.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { RoomComponent } from './room/room.component';
 import { CatalogComponent } from './catalog/catalog.component';
-import { CoreModule } from '../core/core.module';
 import { AboutComponent } from './about/about.component';
-
+import { AddYourHotelComponent } from './add-hotel/add-hotel.component';
+import { MemberOrdersComponent } from './profile/orders/member-orders/member-orders.component';
+import { UsersOrdersComponent } from './profile/orders/users-orders/users-orders.component';
+import { MemberOrderItemComponent } from './profile/orders/member-orders/item/item.component';
+import { UserOrderItemComponent } from './profile/orders/users-orders/item/item.component';
 
 const routes: Routes = []
 
@@ -34,7 +39,12 @@ const COMPONENTS = [
   HotelComponent,
   RoomComponent,
   CatalogComponent,
-  AboutComponent
+  AboutComponent,
+  AddYourHotelComponent,
+  MemberOrdersComponent,
+  UsersOrdersComponent,
+  MemberOrderItemComponent,
+  UserOrderItemComponent
 ];
 
 const MODULES = [
@@ -42,6 +52,8 @@ const MODULES = [
   CommonModule,
 
   MatProgressSpinnerModule,
+  MatTabsModule,
+  MatRadioModule,
   SlickCarouselModule,
 
   RouterModule.forRoot(routes),
@@ -50,7 +62,7 @@ const MODULES = [
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS, CatalogComponent, AboutComponent,],
+  declarations: [...COMPONENTS],
   imports: [...MODULES],
   exports: [...COMPONENTS]
 })

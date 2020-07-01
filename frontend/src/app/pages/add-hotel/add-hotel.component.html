@@ -1,0 +1,10 @@
+<h2 class="text_center">To add new hotel register as a member, please!</h2>
+
+<app-form 
+    [controls$]="formStructure$" 
+    (valueChange)="onSubmit($event)" 
+    buttonName="Add" 
+    class="register_member">
+</app-form>
+
+<app-alert-message></app-alert-message>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginComponent } from 'src/app/core/authentication/login/login.component';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { User } from 'src/app/core/models/User';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile-trigger',
@@ -14,6 +15,8 @@ export class ProfileTriggerComponent implements OnInit {
 
   currUser: User;
   notification: number = 0;
+  profileImage: string;
+  readonly URL = environment.apiUrl;
 
   constructor(
     private dialog: MatDialog,
@@ -23,7 +26,8 @@ export class ProfileTriggerComponent implements OnInit {
   ) {
 
     this.auth.currUser.subscribe((user: User) => {
-      this.currUser = user
+      this.currUser = user;
+      if (this.currUser?.image) this.profileImage = this.URL + this.currUser.image
     })
 
     // this.bookingService.bookings.subscribe(x =>

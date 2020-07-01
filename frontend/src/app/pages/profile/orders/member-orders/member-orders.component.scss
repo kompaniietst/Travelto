@@ -1,0 +1,70 @@
+@import "src/assets/sass/abstracts/variables.scss";
+
+.room_container {
+    margin-bottom: 40px;
+}
+
+// .actions {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+.btn {
+    margin: 4px 0;
+    // background: white;
+    // color: #484848;
+    // font-size: 14px;
+    // border: 1px solid $color;
+    min-width: 150px;
+    // &.btn-accept {
+    //     border: 2px solid $color_orange;
+    // }
+    // &.btn-completed {
+    //     border: 2px solid $color;
+    // }
+    // &.btn-canceled {
+    //     border: 2px solid $color_grey;
+    // }
+    &.btn-blue-outline {
+        border-radius: 3px;
+    }
+}
+// }
+
+:host ::ng-deep {
+    .mat-tab-header {
+        background: #eef9fc;
+        margin-bottom: 40px;
+        margin-top: 1px;
+    }
+    .mat-tab-label-active {
+        background: $color;
+        opacity: 1;
+        color: white;
+    }
+}
+.order {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid $border_gray;
+    padding: 15px 20px;
+}
+.notification {
+    background: $color_orange;
+    width: 20px;
+    height: 20px;
+    color: white;
+    border-radius: 30px;
+    margin-left: 8px;
+    font-size: 13px;
+}
+.confirmCancel .note {
+    text-align: center;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p {
+        font-family: $font_bold;
+        margin: 10px 0;
+    }
+}

@@ -34,8 +34,12 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
+    const newUser = this.form.value;
+    newUser["role"] = "user";
+    console.log('newusr', newUser);
+
     this.auth
-      .register(this.form.value)
+      .register(newUser)
       .subscribe(
         _ => {
           this.alert.success('Thanks for the registration');

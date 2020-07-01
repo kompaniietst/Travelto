@@ -11,14 +11,15 @@ import { User } from 'src/app/core/models/User';
 export class ProfileComponent implements OnInit {
 
   currUser: User;
-
+  currUserRole: string;
   notification: number = 0;
 
   constructor(
     private router: Router,
     private auth: AuthenticationService,
   ) {
-    auth.currUser.subscribe((user: User) => this.currUser = user)
+    auth.currUser.subscribe((user: User) => this.currUser = user);
+    this.currUserRole = this.auth.getCurrUser().role;
   }
 
   ngOnInit(): void { }

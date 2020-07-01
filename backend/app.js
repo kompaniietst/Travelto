@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require('body-parser');
 const dotenv = require('dotenv').config();
 require('./src/db/db')
 const port = process.env.PORT;
@@ -18,6 +19,9 @@ const Amenity = require('./src/models/Amenity')
 const cityRouter = require('./src/routers/city')
 const City = require('./src/models/City')
 
+const bookingRouter = require('./src/routers/booking')
+const Booking = require('./src/models/Booking')
+
 const app = express()
 
 app.use(cors())
@@ -27,11 +31,12 @@ app.use(hotelRouter)
 app.use(roomRouter)
 app.use(amenityRouter)
 app.use(cityRouter)
+app.use(bookingRouter)
 
 app.use(cors());
 
-
-
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 
 var multer = require('multer')
@@ -59,7 +64,7 @@ app.post('/images/hotels', uploadImages('hotels').array('files'), function (req,
 app.use('/images/rooms', express.static(__dirname + '/uploads/rooms'));
 app.post('/images/rooms', uploadImages('rooms').array('files'), function (req, res, next) {
     console.log(req.files);
-    
+
     const files = req.files.map(f => f.filename);
     res.send(files);
 });

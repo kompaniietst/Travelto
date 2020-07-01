@@ -1,0 +1,110 @@
+<mat-tab-group animationDuration="0ms">
+
+    <mat-tab label="Active orders">
+        <div *ngIf="(bookings$ | async | filterByStatus: 'active'); let activeBookings">
+            <!-- <ng-template mat-tab-label>
+                Active orders 
+                <span *ngIf="activeBookings.length > 0">
+                    ({{ activeBookings.length }})
+                </span>
+            </ng-template> -->
+
+            <div *ngIf="activeBookings?.length == 0 && (bookings$ | async | filterByStatus: 'confirmCancel')?.length == 0">
+                No active orders yet.
+            </div>
+
+            <div *ngFor="let state of ['confirmCancel','active']; trackBy: trackById" class="{{ state }}">
+                <div *ngFor="let item of bookings$ | async | filterByStatus: state; trackBy: trackById"
+                    class="room_container">
+
+                    <div *ngIf="state == 'confirmCancel'" class="note">
+                        <mat-spinner strokeWidth="3" diameter="20" class="blue_spinner"></mat-spinner>
+                        <p>This order requires cancelation.</p>
+                    </div>
+
+                    <app-member-order-item 
+                        [order]="item"
+                        class="{{ state }}">
+                        <div class="btn_controls">
+                            <button 
+                                *ngIf="state == 'active'"
+                                (click)="changeOrderStatus(item._id,'completed')" 
+                                class="btn btn-orange w_100">
+                                Complete order
+                            </button>
+                            <button 
+                                *ngIf="state == 'confirmCancel'"
+                                (click)="changeOrderStatus(item._id,'canceled')" 
+                                class="btn btn-blue w_100">
+                                Cancel order
+                            </button>
+                        </div>
+                    </app-member-order-item>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Completed">
+        <div *ngIf="(bookings$ | async | filterByStatus: 'completed')?.length == 0">
+            No completed orders yet.
+        </div>
+
+        <div *ngFor="let item of bookings$ | async | filterByStatus: 'completed'; trackBy: trackById"
+            class="room_container">
+            <div class="order">
+                <div>
+                    <div>
+                        <strong>Order Id:</strong>
+                        {{ item._id }}
+                    </div>
+                    <div>
+                        <strong>Hotel id:</strong>
+                        {{ item.hotel._id }}
+                        <strong>name: </strong>
+                        {{ item.hotel.label }}
+                    </div>
+                    <div>
+                        <strong>Room id:</strong>
+                        {{ item.room_id }}
+                        <strong>name: </strong>
+                        {{ item.room_name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Canceled">
+        <div *ngIf="(bookings$ | async | filterByStatus: 'canceled').length == 0">
+            No canceled orders yet.
+        </div>
+
+        <div *ngFor="let state of ['canceled','confirmCancel']; trackBy: trackById">
+            <div *ngFor="let item of bookings$ | async | filterByStatus: state; trackBy: trackById"
+                class="room_container">
+                <div class="order">
+                    <div>
+                        <div>
+                            <strong>Order Id:</strong>
+                            {{ item._id }}
+                        </div>
+                        <div>
+                            <strong>Hotel id:</strong>
+                            {{ item.hotel._id }}
+                            <strong>name: </strong>
+                            {{ item.hotel.label }}
+                        </div>
+                        <div>
+                            <strong>Room id:</strong>
+                            {{ item.room_id }}
+                            <strong>name: </strong>
+                            {{ item.room_name }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </mat-tab>
+</mat-tab-group>

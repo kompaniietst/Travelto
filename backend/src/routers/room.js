@@ -10,7 +10,7 @@ router.post('/rooms', async (req, res) => {
 
     console.log(req.body);
 
-    var hotel = await Hotel.findOne({ _id: req.body.hotel_id._id })
+    // var hotel = await Hotel.findOne({ _id: req.body.hotel_id._id })
 
     try {
         const room = new Room(req.body)
@@ -24,6 +24,57 @@ router.post('/rooms', async (req, res) => {
         res.status(400).send(error.message)
     }
 })
+
+router.post('/roomsBy', async (req, res) => {
+    console.log('req', req);
+    console.log('body', req.body);
+    var c = req.param('creator')
+    console.log('params', c);
+
+    const creator = req.body.creator;
+
+    const rooms = await Room.aggregate([
+        { $match: { creator: ObjectId(creator) } },
+        {
+            $lookup: {
+                from: "hotels",
+                localField: "hotel_id",
+                foreignField: "_id",
+                as: "hotel"
+            }
+        },
+        {
+            $project: {
+                _id: 1,
+                name: 1,
+                description: 1,
+                price: 1,
+                specials: 1,
+                images: 1,
+                textFeatures: 1,
+                hotel: { "$arrayElemAt": ["$hotel", 0] },
+                creator: 1
+            }
+        },
+    ]);
+
+    if (!rooms) return res.status(400).send('No rooms')
+
+    res.send(rooms);
+
+    // try {
+    //     const hotel = new Hotel(req.body)
+    //     await hotel.save()
+
+    //     res.status(201).send({ hotel })
+    // }
+    // catch (error) {
+    //     console.log(error);
+
+    //     res.status(400).send(error.message)
+    // }
+})
+
 
 router.put('/rooms/:id', async (req, res) => {
 
@@ -82,7 +133,8 @@ router.get('/rooms', async (req, res) => {
                 specials: 1,
                 images: 1,
                 textFeatures: 1,
-                hotel: { "$arrayElemAt": [ "$hotel", 0 ] }
+                hotel: { "$arrayElemAt": ["$hotel", 0] },
+                creator: 1
             }
         },
     ]);
@@ -97,12 +149,12 @@ router.get('/rooms/:id', async (req, res) => {
 
     const id = req.params.id;
     // const room = await Room.findOne({ _id: id });
-    
+
 
     console.log(ObjectId(id));
-    
+
     const rooms = await Room.aggregate([
-        { $match: { _id: ObjectId(id) }},
+        { $match: { _id: ObjectId(id) } },
         {
             $lookup: {
                 from: "hotels",
@@ -120,7 +172,7 @@ router.get('/rooms/:id', async (req, res) => {
                 specials: 1,
                 images: 1,
                 textFeatures: 1,
-                hotel: { "$arrayElemAt": [ "$hotel", 0 ] }
+                hotel: { "$arrayElemAt": ["$hotel", 0] }
             }
         },
     ]);
@@ -148,7 +200,7 @@ router.get('/roomsByHotel/:id', async (req, res) => {
     // const rooms = await Room.find({ hotel_id: id });
 
     const rooms = await Room.aggregate([
-        { $match: { hotel_id: ObjectId(id) }},
+        { $match: { hotel_id: ObjectId(id) } },
         {
             $lookup: {
                 from: "hotels",
@@ -166,7 +218,7 @@ router.get('/roomsByHotel/:id', async (req, res) => {
                 specials: 1,
                 images: 1,
                 textFeatures: 1,
-                hotel: { "$arrayElemAt": [ "$hotel", 0 ] }
+                hotel: { "$arrayElemAt": ["$hotel", 0] }
             }
         },
     ]);

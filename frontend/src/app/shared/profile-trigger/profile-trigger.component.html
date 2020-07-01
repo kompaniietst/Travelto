@@ -7,7 +7,7 @@
     <div mat-button [matMenuTriggerFor]="menu">
         <div class="notification" *ngIf="notification>0"><strong>{{ notification }}</strong></div>
         <span class="img">
-            <img [src]="currUser.image" alt="" *ngIf="currUser.image; else icon">
+            <img [src]="profileImage" alt="" *ngIf="profileImage; else icon">
         </span>
         <ng-template #icon>
             <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,9 +16,9 @@
                     fill="#FF6847" />
             </svg>
         </ng-template>
-        <div>
-            <div *ngIf="currUser.email">{{ currUser.email }} {{ currUser.lastname }}</div>
-            <a><strong>{{ currUser.firstname }}</strong></a>
+        <div *ngIf="currUser.email">
+            <a><strong>{{ currUser.email }}</strong></a>
+            <div>{{ currUser.firstname }} {{ currUser.lastname }}</div>
         </div>
     </div>
     <mat-menu #menu="matMenu">
@@ -37,6 +37,6 @@
                     fill="#FF6847" />
             </svg>
         </span>
-        Личный кабинет
+        Sign in
     </div>
 </ng-template>

@@ -21,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ProfileTriggerComponent } from './profile-trigger/profile-trigger.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -49,6 +50,7 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { DateTimePickerComponent } from './form/form-control/date-time-picker/date-time-picker.component';
 import { PexComponent } from './form/form-control/pex/pex.component';
 import { CounterComponent } from './form/form-control/counter/counter.component';
+import { FormOrderComponent } from './form-order/form-order.component';
 
 const routes: Routes = []
 
@@ -80,8 +82,10 @@ const COMPONENTS = [
   GoogleMapMarkerComponent,
   SubscriptionComponent,
   MainScreenComponent,
+  DateTimePickerComponent,
   PexComponent,
-  CounterComponent
+  CounterComponent,
+  FormOrderComponent
 ];
 
 const MODULES = [
@@ -102,6 +106,7 @@ const MODULES = [
   MatRadioModule,
   MatProgressSpinnerModule,
   MatTooltipModule,
+  MatIconModule,
 
   NouisliderModule,
   NgxDaterangepickerMd.forRoot(),
@@ -114,7 +119,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, MainScreenComponent, DateTimePickerComponent, PexComponent, CounterComponent],
+  declarations: [...COMPONENTS],
   imports: [...MODULES],
   exports: [...COMPONENTS,
     FormsModule, ReactiveFormsModule

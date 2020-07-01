@@ -101,7 +101,9 @@ strong {
             }
         }
     }
-
+    &.btn-white {
+        background: white;
+    }
     &.btn-blue-outline {
         border: 1px solid #0098db;
         border-radius: 25px;

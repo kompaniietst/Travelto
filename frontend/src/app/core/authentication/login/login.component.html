@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <h2 class="text_center">Авторизация</h2>
+    <h2 class="text_center">Sign in</h2>
     <button [mat-dialog-close]="true" class="close">
         <mat-icon>close</mat-icon>
     </button>
@@ -10,7 +10,7 @@
     </div>
 
     <div class="position_relative">
-        <div class="label">Пароль</div>
+        <div class="label">Password</div>
         <input type="password" formControlName="password" />
     </div>
 
@@ -18,6 +18,6 @@
         конфиденциальности</div>
 
     <app-alert-message></app-alert-message>
-    <button type="submit" class="btn btn-orange w_100">Войти</button>
-    <button (click)="openRegModal()" type="button" class="btn btn-grey-outline w_100">Создать аккаунт</button>
+    <button type="submit" class="btn btn-orange w_100">Sign in</button>
+    <button (click)="openRegModal()" type="button" class="btn btn-grey-outline w_100">Create account</button>
 </form>

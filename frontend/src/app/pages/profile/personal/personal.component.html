@@ -1,20 +1,23 @@
-<h2 class="header_title">Profile</h2>
-<div class="upload_photo">
-    <div class="photo">
-        <img [src]="currUser.image" alt="">
-    </div>
-    <div class="upload_button">
-        <input type="file" multiple (change)="upload($event)">
-        <div>
-            <span></span>
-            Upload image
+<div *ngIf="currUser">
+    <h2 class="header_title">Profile</h2>
+    <div class="upload_photo">
+        <div class="photo">
+            <img [src]="profileImage" alt="">
+        </div>
+        <div class="upload_button">
+            <input type="file" multiple (change)="upload($event)">
+            <div>
+                <span></span>
+                Upload image
+            </div>
         </div>
     </div>
+    <app-alert-message></app-alert-message>
 </div>
-<app-alert-message></app-alert-message>
 
-<!-- <app-form [controls]="formStructureControls" 
+<app-form *ngIf="formStructureControls$"
+    [controls$]="formStructureControls$" 
     [buttonName]="'Сохранить изменения'" 
     class="personal"
-    (valueChange)="changeInfo($event)">
-</app-form> -->
+    (valueChange)="onSubmit($event)">
+</app-form>

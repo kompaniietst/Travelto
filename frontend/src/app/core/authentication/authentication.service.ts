@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from '../models/User';
 
 import { environment } from 'src/environments/environment';
@@ -22,17 +22,18 @@ export class AuthenticationService {
   currUser: Observable<User>;
 
   constructor(private http: HttpClient) {
-
-    // this.currUserBehaviorSubject = new BehaviorSubject<User[]>(JSON.parse(localStorage.getItem('currUser')))
+    this.currUserBehaviorSubject.next(JSON.parse(localStorage.getItem('currUser')));
     this.currUser = this.currUserBehaviorSubject.asObservable();
   }
 
   login(email: string, password: string) {
-    console.log('url',this.URL);
-    
+    console.log('login, url', this.URL);
+
     return this.http.post(`${this.URL}/users/login`, { email, password })
       .pipe(
         map((resp: UserResponse) => {
+
+          console.log('resp', resp);
 
           var user = resp.user as User
 
@@ -43,8 +44,18 @@ export class AuthenticationService {
         }))
   }
 
-  register(user: User) {
-    return this.http.post(`${this.URL}/users`, user)
+  register(newUser: User) {
+    console.log('========', newUser);
+
+    return this.http.post(`${this.URL}/users`, newUser)
+  }
+
+  isAuthorized(): boolean {
+    return !!this.currUserBehaviorSubject.value;
+  }
+
+  getCurrUser(): User {
+    return this.currUserBehaviorSubject.value;
   }
 
   update(_id: string, data: User) {
@@ -54,7 +65,6 @@ export class AuthenticationService {
           localStorage.setItem("currUser", JSON.stringify(user));
           this.currUserBehaviorSubject.next(user)
         }))
-
   }
 
   uploadProfileImage(_id: string, imageData: FormData) {
@@ -62,16 +72,12 @@ export class AuthenticationService {
 
     return this.http.post(`${this.URL}/images/profImages/${_id}`, imageData).
       pipe(
-        map((resp:any) => {
+        map((resp: any) => {
           console.log('RESPONSE ', resp);
-         
-          
-          var image = this.URL + resp.filename;
-      
-          this.saveToLocalstorage(image);
-          return image;
-        }))
 
+          this.saveToLocalstorage(resp.filename);
+          return resp.filename;
+        }))
   }
 
   logout() {
@@ -80,8 +86,8 @@ export class AuthenticationService {
   }
 
   saveToLocalstorage(image) {
-    console.log('i',image);
-    
+    console.log('i', image);
+
     var _local = JSON.parse(localStorage.getItem("currUser"));
     _local['image'] = image;
     localStorage.setItem("currUser", JSON.stringify(_local));

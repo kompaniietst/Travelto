@@ -26,9 +26,6 @@ export class HomeComponent implements OnInit {
       .subscribe((x: Hotel[]) =>{
         this.markers = x
           .map(h => {
-           console.log(h._id);
-           
-            
             return {
               lat: +h.address.map[0],
               lng: +h.address.map[1]

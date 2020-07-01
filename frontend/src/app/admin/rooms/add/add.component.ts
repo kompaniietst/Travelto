@@ -6,6 +6,7 @@ import { Amenity } from 'src/app/core/models/Amenity';
 import { Hotel } from 'src/app/core/models/Hotel';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
 import { Room } from 'src/app/core/models/Room';
+import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 
 @Component({
   selector: 'app-add-room',
@@ -20,10 +21,13 @@ export class AddRoomComponent implements OnInit {
 
   constructor(
     private admin: AdminService,
-    private alert: AlertMessageService
+    private alert: AlertMessageService,
+    private auth: AuthenticationService
   ) {
 
-    this.admin.getHotels()
+    const currUserId = this.auth.getCurrUser()._id;
+
+    this.admin.getHotelsBy(currUserId)
       .subscribe(x => {
         var hotels = x.map(h => { return { _id: h._id, label: h.name } })
         this.initFormStructure(hotels)
@@ -96,6 +100,7 @@ export class AddRoomComponent implements OnInit {
 
   onSubmit(room: Room) {
     this.showSpinner = true;
+    
     this.admin.registerRoom(room)
       .subscribe(
         (_: Room) => {
