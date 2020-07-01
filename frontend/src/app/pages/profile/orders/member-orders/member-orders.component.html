@@ -1,13 +1,13 @@
 <mat-tab-group animationDuration="0ms">
 
-    <mat-tab>
+    <mat-tab label="Active orders">
         <div *ngIf="(bookings$ | async | filterByStatus: 'active'); let activeBookings">
-            <ng-template mat-tab-label>
+            <!-- <ng-template mat-tab-label>
                 Active orders 
                 <span *ngIf="activeBookings.length > 0">
                     ({{ activeBookings.length }})
                 </span>
-            </ng-template>
+            </ng-template> -->
 
             <div *ngIf="activeBookings?.length == 0 && (bookings$ | async | filterByStatus: 'confirmCancel')?.length == 0">
                 No active orders yet.
