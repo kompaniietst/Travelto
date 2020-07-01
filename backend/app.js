@@ -1,9 +1,9 @@
 const express = require('express')
-const bodyParser = require('body-parser');
-const dotenv = require('dotenv').config();
+// const bodyParser = require('body-parser');
+// const dotenv = require('dotenv').config();
 // require('./src/db/db')
-const port = process.env.PORT;
-const cors = require('cors');
+// const port = process.env.PORT;
+// const cors = require('cors');
 
 // const userRouter = require('./src/routers/user')
 // const User = require('./src/models/User')
@@ -24,19 +24,19 @@ const cors = require('cors');
 
 const app = express()
 
-app.use(cors())
-app.use(express.json())
-app.use(userRouter)
-app.use(hotelRouter)
-app.use(roomRouter)
-app.use(amenityRouter)
-app.use(cityRouter)
-app.use(bookingRouter)
+// app.use(cors())
+// app.use(express.json())
+// app.use(userRouter)
+// app.use(hotelRouter)
+// app.use(roomRouter)
+// app.use(amenityRouter)
+// app.use(cityRouter)
+// app.use(bookingRouter)
 
-app.use(cors());
+// app.use(cors());
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+// app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(bodyParser.json())
 
 
 // var multer = require('multer')
@@ -97,4 +97,4 @@ app.get('/healthcheck',async (req, res) => {
 // });
 
 
-app.listen(port, () => console.log(`Server running on port ${port}`))
+// app.listen(port, () => console.log(`Server running on port ${port}`))
