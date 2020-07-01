@@ -1,8 +1,8 @@
 const express = require('express')
 // const bodyParser = require('body-parser');
-// const dotenv = require('dotenv').config();
+const dotenv = require('dotenv').config();
 // require('./src/db/db')
-// const port = process.env.PORT;
+const port = process.env.PORT;
 // const cors = require('cors');
 
 // const userRouter = require('./src/routers/user')
@@ -25,7 +25,7 @@ const express = require('express')
 const app = express()
 
 // app.use(cors())
-// app.use(express.json())
+app.use(express.json())
 // app.use(userRouter)
 // app.use(hotelRouter)
 // app.use(roomRouter)
@@ -97,4 +97,4 @@ app.get('/healthcheck',async (req, res) => {
 // });
 
 
-// app.listen(port, () => console.log(`Server running on port ${port}`))
+app.listen(port, () => console.log(`Server running on port ${port}`))
