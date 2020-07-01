@@ -1,8 +1,26 @@
-const express = require('express')
-// const bodyParser = require('body-parser');
+var http = require('http');
+var express = require("express");
 const dotenv = require('dotenv').config();
+
+var app = express();
+
+app.set('port', process.env.PORT || 3000);
+
+app.get('/', function(request, response) {
+  console.log('[support dash] processing get request')
+  response.send('Hello World 2!');
+});
+
+app.listen(process.env.PORT, function () {
+  console.log('***** exp listening on port: ' + process.env.PORT);
+});
+
+
+
+// const express = require('express')
+// const bodyParser = require('body-parser');
 // require('./src/db/db')
-const port = process.env.PORT;
+// const port = process.env.PORT;
 // const cors = require('cors');
 
 // const userRouter = require('./src/routers/user')
@@ -22,10 +40,10 @@ const port = process.env.PORT;
 // const bookingRouter = require('./src/routers/booking')
 // const Booking = require('./src/models/Booking')
 
-const app = express()
+// const app = express()
 
 // app.use(cors())
-app.use(express.json())
+// app.use(express.json())
 // app.use(userRouter)
 // app.use(hotelRouter)
 // app.use(roomRouter)
@@ -74,9 +92,9 @@ app.use(express.json())
 //     res.send(req.files);
 // });
 
-app.get('/healthcheck',async (req, res) => {
-    res.send("Nope");
-})
+// app.get('/healthcheck',async (req, res) => {
+//     res.send("Nope");
+// })
 // app.use('/images/profImages', express.static(__dirname + '/uploads/profImages'));
 // app.post('/images/profImages/:id?', uploadImages('profImages').single('file'), async function (req, res, next) {
 
@@ -97,4 +115,4 @@ app.get('/healthcheck',async (req, res) => {
 // });
 
 
-app.listen(port, () => console.log(`Server running on port ${port}`))
+// app.listen(port, () => console.log(`Server running on port ${port}`))
