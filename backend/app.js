@@ -7,7 +7,7 @@ const port = process.env.PORT;
 const cors = require('cors');
 
 const userRouter = require('./src/routers/user')
-// const User = require('./src/models/User')
+const User = require('./src/models/User')
 
 // const hotelRouter = require('./src/routers/hotel')
 // const Hotel = require('./src/models/Hotel')
