@@ -40,6 +40,7 @@ app.use(amenityRouter)
 app.use(cityRouter)
 app.use(bookingRouter)
 
+app.use(cors())
 
 // app.use(bodyParser.urlencoded({ extended: true }))
 // app.use(bodyParser.json())
@@ -61,46 +62,46 @@ function uploadImages(folderName) {
     })
 }
 
-// app.use('/images/hotels', express.static(__dirname + '/uploads/hotels'));
-// app.post('/images/hotels', uploadImages('hotels').array('files'), function (req, res, next) {
-//     const files = req.files.map(f => f.filename);
-//     res.send(files);
-// });
+app.use('/images/hotels', express.static(__dirname + '/uploads/hotels'));
+app.post('/images/hotels', uploadImages('hotels').array('files'), function (req, res, next) {
+    const files = req.files.map(f => f.filename);
+    res.send(files);
+});
 
-// app.use('/images/rooms', express.static(__dirname + '/uploads/rooms'));
-// app.post('/images/rooms', uploadImages('rooms').array('files'), function (req, res, next) {
-//     console.log(req.files);
+app.use('/images/rooms', express.static(__dirname + '/uploads/rooms'));
+app.post('/images/rooms', uploadImages('rooms').array('files'), function (req, res, next) {
+    console.log(req.files);
 
-//     const files = req.files.map(f => f.filename);
-//     res.send(files);
-// });
+    const files = req.files.map(f => f.filename);
+    res.send(files);
+});
 
 app.use('/images/amenities', express.static(__dirname + '/uploads/amenities'));
 app.post('/images/amenities', uploadImages('amenities').array('files'), function (req, res, next) {
     res.send(req.files);
 });
 
-// app.get('/healthcheck',async (req, res) => {
-//     res.send("Nope");
-// })
-// app.use('/images/profImages', express.static(__dirname + '/uploads/profImages'));
-// app.post('/images/profImages/:id?', uploadImages('profImages').single('file'), async function (req, res, next) {
+app.get('/healthcheck',async (req, res) => {
+    res.send("Nope");
+})
+app.use('/images/profImages', express.static(__dirname + '/uploads/profImages'));
+app.post('/images/profImages/:id?', uploadImages('profImages').single('file'), async function (req, res, next) {
 
-//     const file = req.file;
-//     const id = req.params.id;
-//     const imageUrl = `/images/profImages/` + file.filename;
+    const file = req.file;
+    const id = req.params.id;
+    const imageUrl = `/images/profImages/` + file.filename;
 
-//     await User.findByIdAndUpdate({ _id: id },
+    await User.findByIdAndUpdate({ _id: id },
 
-//         { "image": imageUrl },
+        { "image": imageUrl },
 
-//         { new: true }, function (err, result) {
-//             if (err) throw err;
-//             console.log(result);
+        { new: true }, function (err, result) {
+            if (err) throw err;
+            console.log(result);
 
-//             res.json({ filename: imageUrl });
-//         });
-// });
+            res.json({ filename: imageUrl });
+        });
+});
 
 
 app.listen(port, () => console.log(`Server running on port ${port}`))
