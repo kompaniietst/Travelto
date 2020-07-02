@@ -32,9 +32,9 @@ app.get('/', function(request, response) {
   response.send('Hello World 2!');
 });
 
-app.listen(process.env.PORT, function () {
-  console.log('***** exp listening on port: ' + process.env.PORT);
-});
+// app.listen(process.env.PORT, function () {
+//   console.log('***** exp listening on port: ' + process.env.PORT);
+// });
 
 
 
@@ -44,22 +44,22 @@ app.listen(process.env.PORT, function () {
 // const port = process.env.PORT;
 // const cors = require('cors');
 
-const userRouter = require('./src/routers/user')
-const User = require('./src/models/User')
+// const userRouter = require('./src/routers/user')
+// const User = require('./src/models/User')
 
-const hotelRouter = require('./src/routers/hotel')
-const Hotel = require('./src/models/Hotel')
+// const hotelRouter = require('./src/routers/hotel')
+// const Hotel = require('./src/models/Hotel')
 
-const roomRouter = require('./src/routers/room')
+// const roomRouter = require('./src/routers/room')
 
-const amenityRouter = require('./src/routers/amenity')
-const Amenity = require('./src/models/Amenity')
+// const amenityRouter = require('./src/routers/amenity')
+// const Amenity = require('./src/models/Amenity')
 
-const cityRouter = require('./src/routers/city')
-const City = require('./src/models/City')
+// const cityRouter = require('./src/routers/city')
+// const City = require('./src/models/City')
 
-const bookingRouter = require('./src/routers/booking')
-const Booking = require('./src/models/Booking')
+// const bookingRouter = require('./src/routers/booking')
+// const Booking = require('./src/models/Booking')
 
 // const app = express()
 
@@ -136,4 +136,4 @@ app.use(bookingRouter)
 // });
 
 
-// app.listen(port, () => console.log(`Server running on port ${port}`))
+app.listen(port, () => console.log(`Server running on port ${port}`))
