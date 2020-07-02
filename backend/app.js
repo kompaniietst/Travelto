@@ -1,12 +1,12 @@
 var express = require("express");
-const dotenv = require('dotenv').config();
-
+// const dotenv = require('dotenv').config();
+const dotenv =  require('dotenv').config({ path: './.env' });
 const bodyParser = require('body-parser');
 require('./src/db/db')
 const port = process.env.PORT;
 const cors = require('cors');
 
-const userRouter = require('./src/routers/user')
+// const userRouter = require('./src/routers/user')
 // const User = require('./src/models/User')
 
 // const hotelRouter = require('./src/routers/hotel')
