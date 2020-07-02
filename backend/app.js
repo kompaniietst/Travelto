@@ -26,11 +26,9 @@ const Booking = require('./src/models/Booking')
 const app = express();
 
 app.use(cors())
-
-
+app.set('port', process.env.PORT || 3000);
 
 app.get('/', function(request, response) {
-
   console.log('[support dash] processing get request')
   response.send('Hello World 2!');
 });
@@ -106,5 +104,5 @@ app.post('/images/profImages/:id?', uploadImages('profImages').single('file'), a
         });
 });
 
-app.set('port', process.env.PORT || 3000);
-// app.listen(port, () => console.log(`Server running on port ${port}`))
+
+app.listen(port, () => console.log(`Server running on port ${port}`))
