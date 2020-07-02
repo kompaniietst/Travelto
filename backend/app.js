@@ -1,6 +1,6 @@
 var express = require("express");
-// const dotenv = require('dotenv').config();
-const dotenv =  require('dotenv').config({ path: './.env' });
+const dotenv = require('dotenv').config();
+// const dotenv =  require('dotenv').config({ path: './.env' });
 const bodyParser = require('body-parser');
 require('./src/db/db')
 const port = process.env.PORT;
