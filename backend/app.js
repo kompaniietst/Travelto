@@ -1,6 +1,6 @@
 var express = require("express");
-// const dotenv = require('dotenv').config();
-const dotenv = require('dotenv').config({ path: __dirname + '/.env' });
+const dotenv = require('dotenv').config();
+// const dotenv =  require('dotenv').config({ path: './.env' });
 const bodyParser = require('body-parser');
 require('./src/db/db')
 const port = process.env.PORT;
@@ -27,13 +27,12 @@ const app = express();
 
 app.use(cors())
 
-console.log('    DIRR  ', __dirname);
 
 
-app.get('/', function (request, response) {
+app.get('/', function(request, response) {
 
-    console.log('[support dash] processing get request')
-    response.send('Hello World 2!');
+  console.log('[support dash] processing get request')
+  response.send('Hello World 2!');
 });
 
 app.use(express.json())
@@ -85,7 +84,7 @@ app.post('/images/amenities', uploadImages('amenities').array('files'), function
     res.send(req.files);
 });
 
-app.get('/healthcheck', async (req, res) => {
+app.get('/healthcheck',async (req, res) => {
     res.send("Nope");
 })
 app.use('/images/profImages', express.static(__dirname + '/uploads/profImages'));
