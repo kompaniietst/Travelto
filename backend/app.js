@@ -69,7 +69,7 @@ app.listen(process.env.PORT, function () {
 // app.use(hotelRouter)
 // app.use(roomRouter)
 // app.use(amenityRouter)
-// app.use(cityRouter)
+app.use(cityRouter)
 // app.use(bookingRouter)
 
 // app.use(cors());
