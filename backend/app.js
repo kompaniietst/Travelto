@@ -25,6 +25,8 @@ const Booking = require('./src/models/Booking')
 
 const app = express();
 
+app.use(cors())
+
 app.set('port', process.env.PORT || 3000);
 
 app.get('/', function(request, response) {
@@ -40,7 +42,7 @@ app.use(amenityRouter)
 app.use(cityRouter)
 app.use(bookingRouter)
 
-app.use(cors())
+
 
 // app.use(bodyParser.urlencoded({ extended: true }))
 // app.use(bodyParser.json())
