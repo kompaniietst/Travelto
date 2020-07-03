@@ -3,11 +3,11 @@ export class User {
     email: string;
     firstname?: string;
     lastname?: string;
-    password: string;
+    password?: string;
     phone?: string;
     city?: string;
     image?: string;
     role: string;
 
-    tokens?: string;
+    tokens?: any;
 }

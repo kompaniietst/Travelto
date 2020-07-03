@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import { User } from '../models/User';
 
 import { environment } from 'src/environments/environment';
@@ -18,11 +18,15 @@ export class AuthenticationService {
 
   readonly URL = environment.apiUrl;
 
-  currUserBehaviorSubject: BehaviorSubject<User> = new BehaviorSubject();
+  currUserBehaviorSubject: BehaviorSubject<User>;
   currUser: Observable<User>;
 
   constructor(private http: HttpClient) {
-    this.currUserBehaviorSubject.next(JSON.parse(localStorage.getItem('currUser')));
+    var userFromStorage = JSON.parse(localStorage.getItem('currUser'));
+    console.log('userFromStorage', userFromStorage);
+
+    this.currUserBehaviorSubject = new BehaviorSubject<User>()
+    this.currUserBehaviorSubject.next(userFromStorage);
     this.currUser = this.currUserBehaviorSubject.asObservable();
   }
 
