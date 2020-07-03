@@ -12,13 +12,13 @@ import { City } from '../models/City';
 })
 export class LocalStorageService {
 
-  private storageSubject: BehaviorSubject<any> = new BehaviorSubject();
-  private cityIdSubject: BehaviorSubject<string> = new BehaviorSubject();
+  private storageSubject: BehaviorSubject<any>;
+  private cityIdSubject: BehaviorSubject<string>;
 
   constructor() {
     if (!localStorage.getItem('searchParams')) {
       localStorage.setItem('searchParams', JSON.stringify({}));
-      this.storageSubject.next({});
+      this.storageSubject = new BehaviorSubject({});
       return;
     }
 
@@ -27,7 +27,7 @@ export class LocalStorageService {
     this.storageSubject.next(lsData);
 
     if (lsData.city)
-      this.cityIdSubject.next(lsData.city._id)
+      this.cityIdSubject = new BehaviorSubject(lsData.city._id)
   }
 
   saveToLOcalstorage(obj: any) {
@@ -37,9 +37,9 @@ export class LocalStorageService {
     if (obj.city) this.cityIdSubject.next(obj.city._id)
   }
 
-  saveDateToLocalstorage(date){
+  saveDateToLocalstorage(date) {
     // console.log('date',date);
-    
+
     var lsData = JSON.parse(localStorage.getItem('searchParams'));
     lsData["date"] = date;
     localStorage.setItem('searchParams', JSON.stringify(lsData));

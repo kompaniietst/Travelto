@@ -25,8 +25,9 @@ export class AuthenticationService {
     var userFromStorage = JSON.parse(localStorage.getItem('currUser'));
     console.log('userFromStorage', userFromStorage);
 
-    this.currUserBehaviorSubject = new BehaviorSubject<User>()
-    this.currUserBehaviorSubject.next(userFromStorage);
+    this.currUserBehaviorSubject = new BehaviorSubject<User>(userFromStorage)
+    // this.currUserBehaviorSubject.next(userFromStorage);
+
     this.currUser = this.currUserBehaviorSubject.asObservable();
   }
 

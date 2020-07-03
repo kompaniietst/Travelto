@@ -14,7 +14,7 @@ export class BookingService {
   readonly URL = environment.apiUrl;
   currUserId: string;
 
-  private bookingsSubject: BehaviorSubject<any> = new BehaviorSubject();
+  private bookingsSubject: BehaviorSubject<any>;
   bookings: Order[] = [];
 
   constructor(private http: HttpClient,
@@ -23,7 +23,7 @@ export class BookingService {
     this.get().subscribe((o: Order[]) => {
       console.log('OO', o);
 
-      this.bookingsSubject.next([...o]);
+      this.bookingsSubject= new BehaviorSubject([...o]);
       this.bookings = o;
     })
 
