@@ -1,567 +1,567 @@
-@import "src/assets/sass/abstracts/variables.scss";
+// @import "src/assets/sass/abstracts/variables.scss";
 
-:host {
-    &.form_subscription .form {
-        width: 700px;
-        margin: auto;
-        background: rgba(255, 255, 255, 0.46);
-        padding: 40px 67px;
-        box-sizing: border-box;
-        .controls_container {
-            display: flex;
-            background: #ffffff;
-            border: 1px solid #d9e7ed;
-            box-shadow: 0px 0px 10px #dcf4ff;
-            border-radius: 3px;
-            padding: 2px;
-            position: relative;
-            margin: 20px 0;
-            .form_group {
-                padding-left: 0;
-                flex: 3;
-                &:before {
-                    content: "";
-                    position: absolute;
-                    width: 24px;
-                    height: 100%;
-                    margin-left: 16px;
-                    background: url(src/assets/images/icons/form/email.svg) no-repeat center;
-                    margin-top: -2px;
-                }
-            }
-            .btn.btn-orange {
-                color: white;
-                background: #fc6341;
-            }
-        }
-    }
+// :host {
+//     &.form_subscription .form {
+//         width: 700px;
+//         margin: auto;
+//         background: rgba(255, 255, 255, 0.46);
+//         padding: 40px 67px;
+//         box-sizing: border-box;
+//         .controls_container {
+//             display: flex;
+//             background: #ffffff;
+//             border: 1px solid #d9e7ed;
+//             box-shadow: 0px 0px 10px #dcf4ff;
+//             border-radius: 3px;
+//             padding: 2px;
+//             position: relative;
+//             margin: 20px 0;
+//             .form_group {
+//                 padding-left: 0;
+//                 flex: 3;
+//                 &:before {
+//                     content: "";
+//                     position: absolute;
+//                     width: 24px;
+//                     height: 100%;
+//                     margin-left: 16px;
+//                     background: url(src/assets/images/icons/form/email.svg) no-repeat center;
+//                     margin-top: -2px;
+//                 }
+//             }
+//             .btn.btn-orange {
+//                 color: white;
+//                 background: #fc6341;
+//             }
+//         }
+//     }
 
-    &.sidebar_form {
-        .form {
-            padding: 20px;
-        }
-        .form_group {
-            border-bottom: 1px solid #e8e8e8;
-            padding: 20px 0 10px;
-            display: block;
-            width: 100%;
-        }
-    }
+//     &.sidebar_form {
+//         .form {
+//             padding: 20px;
+//         }
+//         .form_group {
+//             border-bottom: 1px solid #e8e8e8;
+//             padding: 20px 0 10px;
+//             display: block;
+//             width: 100%;
+//         }
+//     }
 
-    &.navbar_form_search {
-        background: transparent;
-        font-size: 15px;
-        display: block;
-        padding: 3px;
-        width: 77%;
-        .controls_container {
-            display: flex;
-            width: 100%;
-            .item {
-                width: 25%;
-                flex: 1;
-            }
-            .form_group {
-                border-right: 1px solid #53c9fe;
-            }
-        }
-    }
-    &.personal {
-        .controls_container {
-            display: flex;
-            flex-direction: column;
-        }
-    }
-    &.attach_hotel_form {
-        .form {
-            max-width: 700px;
-            margin-top: 43px;
-        }
-    }
-    &.attach_room_form {
-        .form {
-            max-width: 700px;
-            margin-top: 43px;
-        }
-    }
-    &.register_member {
-        max-width: 427px;
-        display: block;
-        margin: auto;
-        .form {
-            background: #ffffff;
-            border: 1px solid #dddddd;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.11);
-            border-radius: 3px;
-            padding: 30px 40px 40px;
-            margin: 50px 0;
-        }
-    }
-}
+//     &.navbar_form_search {
+//         background: transparent;
+//         font-size: 15px;
+//         display: block;
+//         padding: 3px;
+//         width: 77%;
+//         .controls_container {
+//             display: flex;
+//             width: 100%;
+//             .item {
+//                 width: 25%;
+//                 flex: 1;
+//             }
+//             .form_group {
+//                 border-right: 1px solid #53c9fe;
+//             }
+//         }
+//     }
+//     &.personal {
+//         .controls_container {
+//             display: flex;
+//             flex-direction: column;
+//         }
+//     }
+//     &.attach_hotel_form {
+//         .form {
+//             max-width: 700px;
+//             margin-top: 43px;
+//         }
+//     }
+//     &.attach_room_form {
+//         .form {
+//             max-width: 700px;
+//             margin-top: 43px;
+//         }
+//     }
+//     &.register_member {
+//         max-width: 427px;
+//         display: block;
+//         margin: auto;
+//         .form {
+//             background: #ffffff;
+//             border: 1px solid #dddddd;
+//             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.11);
+//             border-radius: 3px;
+//             padding: 30px 40px 40px;
+//             margin: 50px 0;
+//         }
+//     }
+// }
 
-:host.form_subscription .form ::ng-deep input {
-    width: 100%;
-    height: 100%;
-    border: none;
-    padding-left: 60px;
-    border: none;
-    margin: 0;
-}
+// :host.form_subscription .form ::ng-deep input {
+//     width: 100%;
+//     height: 100%;
+//     border: none;
+//     padding-left: 60px;
+//     border: none;
+//     margin: 0;
+// }
 
-:host.sidebar_form ::ng-deep {
-    .mat-radio-group {
-        display: flex;
-        flex-direction: column;
-    }
-    .label {
-        padding-bottom: 10px;
-    }
-}
+// :host.sidebar_form ::ng-deep {
+//     .mat-radio-group {
+//         display: flex;
+//         flex-direction: column;
+//     }
+//     .label {
+//         padding-bottom: 10px;
+//     }
+// }
 
-:host.navbar_form_search ::ng-deep {
-    .form {
-        align-items: center;
-        display: flex;
-        min-height: 52px;
-    }
-    .filterDropdown,
-    .dateTimePicker,
-    .dropdownPex {
-        padding-left: 52px;
-    }
-    .cdk-text-field-autofill-monitored:not(:-webkit-autofill),
-    .dateTimePicker input,
-    .placeholder {
-        color: #040404;
-        font-weight: normal;
-        font-size: 14px;
-    }
-    .filterDropdown:before,
-    .dateTimePicker:before,
-    .dropdownPex:before {
-        filter: none;
-    }
-    ::placeholder {
-        color: #040404;
-    }
-    .filterDropdown:before {
-        left: 15px;
-    }
-    .cdk-text-field-autofill-monitored:not(:-webkit-autofill),
-    .dateTimePicker input,
-    .placeholder {
-        color: white;
-        font-weight: normal;
-        font-size: 14px;
-    }
-    .filterDropdown:before,
-    .dateTimePicker:before,
-    .dropdownPex:before {
-        filter: brightness(0) invert(1);
-    }
-    ::placeholder {
-        color: white;
-    }
-    .md-drppicker td.off.end-date,
-    .md-drppicker td.off.in-range,
-    .md-drppicker td.off.start-date,
-    .md-drppicker td {
-        &.available {
-            color: #030303;
-        }
+// :host.navbar_form_search ::ng-deep {
+//     .form {
+//         align-items: center;
+//         display: flex;
+//         min-height: 52px;
+//     }
+//     .filterDropdown,
+//     .dateTimePicker,
+//     .dropdownPex {
+//         padding-left: 52px;
+//     }
+//     .cdk-text-field-autofill-monitored:not(:-webkit-autofill),
+//     .dateTimePicker input,
+//     .placeholder {
+//         color: #040404;
+//         font-weight: normal;
+//         font-size: 14px;
+//     }
+//     .filterDropdown:before,
+//     .dateTimePicker:before,
+//     .dropdownPex:before {
+//         filter: none;
+//     }
+//     ::placeholder {
+//         color: #040404;
+//     }
+//     .filterDropdown:before {
+//         left: 15px;
+//     }
+//     .cdk-text-field-autofill-monitored:not(:-webkit-autofill),
+//     .dateTimePicker input,
+//     .placeholder {
+//         color: white;
+//         font-weight: normal;
+//         font-size: 14px;
+//     }
+//     .filterDropdown:before,
+//     .dateTimePicker:before,
+//     .dropdownPex:before {
+//         filter: brightness(0) invert(1);
+//     }
+//     ::placeholder {
+//         color: white;
+//     }
+//     .md-drppicker td.off.end-date,
+//     .md-drppicker td.off.in-range,
+//     .md-drppicker td.off.start-date,
+//     .md-drppicker td {
+//         &.available {
+//             color: #030303;
+//         }
 
-        &.off {
-            color: #999999;
-        }
+//         &.off {
+//             color: #999999;
+//         }
 
-        &.active {
-            color: #ffffff;
-        }
-    }
-}
+//         &.active {
+//             color: #ffffff;
+//         }
+//     }
+// }
 
-:host.room_form_order ::ng-deep {
-    input {
-        margin: 10px 0;
-    }
-    input,
-    .placeholder {
-        background: #ffffff;
-        border: 1px solid #baddf0;
-        box-sizing: border-box;
-        border-radius: 3px;
-        padding: 18px 21px;
-        font-size: 14px;
-    }
-    .dateTimePicker input,
-    .dropdownPex .placeholder {
-        padding-left: 50px;
-    }
-}
+// :host.room_form_order ::ng-deep {
+//     input {
+//         margin: 10px 0;
+//     }
+//     input,
+//     .placeholder {
+//         background: #ffffff;
+//         border: 1px solid #baddf0;
+//         box-sizing: border-box;
+//         border-radius: 3px;
+//         padding: 18px 21px;
+//         font-size: 14px;
+//     }
+//     .dateTimePicker input,
+//     .dropdownPex .placeholder {
+//         padding-left: 50px;
+//     }
+// }
 
-:host.attach_hotel_form ::ng-deep {
-    .input {
-        &.name {
-            float: left;
-            width: 80%;
-            padding-right: 20px;
-        }
-        &.stars {
-            float: left;
-            width: 20%;
-        }
-        &.city,
-        &.street,
-        &.houseNumber,
-        &.disctrict {
-            float: left;
-            width: 35%;
-            &:not(.city) {
-                padding-left: 20px;
-            }
-        }
-        &.houseNumber {
-            width: 10%;
-        }
-        &.disctrict {
-            width: 20%;
-        }
-        &.map {
-            display: flex;
-            white-space: nowrap;
-            align-items: center;
-            width: 67%;
-            div:nth-child(2) {
-                margin: 0 20px;
-            }
-        }
-        .address {
-            clear: both;
-        }
-    }
-    .input.description {
-        float: left;
-        width: 100%;
-    }
-    .checkbox {
-        border-top: $border_input;
-        display: block;
-        padding: 30px 0;
-        .label {
-            margin-bottom: 30px;
-            font-size: 20px;
-        }
-        .checkboxes_container {
-            display: flex;
-            flex-wrap: wrap;
-            .mat-checkbox {
-                width: 25%;
-                margin-bottom: 5px;
-            }
-        }
-    }
-    .images {
-        text-align: center;
-        .upload_button {
-            margin-top: 20px;
-            div {
-                position: absolute;
-                left: 50%;
-                transform: translate(-50%, 0);
-            }
-        }
-    }
-    .images_container {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 20px -1px;
-        .mat-card {
-            width: 33.3%;
-            height: 200px;
-            overflow: hidden;
-            padding: 1px;
-            position: relative;
-            cursor: all-scroll;
-            .dropdown_img {
-                width: 233px;
-                height: 200px;
-                object-fit: cover;
-            }
-            .remove {
-                position: absolute;
-                width: 35px;
-                height: 35px;
-                background: white;
-                border-radius: 50px;
-                right: 12px;
-                top: 12px;
-                cursor: pointer;
-                display: flex;
-                cursor: pointer;
-                justify-content: center;
-                align-items: center;
-            }
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
-    }
-}
-:host.attach_amenity_form ::ng-deep {
-    .images {
-        text-align: center;
-        .upload_button {
-            margin-top: 20px;
-            div {
-                position: absolute;
-                left: 50%;
-                transform: translate(-50%, 0);
-            }
-            margin-bottom: 40px;
-        }
-    }
-    .mat-radio-group {
-        display: flex;
-        justify-content: center;
-        flex-direction: row;
-        .mat-radio-button {
-            margin: 15px;
-        }
-    }
-}
-:host.attach_room_form ::ng-deep {
-    .input {
-        &.price {
-            width: 23%;
-        }
-    }
-    .checkbox {
-        border-top: $border_input;
-        display: block;
-        padding: 30px 0;
-        .label {
-            margin-bottom: 30px;
-            font-size: 20px;
-        }
-        .checkboxes_container {
-            display: flex;
-            flex-wrap: wrap;
-            .mat-checkbox {
-                width: 25%;
-                margin-bottom: 5px;
-            }
-        }
-    }
-    .images {
-        text-align: center;
-        .upload_button {
-            margin-top: 20px;
-            div {
-                position: absolute;
-                left: 50%;
-                transform: translate(-50%, 0);
-            }
-        }
-    }
-    .images_container {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 20px -1px;
-        .mat-card {
-            width: 33.3%;
-            height: 200px;
-            overflow: hidden;
-            padding: 1px;
-            position: relative;
-            cursor: all-scroll;
-            .dropdown_img {
-                width: 233px;
-                height: 200px;
-                object-fit: cover;
-            }
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
-    }
-}
+// :host.attach_hotel_form ::ng-deep {
+//     .input {
+//         &.name {
+//             float: left;
+//             width: 80%;
+//             padding-right: 20px;
+//         }
+//         &.stars {
+//             float: left;
+//             width: 20%;
+//         }
+//         &.city,
+//         &.street,
+//         &.houseNumber,
+//         &.disctrict {
+//             float: left;
+//             width: 35%;
+//             &:not(.city) {
+//                 padding-left: 20px;
+//             }
+//         }
+//         &.houseNumber {
+//             width: 10%;
+//         }
+//         &.disctrict {
+//             width: 20%;
+//         }
+//         &.map {
+//             display: flex;
+//             white-space: nowrap;
+//             align-items: center;
+//             width: 67%;
+//             div:nth-child(2) {
+//                 margin: 0 20px;
+//             }
+//         }
+//         .address {
+//             clear: both;
+//         }
+//     }
+//     .input.description {
+//         float: left;
+//         width: 100%;
+//     }
+//     .checkbox {
+//         border-top: $border_input;
+//         display: block;
+//         padding: 30px 0;
+//         .label {
+//             margin-bottom: 30px;
+//             font-size: 20px;
+//         }
+//         .checkboxes_container {
+//             display: flex;
+//             flex-wrap: wrap;
+//             .mat-checkbox {
+//                 width: 25%;
+//                 margin-bottom: 5px;
+//             }
+//         }
+//     }
+//     .images {
+//         text-align: center;
+//         .upload_button {
+//             margin-top: 20px;
+//             div {
+//                 position: absolute;
+//                 left: 50%;
+//                 transform: translate(-50%, 0);
+//             }
+//         }
+//     }
+//     .images_container {
+//         display: flex;
+//         flex-wrap: wrap;
+//         margin: 20px -1px;
+//         .mat-card {
+//             width: 33.3%;
+//             height: 200px;
+//             overflow: hidden;
+//             padding: 1px;
+//             position: relative;
+//             cursor: all-scroll;
+//             .dropdown_img {
+//                 width: 233px;
+//                 height: 200px;
+//                 object-fit: cover;
+//             }
+//             .remove {
+//                 position: absolute;
+//                 width: 35px;
+//                 height: 35px;
+//                 background: white;
+//                 border-radius: 50px;
+//                 right: 12px;
+//                 top: 12px;
+//                 cursor: pointer;
+//                 display: flex;
+//                 cursor: pointer;
+//                 justify-content: center;
+//                 align-items: center;
+//             }
+//             img {
+//                 width: 100%;
+//                 height: 100%;
+//                 object-fit: cover;
+//             }
+//         }
+//     }
+// }
+// :host.attach_amenity_form ::ng-deep {
+//     .images {
+//         text-align: center;
+//         .upload_button {
+//             margin-top: 20px;
+//             div {
+//                 position: absolute;
+//                 left: 50%;
+//                 transform: translate(-50%, 0);
+//             }
+//             margin-bottom: 40px;
+//         }
+//     }
+//     .mat-radio-group {
+//         display: flex;
+//         justify-content: center;
+//         flex-direction: row;
+//         .mat-radio-button {
+//             margin: 15px;
+//         }
+//     }
+// }
+// :host.attach_room_form ::ng-deep {
+//     .input {
+//         &.price {
+//             width: 23%;
+//         }
+//     }
+//     .checkbox {
+//         border-top: $border_input;
+//         display: block;
+//         padding: 30px 0;
+//         .label {
+//             margin-bottom: 30px;
+//             font-size: 20px;
+//         }
+//         .checkboxes_container {
+//             display: flex;
+//             flex-wrap: wrap;
+//             .mat-checkbox {
+//                 width: 25%;
+//                 margin-bottom: 5px;
+//             }
+//         }
+//     }
+//     .images {
+//         text-align: center;
+//         .upload_button {
+//             margin-top: 20px;
+//             div {
+//                 position: absolute;
+//                 left: 50%;
+//                 transform: translate(-50%, 0);
+//             }
+//         }
+//     }
+//     .images_container {
+//         display: flex;
+//         flex-wrap: wrap;
+//         margin: 20px -1px;
+//         .mat-card {
+//             width: 33.3%;
+//             height: 200px;
+//             overflow: hidden;
+//             padding: 1px;
+//             position: relative;
+//             cursor: all-scroll;
+//             .dropdown_img {
+//                 width: 233px;
+//                 height: 200px;
+//                 object-fit: cover;
+//             }
+//             img {
+//                 width: 100%;
+//                 height: 100%;
+//                 object-fit: cover;
+//             }
+//         }
+//     }
+// }
 
-:host.edit_form .form {
-    margin-top: 20px;
-    border-top: $border;
-    padding-top: 27px;
-}
+// :host.edit_form .form {
+//     margin-top: 20px;
+//     border-top: $border;
+//     padding-top: 27px;
+// }
 
-:host.edit_form ::ng-deep,
-:host.edit_amenity_form ::ng-deep {
-    .upload_button {
-        margin: 20px 0;
-        div {
-            position: absolute;
-            left: 50%;
-            transform: translate(-50%, 0);
-        }
-    }
-    .checkbox {
-        display: block;
-        margin: 20px 0;
-        .checkboxes_container {
-            display: flex;
-            flex-wrap: wrap;
-            .mat-checkbox {
-                width: 33.3%;
-                font-size: 13px;
-            }
-        }
-    }
-    .btn.btn-orange span {
-        margin-left: -20px;
-    }
-    .images_container {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 0 -5px;
-        .mat-card {
-            width: 20%;
-            height: 136px;
-            padding: 6px;
-            position: relative;
-            overflow: hidden;
-            margin: 4px 5px 4px;
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
-    }
-    .name {
-        float: left;
-        width: 85%;
-    }
-    .stars {
-        float: left;
-        clear: right;
-        width: 15%;
-        padding-left: 20px;
-    }
-    .street {
-        float: left;
-        width: 50%;
-    }
-    .houseNumber {
-        float: left;
-        width: 15%;
-        padding-left: 20px;
-    }
-    .disctrict {
-        float: left;
-        clear: right;
-        width: 35%;
-        padding-left: 20px;
-    }
-    .map {
-        clear: both;
-    }
-}
-:host.edit_amenity_form ::ng-deep {
-    .images_container .mat-card {
-        width: 100%;
-        height: 46px;
-        img {
-            object-fit: contain;
-            max-width: 50px;
-        }
-        .remove {
-            top: 50%;
-            transform: translate(0, -50%);
-        }
-    }
-    mat-radio-group {
-        flex-direction: row;
-        justify-content: center;
-        .mat-radio-button {
-            margin: 0 20px;
-        }
-    }
-}
+// :host.edit_form ::ng-deep,
+// :host.edit_amenity_form ::ng-deep {
+//     .upload_button {
+//         margin: 20px 0;
+//         div {
+//             position: absolute;
+//             left: 50%;
+//             transform: translate(-50%, 0);
+//         }
+//     }
+//     .checkbox {
+//         display: block;
+//         margin: 20px 0;
+//         .checkboxes_container {
+//             display: flex;
+//             flex-wrap: wrap;
+//             .mat-checkbox {
+//                 width: 33.3%;
+//                 font-size: 13px;
+//             }
+//         }
+//     }
+//     .btn.btn-orange span {
+//         margin-left: -20px;
+//     }
+//     .images_container {
+//         display: flex;
+//         flex-wrap: wrap;
+//         margin: 0 -5px;
+//         .mat-card {
+//             width: 20%;
+//             height: 136px;
+//             padding: 6px;
+//             position: relative;
+//             overflow: hidden;
+//             margin: 4px 5px 4px;
+//             img {
+//                 width: 100%;
+//                 height: 100%;
+//                 object-fit: cover;
+//             }
+//         }
+//     }
+//     .name {
+//         float: left;
+//         width: 85%;
+//     }
+//     .stars {
+//         float: left;
+//         clear: right;
+//         width: 15%;
+//         padding-left: 20px;
+//     }
+//     .street {
+//         float: left;
+//         width: 50%;
+//     }
+//     .houseNumber {
+//         float: left;
+//         width: 15%;
+//         padding-left: 20px;
+//     }
+//     .disctrict {
+//         float: left;
+//         clear: right;
+//         width: 35%;
+//         padding-left: 20px;
+//     }
+//     .map {
+//         clear: both;
+//     }
+// }
+// :host.edit_amenity_form ::ng-deep {
+//     .images_container .mat-card {
+//         width: 100%;
+//         height: 46px;
+//         img {
+//             object-fit: contain;
+//             max-width: 50px;
+//         }
+//         .remove {
+//             top: 50%;
+//             transform: translate(0, -50%);
+//         }
+//     }
+//     mat-radio-group {
+//         flex-direction: row;
+//         justify-content: center;
+//         .mat-radio-button {
+//             margin: 0 20px;
+//         }
+//     }
+// }
 
-:host.edit_room_form .form {
-    margin-top: 20px;
-    border-top: 1px solid #dcdcdc;
-    padding-top: 27px;
-}
-:host.edit_room_form ::ng-deep {
-    .images {
-        display: block;
-        margin-bottom: 20px;
-        .upload_button {
-            margin: 20px 0;
-            text-align: center;
-            div {
-                left: 50%;
-                transform: translate(-50%, 0);
-            }
-        }
-        .images_container {
-            display: flex;
-            flex-wrap: wrap;
-            margin: 0 -5px;
-            .mat-card {
-                width: 20%;
-                height: 136px;
-                padding: 6px;
-                position: relative;
-                overflow: hidden;
-                margin: 4px 5px 4px;
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-            }
-        }
-    }
-    .price {
-        width: 30%;
-        float: left;
-        padding-right: 20px;
-    }
-    .checkbox {
-        width: 70%;
-        .mat-checkbox {
-            margin-right: 25px;
-            margin-top: 20px;
-            display: inline-block;
-        }
-    }
-    .dropdown {
-        display: block;
-        input {
-            border: 1px solid #d6e7f0;
-            padding: 15px 10px;
-            border-radius: 3px;
-            margin: 12px 0;
-            width: 100%;
-        }
-    }
-    .textFeatures {
-        display: block;
-        clear: both;
-    }
-}
+// :host.edit_room_form .form {
+//     margin-top: 20px;
+//     border-top: 1px solid #dcdcdc;
+//     padding-top: 27px;
+// }
+// :host.edit_room_form ::ng-deep {
+//     .images {
+//         display: block;
+//         margin-bottom: 20px;
+//         .upload_button {
+//             margin: 20px 0;
+//             text-align: center;
+//             div {
+//                 left: 50%;
+//                 transform: translate(-50%, 0);
+//             }
+//         }
+//         .images_container {
+//             display: flex;
+//             flex-wrap: wrap;
+//             margin: 0 -5px;
+//             .mat-card {
+//                 width: 20%;
+//                 height: 136px;
+//                 padding: 6px;
+//                 position: relative;
+//                 overflow: hidden;
+//                 margin: 4px 5px 4px;
+//                 img {
+//                     width: 100%;
+//                     height: 100%;
+//                     object-fit: cover;
+//                 }
+//             }
+//         }
+//     }
+//     .price {
+//         width: 30%;
+//         float: left;
+//         padding-right: 20px;
+//     }
+//     .checkbox {
+//         width: 70%;
+//         .mat-checkbox {
+//             margin-right: 25px;
+//             margin-top: 20px;
+//             display: inline-block;
+//         }
+//     }
+//     .dropdown {
+//         display: block;
+//         input {
+//             border: 1px solid #d6e7f0;
+//             padding: 15px 10px;
+//             border-radius: 3px;
+//             margin: 12px 0;
+//             width: 100%;
+//         }
+//     }
+//     .textFeatures {
+//         display: block;
+//         clear: both;
+//     }
+// }
 
-:host.filter_form ::ng-deep .form {
-    padding: 20px;
-    .checkbox {
-        display: block;
-        margin: 20px 0;
-    }
-    .checkboxes_container {
-        margin: 10px 0;
-    }
-}
+// :host.filter_form ::ng-deep .form {
+//     padding: 20px;
+//     .checkbox {
+//         display: block;
+//         margin: 20px 0;
+//     }
+//     .checkboxes_container {
+//         margin: 10px 0;
+//     }
+// }
