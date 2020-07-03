@@ -22,7 +22,7 @@ export class AddYourHotelComponent implements OnInit {
     private router: Router) {
 
     this.auth.currUser.subscribe(x => {                                        // check if user is a member
-      if (x.role == "member") this.router.navigate(['/admin/hotels'])
+      if (x.role == "member" || x.role == "admin") this.router.navigate(['/admin/hotels'])
     })
   }
 

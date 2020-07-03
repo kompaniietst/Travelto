@@ -12,7 +12,7 @@
         </app-sidebar>
         <app-wrapper class="wrapper">
             <div class="title">
-                <strong>Founded {{ (filteredRooms$ | async | reverse | filter:priceFilter | filter: cityFilter)?.length }} options:</strong>
+                <strong>Founded {{ (filteredRooms$ | async | filter:priceFilter | filter: cityFilter)?.length }} options:</strong>
             </div>
 
             <app-filter-tabs></app-filter-tabs>
