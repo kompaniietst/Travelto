@@ -12,14 +12,14 @@
         </app-sidebar>
         <app-wrapper class="wrapper">
             <div class="title">
-                <strong>Founded {{ (rooms$ | async | filter:priceFilter | filter: cityFilter)?.length }} options:</strong>
+                <strong>Founded {{ (filteredRooms$ | async | reverse | filter:priceFilter | filter: cityFilter)?.length }} options:</strong>
             </div>
 
             <app-filter-tabs></app-filter-tabs>
             <mat-spinner *ngIf="showSpinner" strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner>
 
             <ng-container 
-                *ngFor="let room of rooms$ | async | reverse 
+                *ngFor="let room of filteredRooms$ | async | reverse 
                 | filter: priceFilter
                 | filter: cityFilter">
                 <app-card 

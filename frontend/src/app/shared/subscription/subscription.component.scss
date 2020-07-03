@@ -1,4 +1,4 @@
-@import 'src/assets/sass/abstracts/variables.scss';
+@import "src/assets/sass/abstracts/variables.scss";
 :host {
     background: url(src/assets/images/subscription.jpg) no-repeat center;
     padding: 50px 0;
@@ -19,9 +19,51 @@
     &.home {
         margin-top: 0;
     }
-    
 }
 :host ::ng-deep {
+    &.form_subscription .form {
+        width: 700px;
+        margin: auto;
+        background: rgba(255, 255, 255, 0.46);
+        padding: 40px 67px;
+        box-sizing: border-box;
+        .controls_container {
+            display: flex;
+            background: #ffffff;
+            border: 1px solid #d9e7ed;
+            box-shadow: 0px 0px 10px #dcf4ff;
+            border-radius: 3px;
+            padding: 2px;
+            position: relative;
+            margin: 20px 0;
+            .form_group {
+                padding-left: 0;
+                flex: 3;
+                &:before {
+                    content: "";
+                    position: absolute;
+                    width: 24px;
+                    height: 100%;
+                    margin-left: 16px;
+                    background: url(src/assets/images/icons/form/email.svg) no-repeat center;
+                    margin-top: -2px;
+                }
+            }
+            .btn.btn-orange {
+                color: white;
+                background: #fc6341;
+            }
+        }
+        input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            padding-left: 60px;
+            border: none;
+            margin: 0;
+        }
+    }
+
     .email {
         width: 100%;
         &:before {

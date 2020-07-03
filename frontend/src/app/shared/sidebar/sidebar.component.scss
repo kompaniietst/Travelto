@@ -11,7 +11,28 @@
         width: 260px;
         display: block;
     }
-    &.ontop{
+    &.ontop {
         padding-top: 0;
     }
 }
+
+// :host ::ng-deep {
+//     .sidebar_form {
+//         .form {
+//             padding: 20px;
+//         }
+//         .form_group {
+//             border-bottom: 1px solid #e8e8e8;
+//             padding: 20px 0 10px;
+//             display: block;
+//             width: 100%;
+//         }
+//         .mat-radio-group {
+//             display: flex;
+//             flex-direction: column;
+//         }
+//         .label {
+//             padding-bottom: 10px;
+//         }
+//     }
+// }
