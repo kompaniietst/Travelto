@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Hotel } from '../models/Hotel';
 import { Room } from '../models/Room';
@@ -23,8 +23,9 @@ export class LocalStorageService {
     }
 
     var lsData = JSON.parse(localStorage.getItem('searchParams'))
+    if (Object.keys(lsData).length > 0)
+      this.storageSubject.next(lsData);
 
-    this.storageSubject.next(lsData);
 
     if (lsData.city)
       this.cityIdSubject = new BehaviorSubject(lsData.city._id)
@@ -47,6 +48,9 @@ export class LocalStorageService {
   }
 
   onCityChange(): Observable<string> {
+    if (!this.cityIdSubject)
+      return of('');
+
     return this.cityIdSubject.asObservable();
   }
 
@@ -56,6 +60,11 @@ export class LocalStorageService {
 
     // if (localStorage.getItem('searchParams'))
     //   return JSON.parse(localStorage.getItem('searchParams'))
+    console.log('VSLUE ', this.storageSubject);
+
+    if (!this.storageSubject)
+      return of({});
+
     return this.storageSubject.asObservable();
   }
 

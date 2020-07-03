@@ -67,6 +67,8 @@ export class CatalogComponent implements OnInit {
     this.filterTabsService.getFilters()
       .subscribe((x: FilterItem[]) => {
         if (!x || x.length == 0) {
+          console.log('FILTER',x);
+          
           this.filteredRooms$ = this.rooms$;
           return;
         }
