@@ -79,4 +79,11 @@ export class AddYourHotelComponent implements OnInit {
       )
   }
 
+  openModal(){
+    this.dialog.closeAll();
+    this.dialog.open(LoginComponent, {
+      panelClass: 'popup',
+    });
+  }
+
 }

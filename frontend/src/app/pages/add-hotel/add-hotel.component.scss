@@ -1,3 +1,16 @@
-h2{
+@import "src/assets/sass/abstracts/variables.scss";
+h2 {
     margin-top: 40px;
+}
+h3 {
+    span {
+        color: $color;
+        border-bottom: 1px solid $color;
+        cursor: pointer;
+    }
+}
+.register_member {
+    max-width: 700px;
+    margin: auto;
+    display: block;
 }
