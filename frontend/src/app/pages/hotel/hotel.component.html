@@ -71,14 +71,14 @@
             <div class="title">
                 <strong>Hotel services</strong>
             </div>
-            <div class="list_amenities">
+            <!-- <div class="list_amenities">
                 <div *ngFor="let amenity of amenities; trackBy: trackById; let i = index" class="hotel_amenity">
                     <div class="img" [ngClass]="{'active': ifActiveAmenity(amenity._id)}">
                         <img [src]="URL + amenity.image" alt="">
                     </div>
                     <strong>{{ amenity.label }}</strong>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <div class="section" *ngIf="hotel.feedbacks && hotel.feedbacks.length > 0">
