@@ -13,7 +13,7 @@ export class FilterTabsService {
   private priceRangeSubject: BehaviorSubject<number[]>;
 
   constructor() {
-    this.tabsSubject = new BehaviorSubject(this.tabs);
+    this.tabsSubject = new BehaviorSubject(null);
     this.removedTabID = new BehaviorSubject("");
     this.priceRangeSubject = new BehaviorSubject([50,250]);
   }
