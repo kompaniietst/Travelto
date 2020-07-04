@@ -40,7 +40,9 @@ export class FormOrderComponent implements OnInit {
       })
 
     this.isAuthorized = this.auth.isAuthorized();
-    this.currUserId = this.auth.getCurrUser()._id;
+
+    if (this.isAuthorized)
+      this.currUserId = this.auth.getCurrUser()._id;
   }
 
   ngOnInit(): void {

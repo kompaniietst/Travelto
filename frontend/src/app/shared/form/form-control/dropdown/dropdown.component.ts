@@ -23,20 +23,10 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
   @Input() control: any;
   @Input() lsData: City;
 
-  onChange = (val) => { }
-
   formControl = new FormControl();
-
   filteredOptions: Observable<any>;
 
-  constructor() { }
-
-  writeValue(obj: any): void { }
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: any): void { }
+  onChange = (val) => { }
 
   ngOnInit(): void {
     console.log('this.control.value', this.control.value);
@@ -45,28 +35,80 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
       this.formControl.setValue(this.control.value)
     }
 
+    console.log('dropdoen', this.lsData, this.control);
+
     if (this.lsData && this.control.key == "city") {
       this.formControl.setValue(this.lsData)
     }
-
-    this.filteredOptions = this.formControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value)));
+    // this.filteredOptions = this.formControl.valueChanges
+    //   .pipe(
+    //     startWith(''),
+    //     map(value => this._filter(value)));
 
     this.formControl.valueChanges.subscribe(x => this.onChange(x))
   }
 
-  private _filter(value: string) {
-
-    const filterValue = value.toLowerCase();
-
-    return this.control.options.filter(option => {
-      if (option.label.toLowerCase().includes(filterValue))
-        return option;
-    })
-
+  writeValue(obj: any): void {
+    // throw new Error("Method not implemented.");
   }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    // throw new Error("Method not implemented.");
+  }
+
+
+  //   @Input() control: any;
+  //   @Input() lsData: City;
+
+  //   onChange = (val) => { }
+
+  //   formControl = new FormControl();
+
+  //   filteredOptions: Observable<any>;
+
+  //   constructor() { }
+
+  //   writeValue(obj: any): void { }
+
+  //   registerOnChange(fn: any): void {
+  //     this.onChange = fn;
+  //   }
+  //   registerOnTouched(fn: any): void { }
+
+  //   ngOnInit(): void {
+  //     console.log('this.control.value', this.control.value);
+
+  //     if (this.control.value) {
+  //       this.formControl.setValue(this.control.value)
+  //     }
+
+  // console.log('dropdoen',this.lsData, this.control);
+
+  //     // if (this.lsData && this.control.key == "city") {
+  //     //   this.formControl.setValue(this.lsData)
+  //     // }
+  //     this.filteredOptions = this.formControl.valueChanges
+  //     .pipe(
+  //       startWith(''),
+  //       map(value => this._filter(value)));
+
+  //     this.formControl.valueChanges.subscribe(x => this.onChange(x))
+  //   }
+
+  //   private _filter(value: string) {
+
+  //     const filterValue = value.toLowerCase();
+
+  //     return this.control.options.filter(option => {
+  //       if (option.label.toLowerCase().includes(filterValue))
+  //         return option;
+  //     })
+
+  //   }
 
   displayFn(option) {
     return option?.label;

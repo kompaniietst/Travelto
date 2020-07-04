@@ -54,12 +54,18 @@ export class MainScreenComponent implements OnInit {
   }
 
   onSubmit(formData: any) {
-    console.log('formData', formData);
 
     const queryParams: Params = {};
 
-    if (formData.city)
+    if (formData.city == null)
+      delete formData.city;
+
+    if (formData.city != null)
       queryParams["placeId"] = formData.city._id;
+
+
+    if (formData.date == null)
+      delete formData.date;
 
     if (formData.date) {
       queryParams["checkIn"] = formData.date[0];

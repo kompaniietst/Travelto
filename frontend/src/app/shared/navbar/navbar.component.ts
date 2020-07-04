@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Control } from 'src/app/core/models/Control';
 import { CitiesService } from 'src/app/core/services/cities.service';
-import { Router } from '@angular/router';
+import { Router, Params } from '@angular/router';
 import { City } from 'src/app/core/models/City';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
@@ -51,7 +51,26 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void { }
   onSubmit(formData: any) {
+
+    const queryParams: Params = {};
+
+    if (formData.city == null)
+      delete formData.city;
+
+    if (formData.city != null)
+      queryParams["placeId"] = formData.city._id;
+
+
+    if (formData.date == null)
+      delete formData.date;
+
+    if (formData.date) {
+      queryParams["checkIn"] = formData.date[0];
+      queryParams["checkOut"] = formData.date[1];
+    }
+
     this.ls.saveToLOcalstorage(formData);
+    this.router.navigate(['catalog'], { queryParams: queryParams })
   }
   
 }

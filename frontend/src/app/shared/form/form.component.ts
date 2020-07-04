@@ -43,11 +43,7 @@ export class FormComponent<T> implements OnInit {
   ) {
 
     if (this.localstorageNotEmpty)
-      this.ls.get().subscribe(x => {
-        console.log('lSSS', x);
-
-        this.lsData = x
-      });                           // get localstorage data
+      this.ls.get().subscribe(x => this.lsData = x);                           // get localstorage data
   }
 
   localstorageNotEmpty() {
@@ -87,7 +83,7 @@ export class FormComponent<T> implements OnInit {
 
   onSubmit() {
     this.valueChange.emit(this.form.value);
-    // console.log('form.value',this.form.value);
+    console.log('form.value', this.form.value);
     // this.resetForm();
   }
 

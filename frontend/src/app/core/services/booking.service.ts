@@ -14,7 +14,7 @@ export class BookingService {
   readonly URL = environment.apiUrl;
   currUserId: string;
 
-  private bookingsSubject: BehaviorSubject<any>;
+  private bookingsSubject: BehaviorSubject<any> = new BehaviorSubject([]);
   bookings: Order[] = [];
 
   constructor(private http: HttpClient,
@@ -23,37 +23,30 @@ export class BookingService {
     this.get().subscribe((o: Order[]) => {
       console.log('OO', o);
 
-      this.bookingsSubject= new BehaviorSubject([...o]);
+      this.bookingsSubject.next([...o]);
       this.bookings = o;
     })
 
-    this.currUserId = this.auth.getCurrUser()._id;
+    if (this.auth.isAuthorized())
+      this.currUserId = this.auth.getCurrUser()._id;
 
   }
 
   register(newOrder: Order): Observable<Order> {
     console.log('newOrder', newOrder);
     return this.http.post<Order>(`${this.URL}/bookings`, newOrder)
-      .pipe(map(o => { 
-        console.log('http',o);
-        
+      .pipe(map(o => {
+        console.log('http', o);
+
         this.bookings.push(newOrder);
         this.bookingsSubject.next([...this.bookings]);
         return o;
-       }))
+      }))
   }
 
   getBookings() {
     return this.bookingsSubject.asObservable();
   }
-
-  // cancelBooking(_id:string){
-
-
-  //   this.changeOrderStatus(_id, 'confirmCancel')
-  // }
-
-
 
   /*                  http               */
 
