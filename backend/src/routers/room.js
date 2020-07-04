@@ -16,7 +16,7 @@ router.post('/rooms', async (req, res) => {
         const room = new Room(req.body)
         await room.save()
 
-        res.status(201).send({ room })
+        res.status(201).send(room)
     }
     catch (error) {
         console.log(error);

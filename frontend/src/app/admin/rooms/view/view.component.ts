@@ -21,9 +21,9 @@ export class ViewRoomsComponent implements OnInit {
 
     console.log('ddd');
     
-    this.rooms$ = this.admin.getRoomsBy(currUserId);
+    this.rooms$ = this.admin.allRooms;
 
-    this.admin.getRoomsBy(currUserId).subscribe(x => {
+    this.admin.allRooms.subscribe(x => {
       console.log('__rooms', x);
 
       this.loading = false

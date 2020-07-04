@@ -20,7 +20,7 @@
     <div class="block images">
         <app-special [specials]="item.specials"></app-special>
         <div *ngFor="let img of item.images; trackBy: trackById" class="img">
-            <img [src]="img" alt="">
+            <img [src]="URL + img" alt="">{{img}}
         </div>
     </div>
 

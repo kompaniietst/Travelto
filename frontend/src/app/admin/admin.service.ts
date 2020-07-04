@@ -20,8 +20,12 @@ export class AdminService {
   currUserId: string;
 
   private hotelsSubject: BehaviorSubject<Hotel[]> = new BehaviorSubject([]);
-  hotels = [];
+  hotels: Hotel[] = [];
   allHotels: Observable<Hotel[]>;
+
+  private roomsSubject: BehaviorSubject<Room[]> = new BehaviorSubject([]);
+  rooms: Room[] = [];
+  allRooms: Observable<Room[]>;
 
   constructor(
     private http: HttpClient,
@@ -41,6 +45,17 @@ export class AdminService {
       });
 
     this.allHotels = this.hotelsSubject.asObservable();
+
+    this.getRoomsBy(this.currUserId).
+      subscribe((x: Room[]) => {
+        console.log('adm serv', x);
+
+        this.rooms = x;
+        this.roomsSubject.next([...x]);
+      });
+
+    this.allHotels = this.hotelsSubject.asObservable();
+    this.allRooms = this.roomsSubject.asObservable();
   }
 
   registerHotel(hotel: Hotel): Observable<Hotel> {
@@ -80,8 +95,8 @@ export class AdminService {
 
 
           let i = this.hotels.findIndex((h: Hotel) => h._id == _id);
-          console.log('i',i);
-          
+          console.log('i', i);
+
           this.hotels.splice(i, 1);
           this.hotelsSubject.next([...this.hotels]);
 
@@ -132,8 +147,18 @@ export class AdminService {
 
   registerRoom(room: Room): Observable<Room> {
     return this.roomService.register(room)
-      .pipe(delay(1500))
+    .pipe(
+      map((x: Room) => {
+        console.log('reg ', x);
+
+        this.rooms.push(x);
+        this.roomsSubject.next([...this.rooms]);
+        return x;
+      }),
+      delay(1500)
+    )
   }
+
 
   editRoom(_id: string, room: Room): Observable<Room> {
     return this.roomService.editRoom(_id, room)

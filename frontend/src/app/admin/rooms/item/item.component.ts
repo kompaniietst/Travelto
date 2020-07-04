@@ -8,12 +8,7 @@ import { Control } from 'src/app/core/models/Control';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
 import { CustomCurrencyPipe } from 'src/app/pipes/customCurrency.pipe';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
-
-class HoteInfo {
-  _id: string;
-  name: string;
-  stars: number;
-}
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-room-item',
@@ -23,6 +18,8 @@ class HoteInfo {
 })
 export class RoomItemComponent implements OnInit {
 
+  readonly URL = environment.apiUrl;
+  
   @Input() item: Room;
   // hotelInfo: HoteInfo;
   loading = true;
