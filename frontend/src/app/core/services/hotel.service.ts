@@ -47,9 +47,9 @@ export class HotelService {
     return this.http.put<Hotel>(`${this.URL}/hotels/${_id}`, hotel)
   }
 
-  // gethotelInfoByRoom(_id: string): Observable<Hotel> {
-  //   // console.log('id', _id);
-
-  //   return this.http.get<Hotel>(`${this.URL}/hotelInfoByRoom/${_id}`)
-  // }
+  removeHotel(_id: string) {
+    console.log('id', _id);
+    
+    return this.http.delete<Hotel>(`${this.URL}/hotels/${_id}`)
+  }
 }

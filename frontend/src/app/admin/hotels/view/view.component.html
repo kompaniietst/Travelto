@@ -8,7 +8,7 @@
     No hotels yet
 </div>
 <div *ngIf="hotels$">
-    <div *ngFor="let item of hotels$ | async | reverse; trackBy: trackById">
+    <div *ngFor="let item of hotels$ | async | reverse">
         <app-hotel-item [item]="item"></app-hotel-item>
     </div>
 </div>

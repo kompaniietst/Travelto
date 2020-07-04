@@ -18,6 +18,7 @@
         </div>
 
         <app-carousel 
+            *ngIf="carouselConfig"
             [slides]="hotel.images" 
             [config]="carouselConfig" 
             needCountSlides="true" 
@@ -73,7 +74,7 @@
             <div class="list_amenities">
                 <div *ngFor="let amenity of amenities; trackBy: trackById; let i = index" class="hotel_amenity">
                     <div class="img" [ngClass]="{'active': ifActiveAmenity(amenity._id)}">
-                        <img [src]="amenity.image" alt="">
+                        <img [src]="URL + amenity.image" alt="">
                     </div>
                     <strong>{{ amenity.label }}</strong>
                 </div>
@@ -90,7 +91,7 @@
         </div>
 
         <div class="section address">
-            <div class="title"><strong>Расположение</strong></div>
+            <div class="title"><strong>Location</strong></div>
 
             <div class="place">
                 <span></span>
@@ -98,8 +99,8 @@
                 {{ hotel.address.street }} 
                 {{ hotel.address.houseNumber }}
             </div>
-            
             <app-google-maps 
+                *ngIf="mapLat > 0 && mapLng > 0"
                 [key]="mapApiKey" 
                 [zoom]="9" 
                 [mapLat]="mapLat" 

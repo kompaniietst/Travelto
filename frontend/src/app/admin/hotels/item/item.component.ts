@@ -39,6 +39,13 @@ export class HotelItemComponent<T> implements OnInit {
     this.editItem = true;
   }
 
+  remove(_id: string) {
+    console.log('_id item');
+    
+    this.admin.removeHotel(_id)
+      .subscribe(x => console.log(x))
+  }
+
   initFormStructure(amenities: Amenity[], cities: City[]) {
 
     this.formStructure$ = of([
@@ -106,7 +113,7 @@ export class HotelItemComponent<T> implements OnInit {
             key: 'map',
             label: 'Map coordinates:',
             required: true,
-            value: this.item.address.map || [0,0],
+            value: this.item.address.map || [0, 0],
             options: [
               { placeholder: 'latitude' },
               { placeholder: 'longitude' }
@@ -152,7 +159,7 @@ export class HotelItemComponent<T> implements OnInit {
         err => console.log(err)
       )
   }
-  
+
   trackById(index, item) {
     return item.id;
   }

@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Amenity } from '../core/models/Amenity';
 import { Hotel } from '../core/models/Hotel';
 import { City } from '../core/models/City';
-import { delay } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { Room } from '../core/models/Room';
 import { RoomService } from '../core/services/room.service';
 import { AuthenticationService } from '../core/authentication/authentication.service';
@@ -17,24 +17,44 @@ import { AuthenticationService } from '../core/authentication/authentication.ser
 export class AdminService {
 
   readonly URL = environment.apiUrl;
-  // private amenitiesSubject: BehaviorSubject<any>;
-  // amenities: Observable<any>;
+  currUserId: string;
+
+  private hotelsSubject: BehaviorSubject<Hotel[]> = new BehaviorSubject([]);
+  hotels = [];
+  allHotels: Observable<Hotel[]>;
 
   constructor(
     private http: HttpClient,
     private hotelService: HotelService,
     private roomService: RoomService,
-
+    private auth: AuthenticationService
   ) {
 
-    // this.amenitiesSubject = new BehaviorSubject(this.getAmenities());
-    // this.amenities = this.amenitiesSubject.asObservable();
+    this.currUserId = this.auth.getCurrUser()._id;
 
+    this.getHotelsBy(this.currUserId).
+      subscribe((x: Hotel[]) => {
+        console.log('adm serv', x);
+
+        this.hotels = x;
+        this.hotelsSubject.next([...x]);
+      });
+
+    this.allHotels = this.hotelsSubject.asObservable();
   }
 
   registerHotel(hotel: Hotel): Observable<Hotel> {
     return this.hotelService.register(hotel)
-      .pipe(delay(1500))
+      .pipe(
+        map((x: Hotel) => {
+          console.log('reg ', x);
+
+          this.hotels.push(x);
+          this.hotelsSubject.next([...this.hotels]);
+          return x;
+        }),
+        delay(1500)
+      )
   }
 
   getHotelsBy(currUserId: string): Observable<Hotel[]> {
@@ -49,6 +69,27 @@ export class AdminService {
     console.log('in serv', _id, hotel);
     return this.hotelService.editHotel(_id, hotel)
       .pipe(delay(1500))
+  }
+
+  removeHotel(_id: string) {
+    return this.hotelService.removeHotel(_id)
+      .pipe(
+        map((x) => {
+          console.log('rem in adm', x);
+          console.log('   ', this.hotels);
+
+
+          let i = this.hotels.findIndex((h: Hotel) => h._id == _id);
+          console.log('i',i);
+          
+          this.hotels.splice(i, 1);
+          this.hotelsSubject.next([...this.hotels]);
+
+          console.log('   ', this.hotels);
+          return x;
+        }),
+        delay(1500)
+      )
   }
 
   // gethotelInfoByRoom(_id: string): Observable<Hotel> {
@@ -106,7 +147,7 @@ export class AdminService {
 
   getRoomsBy(currUserId: string): Observable<Room[]> {
     console.log(currUserId);
-    
+
     return this.roomService.getRoomsBy(currUserId as string)
       .pipe(delay(1500))
   }

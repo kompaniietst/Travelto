@@ -23,11 +23,11 @@ export class ViewHotelsComponent implements OnInit {
     private auth: AuthenticationService
   ) {
 
-    const currUserId = this.auth.getCurrUser()._id;
+    // const currUserId = this.auth.getCurrUser()._id;
 
-    this.hotels$ = this.admin.getHotelsBy(currUserId);
+    this.hotels$ = this.admin.allHotels;
 
-    this.admin.getHotelsBy(currUserId)
+    this.admin.allHotels
       .subscribe(
         (x: Hotel[]) => {
           this.loading = false;

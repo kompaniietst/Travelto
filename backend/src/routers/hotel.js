@@ -12,7 +12,7 @@ router.post('/hotels', async (req, res) => {
         const hotel = new Hotel(req.body)
         await hotel.save()
 
-        res.status(201).send({ hotel })
+        res.status(201).send(hotel)
     }
     catch (error) {
         res.status(400).send(error.message)
@@ -110,6 +110,20 @@ router.get('/hotelInfoByRoom/:id', async (req, res) => {
 
     res.send(hotel)
 
+})
+
+
+router.delete('/hotels/:id', async (req, res) => {
+
+    console.log(req.body, req.params);
+
+    const id = req.params.id;
+
+    await Hotel.deleteOne({ _id: id },
+        function (err, result) {
+            if (result)
+                res.send(result)
+        });
 })
 
 module.exports = router

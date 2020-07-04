@@ -17,6 +17,8 @@ import { environment } from 'src/environments/environment';
 })
 export class HotelComponent implements OnInit {
 
+  readonly URL = environment.apiUrl;
+
   id: string = this.route.snapshot.params.id;
   hotel: Hotel;
   loading = true;
@@ -32,24 +34,8 @@ export class HotelComponent implements OnInit {
   // loading = true;
 
 
-  
-  needCountSlides: boolean = true;
-  carouselConfig = {
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    arrows: true
-  };
-  carouselConfigRooms = {
-    speed: 700,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
-    needLink: true,
-    arrows: true,
-    autoplay: true,
-    draggable: true,
-  };
+
+
 
 
   mapApiKey = environment.mapApiKey;
@@ -57,6 +43,10 @@ export class HotelComponent implements OnInit {
   markers = [];
   mapLat: number;
   mapLng: number;
+
+  needCountSlides: boolean = true;
+  carouselConfig;
+  carouselConfigRooms;
 
 
   constructor(
@@ -75,6 +65,7 @@ export class HotelComponent implements OnInit {
           this.loading = false;
           this.getRooms();
           this.defineMapData();
+          this.defineCarousels();
         },
         err => this.alert.error(err.error))
 
@@ -82,9 +73,7 @@ export class HotelComponent implements OnInit {
       .subscribe((x: Amenity[]) => this.amenities = x)
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   getRooms() {
     this.rooms$ = this.admin.getRoomsByHotel(this.id)
@@ -109,6 +98,24 @@ export class HotelComponent implements OnInit {
     this.mapLng = +this.hotel.address.map[1];
   }
 
+  defineCarousels() {
+    this.carouselConfig = {
+      slidesToShow: this.hotel.images.length < 3 ? this.hotel.images.length : 3,
+      slidesToScroll: 1,
+      autoplay: true,
+      arrows: true
+    };
+    this.carouselConfigRooms = {
+      speed: 700,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
+      needLink: true,
+      arrows: true,
+      autoplay: true,
+      draggable: true,
+    };
+  }
   trackById(index, item) {
     return item.id;
   }
