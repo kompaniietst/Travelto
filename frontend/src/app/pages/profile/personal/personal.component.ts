@@ -33,7 +33,9 @@ export class PersonalComponent implements OnInit {
     )
       .subscribe(x => {
         this.currUser = x[0];
-        this.profileImage = this.URL + this.currUser.image
+        console.log('p ',this.URL + this.currUser.image);
+        
+        this.profileImage = this.URL + this.currUser.image;
 
         var cities = x[1];
 

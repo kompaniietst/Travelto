@@ -65,3 +65,10 @@
     font-size: 24px;
     margin-bottom: 40px;
 }
+
+.mat-h1, .mat-headline, .mat-typography h1{
+    color: #1c8ec0;
+    font-size: 28px;
+    line-height: 40px;
+    font-family: $font_bold;
+}

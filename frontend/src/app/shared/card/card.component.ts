@@ -4,6 +4,7 @@ import { LimitPipe } from 'src/app/pipes/limit.pipe';
 import { Hotel } from 'src/app/core/models/Hotel';
 import { HotelService } from 'src/app/core/services/hotel.service';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-card',
@@ -13,6 +14,8 @@ import { LocalStorageService } from 'src/app/core/services/local-storage.service
 })
 export class CardComponent implements OnInit {
 
+  readonly URL = environment.apiUrl;
+  
   @Input() room: Room;
   @Input() limit: number;
   @Input() quantity: number;

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: "https://the-travelto.herokuapp.com",
+  apiUrl: "http://localhost:3000",
   mapApiKey: "AIzaSyDtI0Ygt2xVHorrttgcueuhEdoVSDjpv5A"
 };
 

@@ -6,6 +6,7 @@ import { of, Observable, forkJoin } from 'rxjs';
 import { Control } from 'src/app/core/models/Control';
 import { City } from 'src/app/core/models/City';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-hotel-item',
@@ -15,6 +16,8 @@ import { AlertMessageService } from 'src/app/core/services/alert-message.service
 export class HotelItemComponent<T> implements OnInit {
 
   @Input() item: Hotel;
+
+  readonly URL = environment.apiUrl;
 
   formStructure$: Observable<Control[]>;
   showSpinner = false;

@@ -73,7 +73,7 @@ export class AuthenticationService {
   }
 
   uploadProfileImage(_id: string, imageData: FormData) {
-    console.log('imageData ', imageData);
+    console.log('imageData ', _id, imageData);
 
     return this.http.post(`${this.URL}/images/profImages/${_id}`, imageData).
       pipe(

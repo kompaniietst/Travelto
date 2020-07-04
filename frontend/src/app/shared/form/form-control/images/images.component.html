@@ -16,7 +16,7 @@
         <mat-card *ngFor="let item of imagesToShow; trackBy: trackById; index as i" cdkDrag>
             <div class="remove" (click)="removeImage(i)"><span class="icon icon_trash"></span></div>
             <mat-spinner *ngIf="showSpinner" strokeWidth="3" diameter="20"></mat-spinner>
-            <img [src]="item" alt="">
+            <img [src]="URL + item" alt="">
         </mat-card>
     </div>
 </div>

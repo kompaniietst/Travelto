@@ -31,7 +31,7 @@
             </ul>
             <div class="amenities">
                 <div *ngFor="let item of room.hotel.amenities; trackBy: trackById">
-                    <img [src]="item.image" [alt]="item.label" [matTooltip]="item.label">
+                    <img [src]="URL + item.image" [alt]="item.label" [matTooltip]="item.label">
                 </div>
             </div>
         </div>

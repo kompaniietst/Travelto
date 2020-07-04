@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-carousel',
@@ -8,6 +9,8 @@ import { LocalStorageService } from 'src/app/core/services/local-storage.service
 })
 export class CarouselComponent implements OnInit {
 
+  readonly URL = environment.apiUrl;
+  
   defaultConfig = {
     slidesToShow: 1,
     slidesToScroll: 1,

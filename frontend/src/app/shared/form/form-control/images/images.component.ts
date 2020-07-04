@@ -93,6 +93,8 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
     this.admin.uploadImages(this.control.type, formData)
       .subscribe(
         (resp: any) => {
+          console.log('RESR', resp);
+          
           this.showSpinner = false;
 
           var defaultData = this.control.value;
@@ -102,20 +104,20 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
 
             resp.forEach((img: any) => {
               (this.form.get('formKey') as FormArray)
-                .push(new FormControl(`${this.URL}/images/${this.control.type}/` + img));
+                .push(new FormControl(`/images/${this.control.type}/` + img));
             });
 
             return;
           }
 
           if (this.defaultDataExist()) {
-            this.form.get('formKey').setValue(`${this.URL}/images/${this.control.type}/` + resp[0].filename)
+            this.form.get('formKey').setValue(`/images/${this.control.type}/` + resp[0].filename)
             return
           }
 
           resp.forEach(img => {
             (this.form.get('formKey') as FormArray)
-              .push(new FormControl(`${this.URL}/images/${this.control.type}/` + img));
+              .push(new FormControl(`/images/${this.control.type}/` + img));
           })
         },
         err => console.log(err))
