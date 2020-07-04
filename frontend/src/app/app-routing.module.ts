@@ -21,8 +21,8 @@ import { AddYourHotelComponent } from './pages/add-hotel/add-hotel.component';
 import { RoleGuard } from './core/guards/role.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  // { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', component: HomeComponent },
   { path: 'catalog', component: CatalogComponent },
   { path: 'about', component: AboutComponent },
   {
