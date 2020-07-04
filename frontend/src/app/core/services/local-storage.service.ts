@@ -55,13 +55,6 @@ export class LocalStorageService {
   }
 
   get(): Observable<any> {
-    // if (!localStorage.getItem('searchParams'))
-    //   return null
-
-    // if (localStorage.getItem('searchParams'))
-    //   return JSON.parse(localStorage.getItem('searchParams'))
-    console.log('VSLUE ', this.storageSubject);
-
     if (!this.storageSubject)
       return of({});
 

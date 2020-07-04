@@ -41,10 +41,17 @@ export class FormComponent<T> implements OnInit {
     private generateForm: GenerateFormStructureService,
     private ls: LocalStorageService
   ) {
-    
-    var localstorageData = this.ls.get();
-    if (localstorageData)
-      this.ls.get().subscribe(x => this.lsData = x);                           // get localstorage data
+
+    if (this.localstorageNotEmpty)
+      this.ls.get().subscribe(x => {
+        console.log('lSSS', x);
+
+        this.lsData = x
+      });                           // get localstorage data
+  }
+
+  localstorageNotEmpty() {
+    return Object.keys(this.ls.get()).length > 0;
   }
 
   ngOnInit() {
