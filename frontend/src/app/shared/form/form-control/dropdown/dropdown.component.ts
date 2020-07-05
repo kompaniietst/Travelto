@@ -29,13 +29,11 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
   onChange = (val) => { }
 
   ngOnInit(): void {
-    console.log('this.control.value', this.control.value);
 
     if (this.control.value) {
       this.formControl.setValue(this.control.value)
     }
 
-    console.log('dropdoen', this.lsData, this.control);
 
     if (this.lsData && this.control.key == "city") {
       this.formControl.setValue(this.lsData)

@@ -52,7 +52,7 @@ export class FormComponent<T> implements OnInit {
 
   ngOnInit() {
 
-    this.controls$.subscribe(x => console.log('CONTROLS: ', x))
+    // this.controls$.subscribe(x => console.log('CONTROLS: ', x))
     this.form = this.generateForm.defineStructure(this.controls$);
 
     if (this.defaultData) {
@@ -63,14 +63,13 @@ export class FormComponent<T> implements OnInit {
         var value = this.defaultData[key];
         
         if (key == '_id' || key == 'feedbacks' || key == '__v') return
-        console.log(key, value == null);
+        // console.log(key, value == null);
 
         if (value == null)
           return;
 
         this.form.get(key).setValue(value)
       }
-      console.log('form', this.form);
       
     }
 

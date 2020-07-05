@@ -25,8 +25,6 @@ export class GoogleMapsComponent implements OnInit {
 
 
   ngAfterViewInit(): void {
-    console.log('mapLat', this.mapLat);
-    console.log('mapLat', this.mapLng);
     GoogleMapsApiLoader({
       apiKey: this.key
     }).then(googleMapApi => {

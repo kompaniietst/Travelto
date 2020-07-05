@@ -29,7 +29,7 @@ export class RoomService {
   }
 
   getRoomsBy(currUserId: string): Observable<Room[]> {
-    console.log('-', currUserId);
+    // console.log('-', currUserId);
     
     const params = { "creator": currUserId };
     return this.http.post<Room[]>(`${this.URL}/roomsBy`, params)

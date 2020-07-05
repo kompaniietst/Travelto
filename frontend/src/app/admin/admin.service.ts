@@ -38,7 +38,7 @@ export class AdminService {
 
     this.getHotelsBy(this.currUserId).
       subscribe((x: Hotel[]) => {
-        console.log('adm serv', x);
+        console.log('get hotels', x);
 
         this.hotels = x;
         this.hotelsSubject.next([...x]);
@@ -81,7 +81,7 @@ export class AdminService {
   }
 
   editHotel(_id: string, hotel: Hotel): Observable<Hotel> {
-    console.log('in serv', _id, hotel);
+    // console.log('in serv', _id, hotel);
     return this.hotelService.editHotel(_id, hotel)
       .pipe(delay(1500))
   }
@@ -171,7 +171,7 @@ export class AdminService {
   }
 
   getRoomsBy(currUserId: string): Observable<Room[]> {
-    console.log(currUserId);
+    // console.log(currUserId);
 
     return this.roomService.getRoomsBy(currUserId as string)
       .pipe(delay(1500))
