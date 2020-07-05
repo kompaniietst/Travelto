@@ -23,7 +23,7 @@ export class HotelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('ROUTE', this.route);
+    console.log('ROUTE', this);
 
 
   }
