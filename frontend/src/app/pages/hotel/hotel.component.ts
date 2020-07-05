@@ -15,7 +15,7 @@ export class HotelComponent implements OnInit {
 
 
   constructor(
-    //private route: ActivatedRoute,
+    private route: ActivatedRoute,
    // private admin: AdminService,
     //private alert: AlertMessageService
   ) {
@@ -23,7 +23,7 @@ export class HotelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('ROUTE', this);
+    console.log('ROUTE', this.route);
 
 
   }
