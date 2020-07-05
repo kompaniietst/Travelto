@@ -19,13 +19,12 @@ const COMPONENTS = [
 ];
 
 const MODULES = [
-  SharedModule,
-
   BrowserModule,
   CommonModule,
   HttpClientModule,
   FormsModule,
   ReactiveFormsModule,
+  SharedModule,
   PipesModule,
 
   RouterModule.forRoot(routes)

@@ -27,10 +27,10 @@ export class RegistrationComponent implements OnInit {
   })
 
   openModal() {
-    this.dialog.closeAll();
-    this.dialog.open(LoginComponent, {
-      panelClass: 'popup',
-    });
+    // this.dialog.closeAll();
+    // this.dialog.open(LoginComponent, {
+    //   panelClass: 'popup',
+    // });
   }
 
   onSubmit() {
