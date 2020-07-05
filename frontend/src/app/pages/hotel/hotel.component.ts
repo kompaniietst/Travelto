@@ -19,34 +19,27 @@ export class HotelComponent implements OnInit {
 
   readonly URL = environment.apiUrl;
 
-  id: string = this.route.snapshot.params.id;
-  hotel: Hotel;
-  loading = true;
-  // breadcrumbs: string[] = ['All hotels', 'Hotel preview'];
-  // hotelAmenities;
-
-  rooms$: Observable<Room[]>;
-  amenities: Amenity[];
-  // mapLat;
-  // mapLng;
-  // markers = [];
-
+  // id: string = this.route.snapshot.params.id;
+  // hotel: Hotel;
   // loading = true;
 
+  // rooms$: Observable<Room[]>;
+  // amenities: Amenity[];
 
 
 
 
 
-  mapApiKey = environment.mapApiKey;
 
-  markers = [];
-  mapLat: number;
-  mapLng: number;
+  // mapApiKey = environment.mapApiKey;
 
-  needCountSlides: boolean = true;
-  carouselConfig;
-  carouselConfigRooms;
+  // markers = [];
+  // mapLat: number;
+  // mapLng: number;
+
+  // needCountSlides: boolean = true;
+  // carouselConfig;
+  // carouselConfigRooms;
 
 
   constructor(
@@ -54,7 +47,7 @@ export class HotelComponent implements OnInit {
     private admin: AdminService,
     private alert: AlertMessageService
   ) {
-    console.log(this.id);
+    // console.log(this.id);
 
     // this.admin
     //   .getHotelBy(this.id)
@@ -69,8 +62,8 @@ export class HotelComponent implements OnInit {
     //     },
     //     err => this.alert.error(err.error))
 
-    this.admin.getAmenities()
-      .subscribe((x: Amenity[]) => this.amenities = x)
+    // this.admin.getAmenities()
+    //   .subscribe((x: Amenity[]) => this.amenities = x)
   }
 
   ngOnInit(): void {
@@ -78,48 +71,48 @@ export class HotelComponent implements OnInit {
 
   }
 
-  getRooms() {
-    this.rooms$ = this.admin.getRoomsByHotel(this.id)
+  // getRooms() {
+  //   this.rooms$ = this.admin.getRoomsByHotel(this.id)
 
-    this.admin.getRoomsByHotel(this.id)
-      .subscribe(
-        r => console.log('after r', r),
-        er => console.log(er))
+  //   this.admin.getRoomsByHotel(this.id)
+  //     .subscribe(
+  //       r => console.log('after r', r),
+  //       er => console.log(er))
 
-  }
+  // }
 
 
-  ifActiveAmenity(_id: string) {
-    return this.hotel.amenities.some(a => a._id == _id)
-  }
+  // ifActiveAmenity(_id: string) {
+  //   return this.hotel.amenities.some(a => a._id == _id)
+  // }
 
-  defineMapData() {
-    this.markers = [
-      { lat: +this.hotel.address.map[0], lng: +this.hotel.address.map[1] },
-    ];
-    this.mapLat = +this.hotel.address.map[0];
-    this.mapLng = +this.hotel.address.map[1];
-  }
+  // defineMapData() {
+  //   this.markers = [
+  //     { lat: +this.hotel.address.map[0], lng: +this.hotel.address.map[1] },
+  //   ];
+  //   this.mapLat = +this.hotel.address.map[0];
+  //   this.mapLng = +this.hotel.address.map[1];
+  // }
 
-  defineCarousels() {
-    this.carouselConfig = {
-      slidesToShow: this.hotel.images.length < 3 ? this.hotel.images.length : 3,
-      slidesToScroll: 1,
-      autoplay: true,
-      arrows: true
-    };
-    this.carouselConfigRooms = {
-      speed: 700,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
-      needLink: true,
-      arrows: true,
-      autoplay: true,
-      draggable: true,
-    };
-  }
-  trackById(index, item) {
-    return item.id;
-  }
+  // defineCarousels() {
+  //   this.carouselConfig = {
+  //     slidesToShow: this.hotel.images.length < 3 ? this.hotel.images.length : 3,
+  //     slidesToScroll: 1,
+  //     autoplay: true,
+  //     arrows: true
+  //   };
+  //   this.carouselConfigRooms = {
+  //     speed: 700,
+  //     slidesToShow: 1,
+  //     slidesToScroll: 1,
+  //     cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
+  //     needLink: true,
+  //     arrows: true,
+  //     autoplay: true,
+  //     draggable: true,
+  //   };
+  // }
+  // trackById(index, item) {
+  //   return item.id;
+  // }
 }
