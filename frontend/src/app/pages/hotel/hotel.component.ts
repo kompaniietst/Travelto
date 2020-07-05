@@ -16,7 +16,7 @@ export class HotelComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-   // private admin: AdminService,
+    private admin: AdminService,
     //private alert: AlertMessageService
   ) {
 
