@@ -19,7 +19,6 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { AddHotelComponent } from './admin/hotels/add/add.component';
 import { AddYourHotelComponent } from './pages/add-hotel/add-hotel.component';
 import { RoleGuard } from './core/guards/role.guard';
-import { TestComponent } from './pages/test/test.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'home', pathMatch: 'full' },
