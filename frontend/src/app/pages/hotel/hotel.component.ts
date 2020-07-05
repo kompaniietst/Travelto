@@ -56,18 +56,18 @@ export class HotelComponent implements OnInit {
   ) {
     console.log(this.id);
 
-    this.admin
-      .getHotelBy(this.id)
-      .subscribe(
-        (h: Hotel) => {
-          this.hotel = h
-          console.log('HOTEl', this.hotel);
-          this.loading = false;
-          this.getRooms();
-          this.defineMapData();
-          this.defineCarousels();
-        },
-        err => this.alert.error(err.error))
+    // this.admin
+    //   .getHotelBy(this.id)
+    //   .subscribe(
+    //     (h: Hotel) => {
+    //       this.hotel = h
+    //       console.log('HOTEl', this.hotel);
+    //       this.loading = false;
+    //       this.getRooms();
+    //       this.defineMapData();
+    //       this.defineCarousels();
+    //     },
+    //     err => this.alert.error(err.error))
 
     this.admin.getAmenities()
       .subscribe((x: Amenity[]) => this.amenities = x)

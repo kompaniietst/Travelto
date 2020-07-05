@@ -1,4 +1,4 @@
-<div *ngIf="hotel">
+<!-- <div *ngIf="hotel">
     
     <div class="mainscreen">
         <div class="container">
@@ -32,7 +32,6 @@
             {{ hotel.description }}
         </div>
 
-        <!-- Rooms -->
         <div class="section room"  *ngIf="(rooms$ | async)?.length > 0">
             <div class="title">
                 <strong>Выберите номер:</strong>
@@ -65,20 +64,19 @@
                 </div>
             </div>
         </div>
-        <!-- end rooms -->
 
         <div class="section">
             <div class="title">
                 <strong>Hotel services</strong>
             </div>
-            <!-- <div class="list_amenities">
+            <div class="list_amenities">
                 <div *ngFor="let amenity of amenities; trackBy: trackById; let i = index" class="hotel_amenity">
                     <div class="img" [ngClass]="{'active': ifActiveAmenity(amenity._id)}">
                         <img [src]="URL + amenity.image" alt="">
                     </div>
                     <strong>{{ amenity.label }}</strong>
                 </div>
-            </div> -->
+            </div>
         </div>
 
         <div class="section" *ngIf="hotel.feedbacks && hotel.feedbacks.length > 0">
@@ -124,4 +122,6 @@
         diameter="30" 
         class="blue_spinner">
     </mat-spinner>
-</div>
+</div> -->
+
+sdsdsd
