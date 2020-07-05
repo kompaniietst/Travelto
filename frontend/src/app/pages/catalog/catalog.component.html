@@ -1,9 +1,5 @@
-<div *ngIf="!(filteredRooms$ | async | filter:priceFilter | filter: cityFilter)?.length" class="align_center">
-    <mat-spinner strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner>
-</div>
-
-    <div class="container">
-    <div class="d_flex" *ngIf="(filteredRooms$ | async | filter:priceFilter | filter: cityFilter)?.length">
+<div class="container">
+    <div class="d_flex">
         <app-sidebar class="sidebar">
             <div class="title">
                 <strong>Filter:</strong>
@@ -20,8 +16,10 @@
             </div>
 
             <app-filter-tabs></app-filter-tabs>
-            <mat-spinner *ngIf="showSpinner" strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner>
-
+            <!-- <mat-spinner *ngIf="showSpinner" strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner> -->
+            <div *ngIf="!(filteredRooms$ | async)?.length" class="align_center">
+                <mat-spinner strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner>
+            </div>
             <ng-container 
                 *ngFor="let room of filteredRooms$ | async 
                 | filter: priceFilter
