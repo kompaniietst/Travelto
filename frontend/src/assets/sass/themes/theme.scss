@@ -143,11 +143,6 @@ form {
     animation: fadein 2s;
 }
 
-// .mat-progress-spinner .circle,
-// .mat-spinner .circle {
-//     stroke: $color;
-// }
-
 .mat-progress-spinner circle,
 .mat-spinner circle {
     stroke: white;
@@ -163,6 +158,14 @@ form {
 .mat-spinner.blue_spinner circle {
     stroke: $color;
 }
+
+.align_center{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
 /*  */
 .no_items {
     padding: 30px 0;

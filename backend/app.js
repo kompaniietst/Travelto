@@ -28,11 +28,6 @@ const app = express();
 app.use(cors())
 app.set('port', process.env.PORT || 3000);
 
-app.get('/', function(request, response) {
-  console.log('[support dash] processing get request')
-  response.send('Hello World 2!');
-});
-
 app.use(express.json())
 app.use(userRouter)
 app.use(hotelRouter)
@@ -41,14 +36,10 @@ app.use(amenityRouter)
 app.use(cityRouter)
 app.use(bookingRouter)
 
-
-
 // app.use(bodyParser.urlencoded({ extended: true }))
 // app.use(bodyParser.json())
 
-
 var multer = require('multer')
-
 
 function uploadImages(folderName) {
     return multer({

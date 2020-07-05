@@ -1,5 +1,9 @@
-<div class="container">
-    <div class="d_flex">
+<div *ngIf="!(filteredRooms$ | async | filter:priceFilter | filter: cityFilter)?.length" class="align_center">
+    <mat-spinner strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner>
+</div>
+
+    <div class="container">
+    <div class="d_flex" *ngIf="(filteredRooms$ | async | filter:priceFilter | filter: cityFilter)?.length">
         <app-sidebar class="sidebar">
             <div class="title">
                 <strong>Filter:</strong>
@@ -12,14 +16,14 @@
         </app-sidebar>
         <app-wrapper class="wrapper">
             <div class="title">
-                <strong>Founded {{ (filteredRooms$ | async | reverse | filter:priceFilter | filter: cityFilter)?.length }} options:</strong>
+                <strong>Founded {{ (filteredRooms$ | async | filter:priceFilter | filter: cityFilter)?.length }} options:</strong>
             </div>
 
             <app-filter-tabs></app-filter-tabs>
             <mat-spinner *ngIf="showSpinner" strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner>
 
             <ng-container 
-                *ngFor="let room of filteredRooms$ | async | reverse 
+                *ngFor="let room of filteredRooms$ | async 
                 | filter: priceFilter
                 | filter: cityFilter">
                 <app-card 
@@ -29,7 +33,7 @@
                     [config]="config"
                     [thumbnailsConfig]="thumbnailsConfig">
                     <div class="header_templ_center">
-                        <div class="hotel_name">hotel/{{ room.hotel._id }}
+                        <div class="hotel_name">
                             <a routerLink="/hotel/5ef358e24d47fe2c8081eba6"><strong>{{ room.hotel.name }}</strong></a>
                             <app-star-rating [starRating]="room.hotel.stars"></app-star-rating>
                         </div>
@@ -55,7 +59,7 @@
                 </app-card>
             </ng-container>
 
-            <div *ngIf="(filteredRooms$ | async | reverse | filter:priceFilter | filter: cityFilter)?.length == 0">No rooms.</div>
+            <div *ngIf="(filteredRooms$ | async | filter:priceFilter | filter: cityFilter)?.length == 0">No rooms.</div>
         </app-wrapper>
     </div>
 </div>

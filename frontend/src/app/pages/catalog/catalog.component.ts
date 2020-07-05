@@ -21,7 +21,7 @@ import { FormOrderComponent } from 'src/app/shared/form-order/form-order.compone
   providers: [CustomCurrencyPipe]
 })
 export class CatalogComponent implements OnInit {
-
+  optionsAmount
   rooms$: Observable<Room[]>
   amenities: Amenity[];
   formStructure$: Observable<Control[]>;
@@ -67,9 +67,9 @@ export class CatalogComponent implements OnInit {
     this.filterTabsService.getFilters()
       .subscribe((x: FilterItem[]) => {
         if (!x || x.length == 0) {
-          // console.log('FILTER',x);
-          
-          this.filteredRooms$ = this.rooms$;
+          setTimeout(() => {
+            this.filteredRooms$ = this.rooms$;
+          }, 2000);
           return;
         }
 
