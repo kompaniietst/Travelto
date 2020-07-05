@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomCurrencyPipe } from 'src/app/pipes/customCurrency.pipe';
+//import { CustomCurrencyPipe } from 'src/app/pipes/customCurrency.pipe';
 import { ActivatedRoute } from '@angular/router';
 import { AdminService } from 'src/app/admin/admin.service';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
@@ -23,7 +23,7 @@ export class HotelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //console.log('ROUTE', this);
+    console.log('ROUTE', this);
 
 
   }
