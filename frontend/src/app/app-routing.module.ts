@@ -48,7 +48,7 @@ const routes: Routes = [
     ]
   },
 
-  { path: 'hotel/:id', component: HotelComponent },
+  { path: 'hotel/:id', component: TestComponent },
   { path: 'room/:id', component: RoomComponent },
 
   { path: '**', component: NotfoundComponent },
