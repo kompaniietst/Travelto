@@ -26,8 +26,6 @@ import { MemberOrdersComponent } from './profile/orders/member-orders/member-ord
 import { UsersOrdersComponent } from './profile/orders/users-orders/users-orders.component';
 import { MemberOrderItemComponent } from './profile/orders/member-orders/item/item.component';
 import { UserOrderItemComponent } from './profile/orders/users-orders/item/item.component';
-import { HttpClientModule } from '@angular/common/http';
-import { TestComponent } from './test/test.component';
 import { FilterFormComponent } from './catalog/filter-form/filter-form.component';
 import { FilteredRoomsComponent } from './catalog/filtered-rooms/filtered-rooms.component';
 
@@ -68,7 +66,7 @@ const MODULES = [
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS, TestComponent, FilterFormComponent, FilteredRoomsComponent],
+  declarations: [...COMPONENTS],
   imports: [...MODULES],
   exports: [...COMPONENTS]
 })
