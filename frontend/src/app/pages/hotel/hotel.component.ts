@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomCurrencyPipe } from 'src/app/pipes/customCurrency.pipe';
 import { ActivatedRoute } from '@angular/router';
-import { AdminService } from 'src/app/admin/admin.service';
+import { AdminService } from 'src/app/core/roles/admin/admin.service';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
 import { environment } from 'src/environments/environment';
 import { Hotel } from 'src/app/core/models/Hotel';

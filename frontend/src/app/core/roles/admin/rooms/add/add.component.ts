@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from 'src/app/admin/admin.service';
+import { AdminService } from 'src/app/core/roles/admin/admin.service';
 import { Control } from 'src/app/core/models/Control';
 import { Observable, of, forkJoin } from 'rxjs';
 import { Amenity } from 'src/app/core/models/Amenity';

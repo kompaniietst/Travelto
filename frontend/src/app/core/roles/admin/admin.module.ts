@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 
 import { AdminComponent } from "./admin/admin.component";
 import { HotelsComponent } from './hotels/hotels.component';
@@ -23,10 +23,10 @@ import { AddCitiesComponent } from './cities/add/add.component';
 import { ViewCitiesComponent } from './cities/view/view.component';
 import { ViewRoomsComponent } from './rooms/view/view.component';
 import { RoomItemComponent } from './rooms/item/item.component';
-import { StarRatingComponent } from '../shared/star-rating/star-rating.component';
-import { CoreModule } from '../core/core.module';
+import { StarRatingComponent } from '../../../shared/star-rating/star-rating.component';
+import { CoreModule } from '../../../core/core.module';
 import { AmenityItemComponent } from './amenities/item/item.component';
-import { PipesModule } from '../pipes/pipes.module';
+import { PipesModule } from '../../../pipes/pipes.module';
 
 const routes: Routes = []
 

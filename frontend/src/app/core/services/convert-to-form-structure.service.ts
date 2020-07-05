@@ -3,7 +3,7 @@ import { FormControl, Validators, FormGroup, FormArray } from '@angular/forms';
 import { Control } from '../models/Control';
 import { Observable } from 'rxjs';
 import { Amenity } from '../models/Amenity';
-import { AdminService } from 'src/app/admin/admin.service';
+import { AdminService } from 'src/app/core/roles/admin/admin.service';
 
 @Injectable({
   providedIn: 'root'

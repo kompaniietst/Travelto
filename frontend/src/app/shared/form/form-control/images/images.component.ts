@@ -4,7 +4,7 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Control } from 'src/app/core/models/Control';
-import { AdminService } from 'src/app/admin/admin.service';
+import { AdminService } from 'src/app/core/roles/admin/admin.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
