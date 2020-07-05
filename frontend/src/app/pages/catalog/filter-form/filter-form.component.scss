@@ -1,0 +1,28 @@
+.title {
+    font-size: 1.2rem;
+    color: #484848;
+    margin: 10px 0 0;
+}
+
+.filter_form ::ng-deep {
+    .form {
+        padding: 20px;display: block;
+        .checkbox {
+            display: block;
+            margin: 20px 0;
+        }
+        .checkboxes_container {
+            margin: 10px 0;
+        }
+        .dropdown {
+            margin-top: 18px;
+            display: block;
+            .mat-input-element {
+                border: 1px solid #d6e7f0;
+                padding: 15px 10px;
+                border-radius: 3px;
+                width: 100%;
+            }
+        }
+    }
+}

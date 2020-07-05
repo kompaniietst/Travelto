@@ -49,7 +49,8 @@ const COMPONENTS = [
   UsersOrdersComponent,
   MemberOrderItemComponent,
   UserOrderItemComponent,
-  TestComponent
+  FilteredRoomsComponent,
+  FilterFormComponent
 ];
 
 const MODULES = [

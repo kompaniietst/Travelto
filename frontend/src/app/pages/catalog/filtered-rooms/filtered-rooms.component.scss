@@ -1,0 +1,59 @@
+@import "src/assets/sass/abstracts/variables.scss";
+
+a {
+    color: $color;
+}
+h3 {
+    font-family: $font_bold;
+    font-size: 1.3em;
+    margin: 0;
+    a {
+        color: black;
+    }
+}
+.title {
+    font-size: 1.2rem;
+    color: #484848;
+    margin: 10px 0 0;
+}
+
+.btn.btn-grey-outline {
+    margin-top: 5px;
+}
+.place {
+    font-size: 11px;
+    span {
+        background: url(src/assets/images/icons/form/map.svg) no-repeat left;
+        background-size: 11px;
+    }
+}
+.price {
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+.catalog ::ng-deep {
+    .carousel {
+        height: 180px;
+        width: 300px;
+        overflow: hidden;
+    }
+    .thumbnail_slider,
+    .thumbnail_slider .slick-slide {
+        height: 54px;
+        margin-right: 1px;
+        margin-top: 1px;
+    }
+}
+
+.mat-spinner {
+    margin-left: 0px;
+    margin: 5px 0;
+}
+.hotel_name {
+    margin-top: 8px;
+    a {
+        padding-right: 10px;
+        color: $text_color;
+    }
+}
