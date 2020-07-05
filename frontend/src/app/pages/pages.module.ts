@@ -26,6 +26,8 @@ import { MemberOrdersComponent } from './profile/orders/member-orders/member-ord
 import { UsersOrdersComponent } from './profile/orders/users-orders/users-orders.component';
 import { MemberOrderItemComponent } from './profile/orders/member-orders/item/item.component';
 import { UserOrderItemComponent } from './profile/orders/users-orders/item/item.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = []
 
@@ -44,7 +46,8 @@ const COMPONENTS = [
   MemberOrdersComponent,
   UsersOrdersComponent,
   MemberOrderItemComponent,
-  UserOrderItemComponent
+  UserOrderItemComponent,
+  TestComponent
 ];
 
 const MODULES = [
@@ -62,7 +65,7 @@ const MODULES = [
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, TestComponent],
   imports: [...MODULES],
   exports: [...COMPONENTS]
 })
