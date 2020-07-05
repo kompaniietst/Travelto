@@ -29,7 +29,7 @@
                     [config]="config"
                     [thumbnailsConfig]="thumbnailsConfig">
                     <div class="header_templ_center">
-                        <div class="hotel_name">
+                        <div class="hotel_name">hotel/{{ room.hotel._id }}
                             <a routerLink="/hotel/{{ room.hotel._id }}"><strong>{{ room.hotel.name }}</strong></a>
                             <app-star-rating [starRating]="room.hotel.stars"></app-star-rating>
                         </div>

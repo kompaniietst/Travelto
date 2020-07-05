@@ -26,10 +26,10 @@ router.post('/rooms', async (req, res) => {
 })
 
 router.post('/roomsBy', async (req, res) => {
-    console.log('req', req);
-    console.log('body', req.body);
-    var c = req.param('creator')
-    console.log('params', c);
+    // console.log('req', req);
+    // console.log('body', req.body);
+    // var c = req.param('creator')
+    // console.log('params', c);
 
     const creator = req.body.creator;
 
