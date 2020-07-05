@@ -33,29 +33,54 @@ export class AdminService {
     private roomService: RoomService,
     private auth: AuthenticationService
   ) {
+    if (!this.auth.getCurrUser()) {
 
-    this.currUserId = this.auth.getCurrUser()._id;
+      this.hotelService.get()
+        .subscribe((x: Hotel[]) => {
+          console.log('get hotels', x);
 
-    this.getHotelsBy(this.currUserId).
-      subscribe((x: Hotel[]) => {
-        console.log('get hotels', x);
+          this.hotels = x;
+          this.hotelsSubject.next([...x]);
+        });
 
-        this.hotels = x;
-        this.hotelsSubject.next([...x]);
-      });
+      this.allHotels = this.hotelsSubject.asObservable();
 
-    this.allHotels = this.hotelsSubject.asObservable();
+      this.roomService.get()
+        .subscribe((x: Room[]) => {
+          console.log('adm serv', x);
 
-    this.getRoomsBy(this.currUserId).
-      subscribe((x: Room[]) => {
-        console.log('adm serv', x);
+          this.rooms = x;
+          this.roomsSubject.next([...x]);
+        });
 
-        this.rooms = x;
-        this.roomsSubject.next([...x]);
-      });
+      this.allHotels = this.hotelsSubject.asObservable();
+      this.allRooms = this.roomsSubject.asObservable();
+    }
 
-    this.allHotels = this.hotelsSubject.asObservable();
-    this.allRooms = this.roomsSubject.asObservable();
+    if (this.auth.getCurrUser()) {
+      this.currUserId = this.auth.getCurrUser()._id;
+
+      this.getHotelsBy(this.currUserId).
+        subscribe((x: Hotel[]) => {
+          console.log('get hotels', x);
+
+          this.hotels = x;
+          this.hotelsSubject.next([...x]);
+        });
+
+      this.allHotels = this.hotelsSubject.asObservable();
+
+      this.getRoomsBy(this.currUserId).
+        subscribe((x: Room[]) => {
+          console.log('adm serv', x);
+
+          this.rooms = x;
+          this.roomsSubject.next([...x]);
+        });
+
+      this.allHotels = this.hotelsSubject.asObservable();
+      this.allRooms = this.roomsSubject.asObservable();
+    }
   }
 
   registerHotel(hotel: Hotel): Observable<Hotel> {
@@ -147,16 +172,16 @@ export class AdminService {
 
   registerRoom(room: Room): Observable<Room> {
     return this.roomService.register(room)
-    .pipe(
-      map((x: Room) => {
-        console.log('reg ', x);
+      .pipe(
+        map((x: Room) => {
+          console.log('reg ', x);
 
-        this.rooms.push(x);
-        this.roomsSubject.next([...this.rooms]);
-        return x;
-      }),
-      delay(1500)
-    )
+          this.rooms.push(x);
+          this.roomsSubject.next([...this.rooms]);
+          return x;
+        }),
+        delay(1500)
+      )
   }
 
 
