@@ -28,6 +28,8 @@ import { MemberOrderItemComponent } from './profile/orders/member-orders/item/it
 import { UserOrderItemComponent } from './profile/orders/users-orders/item/item.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TestComponent } from './test/test.component';
+import { FilterFormComponent } from './catalog/filter-form/filter-form.component';
+import { FilteredRoomsComponent } from './catalog/filtered-rooms/filtered-rooms.component';
 
 const routes: Routes = []
 
@@ -65,7 +67,7 @@ const MODULES = [
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS, TestComponent],
+  declarations: [...COMPONENTS, TestComponent, FilterFormComponent, FilteredRoomsComponent],
   imports: [...MODULES],
   exports: [...COMPONENTS]
 })

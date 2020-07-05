@@ -39,8 +39,8 @@ export class HotelService {
     return this.http.post<Hotel[]>(`${this.URL}/hotelsBy`, params)
   }
 
-  getHotelBy(_id: string): Observable<Hotel> {
-    return this.http.get<Hotel>(`${this.URL}/hotels/${_id}`)
+  getHotelBy(hotel_id: string): Observable<Hotel> {
+    return this.http.get<Hotel>(`${this.URL}/hotels/${hotel_id}`)
   }
 
   editHotel(_id: string, hotel: Hotel): Observable<Hotel> {

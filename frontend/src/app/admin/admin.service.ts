@@ -33,54 +33,29 @@ export class AdminService {
     private roomService: RoomService,
     private auth: AuthenticationService
   ) {
-    if (!this.auth.getCurrUser()) {
 
-      this.hotelService.get()
-        .subscribe((x: Hotel[]) => {
-          console.log('get hotels', x);
+    this.currUserId = this.auth.getCurrUser()._id;
 
-          this.hotels = x;
-          this.hotelsSubject.next([...x]);
-        });
+    this.getHotelsBy(this.currUserId).
+      subscribe((x: Hotel[]) => {
+        console.log('get hotels', x);
 
-      this.allHotels = this.hotelsSubject.asObservable();
+        this.hotels = x;
+        this.hotelsSubject.next([...x]);
+      });
 
-      this.roomService.get()
-        .subscribe((x: Room[]) => {
-          console.log('adm serv', x);
+    this.allHotels = this.hotelsSubject.asObservable();
 
-          this.rooms = x;
-          this.roomsSubject.next([...x]);
-        });
+    this.getRoomsBy(this.currUserId).
+      subscribe((x: Room[]) => {
+        console.log('adm serv', x);
 
-      this.allHotels = this.hotelsSubject.asObservable();
-      this.allRooms = this.roomsSubject.asObservable();
-    }
+        this.rooms = x;
+        this.roomsSubject.next([...x]);
+      });
 
-    if (this.auth.getCurrUser()) {
-      this.currUserId = this.auth.getCurrUser()._id;
-
-      this.getHotelsBy(this.currUserId).
-        subscribe((x: Hotel[]) => {
-          console.log('get hotels', x);
-
-          this.hotels = x;
-          this.hotelsSubject.next([...x]);
-        });
-
-      this.allHotels = this.hotelsSubject.asObservable();
-
-      this.getRoomsBy(this.currUserId).
-        subscribe((x: Room[]) => {
-          console.log('adm serv', x);
-
-          this.rooms = x;
-          this.roomsSubject.next([...x]);
-        });
-
-      this.allHotels = this.hotelsSubject.asObservable();
-      this.allRooms = this.roomsSubject.asObservable();
-    }
+    this.allHotels = this.hotelsSubject.asObservable();
+    this.allRooms = this.roomsSubject.asObservable();
   }
 
   registerHotel(hotel: Hotel): Observable<Hotel> {

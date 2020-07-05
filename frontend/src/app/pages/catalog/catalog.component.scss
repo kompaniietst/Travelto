@@ -1,45 +1,9 @@
 @import "src/assets/sass/abstracts/variables.scss";
-:host {
-    min-height: calc(100% - 240px);
-    display: block;
-}
-a {
-    color: $color;
-}
-.align_center{
-  
-}
-h3 {
-    font-family: $font_bold;
-    font-size: 1.3em;
-    margin: 0;
-    a {
-        color: black;
-    }
-}
+
 .title {
     font-size: 1.2rem;
     color: #484848;
     margin: 10px 0 0;
-}
-.wrapper {
-    width: 100%;
-    padding-right: 0;
-    padding-top: 30px;
-}
-.btn.btn-grey-outline {
-    margin-top: 5px;
-}
-.place {
-    font-size: 11px;
-    span {
-        background: url(src/assets/images/icons/form/map.svg) no-repeat left;
-        background-size: 11px;
-    }
-}
-.price {
-    padding-top: 10px;
-    margin-bottom: 10px;
 }
 .sidebar ::ng-deep {
     max-width: 300px;
@@ -49,62 +13,8 @@ h3 {
         }
     }
 }
-.catalog ::ng-deep {
-    .carousel {
-        height: 180px;
-        width: 300px;
-        overflow: hidden;
-    }
-    .thumbnail_slider,
-    .thumbnail_slider .slick-slide {
-        height: 54px;
-        margin-right: 1px;
-        margin-top: 1px;
-    }
-}
-
-.filter_form  ::ng-deep{
-    .form {
-        padding: 20px;
-        .checkbox {
-            display: block;
-            margin: 20px 0;
-        }
-        .checkboxes_container {
-            margin: 10px 0;
-        }
-        .dropdown {
-            margin-top: 18px;
-            display: block;
-            .mat-input-element {
-                border: 1px solid #d6e7f0;
-                padding: 15px 10px;
-                border-radius: 3px;
-                width: 100%;
-            }
-        }
-    }
-}
-
-// :host.filter_form ::ng-deep .form {
-//     padding: 20px;
-//     .checkbox {
-//         display: block;
-//         margin: 20px 0;
-//     }
-//     .checkboxes_container {
-//         margin: 10px 0;
-//     }
-// }
-
-.mat-spinner {
-    margin-left: 0px;
-    margin: 5px 0;
-}
-.hotel_name {
-    margin-top: 8px;
-    a {
-        padding-right: 10px;
-        color: $text_color;
-    }
+.wrapper {
+    width: 100%;
+    padding-right: 0;
+    padding-top: 30px;
 }

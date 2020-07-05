@@ -1,63 +1,17 @@
 <div class="container">
     <div class="d_flex">
+
         <app-sidebar class="sidebar">
-            <div class="title">
-                <strong>Filter:</strong>
-            </div>
-            <app-form 
-                *ngIf="formStructure$"
-                [controls$]="formStructure$" 
-                class="filter_form">
-            </app-form>
+            <div class="title"><strong>Filter:</strong></div>
+            <app-filter-form></app-filter-form>
         </app-sidebar>
+
         <app-wrapper class="wrapper">
-            <div class="title">
-                <strong>Founded {{ (filteredRooms$ | async | filter:priceFilter | filter: cityFilter)?.length }} options:</strong>
-            </div>
+            
+            <app-filtered-rooms>
+                <app-filter-tabs></app-filter-tabs>
+            </app-filtered-rooms>
 
-            <app-filter-tabs></app-filter-tabs>
-            <!-- <mat-spinner *ngIf="showSpinner" strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner> -->
-            <div *ngIf="!(filteredRooms$ | async)?.length" class="align_center">
-                <mat-spinner strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner>
-            </div>
-            <ng-container 
-                *ngFor="let room of filteredRooms$ | async 
-                | filter: priceFilter
-                | filter: cityFilter">
-                <app-card 
-                    [room]="room" 
-                    class="catalog"
-                    limit="5"
-                    [config]="config"
-                    [thumbnailsConfig]="thumbnailsConfig">
-                    <div class="header_templ_center">
-                        <div class="hotel_name">
-                            <a routerLink="/hotel/5ef358e24d47fe2c8081eba6"><strong>{{ room.hotel.name }}</strong></a>
-                            <app-star-rating [starRating]="room.hotel.stars"></app-star-rating>
-                        </div>
-                        <h3><a routerLink="/room/{{ room._id }}">{{ room.name }}</a></h3>
-                        <div class="place"><span></span>
-                            {{ room.hotel.address.city.label }}, {{ room.hotel.address.street }} {{ room.hotel.address.houseNumber }}
-                        </div> 
-                    </div>
-                    
-                    <div class="end_block">
-                        <div class="price text_center">
-                            <span class="blue">
-                                <strong>
-                                    {{ room.price | customCurrency }} <span class="currency">$</span>
-                                </strong>
-                            </span> / night
-                        </div>
-                        <div class="buttons">
-                            <button class="btn btn-orange w_100" (click)="openFormOrder(room)">Choose your room</button>
-                            <button class="btn btn-grey-outline w_100" routerLink="">About hotel</button>
-                        </div>
-                    </div>
-                </app-card>
-            </ng-container>
-
-            <div *ngIf="(filteredRooms$ | async | filter:priceFilter | filter: cityFilter)?.length == 0">No rooms.</div>
         </app-wrapper>
     </div>
 </div>
