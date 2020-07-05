@@ -1,0 +1,127 @@
+<!-- <div *ngIf="hotel">
+    
+    <div class="mainscreen">
+        <div class="container">
+            <div class="inner_page_header">
+                <h1>
+                    {{ hotel.name }}
+                    <app-star-rating 
+                        *ngIf="hotel.stars"
+                        [starRating]="hotel.stars">
+                    </app-star-rating>
+                </h1>
+                <div class="place" *ngIf="hotel.address.city">
+                    <span></span>
+                    {{ hotel.address.city.label }}, {{ hotel.address.street }} {{ hotel.address.houseNumber }}
+                </div>
+            </div>
+        </div>
+
+        <app-carousel 
+            *ngIf="carouselConfig"
+            [slides]="hotel.images" 
+            [config]="carouselConfig" 
+            needCountSlides="true" 
+            class="hotel">
+        </app-carousel>
+    </div>
+
+    <div class="container">
+        <div class="section" *ngIf="hotel.description.length > 0">
+            <div class="title"><strong>About hotel:</strong></div>
+            {{ hotel.description }}
+        </div>
+
+        <div class="section room"  *ngIf="(rooms$ | async)?.length > 0">
+            <div class="title">
+                <strong>Выберите номер:</strong>
+            </div>
+            <div class="list">
+                <div *ngFor="let room of rooms$ | async; trackBy: trackById" class="item">
+                    <app-card 
+                        [room]="room" 
+                        class="hotel"
+                        [config]="carouselConfigRooms">
+                        <div class="header_templ_center">
+                            <h4>
+                                <a routerLink="/room/{{ room._id }}">{{ room.name }}</a>
+                            </h4>
+                            <div class="price blue text_center">
+                                <span class="blue">
+                                    <strong>
+                                        {{ room.price | customCurrency  }} <span class="currency">$</span>
+                                    </strong>
+                                </span><br> night
+                            </div>
+                        </div>
+
+                        <div class="end_block">
+                            <div class="buttons">
+                                <button class="btn btn-orange w_100">Choose your room</button>
+                            </div>
+                        </div>
+                    </app-card>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="title">
+                <strong>Hotel services</strong>
+            </div>
+            <div class="list_amenities">
+                <div *ngFor="let amenity of amenities; trackBy: trackById; let i = index" class="hotel_amenity">
+                    <div class="img" [ngClass]="{'active': ifActiveAmenity(amenity._id)}">
+                        <img [src]="URL + amenity.image" alt="">
+                    </div>
+                    <strong>{{ amenity.label }}</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" *ngIf="hotel.feedbacks && hotel.feedbacks.length > 0">
+            <div class="title"><strong>Отзывы</strong></div>
+            <div class="d_flex flex_wrap" class="feedbacks">
+                <app-feedback *ngFor="let feedback of hotel.feedbacks; trackBy: trackById;" [feedback]="feedback"
+                    class="hotel">
+                </app-feedback>
+            </div>
+        </div>
+
+        <div class="section address">
+            <div class="title"><strong>Location</strong></div>
+
+            <div class="place">
+                <span></span>
+                {{ hotel.address.city.label }},
+                {{ hotel.address.street }} 
+                {{ hotel.address.houseNumber }}
+            </div>
+            <app-google-maps 
+                *ngIf="mapLat > 0 && mapLng > 0"
+                [key]="mapApiKey" 
+                [zoom]="9" 
+                [mapLat]="mapLat" 
+                [mapLng]="mapLng">
+                <ng-template let-google="google" let-map="map">
+                    <app-google-map-marker *ngFor="let marker of markers; trackBy: trackById" [google]="google" [map]="map"
+                        [lat]="marker.lat" 
+                        [lng]="marker.lng">
+                    </app-google-map-marker>
+                </ng-template>
+            </app-google-maps>
+        </div>
+    </div>
+</div>
+
+<app-alert-message></app-alert-message>
+
+<div *ngIf="loading" class="spinner_container">
+    <mat-spinner 
+        strokeWidth="4" 
+        diameter="30" 
+        class="blue_spinner">
+    </mat-spinner>
+</div> -->
+
+sdsdsd
