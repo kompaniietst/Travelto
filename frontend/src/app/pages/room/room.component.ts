@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AdminService } from 'src/app/core/roles/admin/admin.service';
 import { Hotel } from 'src/app/core/models/Hotel';
 import { Room } from 'src/app/core/models/Room';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';

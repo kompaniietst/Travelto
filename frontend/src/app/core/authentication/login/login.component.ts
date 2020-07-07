@@ -4,6 +4,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertMessageService } from '../../services/alert-message.service';
 import { AuthenticationService } from '../authentication.service';
+import { of } from 'rxjs';
+import { Control } from '../../models/Control';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +15,22 @@ import { AuthenticationService } from '../authentication.service';
 export class LoginComponent implements OnInit {
 
   public form: FormGroup;
+  
+  formStructure$ = of([
+    new Control({
+      controlType: 'input',
+      key: 'email',
+      label: 'Email:',
+      placeholder: ''
+    }),
+    new Control({
+      controlType: 'input',
+      key: 'password',
+      label: 'Password:',
+      placeholder: '',
+      type: 'password'
+    }),
+  ])
 
   constructor(
     private dialog: MatDialog,
@@ -34,9 +52,11 @@ export class LoginComponent implements OnInit {
     // });
   }
 
-  onSubmit() {
+  onSubmit(formData) {
+    console.log(formData);
+    
     this.auth
-      .login(this.form.value.email, this.form.value.password)
+      .login(formData.email, formData.password)
       .subscribe(
         _ => this.dialog.closeAll(),
         err => this.alert.error(err.error)

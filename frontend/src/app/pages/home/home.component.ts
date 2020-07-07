@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
           }
           
           );
-          console.log('this.markers',this.markers);
+          // console.log('this.markers',this.markers);
         }
       )
   }

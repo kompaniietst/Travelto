@@ -23,22 +23,21 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {
     var userFromStorage = JSON.parse(localStorage.getItem('currUser'));
-    // console.log('userFromStorage', userFromStorage);
-
-    // this.currUserBehaviorSubject = new BehaviorSubject<User>(null)
     this.currUserBehaviorSubject.next(userFromStorage);
 
     this.currUser = this.currUserBehaviorSubject.asObservable();
+
+
   }
 
   login(email: string, password: string) {
-    console.log('login, url', this.URL);
+    // console.log('login, url', this.URL);
 
     return this.http.post(`${this.URL}/users/login`, { email, password })
       .pipe(
         map((resp: UserResponse) => {
 
-          console.log('resp', resp);
+          // console.log('resp', resp);
 
           var user = resp.user as User
 
@@ -56,10 +55,13 @@ export class AuthenticationService {
   }
 
   isAuthorized(): boolean {
+    
     return !!this.currUserBehaviorSubject.value;
   }
-
+  
   getCurrUser(): User {
+    // console.log('AUTH');
+    // console.log('this.currUserBehaviorSubject', this.currUserBehaviorSubject.value);
     return this.currUserBehaviorSubject.value;
   }
 

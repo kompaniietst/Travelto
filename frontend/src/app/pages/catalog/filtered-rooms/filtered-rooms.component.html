@@ -4,7 +4,7 @@
 
 <ng-content></ng-content>
 
-<div *ngIf="!(filteredRooms$ | async)?.length" class="align_center">
+<div *ngIf="!(filteredRooms$ | async)?.length" class="spinner_align_center">
     <mat-spinner
         strokeWidth="4"
         diameter="30"

@@ -4,8 +4,8 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Control } from 'src/app/core/models/Control';
-import { AdminService } from 'src/app/core/roles/admin/admin.service';
 import { environment } from 'src/environments/environment';
+import { AdminService } from 'src/app/dashboard/admin.service';
 
 @Component({
   selector: 'app-images',

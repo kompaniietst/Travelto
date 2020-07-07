@@ -17,7 +17,9 @@ body {
     box-sizing: border-box;
     outline: none;
 }
-
+a{
+    color: $color;
+}
 h1 {
     color: #1c8ec0;
     font-size: 28px;
@@ -159,11 +161,12 @@ form {
     stroke: $color;
 }
 
-.align_center{
+.spinner_align_center{
     text-align: center;
     display: flex;
     justify-content: center;
-    margin-top: 15px;
+    padding-top: 15px;
+    padding-bottom: 30px;
 }
 
 /*  */

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, forkJoin } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Order } from '../models/Order';
 import { AuthenticationService } from '../authentication/authentication.service';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,15 +20,41 @@ export class BookingService {
   constructor(private http: HttpClient,
     private auth: AuthenticationService) {
 
-    this.get().subscribe((o: Order[]) => {
-      console.log('OO', o);
 
-      this.bookingsSubject.next([...o]);
-      this.bookings = o;
-    })
 
-    if (this.auth.isAuthorized())
+
+    if (this.auth.isAuthorized()) {
       this.currUserId = this.auth.getCurrUser()._id;
+
+      this.auth.currUser
+        .pipe(
+          mergeMap((user) => this.getOrdersByUserId(user._id))
+        )
+
+        // .subscribe(x => console.log('update curr user',x))
+
+        // this.getOrdersByUserId(this.currUserId)
+        .subscribe((o: Order[]) => {
+          console.log(' ');
+          console.log(' ');
+          console.log('BOOKINGS serv', o);
+          console.log('id: ', this.currUserId);
+          console.log(' ');
+          console.log(' ');
+          console.log(' ');
+
+
+          this.bookings = o;
+          this.bookingsSubject.next([...this.bookings]);
+        })
+
+    }
+
+
+
+
+
+
 
   }
 
@@ -44,9 +70,18 @@ export class BookingService {
       }))
   }
 
-  getBookings() {
-    return this.bookingsSubject.asObservable();
+  getBookings(params: any) {
+    return this.http.post<Order[]>(`${this.URL}/bookingsByParams`, params)
   }
+  // getBookings(userId: string) {
+
+  //   return this.getOrdersByUserId(userId);
+  // }
+  // getBookings() {
+  //   console.log('bookingsSubject value', this.bookingsSubject.value);
+
+  //   return this.bookingsSubject.asObservable();
+  // }
 
   /*                  http               */
 
@@ -54,9 +89,13 @@ export class BookingService {
     return this.http.get<Order[]>(`${this.URL}/bookings`)
   }
 
-  getOrdersByUserId(): Observable<Order[]> {
+  getOrdersByUserId(currUserId: string): Observable<Order[]> {
     // const params = { clientId: this.currUserId }
-    return this.http.get<Order[]>(`${this.URL}/bookingsByUser/${this.currUserId}`)
+    console.log(' ');
+
+    console.log('getOrdersByUserId', currUserId);
+
+    return this.http.get<Order[]>(`${this.URL}/bookingsByUser/${currUserId}`)
     // return this.http.post<Order[]>(`${this.URL}/bookingsByUser`, { params: params })
   }
 

@@ -38,6 +38,9 @@ export class ProfileTriggerComponent implements OnInit {
   ngOnInit() {
   }
 
+  gotoAccount() {
+    this.router.navigate([`account/${this.currUser._id}`])
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(LoginComponent, {

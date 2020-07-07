@@ -41,7 +41,8 @@
                                 [placeholder]="control.placeholder">
                         </div>
                         <div *ngIf="control.type != 'number'">
-                            <input *ngIf="control.type != 'textarea'" 
+                            <input
+                                *ngIf="control.type != 'textarea'" 
                                 [formControlName]="control.key"
                                 [placeholder]="control.placeholder">
                         </div>

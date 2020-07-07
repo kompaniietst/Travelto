@@ -10,8 +10,8 @@ import { AuthenticationModule } from './core/authentication/authentication.modul
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminModule } from './core/roles/admin/admin.module';
 import { TestComponent } from './test/test.component';
+import { AdminModule } from './dashboard/admin.module';
 
 
 
