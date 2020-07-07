@@ -1,0 +1,29 @@
+@import "src/assets/sass/abstracts/mixins.scss";
+@import "src/assets/sass/abstracts/variables.scss";
+:host {
+    min-height: calc(100% - 240px);
+    display: block;
+}
+ul {
+    li {
+        position: relative;
+        @include transition;
+        a {
+            border-bottom: $border;
+            color: #484848;
+            padding: 16px 20px;
+            display: block;
+            cursor: pointer;
+            &:hover,
+            &.active {
+                color: white;
+                background: $background_color;
+                @include transition;
+            }
+        }
+    }
+}
+
+.wrapper {
+    width: 100%;
+}

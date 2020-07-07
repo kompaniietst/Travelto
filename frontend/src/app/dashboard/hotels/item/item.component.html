@@ -1,0 +1,55 @@
+<div *ngIf="!editItem">
+    <div class="block d_flex flex_wrap align_center justify_content_between">
+        <div class="name">
+            <strong><a routerLink="/hotel/{{ item._id }}">{{ item.name }}</a></strong>
+            <app-star-rating [starRating]="item.stars"></app-star-rating>
+        </div>
+        <div>
+            <div class="place"><span></span>
+                {{ item.address?.city?.label }},
+                {{ item.address.street }}
+                {{ item.address.houseNumber }}
+            </div>
+        </div>
+    </div>
+
+    <div class="block">
+        {{ item.description }}
+    </div>
+
+    <div class="block amenities">
+        <div *ngFor="let amenity of item.amenities; trackBy: trackById" class="amenity">
+            {{ amenity.label }}
+        </div>
+    </div>
+
+    <div class="block images">
+        <div *ngFor="let img of item.images; trackBy: trackById" class="img">
+            <img [src]="URL + img" alt="">
+        </div>
+    </div>
+
+    <div class="control_buttons">
+        <button class="edit" (click)="edit(item._id)" class="btn">Edit</button>
+        <button class="rem" (click)="remove(item._id)" class="btn">Remove</button>
+    </div>
+</div>
+
+<div *ngIf="editItem">
+    <div class="name">
+        <strong><a routerLink="/hotel/{{ item._id }}">{{ item.name }}</a></strong>
+        <app-star-rating [starRating]="item.stars"></app-star-rating>
+    </div>
+
+    <app-form 
+        [controls$]="formStructure$"  
+        [defaultData]="item" 
+        (valueChange)="onSubmit($event)" 
+        buttonName="Update" 
+        [showSpinner]="showSpinner"
+        class="edit_form">
+    </app-form>
+    <app-alert-message></app-alert-message>
+
+    <a (click)="cancelEdit()" class="cancel">Cancel</a>
+</div>

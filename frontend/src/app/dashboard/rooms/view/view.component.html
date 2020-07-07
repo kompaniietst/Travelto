@@ -1,0 +1,12 @@
+
+<h2 class="header_title">Your rooms</h2>
+    <div *ngIf="loading" class="spinner_container">
+        <mat-spinner strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner>
+    </div>
+
+<div *ngIf="(rooms$ | async)?.length == 0" class="no_items">
+    No rooms yet
+</div>
+<div *ngFor="let item of rooms$ | async | reverse; trackBy: trackById;">
+    <app-room-item [item]="item"></app-room-item>
+</div>

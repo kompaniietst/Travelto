@@ -1,0 +1,25 @@
+<div class="item">
+
+    <div class="img">
+        <img [src]="URL + item.image" alt="">
+    </div>
+    <div class="label">{{ item.label }}</div>
+    <div class="control_buttons">
+        <button class="edit" (click)="edit(item._id)" class="btn">Edit</button>
+        <button class="rem" (click)="rem(item._id)" class="btn">Remove</button>
+    </div>
+</div>
+
+<div *ngIf="editItem" class="editItem_container">
+    <app-form 
+        [controls$]="formStructure$"  
+        [defaultData]="item" 
+        (valueChange)="onSubmit($event)" 
+        buttonName="Update" 
+        [showSpinner]="showSpinner"
+        class="edit_amenity_form">
+    </app-form>
+    <app-alert-message></app-alert-message>
+
+    <a (click)="cancelEdit()" class="cancel">Cancel</a>
+</div>

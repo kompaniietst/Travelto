@@ -1,0 +1,183 @@
+<mat-tab-group animationDuration="0ms">
+    <mat-tab label="Active orders">
+        <strong>ROLE: {{ role }} <br><br></strong>
+        <div *ngIf="(bookings$ | async | filterByStatus: 'active'); let activeBookings">
+
+            <div *ngIf="showSpinner" class="spinner_align_center">
+                <mat-spinner strokeWidth="4" diameter="30" class="blue_spinner">
+                </mat-spinner>
+            </div>
+
+            <div *ngIf="countBookings == 0">
+                No active orders yet.
+            </div>
+
+            <div *ngFor="let state of ['confirmCancel','active']; trackBy: trackById" class="{{ state }}">
+                <div *ngFor="let item of bookings$ | async | filterByStatus: state; trackBy: trackById"
+                    class="room_container">
+                    {{state}}
+
+                    <div *ngIf="state == 'confirmCancel' && role == 'user'" class="note">
+                        <mat-spinner strokeWidth="3" diameter="20" class="blue_spinner"></mat-spinner>
+                        <p>Your order is being in process. <br>
+                            Please, wait while your suplier will confirm a canceling.</p>
+                    </div>
+
+                    <div *ngIf="state == 'confirmCancel' && role == 'member' || state == 'confirmCancel' && role == 'admin'"
+                        class="note">
+                        <mat-spinner strokeWidth="3" diameter="20" class="blue_spinner"></mat-spinner>
+                        <p>This order requires cancelation.</p>
+                    </div>
+
+                    <app-order-item [order]="item" class="{{ state }}">
+                        <div class="btn_controls">
+
+                            <button *ngIf="state == 'active' && role == 'user'"
+                                (click)="changeOrderStatus(item._id,'confirmCancel')"
+                                class="btn btn-grey-outline w_100">
+                                Cancel
+                            </button>
+
+                            <button *ngIf="state == 'active' && role == 'member' || state == 'active' && role == 'admin'"
+                                (click)="changeOrderStatus(item._id,'completed')" class="btn btn-orange w_100">
+                                Complete order
+                            </button>
+
+                            <button *ngIf="state == 'confirmCancel'" (click)="changeOrderStatus(item._id,'canceled')"
+                                class="btn btn-blue w_100">
+                                Cancel order
+                            </button>
+                        </div>
+
+                    </app-order-item>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Completed">
+        <div *ngIf="(bookings$ | async | filterByStatus: 'completed')?.length == 0">
+            No completed orders yet.
+        </div>
+
+        <div class="items_container">
+            <div 
+                *ngFor="let item of bookings$ | async | filterByStatus: 'completed'; trackBy: trackById" 
+                class="order" [ngClass]="{ 'column' : role == 'user' }">
+                <div class="d_flex w_100">
+                    <div class="img">
+                        <img [src]="URL + item.image" alt="">
+                    </div>
+                    <div class="d_flex justify_content_between w_100">
+                        <div>
+                            <div>
+                                <a routerLink="/hotel/{{ item.hotel._id }}"><strong>{{ item.hotel.label }}</strong></a>
+                            </div>
+                            <div>
+                                <a routerLink="/room/{{ item.room_id }}"><strong>{{ item.room_name }}</strong></a>
+                            </div>
+                            <button 
+                                *ngIf="role == 'user'" 
+                                class="btn btn-grey-outline w_100" 
+                                (click)="changeOrderStatus(item._id,'active')">
+                                Reopen
+                            </button>
+                            <div *ngIf="role != 'user'">
+                                <div class="d_flex">
+                                    <div class="profile_image" *ngIf="item.user.image">
+                                        <img [src]="URL + item.user.image" alt="">
+                                    </div>
+                                    <div>
+                                        <strong>Name: </strong>
+                                        {{ item.user.firstname }}
+                                        <br>
+                                        <strong>Email: </strong>
+                                        {{ item.user.email }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="role != 'user'">
+                            <small>
+                                <strong>Order Id:</strong>
+                                {{ item._id }}
+                            </small><br>
+                            <small>
+                                <strong>Hotel id: </strong>
+                                {{ item.hotel._id }}
+                            </small><br>
+                            <small>
+                                <strong>Room id:</strong>
+                                {{ item.room_id }}
+                            </small><br>
+                            <small>
+                                <strong>User id:</strong>
+                                {{ item.clientId }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Canceled">
+        <div *ngIf="(bookings$ | async | filterByStatus: 'canceled').length == 0">
+            No canceled orders yet.
+        </div>
+
+        <div *ngFor="let item of bookings$ | async | filterByStatus: 'canceled'; trackBy: trackById"
+            class="room_container">
+            <div class="order">
+                <div class="d_flex w_100">
+                    <div class="img">
+                        <img [src]="URL + item.image" alt="">
+                    </div>
+                    <div class="d_flex justify_content_between w_100">
+                        <div>
+                            <div>
+                                <a><strong>{{ item.hotel.label }}</strong></a>
+                            </div>
+                            <div>
+                                <strong>{{ item.room_name }}</strong>
+                            </div>
+                            <div>
+                                <div class="d_flex">
+                                    <div class="profile_image" *ngIf="item.user.image">
+                                        <img [src]="URL + item.user.image" alt="">
+                                    </div>
+                                    <div>
+                                        <strong>Name: </strong>
+                                        {{ item.user.firstname }}
+                                        <br>
+                                        <strong>Email: </strong>
+                                        {{ item.user.email }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <small>
+                                <strong>Order Id:</strong>
+                                {{ item._id }}
+                            </small><br>
+                            <small>
+                                <strong>Hotel id: </strong>
+                                {{ item.hotel._id }}
+                            </small><br>
+                            <small>
+                                <strong>Room id:</strong>
+                                {{ item.room_id }}
+                            </small><br>
+                            <small>
+                                <strong>User id:</strong>
+                                {{ item.clientId }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </mat-tab>
+</mat-tab-group>
