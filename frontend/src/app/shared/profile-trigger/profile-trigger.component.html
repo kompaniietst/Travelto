@@ -1,11 +1,8 @@
-<!-- <a routerLink="/">LINK</a><br>
-<a routerLink="test">test</a><br>
-<a routerLink="profile">profile</a><br>
-<a routerLink="personal">personal</a> -->
-
 <div class="account" *ngIf="currUser != null; else default">
     <div mat-button [matMenuTriggerFor]="menu">
-        <div class="notification" *ngIf="notification>0"><strong>{{ notification }}</strong></div>
+        <div class="notification" *ngIf="count > 0">
+            <strong>{{ count  }}</strong>
+        </div>
         <span class="img">
             <img [src]="profileImage" alt="" *ngIf="profileImage; else icon">
         </span>
@@ -21,9 +18,40 @@
             <div>{{ currUser.firstname }} {{ currUser.lastname }}</div>
         </div>
     </div>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="gotoAccount()">Personal account</button>
-        <button mat-menu-item (click)="logout()">Logout</button>
+    <mat-menu #menu="matMenu" class="matMenu">
+        <button mat-menu-item 
+            routerLink="/account/{{ currUser._id }}/orders">
+            Orders
+            <span class="notification" *ngIf="notification>0"><strong>{{ notification }}</strong></span>
+        </button>
+        <button mat-menu-item 
+            *ngIf="isMember || isAdmin"
+            routerLink="/account/{{ currUser._id }}/hotels">
+            Hotels
+        </button>
+        <button mat-menu-item 
+            *ngIf="isMember || isAdmin"
+            routerLink="/account/{{ currUser._id }}/rooms">
+            Rooms
+        </button>
+        <button mat-menu-item 
+            *ngIf="isAdmin"
+            routerLink="/account/{{ currUser._id }}/amenities">
+            Amenities
+        </button>
+        <button mat-menu-item 
+            *ngIf="isAdmin"
+            routerLink="/account/{{ currUser._id }}/cities">
+            Cities
+        </button>
+        <button mat-menu-item 
+            routerLink="/account/${this.currUser._id}/personal">
+            Profile
+        </button>
+        <button mat-menu-item 
+            (click)="logout()">
+            <strong><small>Logout</small></strong>
+        </button>
     </mat-menu>
     <div></div>
 </div>

@@ -10,6 +10,7 @@ import { RegistrationComponent } from 'src/app/core/authentication/registration/
 import { LoginComponent } from 'src/app/core/authentication/login/login.component';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
+import { User } from 'src/app/core/models/User';
 
 @Component({
   selector: 'app-form-order',
@@ -24,7 +25,7 @@ export class FormOrderComponent implements OnInit {
   total: number;
   isAuthorized: boolean = false;
   ii: boolean = false;
-  currUserId: string;
+  currUser: User;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -33,16 +34,18 @@ export class FormOrderComponent implements OnInit {
     private booking: BookingService,
     private alert: AlertMessageService,
     private ls: LocalStorageService) {
+
+    this.auth.currUser
+      .subscribe((x: User) => {
+        this.currUser = x;
+      })
+
     this.ls.get()
       .subscribe(x => {
         if (x.date)
           this.nights = moment(x.date[1]).diff(moment(x.date[0]), 'days');
       })
 
-    this.isAuthorized = this.auth.isAuthorized();
-
-    if (this.isAuthorized)
-      this.currUserId = this.auth.getCurrUser()._id;
   }
 
   ngOnInit(): void {
@@ -75,7 +78,7 @@ export class FormOrderComponent implements OnInit {
           houseNumber: this.room.hotel.address.houseNumber
         }
       },
-      clientId: this.currUserId,
+      clientId: this.currUser._id,
       status: "active"
     }
 

@@ -1,0 +1,47 @@
+<div class="img">
+    <img [src]="URL + order.image" alt="">
+</div>
+<div class="d_flex justify_content_between w_100">
+    <div>
+        <small>
+            <a routerLink="/hotel/{{ order.hotel._id }}"><strong>{{ order.hotel.label }}</strong></a>
+        </small><br>
+        <a routerLink="/room/{{ order.room_id }}"><strong>{{ order.room_name }}</strong></a>
+        <ng-content></ng-content>
+        <div *ngIf="role != 'user'">
+            <div class="d_flex">
+                <div class="profile_image" *ngIf="profileImage">
+                    <img [src]="URL + profileImage" alt="">
+                </div>
+                <div>
+                    <strong>Name: </strong>
+                    {{ order.user.firstname }}
+                    <br>
+                    <strong>Email: </strong>
+                    {{ order.user.email }}
+                </div>
+            </div>
+        </div>
+        <small>
+            Completed: {{ order.completed | formatDate: 'date+time' }}
+        </small>
+    </div>
+    <div *ngIf="role != 'user'">
+        <small>
+            <strong>Order Id:</strong>
+            {{ order._id }}
+        </small><br>
+        <small>
+            <strong>Hotel id: </strong>
+            {{ order.hotel._id }}
+        </small><br>
+        <small>
+            <strong>Room id:</strong>
+            {{ order.room_id }}
+        </small><br>
+        <small>
+            <strong>User id:</strong>
+            {{ order.clientId }}
+        </small>
+    </div>
+</div>

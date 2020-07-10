@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { Amenity } from 'src/app/core/models/Amenity';
 import { Hotel } from 'src/app/core/models/Hotel';
@@ -23,10 +23,14 @@ export class HotelItemComponent<T> implements OnInit {
   showSpinner = false;
   editItem: boolean = false;
 
+  @Output() editHotel: EventEmitter<{ _id: string, formData: Hotel }> = new EventEmitter();
+  @Output() removeHotel: EventEmitter<string> = new EventEmitter();
+
   constructor(
     private admin: AdminService,
     private alert: AlertMessageService
   ) {
+
     forkJoin(
       this.admin.getAmenities(),       // get cities and amenities from the server to form form structure
       this.admin.getCities()
@@ -40,10 +44,7 @@ export class HotelItemComponent<T> implements OnInit {
   }
 
   remove(_id: string) {
-    console.log('_id item');
-    
-    this.admin.removeHotel(_id)
-      .subscribe(x => console.log(x))
+    this.removeHotel.emit(_id);
   }
 
   initFormStructure(amenities: Amenity[], cities: City[]) {
@@ -144,20 +145,9 @@ export class HotelItemComponent<T> implements OnInit {
     this.editItem = false;
   }
 
-  onSubmit(formData: any) {
-    this.showSpinner = true;
-    this.admin.editHotel(this.item._id, formData)
-      .subscribe(
-        x => {
-          console.log('sss', x);
-
-          this.alert.success("Item is successfuly updated");
-
-          this.showSpinner = false;
-          setTimeout(() => { this.editItem = false }, 1500);
-        },
-        err => console.log(err)
-      )
+  onSubmitEditForm(formData: Hotel) {
+    this.editHotel.emit({ _id: this.item._id, formData: formData });
+    this.editItem = false;
   }
 
   trackById(index, item) {

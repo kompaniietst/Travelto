@@ -1,7 +1,18 @@
+<div *ngIf="state == 'confirmCancel' && role == 'user'" class="note">
+    <mat-spinner strokeWidth="3" diameter="20" class="blue_spinner"></mat-spinner>
+    <p>Your order is being in process. <br>
+        Please, wait while your suplier will confirm a canceling.</p>
+</div>
+
+<div *ngIf="state == 'confirmCancel' && role == 'member' || state == 'confirmCancel' && role == 'admin'"
+    class="note">
+    <mat-spinner strokeWidth="3" diameter="20" class="blue_spinner"></mat-spinner>
+    <p>This order requires cancelation.</p>
+</div>
+
 <div class="order_container">
         
     <div class="room {{ order.status }}">
-
         <div class="img">
             <img [src]="URL + order.image" alt="">
         </div>
@@ -62,7 +73,7 @@
             </div>
             <div>
                 <small>
-                    Created: {{ order.reservation_date | formatDate: 'date+time' }}
+                    Created: {{ order.reserved | formatDate: 'date+time' }}
                 </small>
             </div>
         </div>

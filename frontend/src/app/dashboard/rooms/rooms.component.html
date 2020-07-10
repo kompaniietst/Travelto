@@ -1,0 +1,30 @@
+<mat-tab-group animationDuration="0ms" #tabGroup>
+    <mat-tab label="View your rooms">
+
+       <h2 class="header_title">Your rooms
+            <span *ngIf="countRooms > 0">({{ countRooms }})</span>
+        </h2>
+
+          <div *ngIf="loading" class="spinner_container">
+            <mat-spinner strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner>
+        </div>
+
+        <div *ngIf="(rooms$ | async)?.length == 0" class="no_items">
+            No rooms yet
+        </div>
+
+        <div *ngFor="let item of rooms$ | async | reverse; trackBy: trackById;">
+            <app-room-item
+                [item]="item"
+                (editRoom)="onEdit($event)"
+                (removeRoom)="onRemove($event)">
+            </app-room-item>
+        </div> 
+
+    </mat-tab>
+    <mat-tab label="Add new room">
+        <app-add-room
+            (addRoom)="onAdd($event)">
+        </app-add-room>
+    </mat-tab>
+</mat-tab-group>

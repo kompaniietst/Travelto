@@ -31,8 +31,11 @@ export class Order {
         firstname: string;
         lastname: string;
         phone: string;
+        image: string;
     }
-    reservation_date: Date;
+    reserved: Date;
+    completed: Date;
+    canceled: Date;
     clientId?: string;
     status: string;
 }

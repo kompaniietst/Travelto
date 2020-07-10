@@ -70,7 +70,7 @@ const bookingSchema = mongoose.Schema({
         type: String,
         trim: true
     },
-    reservation_date: { type: Date, default: Date.now }
+    reserved: { type: Date, default: Date.now }
 })
 
 bookingSchema.pre('save', async function (next) {

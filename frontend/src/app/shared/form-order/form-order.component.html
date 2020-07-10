@@ -1,4 +1,4 @@
-<div *ngIf="!isAuthorized; else ifAuthorized">
+<div *ngIf="currUser.role != 'user' || !currUser; else showForm">
     <h2 class="text_center">In order to choose the room <br> please, sign in or register</h2>
     <button [mat-dialog-close]="true" class="close">
         <mat-icon>close</mat-icon>
@@ -7,7 +7,7 @@
     <button (click)="openRegModal()" type="button" class="btn btn-grey-outline w_100">Create account</button>
 </div>
 
-<ng-template #ifAuthorized>
+<ng-template #showForm>
     <h2>{{ room.name }}</h2>
     <button [mat-dialog-close]="true" class="close">
         <mat-icon>close</mat-icon>

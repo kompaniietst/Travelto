@@ -22,7 +22,7 @@
                 <li *ngFor="let item of room.textFeatures | limit:limit; trackBy: trackById;" class="feature">
                     {{ item }}
                 </li>
-                <li class="more feature" (click)="showMore()" *ngIf="showbutton">
+                <li class="more feature" (click)="showMore()" *ngIf="showbutton && room.textFeatures?.length > 0">
                     <strong>
                         <span>... </span>
                         <span>show more</span>

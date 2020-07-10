@@ -3,19 +3,24 @@ import { Order } from 'src/app/core/models/Order';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-order-item',
-  templateUrl: './order-item.component.html',
-  styleUrls: ['./order-item.component.scss']
+  selector: 'app-completed',
+  templateUrl: './completed.component.html',
+  styleUrls: ['./completed.component.scss']
 })
-export class OrderItemComponent implements OnInit {
+export class CompletedComponent implements OnInit {
 
   readonly URL = environment.apiUrl;
-  
+
   @Input() order: Order;
+  @Input() state: string;
+  @Input() role: string;
+
+  profileImage: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.profileImage = this.order.user.image;
   }
 
 }

@@ -10,7 +10,7 @@ const ObjectId = mongoose.Types.ObjectId;
 router.post('/hotels', async (req, res) => {
     try {
         const hotel = new Hotel(req.body)
-        await hotel.save()
+        await hotel.save();
 
         res.status(201).send(hotel)
     }

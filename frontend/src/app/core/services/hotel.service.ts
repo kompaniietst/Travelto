@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Hotel } from '../models/Hotel';
 import { AuthenticationService } from '../authentication/authentication.service';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { AuthenticationService } from '../authentication/authentication.service'
 export class HotelService {
 
   readonly URL = environment.apiUrl;
-  private hotelSubject: BehaviorSubject<any>;
+  // private hotelSubject: BehaviorSubject<any>;
+  // currUser: User;
   // private bookingSubject: BehaviorSubject<any>;
   // bookings: Observable<any>;
 
@@ -20,6 +22,7 @@ export class HotelService {
 
   constructor(private http: HttpClient,
     private auth: AuthenticationService) {
+    // this.currUser = this.auth.getCurrUser();
     // this.hotelSubject = new BehaviorSubject(JSON.parse(localStorage.getItem("hotels")));
   }
 
@@ -27,15 +30,21 @@ export class HotelService {
     const newHotel = hotel;
     newHotel["creator"] = this.auth.getCurrUser()._id;
 
+    console.log('newh', newHotel, `${this.URL}/hotels`);
+
     return this.http.post<Hotel>(`${this.URL}/hotels`, newHotel)
+  }
+
+  getHotelsByCurrRole(role: string, user_id: string) {
+    return role == 'admin' ? this.get() : this.getHotelsBy(user_id)
   }
 
   get(): Observable<Hotel[]> {
     return this.http.get<Hotel[]>(`${this.URL}/hotels`)
   }
 
-  getHotelsBy(currUserId: string): Observable<Hotel[]> {
-    const params = { "creator": currUserId };
+  getHotelsBy(user_id: string): Observable<Hotel[]> {
+    const params = { "creator": user_id };
     return this.http.post<Hotel[]>(`${this.URL}/hotelsBy`, params)
   }
 
@@ -49,7 +58,7 @@ export class HotelService {
 
   removeHotel(_id: string) {
     console.log('id', _id);
-    
+
     return this.http.delete<Hotel>(`${this.URL}/hotels/${_id}`)
   }
 }

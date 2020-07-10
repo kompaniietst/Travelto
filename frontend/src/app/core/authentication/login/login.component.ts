@@ -46,10 +46,10 @@ export class LoginComponent implements OnInit {
   }
 
   openRegModal() {
-    // this.dialog.closeAll();
-    // this.dialog.open(RegistrationComponent, {
-    //   panelClass: 'popup',
-    // });
+    this.dialog.closeAll();
+    this.dialog.open(RegistrationComponent, {
+      panelClass: 'popup',
+    });
   }
 
   onSubmit(formData) {

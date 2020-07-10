@@ -46,13 +46,13 @@ export class AdminService {
 
     this.allHotels = this.hotelsSubject.asObservable();
 
-    this.getRoomsBy(this.currUserId).
-      subscribe((x: Room[]) => {
-        console.log('adm serv', x);
+    // this.getRoomsBy(this.currUserId).
+    //   subscribe((x: Room[]) => {
+    //     console.log('adm serv', x);
 
-        this.rooms = x;
-        this.roomsSubject.next([...x]);
-      });
+    //     this.rooms = x;
+    //     this.roomsSubject.next([...x]);
+    //   });
 
     this.allHotels = this.hotelsSubject.asObservable();
     this.allRooms = this.roomsSubject.asObservable();
@@ -145,19 +145,19 @@ export class AdminService {
 
   //--------------------------------------------------------
 
-  registerRoom(room: Room): Observable<Room> {
-    return this.roomService.register(room)
-      .pipe(
-        map((x: Room) => {
-          console.log('reg ', x);
+  // registerRoom(room: Room): Observable<Room> {
+  //   return this.roomService.register(room)
+  //     .pipe(
+  //       map((x: Room) => {
+  //         console.log('reg ', x);
 
-          this.rooms.push(x);
-          this.roomsSubject.next([...this.rooms]);
-          return x;
-        }),
-        delay(1500)
-      )
-  }
+  //         this.rooms.push(x);
+  //         this.roomsSubject.next([...this.rooms]);
+  //         return x;
+  //       }),
+  //       delay(1500)
+  //     )
+  // }
 
 
   editRoom(_id: string, room: Room): Observable<Room> {
@@ -170,16 +170,16 @@ export class AdminService {
       .pipe(delay(1500))
   }
 
-  getRoomsBy(currUserId: string): Observable<Room[]> {
-    // console.log(currUserId);
+  // getRoomsBy(currUserId: string): Observable<Room[]> {
+  //   // console.log(currUserId);
 
-    return this.roomService.getRoomsBy(currUserId as string)
-      .pipe(delay(1500))
-  }
+  //   return this.roomService.getRoomsBy(currUserId as string)
+  //     .pipe(delay(1500))
+  // }
 
-  getRoomBy(_id: string): Observable<Room> {
-    return this.roomService.getRoomBy(_id);
-  }
+  // getRoomBy(_id: string): Observable<Room> {
+  //   return this.roomService.getRoomBy(_id);
+  // }
 
   getRoomsByHotel(id: string): Observable<Room[]> {
     return this.roomService.getRoomsByHotel(id);

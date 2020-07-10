@@ -4,7 +4,7 @@ import { AuthenticationService } from 'src/app/core/authentication/authenticatio
 import { Control } from 'src/app/core/models/Control';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
 import { environment } from 'src/environments/environment';
-import { of, Observable, forkJoin, combineLatest } from 'rxjs';
+import { of, Observable, combineLatest } from 'rxjs';
 import { CitiesService } from 'src/app/core/services/cities.service';
 import { City } from 'src/app/core/models/City';
 
@@ -25,44 +25,21 @@ export class PersonalComponent implements OnInit {
     private alert: AlertMessageService,
     private citiesService: CitiesService
   ) {
- 
 
     combineLatest(
       this.auth.currUser,
       this.citiesService.get()
     )
-      .subscribe(x => {
-        this.currUser = x[0];
-        console.log('p ',this.URL + this.currUser.image);
-        
-        this.profileImage = this.URL + this.currUser.image;
-
-        var cities = x[1];
-
-        this.defineFormStructure(cities as City[]);
-        console.log('***', this.currUser);
-      }) /* */
-
-      // this.auth.getUser().complete();
-    // this.auth.currUser.subscribe((user: User) => {
-    //   this.currUser = user;
-    //   console.log('user', user);
-    // });
-
-    console.log('URL', this.URL);
-
-    // this.selectedFile = this.currUser.image;
+      .subscribe((x: [User, City[]]) => {
+        this.currUser = x[0] as User;
+        if (this.currUser) {
+          this.profileImage = this.URL + this.currUser.image;
+          this.defineFormStructure(x[1] as City[]);
+        }
+      })
   }
 
-  //   personaleFormStructureControls: Form[];
-  //   passwordFormStructureControls: Form[];
-
-  ngOnInit(): void {
-
-    // this.profileImage = this.URL + this.currUser.image;
-    // console.log('im', this.profileImage);
-
-  }
+  ngOnInit(): void { }
 
   defineFormStructure(cities: City[]) {
 
@@ -121,23 +98,15 @@ export class PersonalComponent implements OnInit {
     ]);
   }
 
-  //   selectedFiles = [];
   formData: FormData = new FormData();
   upload(event: any) {
-    console.log('event.target', event.target.files[0]);
 
     var file = event.target.files[0];
-
     this.formData.append('file', file);
-
-
-    console.log('====selectedFiles===', file);
-
-    console.log('id', this.currUser._id);
 
     this.auth.uploadProfileImage(this.currUser._id, this.formData)
       .subscribe(
-        resp => {
+        _ => {
           this.alert.success('Changes are saved');
         },
         err => this.alert.error(err.error))

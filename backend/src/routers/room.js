@@ -14,7 +14,7 @@ router.post('/rooms', async (req, res) => {
 
     try {
         const room = new Room(req.body)
-        await room.save()
+        await room.save();
 
         res.status(201).send(room)
     }
@@ -25,7 +25,7 @@ router.post('/rooms', async (req, res) => {
     }
 })
 
-router.post('/roomsBy', async (req, res) => {
+router.post('/roomsByOwner', async (req, res) => {
     // console.log('req', req);
     // console.log('body', req.body);
     // var c = req.param('creator')
@@ -74,9 +74,8 @@ router.post('/roomsBy', async (req, res) => {
     //     res.status(400).send(error.message)
     // }
 })
-
-
-router.put('/rooms/:id', async (req, res) => {
+ 
+router.patch('/rooms/:id', async (req, res) => {
 
     console.log(req.body, req.params);
 
@@ -223,11 +222,23 @@ router.get('/roomsByHotel/:id', async (req, res) => {
         },
     ]);
 
-
     if (!rooms) return res.status(401).send('Room are empty')
 
     res.send(rooms)
 
+})
+
+router.delete('/rooms/:id', async (req, res) => {
+
+    console.log(req.body, req.params);
+
+    const id = req.params.id;
+
+    await Room.deleteOne({ _id: id },
+        function (err, result) {
+            if (result)
+                res.send(result)
+        });
 })
 
 module.exports = router

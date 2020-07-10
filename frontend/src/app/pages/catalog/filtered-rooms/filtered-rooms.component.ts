@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Room } from 'src/app/core/models/Room';
 import { RoomService } from 'src/app/core/services/room.service';
 import { Control } from 'src/app/core/models/Control';
@@ -20,11 +20,14 @@ export class FilteredRoomsComponent implements OnInit {
 
   rooms$: Observable<Room[]>
   amenities: Amenity[];
-  
+
   filteredRooms$: Observable<Room[]>
   showSpinner: boolean = false;
   priceFilter: { key: string, price: number[] };
   cityFilter: { key: string, cityId: string };
+
+  private roomsSubject: BehaviorSubject<Room[]> = new BehaviorSubject<Room[]>([]);
+  rooms: Room[] = []
 
   config = {
     speed: 700,
@@ -55,7 +58,16 @@ export class FilteredRoomsComponent implements OnInit {
     private dialog: MatDialog,
   ) {
 
-    this.rooms$ = this.roomService.get();
+    this.rooms$ = this.roomsSubject.asObservable();
+
+    this.roomService.get()
+    .subscribe((rooms: Room[]) => {
+      this.rooms = rooms;
+      this.roomsSubject.next([...rooms]);
+    });
+
+    this.roomService.get()
+      .subscribe(x => console.log('0=>', x));
 
     this.filterTabsService.getFilters()
       .subscribe((x: FilterItem[]) => {

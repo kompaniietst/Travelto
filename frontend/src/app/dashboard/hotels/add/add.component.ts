@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Control } from 'src/app/core/models/Control';
 import { Observable, of, forkJoin } from 'rxjs';
 import { Amenity } from 'src/app/core/models/Amenity';
@@ -16,6 +16,8 @@ export class AddHotelComponent implements OnInit {
 
   amenities: Observable<any>;
   showSpinner = false;
+
+  @Output() addHotel = new EventEmitter<Hotel>();
 
   constructor(
     private alert: AlertMessageService,
@@ -121,19 +123,23 @@ export class AddHotelComponent implements OnInit {
     ])
   }
 
-  onSubmit(hotel: Hotel) {
-    console.log('hot', hotel);
+  onSubmit(formData: Hotel) {
+    console.log('____', formData);
 
-    this.showSpinner = true;
-    this.admin.registerHotel(hotel)
-      .subscribe(
-        (x: Hotel) => {
-          this.showSpinner = false;
-          this.alert.success('Item is successfully added');
-          // this.router.navigate([`/hotel/${x._id}`])
-        },
-        err => this.alert.error(err.error)
-      )
+    this.addHotel.emit(formData);
+    // this.valueChange.emit(hotel);
+    // console.log('hot', hotel);
+
+    // this.showSpinner = true;
+    // this.admin.registerHotel(hotel)
+    //   .subscribe(
+    //     (x: Hotel) => {
+    //       this.showSpinner = false;
+    //       this.alert.success('Item is successfully added');
+    //       // this.router.navigate([`/hotel/${x._id}`])
+    //     },
+    //     err => this.alert.error(err.error)
+    //   )
 
   }
 

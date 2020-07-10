@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Room } from 'src/app/core/models/Room';
 import { AdminService } from '../../admin.service';
 import { Hotel } from 'src/app/core/models/Hotel';
@@ -9,6 +9,9 @@ import { AlertMessageService } from 'src/app/core/services/alert-message.service
 import { CustomCurrencyPipe } from 'src/app/pipes/customCurrency.pipe';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { environment } from 'src/environments/environment';
+import { HotelService } from 'src/app/core/services/hotel.service';
+import { User } from 'src/app/core/models/User';
+import { RoomService } from 'src/app/core/services/room.service';
 
 @Component({
   selector: 'app-room-item',
@@ -19,24 +22,44 @@ import { environment } from 'src/environments/environment';
 export class RoomItemComponent implements OnInit {
 
   readonly URL = environment.apiUrl;
-  
+
   @Input() item: Room;
   // hotelInfo: HoteInfo;
   loading = true;
   amenities: Amenity[];
+  currUser: User;
 
   formStructure$: Observable<Control[]>;
   showSpinner = false;
   editItem: boolean = false;
   defaultFormData: Partial<Room>;
 
+  @Output() editRoom: EventEmitter<string> = new EventEmitter();
+  @Output() removeRoom: EventEmitter<string> = new EventEmitter();
+
   constructor(
-    private admin: AdminService,
+    private hotelService: HotelService,
+    private roomService: RoomService,
     private alert: AlertMessageService,
     private auth: AuthenticationService
   ) {
 
+    this.auth.currUser
+      .subscribe(user => {
+        if (user) {
+          this.currUser = user;
+          this.getHotels(user.role, user._id);
+        }
+      })
+  }
 
+  getHotels(role: string, _id: string) {
+    this.hotelService.getHotelsByCurrRole(role, _id)                 // get hotels for editing curr room
+      .subscribe(x => {
+
+        var hotels = x.map((h: Hotel) => { return { _id: h._id, label: h.name } })
+        this.initFormStructure(hotels)
+      })
   }
 
   edit(_id: string) {
@@ -116,18 +139,8 @@ export class RoomItemComponent implements OnInit {
     this.loading = true;
 
     const currUserId = this.auth.getCurrUser()._id;
-    console.log('currUserId', currUserId);
-
-    this.admin.getHotelsBy(currUserId)                 // get hotels for editing curr room
-      .subscribe(x => {
-        // console.log('@@@@@@@', this.item.hotel._id);
-
-        var hotels = x.map((h: Hotel) => { return { _id: h._id, label: h.name } })
-        this.initFormStructure(hotels)
-      })
 
     this.defaultFormData = {
-      // hotel_id: this.item.hotel._id,
       name: this.item.name,
       description: this.item.description,
       price: this.item.price,
@@ -135,27 +148,18 @@ export class RoomItemComponent implements OnInit {
       textFeatures: this.item.textFeatures,
       images: this.item.images,
     }
-
-
-    // this.admin.getHotelBy(this.item.hotel_id)
-    //   .subscribe((x: Hotel) => {
-    //     this.loading = false;
-    //     // this.hotelInfo = { _id: x._id, name: x.name, stars: x.stars } as HoteInfo;
-    //   })
   }
 
-  onSubmit(formData: any) {
-    this.showSpinner = true;
-    // console.log('on edit', formData);
-    this.admin.editRoom(this.item._id, formData)
+  remove(_id: string) {
+    this.removeRoom.emit(_id);
+  }
+
+  onSubmitEditForm(formData: any) {
+    this.roomService.editRoom(this.item._id, formData)
       .subscribe(
-        x => {
-          // console.log('sss', x);
-
-          this.alert.success("Item is successfuly updated");
-
-          this.showSpinner = false;
-          setTimeout(() => { this.editItem = false }, 1500);
+        (x: Room) => {
+          this.editRoom.emit(x._id);
+          this.editItem = false;
         },
         err => console.log(err)
       )

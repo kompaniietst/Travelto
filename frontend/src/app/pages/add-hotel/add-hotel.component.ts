@@ -21,9 +21,11 @@ export class AddYourHotelComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router) {
 
-    this.auth.currUser.subscribe(x => {                                        // check if user is a member
-      if (x.role == "member" || x.role == "admin") this.router.navigate(['/account/hotels'])
-    })
+    this.auth.currUser
+      .subscribe(user => {                                        // check if user is a member
+        if (user && user.role == "member" || user && user.role == "admin")
+          this.router.navigate([`/account/${user._id}/hotels`], { queryParams: { tab: 1 } })
+      })
   }
 
   formStructure$: Observable<Control[]> = of([
@@ -79,7 +81,7 @@ export class AddYourHotelComponent implements OnInit {
       )
   }
 
-  openModal(){
+  openModal() {
     this.dialog.closeAll();
     this.dialog.open(LoginComponent, {
       panelClass: 'popup',

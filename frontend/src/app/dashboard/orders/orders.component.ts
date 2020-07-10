@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Order } from 'src/app/core/models/Order';
 import { FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-orders',
@@ -15,103 +16,94 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class OrdersComponent implements OnInit {
 
   readonly URL = environment.apiUrl;
-  
+
   bookings$: Observable<Order[]>;
   actionControl = new FormControl('active');
   countBookings: number;
   showSpinner = false;
+  user_id: string;
   role: string;
 
+  private bookingsSubject: BehaviorSubject<any> = new BehaviorSubject([]);
+  bookings: Order[] = [];
+
   constructor(
-    private booking: BookingService,
+    private bookingService: BookingService,
     private auth: AuthenticationService,
     private router: Router,
     private route: ActivatedRoute
   ) {
 
+    this.bookings$ = this.bookingsSubject.asObservable();
+
     this.auth.currUser
       .subscribe(user => {
-        console.log('user=', user);
-        this.role = user.role;
-        this.getBookings(user._id)
+        if (user) {
+          this.user_id = user._id;
+          this.role = user.role;
+          this.getBookings(user._id)
+        }
       })
 
-    /*     let url = this.router.url.split('/');
-    
-        this.currUserId = url[url.length - 2]
-    
-        this.role = this.auth.getCurrUser().role;
-    
-        if (this.currUserId) {
-          this.showSpinner = true;
-    
-          // this.role == 'member'
-          //   ? this.getBookings(this.currUserId, this.role)
-          //   : this.getBookings(this.currUserId, this.role)
-        } */
+    this.bookingService.countOrders
+      .subscribe(x => {
+        if (x.length > 0)
+          this.getBookings(this.user_id)
+      })
   }
 
-
-  getBookings(userId: string) {
-
+  getBookings(user_id: string) {
 
     if (this.role == "admin") {
-      this.bookings$ = this.booking.get();
-      this.booking.get()
-        .subscribe(x => {
+      this.bookingService.get()
+        .subscribe((orders: Order[]) => {
+
+          this.bookings = orders;
+          this.bookingsSubject.next([...this.bookings]);
+
           this.showSpinner = false;
-          console.log('orders component', x);
-          this.countBookings = x.length
-        });
+          this.countBookings = orders.length
+          return orders;
+        })
+
       return;
     }
 
     let params = {};
 
     if (this.role == "member")
-      params = { owner_id: userId }
+      params = { owner_id: user_id }
 
     if (this.role == "user")
-      params = { clientId: userId }
+      params = { clientId: user_id }
 
+    this.bookingService.getBookings(params)
+      .pipe(
+        map((orders: Order[]) => {
+          this.bookings = orders;
+          this.bookingsSubject.next([...this.bookings]);
 
-    this.bookings$ = this.booking.getBookings(params);
-    this.booking.getBookings(params)
-      .subscribe(x => {
-        this.showSpinner = false;
-        console.log('orders component', x);
-        this.countBookings = x.length
-      });
-
+          this.showSpinner = false;
+          this.countBookings = orders.length
+          return orders;
+        }))
+      .subscribe(x => x);
   }
 
-
-  ngOnInit(): void {
-    // this.bookings$ = this.booking.getBookings();
-    // this.booking.getBookings().subscribe(x => console.log('orders component', x));
-    // console.log('OBSS', this.booking.getBookings());
-
-  }
+  ngOnInit(): void { }
 
   changeOrderStatus(_id: string, status: string) {
-    // switch (status) {
-    //   case 'active':
-    this.booking.changeOrderStatus(_id, status)
+    this.bookingService.changeOrderStatus(_id, status)
       .subscribe(
-        x => console.log('changeOrderStatus', x),
+        (resp: Order) => {
+          let i = this.bookings.findIndex((o: Order) => o._id == resp._id);
+          this.bookings[i].status = resp.status;
+          this.bookings[i]["completed"] = resp.completed;
+          this.bookingsSubject.next([...this.bookings]);
+        },
         err => console.log(err)
       )
-    //     break;
-
-    //   default:
-    //     break;
-    // }
   }
-
-  // cancel(_id: string) {
-  //   this.booking.cancelBooking(_id);
-  //   this.inProcess = true;
-  // }
 
   trackById(index, item) {
     return item.id;

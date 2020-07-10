@@ -1,21 +1,102 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Observable, BehaviorSubject, forkJoin } from 'rxjs';
+import { Room } from 'src/app/core/models/Room';
+import { RoomService } from 'src/app/core/services/room.service';
+import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
+import { User } from 'src/app/core/models/User';
 
 @Component({
   selector: 'app-rooms',
-  template: `
-        <mat-tab-group animationDuration="0ms">
-          <mat-tab label="View your rooms">
-            <app-view-rooms></app-view-rooms>
-          </mat-tab>
-          <mat-tab label="Add new room">
-              <app-add-room></app-add-room>
-          </mat-tab>
-        </mat-tab-group>
-  `,
+  templateUrl: './rooms.component.html',
+  styleUrls: ['./rooms.component.scss']
 })
+
 export class RoomsComponent implements OnInit {
 
-  constructor() { }
+  rooms$: Observable<Room[]>;
+  loading = true;
+  countRooms: number;
+  currUser: User;
+
+  private roomSubject: BehaviorSubject<Room[]> = new BehaviorSubject([]);
+  rooms: Room[] = [];
+
+  @ViewChild('tabGroup') tabGroupRef;
+
+  constructor(
+    private service: RoomService,
+    private auth: AuthenticationService
+  ) {
+
+    this.rooms$ = this.roomSubject.asObservable();
+
+    this.auth.currUser
+      .subscribe(user => {
+        if (user) {
+          this.currUser = user;
+          this.getRooms(user.role, user._id);
+        }
+      })
+  }
 
   ngOnInit(): void { }
+
+  getRooms(role: string, user_id: string) {
+    this.service.getRoomsByCurrRole(role, user_id)
+      .subscribe(
+        (x: Room[]) => {
+          console.log('rooms$', x);
+
+          this.rooms = x;
+          this.roomSubject.next([...this.rooms]);
+
+          this.loading = false;
+          this.countRooms = x.length;
+        },
+        err => console.log(err))
+  }
+
+
+  onAdd(formData: Room) {
+    let room_id = formData._id;
+    this.service.getRoomBy(room_id)
+      .subscribe((x: Room) => {
+
+        this.rooms.push(x);
+        this.roomSubject.next([...this.rooms]);
+
+        this.tabGroupRef.selectedIndex = 0;
+        window.scrollTo(0, 0)
+      })
+  }
+
+  onEdit(_id: string) {
+    console.log('edit', _id);
+    this.service.getRoomBy(_id)
+      .subscribe((x: Room) => {
+        console.log('R', x);
+
+
+        let i = this.rooms.findIndex(h => h._id == _id);
+        this.rooms[i] = x;
+        this.roomSubject.next([...this.rooms]);
+
+        this.tabGroupRef.selectedIndex = 0;
+        window.scrollTo(0, 0)
+      })
+  }
+
+  onRemove(_id: string) {
+    console.log('rem ', _id);
+    this.service.removeRoom(_id)
+      .subscribe(_ => {
+        let i = this.rooms.findIndex(h => h._id == _id);
+        this.rooms.splice(i, 1)
+        this.roomSubject.next([...this.rooms]);
+      })
+  }
+
+  trackById(index, item) {
+    return item.id;
+  }
 }

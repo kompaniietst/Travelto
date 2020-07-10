@@ -1,0 +1,30 @@
+<mat-tab-group animationDuration="0ms" #tabGroup>
+    <mat-tab label="View your hotels">
+
+        <h2 class="header_title">Your hotels
+            <span *ngIf="countHotels > 0">({{ countHotels }})</span>
+        </h2>
+
+        <div *ngIf="loading" class="spinner_container">
+            <mat-spinner strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner>
+        </div>
+        <div *ngIf="countHotels == 0" class="no_items">
+            No hotels yet
+        </div>
+        <div *ngIf="hotels$">
+            <div *ngFor="let item of hotels$ | async | reverse">
+                <app-hotel-item
+                    [item]="item"
+                    (editHotel)="onEdit($event)"
+                    (removeHotel)="onRemove($event)">
+                </app-hotel-item>
+            </div>
+        </div>
+
+    </mat-tab>
+    <mat-tab label="Add new hotel">
+        <app-add-hotel
+            (addHotel)="onAdd($event)">
+        </app-add-hotel>
+    </mat-tab>
+</mat-tab-group>

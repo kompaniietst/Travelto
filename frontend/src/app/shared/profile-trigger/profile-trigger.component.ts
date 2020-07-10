@@ -5,6 +5,9 @@ import { LoginComponent } from 'src/app/core/authentication/login/login.componen
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { User } from 'src/app/core/models/User';
 import { environment } from 'src/environments/environment';
+import { BehaviorSubject } from 'rxjs';
+import { BookingService } from 'src/app/core/services/booking.service';
+import { Order } from 'src/app/core/models/Order';
 
 @Component({
   selector: 'app-profile-trigger',
@@ -13,44 +16,43 @@ import { environment } from 'src/environments/environment';
 })
 export class ProfileTriggerComponent implements OnInit {
 
-  currUser: User;
-  notification: number = 0;
-  profileImage: string;
   readonly URL = environment.apiUrl;
+
+  currUser: User;
+  notification: number = 3;
+  profileImage: string;
+  count = 0;
 
   constructor(
     private dialog: MatDialog,
     private router: Router,
+    private bookingService: BookingService,
     private auth: AuthenticationService,
-    // private bookingService: BookingService
   ) {
+
+    this.bookingService.countOrders
+      .subscribe((x: Order[]) => this.count = x.length);
 
     this.auth.currUser.subscribe((user: User) => {
       this.currUser = user;
-      if (this.currUser?.image) this.profileImage = this.URL + this.currUser.image
+      console.log('user', user);
+
+      this.currUser?.image
+        ? this.profileImage = this.URL + this.currUser.image
+        : this.profileImage = '';
     })
-
-    // this.bookingService.bookings.subscribe(x =>
-    //   this.notification = x.filter(f => f.state == 'active').length
-    // );
   }
 
-  ngOnInit() {
-  }
+  get isAdmin() { return this.currUser.role == 'admin' }
+  get isMember() { return this.currUser.role == 'member' }
+  get isUser() { return this.currUser.role == 'user' }
 
-  gotoAccount() {
-    this.router.navigate([`account/${this.currUser._id}`])
-  }
+  ngOnInit() { }
 
   openDialog() {
     const dialogRef = this.dialog.open(LoginComponent, {
       panelClass: 'popup',
     });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    //   this.animal = result;
-    // });
   }
 
   logout() {

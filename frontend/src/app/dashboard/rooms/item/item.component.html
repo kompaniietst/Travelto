@@ -12,7 +12,7 @@
             <strong>{{ item.price| customCurrency }} <span class="currency">$</span></strong> / night
         </div>
     </div>
-
+{{item._id}}
     <div class="block">
         {{ item.description }}
     </div>
@@ -32,7 +32,7 @@
 
     <div class="control_buttons">
         <button class="edit" (click)="edit(item._id)" class="btn">Edit</button>
-        <!-- <button class="rem" (click)="rem(item._id)" class="btn">Remove</button> -->
+        <button class="rem" (click)="remove(item._id)" class="btn">Remove</button>
     </div>
 </div>
 
@@ -41,8 +41,13 @@
         <strong><a routerLink="/hotel/{{ item._id }}">{{ item.name }}</a></strong>
     </div>
 
-    <app-form [controls$]="formStructure$" [defaultData]="defaultFormData" (valueChange)="onSubmit($event)" buttonName="Update"
-        [showSpinner]="showSpinner" class="edit_room_form">
+    <app-form 
+        [controls$]="formStructure$" 
+        [defaultData]="defaultFormData" 
+        (valueChange)="onSubmitEditForm($event)" 
+        buttonName="Update"
+        [showSpinner]="showSpinner" 
+        class="edit_room_form">
     </app-form>
     <app-alert-message></app-alert-message>
 

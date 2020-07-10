@@ -13,13 +13,11 @@ import { RoomsComponent } from './rooms/rooms.component';
 import { AddHotelComponent } from './hotels/add/add.component';
 import { AddRoomComponent } from './rooms/add/add.component';
 import { AddAmenitiesComponent } from './amenities/add/add.component';
-import { ViewHotelsComponent } from './hotels/view/view.component';
 import { HotelItemComponent } from './hotels/item/item.component';
 import { ViewAmenitiesComponent } from './amenities/view/view.component';
 import { CitiesComponent } from './cities/cities.component';
 import { AddCitiesComponent } from './cities/add/add.component';
 import { ViewCitiesComponent } from './cities/view/view.component';
-import { ViewRoomsComponent } from './rooms/view/view.component';
 import { RoomItemComponent } from './rooms/item/item.component';
 import { AmenityItemComponent } from './amenities/item/item.component';
 import { OrdersComponent } from './orders/orders.component';
@@ -28,7 +26,9 @@ import { OrdersComponent } from './orders/orders.component';
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
 import { PipesModule } from '../pipes/pipes.module';
-import { OrderItemComponent } from './orders/order-item/order-item.component';
+import { ActiveComponent } from './orders/active/active.component';
+import { CompletedComponent } from './orders/completed/completed.component';
+import { CanceledComponent } from './orders/canceled/canceled.component';
 
 const routes: Routes = []
 
@@ -36,16 +36,13 @@ const COMPONENTS = [
   AccountComponent,
 
   OrdersComponent,
-  OrderItemComponent,
 
   HotelsComponent,
   AddHotelComponent,
-  ViewHotelsComponent,
   HotelItemComponent,
 
   RoomsComponent,
   AddRoomComponent,
-  ViewRoomsComponent,
   RoomItemComponent,
 
   AmenitiesComponent,
@@ -57,8 +54,9 @@ const COMPONENTS = [
   AddCitiesComponent,
   ViewCitiesComponent,
 
-
-  // ReversePipe
+  ActiveComponent,
+  CompletedComponent,
+  CanceledComponent,
 
 ];
 
@@ -78,7 +76,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, AmenityItemComponent],
+  declarations: [...COMPONENTS],
   imports: [...MODULES],
   exports: [...COMPONENTS]
 })

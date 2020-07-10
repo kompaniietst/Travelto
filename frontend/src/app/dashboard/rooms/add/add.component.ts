@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Control } from 'src/app/core/models/Control';
 import { Observable, of, forkJoin } from 'rxjs';
 import { Amenity } from 'src/app/core/models/Amenity';
@@ -7,6 +7,9 @@ import { AlertMessageService } from 'src/app/core/services/alert-message.service
 import { Room } from 'src/app/core/models/Room';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { AdminService } from '../../admin.service';
+import { User } from 'src/app/core/models/User';
+import { HotelService } from 'src/app/core/services/hotel.service';
+import { RoomService } from 'src/app/core/services/room.service';
 
 @Component({
   selector: 'app-add-room',
@@ -18,23 +21,36 @@ export class AddRoomComponent implements OnInit {
   amenities: Amenity[];
   hotels: Hotel[];
   showSpinner = false;
+  currUser: User;
+  formStructure$: Observable<Control[]>;
+
+  @Output() addRoom = new EventEmitter<Room>();
 
   constructor(
     private alert: AlertMessageService,
     private auth: AuthenticationService,
-    private admin: AdminService
+    private hotelService: HotelService,
+    private roomService: RoomService,
   ) {
 
-    const currUserId = this.auth.getCurrUser()._id;
+    this.auth.currUser
+      .subscribe(user => {
+        if (user) {
+          this.currUser = user;
+          this.getHotels(user._id);
+        }
+      })
+  }
 
-    this.admin.getHotelsBy(currUserId)
+  getHotels(user_id: string) {
+    this.hotelService.getHotelsBy(user_id)
       .subscribe(x => {
         var hotels = x.map(h => { return { _id: h._id, label: h.name } })
         this.initFormStructure(hotels)
       })
+
   }
 
-  formStructure$: Observable<Control[]>;
 
   ngOnInit(): void { }
 
@@ -98,16 +114,16 @@ export class AddRoomComponent implements OnInit {
     ])
   }
 
-  onSubmit(room: Room) {
+  onSubmit(formData: Room) {
     this.showSpinner = true;
-    
-    this.admin.registerRoom(room)
+    this.roomService.register(formData, this.currUser._id)
       .subscribe(
-        (_: Room) => {
+        (resp: Room) => {
           this.showSpinner = false;
-          console.log('respRoom', _);
+          console.log('respRoom', resp);
           //this.router.navigate([`/room/${_._id}`])
           this.alert.success('Item is successfully added');
+          this.addRoom.emit(resp);
         },
         err => this.alert.error(err.error)
       )
