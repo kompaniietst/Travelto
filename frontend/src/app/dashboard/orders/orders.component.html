@@ -1,5 +1,10 @@
 <mat-tab-group animationDuration="0ms">
     <mat-tab label="Active orders">
+
+        <h2 class="header_title">Orders
+            <span *ngIf="countBookings > 0">({{ countBookings }})</span>
+        </h2>
+
         <div *ngIf="showSpinner" class="spinner_align_center">
             <mat-spinner strokeWidth="4" diameter="30" class="blue_spinner"></mat-spinner>
         </div>
@@ -8,13 +13,21 @@
                 || countBookings > 0 && (bookings$ | async | filterByStatus: 'active').length == 0">
                 No active orders yet.
             </div>
-
-        <div *ngFor="let state of ['confirmCancel','active']; trackBy: trackById" class="{{ state }}">
-            <div *ngFor="let order of bookings$ | async | filterByStatus: state | reverse; trackBy: trackById" class="room_container">
+            <div *ngFor="let state of ['confirmCancel','active']; 
+            trackBy: trackById" 
+            class="{{ state }}">
+            <div *ngFor="let order of bookings$ 
+            | async 
+            | filterByStatus: state 
+            | reverse; 
+            trackBy: trackById;
+            let i = index" 
+            class="room_container">
                 <app-active
                     [order]="order"
                     [state]="state"
-                    [role]="role">
+                    [role]="role"
+                    [ngClass]="{ 'new' : newOrdersId.includes(order._id) }">
                     <button *ngIf="state == 'active' && role == 'user'"
                         (click)="changeOrderStatus(order._id,'confirmCancel')"
                         class="btn btn-grey-outline w_100">

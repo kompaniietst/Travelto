@@ -42,9 +42,7 @@ export class HotelsComponent implements OnInit, AfterViewInit {
       .subscribe(x => this.tabGroupRef.selectedIndex = x.tab)
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   getHotels(role: string, user_id: string) {
     this.service.getHotelsByCurrRole(role, user_id)
@@ -54,7 +52,6 @@ export class HotelsComponent implements OnInit, AfterViewInit {
 
           this.hotels = x;
           this.hotelSubject.next([...this.hotels]);
-
 
           this.loading = false;
           this.countHotels = x.length;

@@ -12,7 +12,9 @@ h3 {
 hr {
     margin: 11px 0;
 }
-
+:host.new .order_container {
+    border: 1.5px solid $color;
+}
 .order_container {
     border: $border;
     border-radius: 3px;

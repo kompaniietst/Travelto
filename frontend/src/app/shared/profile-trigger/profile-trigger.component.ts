@@ -5,9 +5,7 @@ import { LoginComponent } from 'src/app/core/authentication/login/login.componen
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { User } from 'src/app/core/models/User';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
 import { BookingService } from 'src/app/core/services/booking.service';
-import { Order } from 'src/app/core/models/Order';
 
 @Component({
   selector: 'app-profile-trigger',
@@ -19,7 +17,6 @@ export class ProfileTriggerComponent implements OnInit {
   readonly URL = environment.apiUrl;
 
   currUser: User;
-  notification: number = 3;
   profileImage: string;
   count = 0;
 
@@ -31,7 +28,13 @@ export class ProfileTriggerComponent implements OnInit {
   ) {
 
     this.bookingService.countOrders
-      .subscribe((x: Order[]) => this.count = x.length);
+      .subscribe((x: string[]) => {
+        this.count = x.length;
+
+        if (this.router.url.includes('orders')) {
+          this.bookingService.clearNewOrdersSubj();
+        }
+      });
 
     this.auth.currUser.subscribe((user: User) => {
       this.currUser = user;

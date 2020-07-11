@@ -12,9 +12,8 @@ export class BookingService {
   readonly URL = environment.apiUrl;
   date: Date;
 
-  private newOrdersSubj = new BehaviorSubject<Order[]>([]);
-  newOrders: Order[] = [];
-  countOrders: Observable<Order[]>;
+  private newOrdersSubj = new BehaviorSubject<string[]>([]);
+  countOrders: Observable<string[]>;
 
   constructor(private http: HttpClient) {
     this.date = new Date();
@@ -22,22 +21,33 @@ export class BookingService {
     this.countOrders = this.newOrdersSubj.asObservable();
 
     setInterval(() => {
-      console.log('req');
-      // this.count++;
       this.getNewOrders()
         .subscribe(
-          x => {
-            this.newOrdersSubj.next(x);
-            // this.count = x.length;
-            console.log('D -- ', x)
+          (x: string[]) => {
+            console.log('new orders -- ', x)
+            this.newOrdersSubj.next([...x]);
           },
           err => console.log(err)
         )
     }, 5000);
   }
 
+  clearNewOrdersSubj() {
+    this.newOrdersSubj.next([]);
+  }
+
   register(newOrder: Order): Observable<Order> {
     return this.http.post<Order>(`${this.URL}/bookings`, newOrder)
+  }
+
+  getBookingsByCurrRole(role: string, user_id: string) {
+    if (role == 'admin')
+      return this.get()
+
+    let params = {};
+    if (role == "member") params = { owner_id: user_id }
+    if (role == "user") params = { clientId: user_id }
+    return this.getBookings(params)
   }
 
   getBookings(params: any) {
@@ -52,7 +62,7 @@ export class BookingService {
     return this.http.patch<Order>(`${this.URL}/bookings/${_id}`, { status: status })
   }
 
-  getNewOrders(): Observable<Order[]> {
-    return this.http.post<Order[]>(`${this.URL}/bookings_new/`, { date: this.date });
+  getNewOrders(): Observable<string[]> {
+    return this.http.post<string[]>(`${this.URL}/bookings_new/`, { date: this.date });
   }
 }

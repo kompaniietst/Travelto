@@ -18,17 +18,18 @@ export class OrdersComponent implements OnInit {
   readonly URL = environment.apiUrl;
 
   bookings$: Observable<Order[]>;
-  actionControl = new FormControl('active');
   countBookings: number;
+  newBookingsAmount: number;
   showSpinner = false;
   user_id: string;
   role: string;
+  newOrdersId: string[] = [];
 
   private bookingsSubject: BehaviorSubject<any> = new BehaviorSubject([]);
   bookings: Order[] = [];
 
   constructor(
-    private bookingService: BookingService,
+    private service: BookingService,
     private auth: AuthenticationService,
     private router: Router,
     private route: ActivatedRoute
@@ -41,59 +42,39 @@ export class OrdersComponent implements OnInit {
         if (user) {
           this.user_id = user._id;
           this.role = user.role;
-          this.getBookings(user._id)
+          this.getBookings(this.role, user._id)
         }
-      })
+      });
 
-    this.bookingService.countOrders
+    this.service.countOrders
       .subscribe(x => {
-        if (x.length > 0)
-          this.getBookings(this.user_id)
-      })
+        if (x.length > 0) {
+          this.newBookingsAmount = x.length;
+          this.getBookings(this.role, this.user_id);
+          this.newOrdersId = x;
+        }
+      });
   }
 
-  getBookings(user_id: string) {
-
-    if (this.role == "admin") {
-      this.bookingService.get()
-        .subscribe((orders: Order[]) => {
+  getBookings(role: string, user_id: string) {
+    this.service.getBookingsByCurrRole(role, user_id)
+      .subscribe(
+        (orders: Order[]) => {
+          console.log('orders$', orders);
 
           this.bookings = orders;
           this.bookingsSubject.next([...this.bookings]);
 
           this.showSpinner = false;
           this.countBookings = orders.length
-          return orders;
-        })
-
-      return;
-    }
-
-    let params = {};
-
-    if (this.role == "member")
-      params = { owner_id: user_id }
-
-    if (this.role == "user")
-      params = { clientId: user_id }
-
-    this.bookingService.getBookings(params)
-      .pipe(
-        map((orders: Order[]) => {
-          this.bookings = orders;
-          this.bookingsSubject.next([...this.bookings]);
-
-          this.showSpinner = false;
-          this.countBookings = orders.length
-          return orders;
-        }))
-      .subscribe(x => x);
+        },
+        err => console.log(err))
   }
 
   ngOnInit(): void { }
 
   changeOrderStatus(_id: string, status: string) {
-    this.bookingService.changeOrderStatus(_id, status)
+    this.service.changeOrderStatus(_id, status)
       .subscribe(
         (resp: Order) => {
           let i = this.bookings.findIndex((o: Order) => o._id == resp._id);

@@ -305,15 +305,12 @@ router.post('/bookings_new', async (req, res) => {
 
     var tr = '2020-07-08T13:22:36.668+00:00'
 
-    const bookings = await Booking
-        .find(
-            { reserved: { $gte: date } }
-        );
+    let bookings = await Booking.find({ reserved: { $gte: date } });
+    let bookingsIdArr = bookings.map(b => b._id);
 
     if (!bookings) return res.status(401).send({ error: 'Bookings are empty' })
 
-    res.send(bookings)
-    // res.send({ count: d })
+    res.send(bookingsIdArr)
 })
 
 
