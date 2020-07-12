@@ -4,6 +4,7 @@ import { Room } from 'src/app/core/models/Room';
 import { RoomService } from 'src/app/core/services/room.service';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { User } from 'src/app/core/models/User';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rooms',
@@ -30,19 +31,11 @@ export class RoomsComponent implements OnInit {
 
     this.rooms$ = this.roomSubject.asObservable();
 
-    this.auth.currUser
-      .subscribe(user => {
-        if (user) {
-          this.currUser = user;
-          this.getRooms(user.role, user._id);
-        }
-      })
-  }
-
-  ngOnInit(): void { }
-
-  getRooms(role: string, user_id: string) {
-    this.service.getRoomsByCurrRole(role, user_id)
+    this.auth.currUser                                  // get rooms by current user
+      .pipe(
+        mergeMap((user: User) =>
+          this.service
+            .getRoomsByCurrRole(user.role, user._id)))
       .subscribe(
         (x: Room[]) => {
           console.log('rooms$', x);
@@ -56,6 +49,7 @@ export class RoomsComponent implements OnInit {
         err => console.log(err))
   }
 
+  ngOnInit(): void { }
 
   onAdd(formData: Room) {
     let room_id = formData._id;

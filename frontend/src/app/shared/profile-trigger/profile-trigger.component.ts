@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/core/authentication/authenticatio
 import { User } from 'src/app/core/models/User';
 import { environment } from 'src/environments/environment';
 import { BookingService } from 'src/app/core/services/booking.service';
+import { Order } from 'src/app/core/models/Order';
 
 @Component({
   selector: 'app-profile-trigger',
@@ -27,10 +28,9 @@ export class ProfileTriggerComponent implements OnInit {
     private auth: AuthenticationService,
   ) {
 
-    this.bookingService.countOrders
+    this.bookingService.newOrders
       .subscribe((x: string[]) => {
         this.count = x.length;
-
         if (this.router.url.includes('orders')) {
           this.bookingService.clearNewOrdersSubj();
         }
@@ -38,7 +38,6 @@ export class ProfileTriggerComponent implements OnInit {
 
     this.auth.currUser.subscribe((user: User) => {
       this.currUser = user;
-      console.log('user', user);
 
       this.currUser?.image
         ? this.profileImage = this.URL + this.currUser.image

@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, timer, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Order } from '../models/Order';
+import { AuthenticationService } from '../authentication/authentication.service';
+import { map, mergeMap, switchMap, switchMapTo } from 'rxjs/operators';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -13,23 +16,23 @@ export class BookingService {
   date: Date;
 
   private newOrdersSubj = new BehaviorSubject<string[]>([]);
-  countOrders: Observable<string[]>;
+  newOrders: Observable<string[]>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private auth: AuthenticationService) {
     this.date = new Date();
 
-    this.countOrders = this.newOrdersSubj.asObservable();
+    this.newOrders = this.newOrdersSubj.asObservable();
 
-    setInterval(() => {
-      this.getNewOrders()
-        .subscribe(
-          (x: string[]) => {
-            console.log('new orders -- ', x)
-            this.newOrdersSubj.next([...x]);
-          },
-          err => console.log(err)
-        )
-    }, 5000);
+    this.auth.currUser
+      .pipe(
+        switchMap(currUser => {
+          if (!currUser) return of([]);
+          return timer(0, 5000).pipe(switchMapTo(this.getNewOrders(currUser.role, currUser._id)))
+        }))
+      .subscribe(orders => {
+        console.log('or=>', orders);
+        this.newOrdersSubj.next([...orders]);
+      });
   }
 
   clearNewOrdersSubj() {
@@ -40,7 +43,7 @@ export class BookingService {
     return this.http.post<Order>(`${this.URL}/bookings`, newOrder)
   }
 
-  getBookingsByCurrRole(role: string, user_id: string) {
+  getBookingsByCurrUser(role: string, user_id: string) {
     if (role == 'admin')
       return this.get()
 
@@ -62,7 +65,11 @@ export class BookingService {
     return this.http.patch<Order>(`${this.URL}/bookings/${_id}`, { status: status })
   }
 
-  getNewOrders(): Observable<string[]> {
-    return this.http.post<string[]>(`${this.URL}/bookings_new/`, { date: this.date });
+  getNewOrders(role: string, user_id: string): Observable<string[]> {
+    let params = { date: this.date };
+    if (role == "member") params["owner_id"] = user_id;
+    if (role == "user") params["clientId"] = user_id;
+
+    return this.http.post<string[]>(`${this.URL}/bookings_new/`, params);
   }
 }

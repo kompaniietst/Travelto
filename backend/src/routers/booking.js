@@ -294,25 +294,29 @@ router.patch('/bookings/:id', async (req, res) => {
 
 router.post('/bookings_new', async (req, res) => {
 
+    console.log(req.body);
+
     const date = req.body.date;
+    const clientId = req.body.clientId;
+    const owner_id = req.body.owner_id;
 
-    const dateNow = moment(date)
-    const bookDate = moment('2020-07-07T18:29:45.782+00:00')
+    let bookings;
 
-    var d = dateNow.diff(bookDate, 'days')
+    if (clientId)
+        bookings = await Booking.find({ clientId: clientId, reserved: { $gte: date } });
 
-    console.log(d);
+    if (owner_id)
+        bookings = await Booking.find({ owner_id: owner_id, reserved: { $gte: date } });
 
-    var tr = '2020-07-08T13:22:36.668+00:00'
+    if (!clientId && !owner_id)
+        bookings = await Booking.find({ reserved: { $gte: date } });
 
-    let bookings = await Booking.find({ reserved: { $gte: date } });
     let bookingsIdArr = bookings.map(b => b._id);
 
     if (!bookings) return res.status(401).send({ error: 'Bookings are empty' })
 
     res.send(bookingsIdArr)
 })
-
 
 
 module.exports = router

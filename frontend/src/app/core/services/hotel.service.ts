@@ -12,18 +12,9 @@ import { User } from '../models/User';
 export class HotelService {
 
   readonly URL = environment.apiUrl;
-  // private hotelSubject: BehaviorSubject<any>;
-  // currUser: User;
-  // private bookingSubject: BehaviorSubject<any>;
-  // bookings: Observable<any>;
-
-  // get bookingsValue() {
-  // }
 
   constructor(private http: HttpClient,
     private auth: AuthenticationService) {
-    // this.currUser = this.auth.getCurrUser();
-    // this.hotelSubject = new BehaviorSubject(JSON.parse(localStorage.getItem("hotels")));
   }
 
   register(hotel: Hotel): Observable<Hotel> {

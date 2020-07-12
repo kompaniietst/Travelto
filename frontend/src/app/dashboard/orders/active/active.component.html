@@ -54,27 +54,29 @@
                     </span>
                 </div>
             </div>
-            <hr>
-
-            <div *ngIf="order.user?.firstname">
-                Name: 
-                <strong>{{ order.user.firstname }}</strong>
-            </div>
-            <div *ngIf="order.user?.lastname">
-                <strong>{{ order.user.lastname }}</strong>
-            </div>
-            <div>
-                Email: 
-                <strong>{{ order.user.email }}</strong>
-            </div>
-            <div>
-                Phone: 
-                <strong>{{ order.user.phone }}</strong>
-            </div>
-            <div>
-                <small>
-                    Created: {{ order.reserved | formatDate: 'date+time' }}
-                </small>
+{{role}}
+            <div *ngIf="role != 'user'">
+                <hr>
+                <div *ngIf="order.user?.firstname">
+                    Name: 
+                    <strong>{{ order.user.firstname }}</strong>
+                </div>
+                <div *ngIf="order.user?.lastname">
+                    <strong>{{ order.user.lastname }}</strong>
+                </div>
+                <div>
+                    Email: 
+                    <strong>{{ order.user.email }}</strong>
+                </div>
+                <div>
+                    Phone: 
+                    <strong>{{ order.user.phone }}</strong>
+                </div>
+                <div>
+                    <small>
+                        Created: {{ order.reserved | formatDate: 'date+time' }}
+                    </small>
+                </div>
             </div>
         </div>
         <div class="button">

@@ -4,6 +4,8 @@ import { Hotel } from 'src/app/core/models/Hotel';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { HotelService } from 'src/app/core/services/hotel.service';
 import { ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/core/models/User';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-hotels',
@@ -29,23 +31,11 @@ export class HotelsComponent implements OnInit, AfterViewInit {
 
     this.hotels$ = this.hotelSubject.asObservable();
 
-    this.auth.currUser
-      .subscribe(user => {
-        if (user) {
-          this.getHotels(user.role, user._id);
-        }
-      })
-  }
-
-  ngAfterViewInit(): void {
-    this.route.queryParams
-      .subscribe(x => this.tabGroupRef.selectedIndex = x.tab)
-  }
-
-  ngOnInit(): void { }
-
-  getHotels(role: string, user_id: string) {
-    this.service.getHotelsByCurrRole(role, user_id)
+    this.auth.currUser                                  // get hotels by current user
+      .pipe(
+        mergeMap((user: User) =>
+          this.service
+            .getHotelsByCurrRole(user.role, user._id)))
       .subscribe(
         (x: Hotel[]) => {
           console.log('hotels$', x);
@@ -58,6 +48,13 @@ export class HotelsComponent implements OnInit, AfterViewInit {
         },
         err => console.log(err))
   }
+
+  ngAfterViewInit(): void {
+    this.route.queryParams
+      .subscribe(x => this.tabGroupRef.selectedIndex = x.tab)
+  }
+
+  ngOnInit(): void { }
 
   onAdd(formData: Hotel) {
     this.service.register(formData)
