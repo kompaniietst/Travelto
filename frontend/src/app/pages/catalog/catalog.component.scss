@@ -18,3 +18,12 @@
     padding-right: 0;
     padding-top: 30px;
 }
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+    .wrapper{
+        padding-left: 0;
+    }
+}

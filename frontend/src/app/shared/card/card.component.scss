@@ -8,7 +8,6 @@
     display: block;
     color: #484848;
     font-family: $font_regular;
-    // height: 100%;
     h4 {
         font-family: $font_bold;
         font-size: 17px;
@@ -135,4 +134,38 @@
     border: 1px solid #c1e1ef;
     border-radius: 2px;
     background: #f8fdff;
+}
+
+@media screen and (max-width: 768px) {
+    :host.catalog .item_container {
+        flex-direction: column;
+        .img {
+            margin-bottom: 15px;
+        }
+        .center_block {
+            width: 100%;
+            padding: 0;
+        }
+        .end_block {
+            width: 100%;
+            position: relative;
+            .details {
+                top: unset;
+                position: relative;
+                transform: unset;
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+    }
+    :host .amenities div {
+        width: 30px;
+        height: 31px;
+        margin-right: 3px;
+        margin-left: 3px;
+        img {
+            max-height: 18px;
+            max-width: 18px;
+        }
+    }
 }

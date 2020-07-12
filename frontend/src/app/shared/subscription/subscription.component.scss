@@ -80,3 +80,10 @@
         max-width: 240px;
     }
 }
+
+@media screen and (max-width: 768px) {
+    :host ::ng-deep .form_subscription .form {
+        width: 100%;
+        padding: 40px 20px;
+    }
+}

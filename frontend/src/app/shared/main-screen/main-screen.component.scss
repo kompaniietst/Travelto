@@ -1,4 +1,4 @@
-@import 'src/assets/sass/abstracts/variables.scss';
+@import "src/assets/sass/abstracts/variables.scss";
 :host {
     background: url(src/assets/images/main.png) no-repeat top center;
     padding-bottom: 40px;
@@ -116,5 +116,27 @@
     //
     .form .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         height: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    :host ::ng-deep .home_form_search .controls_container {
+        flex-direction: column;
+        .btn {
+            width: 100%;
+        }
+        .dateTimePicker,
+        .pex,
+        .dropdown,
+        .input {
+            width: 100%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: $border;
+        }
+        .dropdown {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
     }
 }

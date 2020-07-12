@@ -13,7 +13,7 @@
                     fill="#FF6847" />
             </svg>
         </ng-template>
-        <div *ngIf="currUser.email">
+        <div *ngIf="currUser.email" class="userInfo">
             <a><strong>{{ currUser.email }}</strong></a>
             <div>{{ currUser.firstname }} {{ currUser.lastname }}</div>
         </div>
