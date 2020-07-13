@@ -7,6 +7,9 @@
 }
 .sidebar ::ng-deep {
     max-width: 300px;
+    @media only screen and (max-width: $tablet) {
+        display: none;
+    }
     .checkboxes_container {
         .mat-checkbox {
             display: block;
@@ -17,13 +20,7 @@
     width: 100%;
     padding-right: 0;
     padding-top: 30px;
-}
-
-@media screen and (max-width: 768px) {
-    .sidebar {
-        display: none;
-    }
-    .wrapper{
+    @media only screen and (max-width: $tablet) {
         padding-left: 0;
     }
 }

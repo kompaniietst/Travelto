@@ -17,8 +17,14 @@
         .controls_container {
             display: flex;
             justify-content: space-between;
+            @media only screen and (max-width: $tablet) {
+                flex-direction: column;
+            }
             .btn {
                 width: 25%;
+                @media only screen and (max-width: $tablet) {
+                    width: 100%;
+                }
             }
             .dateTimePicker,
             .pex,
@@ -27,6 +33,12 @@
                 width: 25%;
                 border-right: 1px solid #d6d6d6;
                 margin: 0;
+                @media only screen and (max-width: $tablet) {
+                    width: 100%;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    border-bottom: $border;
+                }
                 div {
                     align-items: center;
                 }
@@ -39,6 +51,10 @@
             }
             .dropdown {
                 position: relative;
+                @media only screen and (max-width: $tablet) {
+                    padding-top: 0;
+                    padding-bottom: 0;
+                }
                 &:before {
                     content: "";
                     position: absolute;
@@ -116,27 +132,5 @@
     //
     .form .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         height: 100%;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    :host ::ng-deep .home_form_search .controls_container {
-        flex-direction: column;
-        .btn {
-            width: 100%;
-        }
-        .dateTimePicker,
-        .pex,
-        .dropdown,
-        .input {
-            width: 100%;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            border-bottom: $border;
-        }
-        .dropdown {
-            padding-top: 0;
-            padding-bottom: 0;
-        }
     }
 }

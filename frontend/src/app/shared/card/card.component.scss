@@ -41,11 +41,21 @@
             margin-top: 11px;
             align-items: center;
             justify-content: center;
+            @media only screen and (max-width: $tablet) {
+                width: 30px;
+                height: 31px;
+                margin-right: 3px;
+                margin-left: 3px;
+            }
             img {
                 width: 100%;
                 height: auto;
                 max-height: 22px;
                 max-width: 22px;
+                @media only screen and (max-width: $tablet) {
+                    max-height: 18px;
+                    max-width: 18px;
+                }
             }
         }
     }
@@ -75,13 +85,24 @@
         .item_container {
             display: flex;
             justify-content: space-between;
+            @media only screen and (max-width: $tablet) {
+                flex-direction: column;
+            }
             .center_block {
                 padding: 0 20px 0 10px;
                 width: 50%;
+                @media only screen and (max-width: $tablet) {
+                    width: 100%;
+                    padding: 0;
+                }
             }
             .end_block {
                 width: 18%;
                 position: relative;
+                @media only screen and (max-width: $tablet) {
+                    width: 100%;
+                    position: relative;
+                }
                 &:before {
                     content: "";
                     position: absolute;
@@ -95,6 +116,13 @@
                     position: absolute;
                     transform: translate(0, -50%);
                     width: 100%;
+                    @media only screen and (max-width: $tablet) {
+                        top: unset;
+                        position: relative;
+                        transform: unset;
+                        width: 100%;
+                        margin-top: 10px;
+                    }
                     .price {
                         margin-bottom: 10px;
                     }
@@ -134,38 +162,4 @@
     border: 1px solid #c1e1ef;
     border-radius: 2px;
     background: #f8fdff;
-}
-
-@media screen and (max-width: 768px) {
-    :host.catalog .item_container {
-        flex-direction: column;
-        .img {
-            margin-bottom: 15px;
-        }
-        .center_block {
-            width: 100%;
-            padding: 0;
-        }
-        .end_block {
-            width: 100%;
-            position: relative;
-            .details {
-                top: unset;
-                position: relative;
-                transform: unset;
-                width: 100%;
-                margin-top: 10px;
-            }
-        }
-    }
-    :host .amenities div {
-        width: 30px;
-        height: 31px;
-        margin-right: 3px;
-        margin-left: 3px;
-        img {
-            max-height: 18px;
-            max-width: 18px;
-        }
-    }
 }
