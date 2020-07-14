@@ -1,13 +1,32 @@
 <div class="container">
-    <div class="d_flex">
+    <div class="content_container">
 
-        <app-sidebar class="sidebar">
-            <div class="title"><strong>Filter:</strong></div>
+        <app-size-detector></app-size-detector>
+
+        <app-sidebar 
+            class="sidebar" 
+            *ngIf="!isTablet">
+            <div class="title">
+                <strong>Filter:</strong>
+            </div>
             <app-filter-form></app-filter-form>
         </app-sidebar>
 
+        <div *ngIf="isTablet" 
+            [ngClass]="{ 'isTablet' : isTablet }">
+            <button class="btn btn-grey-outline w_100"
+                (click)="showFilters = ! showFilters">
+                Set filters
+            </button>
+            <app-sidebar 
+                class="sidebar" 
+                *ngIf="showFilters">
+                <app-filter-form></app-filter-form>
+            </app-sidebar>
+        </div>
+
         <app-wrapper class="wrapper">
-            
+
             <app-filtered-rooms>
                 <app-filter-tabs></app-filter-tabs>
             </app-filtered-rooms>

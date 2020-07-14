@@ -1,4 +1,4 @@
-<div class="menu">
+<div class="menu" *ngIf="!isTablet">
     <div class="container">
         <ul>
             <li class="separator"><span></span></li>
@@ -14,14 +14,22 @@
     </div>
 </div>
 
-<div class="form_container" *ngIf="router.url.includes('/catalog')">
-    <div class="container">
-        <app-form
-            *ngIf="formStructure$"
-            [controls$]="formStructure$"
-            class="catalog_form_search"
-            (valueChange)="onSubmit($event)"
-            buttonName="Start search">
-        </app-form>
+<div class="menu" *ngIf="isTablet" [ngClass]="{ 'isTablet' : isTablet }">
+    <div class="gamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
+    <button mat-icon-button 
+        [matMenuTriggerFor]="menu" 
+        aria-label="Example icon-button with a menu">
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item><a href routerLink="/">Home</a></button>
+        <button mat-menu-item><a href routerLink="/catalog">Choose hotel</a></button>
+        <button mat-menu-item><a href routerLink="/about">About us</a></button>
+        <button mat-menu-item><a href routerLink="/add-hotel">+ Add hotel</a></button>
+      </mat-menu>
 </div>
+

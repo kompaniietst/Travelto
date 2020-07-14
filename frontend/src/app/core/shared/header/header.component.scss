@@ -1,6 +1,6 @@
 @import "src/assets/sass/abstracts/variables.scss";
 
-:host {
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,5 +17,191 @@
 @media only screen and (max-width: $tablet) {
     .socials {
         display: none;
+    }
+}
+
+.isTablet {
+    display: flex;
+    background: $color_light_blue;
+    align-items: center;
+    padding: 6px 0;
+    height: 75px;
+    .container {
+        width: 80%;
+        height: 100%;
+        .header {
+            padding: 0;
+            height: 100%;
+        }
+        .logo {
+            filter: brightness(0) invert(1);
+            width: 101px;
+            height: 54px;
+        }
+        .icon_tel {
+            width: 28px;
+            height: 28px;
+            display: block;
+            background: url(src/assets/images/icons/tel.svg);
+        }
+    }
+    app-navbar,
+    app-profile-trigger {
+        width: 20%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        border-left: 1px solid #53c9fe;
+    }
+    app-profile-trigger {
+        width: 25%;
+    }
+    .logo_container {
+        width: 50%;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        border-right: 1px solid #53c9fe;
+    }
+}
+
+.form_container {
+    background: #eef9fc;
+    padding: 11px 0;
+    .catalog_form_search {
+        display: flex;
+    }
+    &.dark_blue {
+        background: #0098db;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+.catalog_form_search ::ng-deep {
+    .form {
+        width: 100%;
+        .controls_container {
+            margin: 0 -5px;
+            display: flex;
+            justify-content: space-between;
+            .dropdown,
+            .pex,
+            .dateTimePicker,
+            .btn {
+                width: 25%;
+                margin: 0 5px;
+            }
+            .dropdown,
+            .pex,
+            .dateTimePicker {
+                background: white;
+                border-radius: 5px;
+                border: 1px solid #e4e7eaa6;
+            }
+            .dateTimePicker {
+                padding-left: 52px;
+                position: relative;
+                &:before {
+                    content: "";
+                    position: absolute;
+                    width: 25px;
+                    height: 31px;
+                    left: 15px;
+                    top: 50%;
+                    transform: translate(0, -50%);
+                    background: url(src/assets/images/icons/form/calendar.svg) no-repeat center;
+                    background-size: 100%;
+                }
+                input {
+                    height: 100%;
+                    width: 100%;
+                    border: none;
+                    border-radius: 4px;
+                }
+            }
+            .dropdown {
+                position: relative;
+                padding-left: 52px;
+                &:before {
+                    content: "";
+                    position: absolute;
+                    width: 25px;
+                    height: 31px;
+                    left: 15px;
+                    top: 50%;
+                    transform: translate(0, -50%);
+                    background: url(src/assets/images/icons/form/map.svg);
+                    background-size: 100%;
+                }
+                form,
+                input,
+                .mat-form-field-wrapper {
+                    height: 100%;
+                }
+            }
+            .pex {
+                position: relative;
+                &:after {
+                    content: "";
+                    position: absolute;
+                    width: 10px;
+                    height: 10px;
+                    border-bottom: 1.5px solid $color;
+                    border-right: 1.5px solid $color;
+                    top: 45%;
+                    transform: translate(0, -50%) rotate(45deg);
+                    right: 22px;
+                }
+            }
+        }
+        .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+    }
+}
+:host .catalog_form_search.direction_column ::ng-deep {
+    .controls_container {
+        flex-direction: column;
+        margin: 0;
+        .btn {
+            width: 100%;
+        }
+        .dateTimePicker,
+        .pex,
+        .dropdown,
+        .input {
+            width: 100%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background: transparent;
+            border: none;
+            color: white;
+            border-radius: 0;
+            border-bottom: 1px solid #53c9fe;
+            padding-top: 0;
+            padding-bottom: 0;margin: 0;
+        }
+        .dropdown input,
+        .dateTimePicker input,
+        .placeholder {
+            height: 53px;
+            background: transparent;
+            color: white;
+            font-family: $font_bold;
+        }
+        .mat-form-field-appearance-legacy .mat-form-field-label {
+            color: white;
+            font-family: $font_bold;
+        }
+    }
+    .form .controls_container .dropdown:before,
+    .form .controls_container .dateTimePicker:before,
+    .form .controls_container .pex:before {
+        filter: brightness(0) invert(1);
+        width: 20px;
+        height: 26px;
     }
 }

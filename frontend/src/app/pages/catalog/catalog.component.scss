@@ -1,5 +1,11 @@
 @import "src/assets/sass/abstracts/variables.scss";
 
+.content_container {
+    display: flex;
+    @media only screen and (max-width: $tablet) {
+        flex-direction: column;
+    }
+}
 .title {
     font-size: 1.2rem;
     color: #484848;
@@ -7,9 +13,6 @@
 }
 .sidebar ::ng-deep {
     max-width: 300px;
-    @media only screen and (max-width: $tablet) {
-        display: none;
-    }
     .checkboxes_container {
         .mat-checkbox {
             display: block;
@@ -23,4 +26,12 @@
     @media only screen and (max-width: $tablet) {
         padding-left: 0;
     }
+}
+.isTablet .btn {
+    margin-top: 20px;
+}
+:host .isTablet ::ng-deep .block {
+    border: none;
+    box-shadow: none;
+    width: 100%;
 }

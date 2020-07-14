@@ -51,6 +51,7 @@ import { DateTimePickerComponent } from './form/form-control/date-time-picker/da
 import { PexComponent } from './form/form-control/pex/pex.component';
 import { CounterComponent } from './form/form-control/counter/counter.component';
 import { FormOrderComponent } from './form-order/form-order.component';
+import { SizeDetectorComponent } from './size-detector/size-detector.component';
 
 const routes: Routes = []
 
@@ -85,7 +86,8 @@ const COMPONENTS = [
   DateTimePickerComponent,
   PexComponent,
   CounterComponent,
-  FormOrderComponent
+  FormOrderComponent,
+  SizeDetectorComponent
 ];
 
 const MODULES = [
@@ -119,7 +121,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, SizeDetectorComponent],
   imports: [...MODULES],
   exports: [...COMPONENTS,
     FormsModule, ReactiveFormsModule
