@@ -23,7 +23,36 @@ ul {
         }
     }
 }
-
 .wrapper {
     width: 100%;
+}
+.page_content {
+    display: flex;
+}
+@media screen and(max-width: $tablet) {
+    .container {
+        max-width: 100%;
+        .page_content {
+            flex-direction: column;
+            ul {
+                display: flex;
+                border-bottom: 1px solid #dcdcdc;
+                li a {
+                    border: none;
+                    padding: 16px 9px;
+                }
+            }
+        }
+        .wrapper {
+            padding-right: 20px;
+        }
+    }
+
+    .page_content .ontop ::ng-deep {
+        .block {
+            box-shadow: none;
+            border: none;
+            width: 100%;
+        }
+    }
 }

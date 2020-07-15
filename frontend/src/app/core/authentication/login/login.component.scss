@@ -5,9 +5,3 @@
     cursor: pointer;
     text-decoration: underline;
 }
-.isTablet ::ng-deep {
-    .popup .mat-dialog-container {
-        width: 100%;
-        padding: 30px 31px 22px;
-    }
-}

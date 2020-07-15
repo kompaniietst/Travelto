@@ -1,4 +1,29 @@
+@import "src/assets/sass/abstracts/variables.scss";
 :host {
     display: block;
     padding-left: 20px;
+}
+:host ::ng-deep {
+    @media screen and(max-width: $tablet) {
+        .mat-tab-group {
+            .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+                display: none;
+            }
+            .mat-tab-label {
+                font-family: $font_bold;
+                padding: 0;
+            }
+            .mat-tab-labels {
+                justify-content: center;
+            }
+            .mat-tab-header {
+                background: none;
+            }
+            .mat-tab-label {
+                background: none;
+                color: black;
+                padding: 0 7px;
+            }
+        }
+    }
 }

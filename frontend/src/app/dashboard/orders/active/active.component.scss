@@ -94,6 +94,17 @@ hr {
                 display: block;
             }
         }
+        @media screen and(max-width: $tablet) {
+            flex-direction: column;
+            .img {
+                height: 70px;
+                width: 100px;
+            }
+            .info {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+        }
     }
 }
 :host {

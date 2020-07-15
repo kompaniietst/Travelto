@@ -1,35 +1,9 @@
-<!-- <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <h2 class="text_center">Sign in</h2>
-    <button [mat-dialog-close]="true" class="close">
-        <mat-icon>close</mat-icon>
-    </button>
-
-    <div>
-        <div class="label">Email</div>
-        <input type="text" formControlName="email" />
-    </div>
-
-    <div class="position_relative">
-        <div class="label">Password</div>
-        <input type="password" formControlName="password" />
-    </div>
-
-    <div class="policy">Вход в личный кабинет на сайте подразумевает обязательное согласие с политикой
-        конфиденциальности</div>
-
-    <app-alert-message></app-alert-message>
-    <button type="submit" class="btn btn-orange w_100">Sign in</button>
-    <button (click)="openRegModal()" type="button" class="btn btn-grey-outline w_100">Create account</button>
-</form> -->
-
-
 <app-form *ngIf="formStructure$" 
     [controls$]="formStructure$" 
     (valueChange)="onSubmit($event)" 
     [headerTemplate]="headerTemplate"
     [contentTemplate]="contentTemplate"
     [footerTemplate]="footerTemplate"
-    [ngClass]="{ 'isTablet' : isTablet }"
     class="login_form">
 
     <ng-template #headerTemplate>

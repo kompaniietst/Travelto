@@ -16,7 +16,6 @@ import { SizeDetectorService } from '../../services/size-detector.service';
 export class LoginComponent implements OnInit {
 
   public form: FormGroup;
-  isTablet: boolean = false;
 
   formStructure$ = of([
     new Control({
@@ -39,11 +38,7 @@ export class LoginComponent implements OnInit {
     private auth: AuthenticationService,
     private alert: AlertMessageService,
     private breakpoint: SizeDetectorService
-  ) { 
-    
-    this.breakpoint.onResize$
-    .subscribe((x) => this.isTablet = x < 768 || x == 768)
-  }
+  ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -61,7 +56,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(formData) {
     console.log(formData);
-    
+
     this.auth
       .login(formData.email, formData.password)
       .subscribe(

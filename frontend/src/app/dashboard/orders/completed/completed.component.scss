@@ -1,4 +1,6 @@
-:host{
+@import "src/assets/sass/abstracts/variables.scss";
+
+:host {
     width: 100%;
     display: flex;
 }
@@ -25,4 +27,18 @@ a {
     height: 37px;
     margin-top: 3px;
     margin-right: 7px;
+}
+.info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    @media screen and(max-width: $tablet) {
+        flex-direction: column;
+    }
+}
+@media screen and(max-width: $tablet) {
+    .img {
+        width: 70px;
+        height: 70px;
+    }
 }
