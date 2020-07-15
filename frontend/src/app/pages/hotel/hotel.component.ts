@@ -10,6 +10,7 @@ import { HotelService } from 'src/app/core/services/hotel.service';
 import { RoomService } from 'src/app/core/services/room.service';
 import { AmenitiesService } from 'src/app/core/services/amenities.service';
 import { Amenity } from 'src/app/core/models/Amenity';
+import { SizeDetectorService } from 'src/app/core/services/size-detector.service';
 
 @Component({
   selector: 'app-hotel',
@@ -24,6 +25,7 @@ export class HotelComponent implements OnInit {
   id: string = this.route.snapshot.params.id;
   hotel: Hotel;
   loading = true;
+  isTablet: boolean = false;
 
   rooms$: Observable<Room[]>;
   amenities: Amenity[];
@@ -43,7 +45,8 @@ export class HotelComponent implements OnInit {
     private hotelService: HotelService,
     private roomService: RoomService,
     private amenitiesService: AmenitiesService,
-    private alert: AlertMessageService
+    private alert: AlertMessageService,
+    private breakpoint: SizeDetectorService
   ) {
     console.log(this.id);
 
@@ -56,18 +59,22 @@ export class HotelComponent implements OnInit {
           this.loading = false;
           this.getRooms();
           this.defineMapData();
-          this.defineCarousels();
+
         },
         err => this.alert.error(err.error))
 
     this.amenitiesService.get()
-      .subscribe((x: Amenity[]) => this.amenities = x)
+      .subscribe((x: Amenity[]) => this.amenities = x);
+
+    this.breakpoint.onResize$
+      .subscribe((x) => {
+        this.isTablet = x < 768 || x == 768;
+        this.defineCarousels();
+      })
   }
 
   ngOnInit(): void {
     console.log('ROUTE', this.route);
-
-
   }
 
   getRooms() {
@@ -94,6 +101,28 @@ export class HotelComponent implements OnInit {
   }
 
   defineCarousels() {
+    console.log('this.isTablet', this.isTablet);
+
+    if (this.isTablet) {
+      this.carouselConfig = {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        arrows: true
+      };
+      this.carouselConfigRooms = {
+        speed: 700,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
+        needLink: true,
+        arrows: true,
+        autoplay: true,
+        draggable: true,
+      };
+      return
+    }
+
     this.carouselConfig = {
       slidesToShow: this.hotel.images.length < 3 ? this.hotel.images.length : 3,
       slidesToScroll: 1,

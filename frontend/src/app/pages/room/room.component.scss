@@ -27,6 +27,12 @@ h3 {
     padding-left: 30px;
     width: 25%;
     padding-bottom: 8px;
+    @media screen and(max-width: $tablet) {
+        width: 50%;
+    }
+    @media screen and(max-width: $mobile) {
+        width: 100%;
+    }
     &:before {
         content: "✔";
         position: absolute;

@@ -18,13 +18,13 @@
             </div>
         </div>
 
-
         <app-special 
             [specials]="room.specials"
             class="room">
         </app-special>
 
         <app-carousel 
+            *ngIf="carouselConfig"
             [slides]="room.images" 
             [config]="carouselConfig" 
             needCountSlides="true" 
@@ -82,3 +82,4 @@
         class="blue_spinner">
     </mat-spinner>
 </div>
+<app-size-detector></app-size-detector>

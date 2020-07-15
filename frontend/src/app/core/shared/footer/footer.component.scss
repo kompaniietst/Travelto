@@ -1,3 +1,4 @@
+@import "src/assets/sass/abstracts/variables.scss";
 :host {
     background: #0c5987;
     padding: 50px 0 30px;
@@ -24,5 +25,18 @@
     p {
         line-height: 23px;
         padding-top: 35px;
+    }
+    .columns {
+        @media screen and(max-width: $mobile) {
+            flex-direction: column;
+            .logo svg {
+                height: 49px;
+            }
+            p {
+                line-height: 15px;
+                padding-top: 0;
+                font-size: 11px;
+            }
+        }
     }
 }
