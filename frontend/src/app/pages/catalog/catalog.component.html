@@ -21,7 +21,10 @@
             <app-sidebar 
                 class="sidebar" 
                 *ngIf="showFilters">
-                <app-filter-form></app-filter-form>
+                <app-filter-form>
+                    <div class="close" (click)="showFilters = false">&times;</div>
+                    <button class="btn btn-orange w_100" (click)="showFilters = false">Show rooms</button>
+                </app-filter-form>
             </app-sidebar>
         </div>
 

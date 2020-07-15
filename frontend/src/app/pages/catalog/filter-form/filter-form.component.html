@@ -1,5 +1,18 @@
 <app-form 
     *ngIf="formStructure$"
     [controls$]="formStructure$" 
+    [headerTemplate]="headerTemplate"
+    [contentTemplate]="contentTemplate"
     class="filter_form">
+    <ng-template #headerTemplate>
+        <div class="filter_header">
+            <strong>
+                Filters:
+                <ng-content></ng-content>
+            </strong>
+        </div>
+    </ng-template>
+    <ng-template #contentTemplate>
+        <ng-content select=".btn"></ng-content>
+    </ng-template>
 </app-form>

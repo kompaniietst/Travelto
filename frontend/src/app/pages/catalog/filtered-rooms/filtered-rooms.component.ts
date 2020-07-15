@@ -10,6 +10,7 @@ import { map, delay } from 'rxjs/operators';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormOrderComponent } from 'src/app/shared/form-order/form-order.component';
+import { SizeDetectorService } from 'src/app/core/services/size-detector.service';
 
 @Component({
   selector: 'app-filtered-rooms',
@@ -25,6 +26,7 @@ export class FilteredRoomsComponent implements OnInit {
   showSpinner: boolean = false;
   priceFilter: { key: string, price: number[] };
   cityFilter: { key: string, cityId: string };
+  isTablet: boolean = false;
 
   private roomsSubject: BehaviorSubject<Room[]> = new BehaviorSubject<Room[]>([]);
   rooms: Room[] = []
@@ -56,15 +58,16 @@ export class FilteredRoomsComponent implements OnInit {
     private filterTabsService: FilterTabsService,
     private localStorageService: LocalStorageService,
     private dialog: MatDialog,
+    private breakpoint: SizeDetectorService
   ) {
 
     this.rooms$ = this.roomsSubject.asObservable();
 
     this.roomService.get()
-    .subscribe((rooms: Room[]) => {
-      this.rooms = rooms;
-      this.roomsSubject.next([...rooms]);
-    });
+      .subscribe((rooms: Room[]) => {
+        this.rooms = rooms;
+        this.roomsSubject.next([...rooms]);
+      });
 
     this.roomService.get()
       .subscribe(x => console.log('0=>', x));
@@ -96,6 +99,9 @@ export class FilteredRoomsComponent implements OnInit {
           }
         }
       })
+
+      this.breakpoint.onResize$
+      .subscribe((x) => this.isTablet = x < 768 || x == 768)
   }
 
   ngOnInit(): void { }

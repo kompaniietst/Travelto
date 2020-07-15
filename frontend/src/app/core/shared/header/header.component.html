@@ -60,7 +60,10 @@
             *ngIf="formStructure$"
             [controls$]="formStructure$"
             class="catalog_form_search direction_column"
+            buttonName="Start search"
             (valueChange)="onSubmit($event)">
         </app-form>
     </div>
 </div>
+
+<app-size-detector></app-size-detector>

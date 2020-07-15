@@ -6,6 +6,7 @@ import { AlertMessageService } from '../../services/alert-message.service';
 import { AuthenticationService } from '../authentication.service';
 import { of } from 'rxjs';
 import { Control } from '../../models/Control';
+import { SizeDetectorService } from '../../services/size-detector.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ import { Control } from '../../models/Control';
 export class LoginComponent implements OnInit {
 
   public form: FormGroup;
-  
+  isTablet: boolean = false;
+
   formStructure$ = of([
     new Control({
       controlType: 'input',
@@ -35,8 +37,13 @@ export class LoginComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private auth: AuthenticationService,
-    private alert: AlertMessageService
-  ) { }
+    private alert: AlertMessageService,
+    private breakpoint: SizeDetectorService
+  ) { 
+    
+    this.breakpoint.onResize$
+    .subscribe((x) => this.isTablet = x < 768 || x == 768)
+  }
 
   ngOnInit() {
     this.form = new FormGroup({

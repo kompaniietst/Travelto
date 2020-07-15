@@ -163,11 +163,16 @@
     }
 }
 :host .catalog_form_search.direction_column ::ng-deep {
+    .form .mat-form-field-appearance-legacy .mat-form-field-label {
+        left: 0;
+    }
     .controls_container {
         flex-direction: column;
         margin: 0;
         .btn {
             width: 100%;
+            margin: 0;
+            padding: 26px;
         }
         .dateTimePicker,
         .pex,
@@ -182,7 +187,8 @@
             border-radius: 0;
             border-bottom: 1px solid #53c9fe;
             padding-top: 0;
-            padding-bottom: 0;margin: 0;
+            padding-bottom: 0;
+            margin: 0;
         }
         .dropdown input,
         .dateTimePicker input,
@@ -195,6 +201,9 @@
         .mat-form-field-appearance-legacy .mat-form-field-label {
             color: white;
             font-family: $font_bold;
+        }
+        .dateTimePicker input::placeholder {
+            color: red;
         }
     }
     .form .controls_container .dropdown:before,

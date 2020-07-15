@@ -45,7 +45,25 @@ h3 {
         margin-top: 1px;
     }
 }
-
+.catalog.carousel_full_width ::ng-deep {
+    @media only screen and (max-width: $tablet) {
+        .carousel {
+            width: 100%;
+            height: 213px;
+            .slick-list,
+            .slick-track {
+                height: 213px;
+            }
+        }
+        .thumbnail_slider .carousel {
+            height: 54px;
+            .slick-list,
+            .slick-track {
+                height: 54px;
+            }
+        }
+    }
+}
 .mat-spinner {
     margin-left: 0px;
     margin: 5px 0;

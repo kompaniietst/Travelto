@@ -7,6 +7,7 @@ import { User } from 'src/app/core/models/User';
 import { environment } from 'src/environments/environment';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { Order } from 'src/app/core/models/Order';
+import { SizeDetectorService } from 'src/app/core/services/size-detector.service';
 
 @Component({
   selector: 'app-profile-trigger',
@@ -20,12 +21,14 @@ export class ProfileTriggerComponent implements OnInit {
   currUser: User;
   profileImage: string;
   count = 0;
+  isTablet: boolean = false;
 
   constructor(
     private dialog: MatDialog,
     private router: Router,
     private bookingService: BookingService,
     private auth: AuthenticationService,
+    private breakpoint: SizeDetectorService
   ) {
 
     this.bookingService.newOrders
@@ -43,6 +46,9 @@ export class ProfileTriggerComponent implements OnInit {
         ? this.profileImage = this.URL + this.currUser.image
         : this.profileImage = '';
     })
+
+    this.breakpoint.onResize$
+    .subscribe((x) => this.isTablet = x < 768 || x == 768)
   }
 
   get isAdmin() { return this.currUser.role == 'admin' }

@@ -64,4 +64,11 @@
             display: none;
         }
     }
+    &.isTablet {
+        span {
+            justify-content: center;
+            filter: brightness(0) invert(1);
+            margin: 0;
+        }
+    }
 }

@@ -18,6 +18,9 @@
             display: block;
         }
     }
+    .close {
+        font-size: 26px;
+    }
 }
 .wrapper {
     width: 100%;
@@ -27,8 +30,21 @@
         padding-left: 0;
     }
 }
-.isTablet .btn {
-    margin-top: 20px;
+.isTablet {
+    .sidebar {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        padding: 0;
+        left: 0;
+        right: 0;
+        max-width: 100%;
+        border-radius: 0;
+        z-index: 2;
+    }
+    .btn {
+        margin-top: 20px;
+    }
 }
 :host .isTablet ::ng-deep .block {
     border: none;

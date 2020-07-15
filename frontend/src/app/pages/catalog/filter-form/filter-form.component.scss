@@ -1,12 +1,26 @@
+@import "src/assets/sass/abstracts/variables.scss";
 .title {
     font-size: 1.2rem;
     color: #484848;
     margin: 10px 0 0;
 }
-
+strong {
+    padding: 16px 20px;
+    display: flex;
+    font-size: 17px;
+    justify-content: space-between;
+}
+.filter_header {
+    background: $color_light_blue;
+    color: white;
+}
 .filter_form ::ng-deep {
     .form {
-        padding: 20px;display: block;
+        padding: 0;
+        display: block;
+        .controls_container {
+            padding: 20px;
+        }
         .checkbox {
             display: block;
             margin: 20px 0;

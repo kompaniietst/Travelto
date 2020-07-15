@@ -18,6 +18,7 @@
     | filter: cityFilter">
     <app-card 
         [room]="room" 
+        [ngClass]="{ 'carousel_full_width' : isTablet }"
         class="catalog"
         limit="5"
         [config]="config"
