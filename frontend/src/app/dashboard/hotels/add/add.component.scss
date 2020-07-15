@@ -3,6 +3,9 @@
 :host {
     display: block;
     padding-left: 20px;
+    @media screen and(max-width: $tablet) {
+        padding: 0;
+    }
 }
 .attach_hotel_form ::ng-deep .form {
     .input {
@@ -23,6 +26,16 @@
             width: 35%;
             &:not(.city) {
                 padding-left: 20px;
+            }
+        }
+        &.city {
+            @media screen and(max-width: $tablet) {
+                width: 100%;
+            }
+        }
+        &.street:not(.city) {
+            @media screen and(max-width: $tablet) {
+                padding-left: 0;
             }
         }
         &.houseNumber {
@@ -62,6 +75,9 @@
             .mat-checkbox {
                 width: 25%;
                 margin-bottom: 5px;
+                @media screen and(max-width: $tablet) {
+                    width: 50%;
+                }
             }
         }
     }
@@ -73,6 +89,15 @@
                 position: absolute;
                 left: 50%;
                 transform: translate(-50%, 0);
+                @media screen and(max-width: $tablet) {
+                    width: 181px;
+                    white-space: nowrap;
+                }
+            }
+            @media screen and(max-width: $tablet) {
+                input {
+                    width: 100%;
+                }
             }
         }
     }

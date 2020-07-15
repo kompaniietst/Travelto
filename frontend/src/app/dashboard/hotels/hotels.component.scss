@@ -3,6 +3,9 @@
 :host {
     display: block;
     padding-left: 20px;
+    @media screen and(max-width: $tablet) {
+        padding-left: 0;
+    }
 }
 :host ::ng-deep {
     @media screen and(max-width: $tablet) {

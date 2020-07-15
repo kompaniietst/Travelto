@@ -5,13 +5,23 @@
     max-width: 700px;
     display: block;
     padding-left: 20px;
+    @media screen and(max-width: $tablet) {
+        max-width: 100%;
+        padding-left: 0;
+    }
     h2 {
         margin: 40px 0;
+        @media screen and(max-width: $tablet) {
+            margin: 20px 0;
+        }
     }
     .upload_photo {
         margin-bottom: 50px;
         display: flex;
         align-items: center;
+        @media screen and(max-width: $tablet) {
+            position: relative;
+        }
         .photo {
             width: 79px;
             height: 79px;
@@ -28,7 +38,13 @@
         .upload_button {
             height: 49px;
             padding-left: 26px;
-            div{
+            @media screen and(max-width: $tablet) {
+                width: 100%;
+                input {
+                    width: 100%;
+                }
+            }
+            div {
                 position: absolute;
             }
         }
