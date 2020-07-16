@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Observable, BehaviorSubject, forkJoin, combineLatest } from 'rxjs';
 import { Order } from 'src/app/core/models/Order';
 import { Router, ActivatedRoute } from '@angular/router';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, tap } from 'rxjs/operators';
 import { User } from 'src/app/core/models/User';
 
 @Component({
@@ -41,12 +41,11 @@ export class OrdersComponent implements OnInit {
       .subscribe((user: User) => this.role = user.role)
 
     this.auth.currUser
-      .pipe(
+      .pipe(tap(o => console.log('orders$', o)),
         mergeMap((user: User) =>
           this.service.getBookingsByCurrUser(user.role, user._id)))
       .subscribe(
         (orders: Order[]) => {
-          console.log('orders$', orders);
 
           this.bookings = orders;
           this.bookingsSubject.next([...this.bookings]);
@@ -57,7 +56,7 @@ export class OrdersComponent implements OnInit {
         err => console.log(err))
 
 
-        
+
     combineLatest(
       this.service.newOrders,
       this.auth.currUser
@@ -83,7 +82,7 @@ export class OrdersComponent implements OnInit {
         }
       })
 
-    
+
   }
 
 

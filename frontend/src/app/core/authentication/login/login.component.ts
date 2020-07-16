@@ -22,14 +22,16 @@ export class LoginComponent implements OnInit {
       controlType: 'input',
       key: 'email',
       label: 'Email:',
-      placeholder: ''
+      placeholder: '',
+      required: true
     }),
     new Control({
       controlType: 'input',
       key: 'password',
       label: 'Password:',
       placeholder: '',
-      type: 'password'
+      type: 'password',
+      required: true
     }),
   ])
 

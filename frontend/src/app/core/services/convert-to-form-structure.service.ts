@@ -15,9 +15,7 @@ export class ConvertToFormStructureService<T> {
   constructor(private admin: AdminService) {
     this.admin.getAmenities()
       .subscribe((x: Amenity[]) => {
-        // console.log('>>>>', x)
         this.amenities = x
-
       })
   }
 

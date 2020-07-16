@@ -11,6 +11,7 @@ import { RoomService } from 'src/app/core/services/room.service';
 import { AmenitiesService } from 'src/app/core/services/amenities.service';
 import { Amenity } from 'src/app/core/models/Amenity';
 import { SizeDetectorService } from 'src/app/core/services/size-detector.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-hotel',
@@ -52,10 +53,10 @@ export class HotelComponent implements OnInit {
 
     this.hotelService
       .getHotelBy(this.id)
+      .pipe(tap(x => console.log('HOTEl', this.hotel)))
       .subscribe(
         (h: Hotel) => {
           this.hotel = h
-          console.log('HOTEl', this.hotel);
           this.loading = false;
           this.getRooms();
           this.defineMapData();

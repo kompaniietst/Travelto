@@ -8,6 +8,7 @@ import { Amenity } from 'src/app/core/models/Amenity';
 import { environment } from 'src/environments/environment';
 import { RoomService } from 'src/app/core/services/room.service';
 import { SizeDetectorService } from 'src/app/core/services/size-detector.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-room',
@@ -39,10 +40,10 @@ export class RoomComponent implements OnInit {
 
     this.roomService
       .getRoomBy(this.id)
+      .pipe(tap(x => console.log('Room', this.room)))
       .subscribe(
         (r: Room) => {
           this.room = r
-          console.log('Room', this.room);
           this.loading = false;
           this.defineMapData();
         },

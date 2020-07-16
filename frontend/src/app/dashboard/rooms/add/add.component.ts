@@ -10,6 +10,7 @@ import { AdminService } from '../../admin.service';
 import { User } from 'src/app/core/models/User';
 import { HotelService } from 'src/app/core/services/hotel.service';
 import { RoomService } from 'src/app/core/services/room.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-room',
@@ -117,10 +118,10 @@ export class AddRoomComponent implements OnInit {
   onSubmit(formData: Room) {
     this.showSpinner = true;
     this.roomService.register(formData, this.currUser._id)
+      .pipe(tap(x => console.log('respRoom', x)))
       .subscribe(
         (resp: Room) => {
           this.showSpinner = false;
-          console.log('respRoom', resp);
           //this.router.navigate([`/room/${_._id}`])
           this.alert.success('Item is successfully added');
           this.addRoom.emit(resp);

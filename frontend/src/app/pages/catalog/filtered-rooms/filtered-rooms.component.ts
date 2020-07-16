@@ -6,7 +6,7 @@ import { Control } from 'src/app/core/models/Control';
 import { Amenity } from 'src/app/core/models/Amenity';
 import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 import { FilterItem } from 'src/app/core/models/FilterItem';
-import { map, delay } from 'rxjs/operators';
+import { map, delay, tap } from 'rxjs/operators';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormOrderComponent } from 'src/app/shared/form-order/form-order.component';
@@ -64,13 +64,11 @@ export class FilteredRoomsComponent implements OnInit {
     this.rooms$ = this.roomsSubject.asObservable();
 
     this.roomService.get()
+      .pipe(tap(x => console.log('0=>', x)))
       .subscribe((rooms: Room[]) => {
         this.rooms = rooms;
         this.roomsSubject.next([...rooms]);
       });
-
-    this.roomService.get()
-      .subscribe(x => console.log('0=>', x));
 
     this.filterTabsService.getFilters()
       .subscribe((x: FilterItem[]) => {
@@ -100,7 +98,7 @@ export class FilteredRoomsComponent implements OnInit {
         }
       })
 
-      this.breakpoint.onResize$
+    this.breakpoint.onResize$
       .subscribe((x) => this.isTablet = x < 768 || x == 768)
   }
 

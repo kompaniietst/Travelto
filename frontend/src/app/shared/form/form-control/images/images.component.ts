@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Control } from 'src/app/core/models/Control';
 import { environment } from 'src/environments/environment';
 import { AdminService } from 'src/app/dashboard/admin.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-images',
@@ -91,10 +92,10 @@ export class ImagesComponent implements OnInit, ControlValueAccessor {
     this.showSpinner = true;
 
     this.admin.uploadImages(this.control.type, formData)
+      .pipe(tap(x => console.log('RESR', x)))
       .subscribe(
         (resp: any) => {
-          console.log('RESR', resp);
-          
+
           this.showSpinner = false;
 
           var defaultData = this.control.value;

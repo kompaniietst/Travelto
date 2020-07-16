@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { AdminService } from '../../admin.service';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
 import { environment } from 'src/environments/environment';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-amenity-item',
@@ -14,7 +15,7 @@ import { environment } from 'src/environments/environment';
 export class AmenityItemComponent implements OnInit {
 
   readonly URL = environment.apiUrl;
-  
+
   @Input() item: Amenity;
 
   formStructure$: Observable<Control[]>;
@@ -73,9 +74,9 @@ export class AmenityItemComponent implements OnInit {
     this.showSpinner = true;
     // console.log('on edit', formData);
     this.admin.editAmenity(this.item._id, formData)
+      .pipe(tap(x => console.log('sss', x)))
       .subscribe(
         x => {
-          console.log('sss', x);
           this.alert.success("Item is successfuly updated");
           this.showSpinner = false;
           setTimeout(() => {

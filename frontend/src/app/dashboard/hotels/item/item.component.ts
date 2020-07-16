@@ -34,7 +34,8 @@ export class HotelItemComponent<T> implements OnInit {
     forkJoin(
       this.admin.getAmenities(),       // get cities and amenities from the server to form form structure
       this.admin.getCities()
-    ).subscribe(x => this.initFormStructure(x[0] as Amenity[], x[1] as City[]))
+    )
+      .subscribe(x => this.initFormStructure(x[0] as Amenity[], x[1] as City[]))
   }
 
   ngOnInit(): void { }

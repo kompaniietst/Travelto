@@ -6,6 +6,7 @@ import { Hotel } from 'src/app/core/models/Hotel';
 import { City } from 'src/app/core/models/City';
 import { Params, Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-screen',
@@ -22,8 +23,8 @@ export class MainScreenComponent implements OnInit {
     private ls: LocalStorageService) {
 
     this.citiesService.get()
+      .pipe(tap(x=>console.log('x', x)))
       .subscribe((x: City[]) => {
-        console.log('x', x);
 
         this.initFormStructure(x)
       });

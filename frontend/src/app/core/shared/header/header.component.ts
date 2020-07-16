@@ -22,15 +22,15 @@ export class HeaderComponent implements OnInit {
     public router: Router,
     private breakpoint: SizeDetectorService,
     private ls: LocalStorageService
-    ) {
+  ) {
     this.citiesService.get()
-    .subscribe((x: City[]) => {
-      this.initFormStructure(x)
-    });
-    
+      .subscribe((x: City[]) => {
+        this.initFormStructure(x)
+      });
+
     this.breakpoint.onResize$
-    .subscribe((x) => this.isTablet = x < 768 || x == 768)
-   }
+      .subscribe((x) => this.isTablet = x < 768 || x == 768)
+  }
 
   ngOnInit(): void {
   }

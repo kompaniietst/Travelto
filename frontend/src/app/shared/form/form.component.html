@@ -1,6 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
     <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
-
     <div class="controls_container" *ngIf="controls$ | async">
         <ng-container *ngFor="let control of controls$ | async; trackBy: trackById">
 
@@ -44,7 +43,8 @@
                             <input
                                 *ngIf="control.type != 'textarea'" 
                                 [formControlName]="control.key"
-                                [placeholder]="control.placeholder">
+                                [placeholder]="control.placeholder"
+                                type="{{ control.type }}">
                         </div>
                         <textarea
                             *ngIf="control.type == 'textarea'" 

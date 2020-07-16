@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable, BehaviorSubject, forkJoin } from 'rxjs';
+import { Observable, BehaviorSubject, forkJoin, pipe } from 'rxjs';
 import { Room } from 'src/app/core/models/Room';
 import { RoomService } from 'src/app/core/services/room.service';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { User } from 'src/app/core/models/User';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rooms',
@@ -32,13 +32,12 @@ export class RoomsComponent implements OnInit {
     this.rooms$ = this.roomSubject.asObservable();
 
     this.auth.currUser                                  // get rooms by current user
-      .pipe(
+      .pipe(tap(x => console.log('rooms$', x)),
         mergeMap((user: User) =>
           this.service
             .getRoomsByCurrRole(user.role, user._id)))
       .subscribe(
         (x: Room[]) => {
-          console.log('rooms$', x);
 
           this.rooms = x;
           this.roomSubject.next([...this.rooms]);
@@ -67,9 +66,8 @@ export class RoomsComponent implements OnInit {
   onEdit(_id: string) {
     console.log('edit', _id);
     this.service.getRoomBy(_id)
+      .pipe(tap(x => console.log('R', x)))
       .subscribe((x: Room) => {
-        console.log('R', x);
-
 
         let i = this.rooms.findIndex(h => h._id == _id);
         this.rooms[i] = x;
