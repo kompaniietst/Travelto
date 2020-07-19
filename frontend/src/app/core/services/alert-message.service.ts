@@ -18,6 +18,10 @@ export class AlertMessageService {
     this.subject.next({ type: 'error', text: message })
   }
 
+  valid_error(message: string) {
+    this.subject.next({ type: 'error', text: message })
+  }
+
   clear() {
     this.subject.next(null);
   }

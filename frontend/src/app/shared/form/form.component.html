@@ -1,5 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
     <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+{{form.valid}}
     <div class="controls_container" *ngIf="controls$ | async">
         <ng-container *ngFor="let control of controls$ | async; trackBy: trackById">
 
@@ -109,6 +110,8 @@
 
         <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
 
+        <app-alert-message></app-alert-message>
+        
         <button *ngIf="buttonName" type="submit" class="btn btn-orange w_100">
             <span>
                 <mat-spinner *ngIf="showSpinner" strokeWidth="3" diameter="20"></mat-spinner>

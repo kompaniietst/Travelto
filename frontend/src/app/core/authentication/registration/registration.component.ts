@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AlertMessageService } from '../../services/alert-message.service';
 import { AuthenticationService } from '../authentication.service';
+import { of } from 'rxjs';
+import { Control } from '../../models/Control';
 
 @Component({
   selector: 'app-registration',
@@ -17,14 +19,37 @@ export class RegistrationComponent implements OnInit {
     private alert: AlertMessageService
   ) { }
 
+  formStructure$ = of([
+    new Control({
+      controlType: 'input',
+      key: 'firstname',
+      label: 'Firstname:',
+      placeholder: '',
+    }),
+    new Control({
+      controlType: 'input',
+      key: 'phone',
+      label: 'Phone:',
+      placeholder: '',
+    }),
+    new Control({
+      controlType: 'input',
+      key: 'email',
+      label: 'Email:',
+      placeholder: '',
+      required: true
+    }),
+    new Control({
+      controlType: 'input',
+      key: 'password',
+      label: 'Password:',
+      placeholder: '',
+      type: 'password',
+      required: true
+    }),
+  ])
+  
   ngOnInit() { }
-
-  form = new FormGroup({
-    firstname: new FormControl(''),
-    phone: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-  })
 
   openModal() {
     this.dialog.closeAll();
@@ -33,8 +58,9 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    const newUser = this.form.value;
+  onSubmit(formData) {
+    console.log(formData);
+    const newUser = formData;
     newUser["role"] = "user";
     console.log('newusr', newUser);
 
@@ -51,7 +77,7 @@ export class RegistrationComponent implements OnInit {
             });
           }, 1500);
         },
-        err => this.alert.error(err.error)
+        // err => this.alert.error(err.error)
       )
   }
 }

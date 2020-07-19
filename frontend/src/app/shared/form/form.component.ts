@@ -9,6 +9,8 @@ import { AdvancedInputComponent } from './form-control/advanced-input/advanced-i
 import { ConvertToFormStructureService } from 'src/app/core/services/convert-to-form-structure.service';
 import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { AlertMessageComponent } from '../alert-message/alert-message.component';
+import { AlertMessageService } from 'src/app/core/services/alert-message.service';
 
 @Component({
   selector: 'app-form',
@@ -39,6 +41,7 @@ export class FormComponent<T> implements OnInit {
 
   constructor(
     private generateForm: GenerateFormStructureService,
+    private alert: AlertMessageService,
     private ls: LocalStorageService
   ) {
 
@@ -61,7 +64,7 @@ export class FormComponent<T> implements OnInit {
 
       for (const key of Object.keys(this.defaultData)) {
         var value = this.defaultData[key];
-        
+
         if (key == '_id' || key == 'feedbacks' || key == '__v') return
         // console.log(key, value == null);
 
@@ -70,7 +73,7 @@ export class FormComponent<T> implements OnInit {
 
         this.form.get(key).setValue(value)
       }
-      
+
     }
 
     if (this.lsData) {
@@ -86,6 +89,12 @@ export class FormComponent<T> implements OnInit {
   }
 
   onSubmit() {
+    console.log('VALID ', this.form.valid);
+    if (!this.form.valid) {
+      this.alert.valid_error('Please, fill all required fields');
+    }
+
+
     this.valueChange.emit(this.form.value);
     // console.log('form.value', this.form.value);
     // this.resetForm();

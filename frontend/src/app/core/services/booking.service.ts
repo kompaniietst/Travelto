@@ -27,7 +27,8 @@ export class BookingService {
       .pipe(tap(o => console.log('or=>', o)),
         switchMap(currUser => {
           if (!currUser) return of([]);
-          return timer(0, 5000).pipe(switchMapTo(this.getNewOrders(currUser.role, currUser._id)))
+          return timer(0, 5000)
+            .pipe(switchMapTo(this.getNewOrders(currUser.role, currUser._id)))
         }))
       .subscribe(orders => this.newOrdersSubj.next([...orders]));
   }

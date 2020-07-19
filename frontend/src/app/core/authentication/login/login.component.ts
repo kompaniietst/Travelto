@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
       .login(formData.email, formData.password)
       .subscribe(
         _ => this.dialog.closeAll(),
-        err => this.alert.error(err.error)
+        // err => this.alert.error(err.error)
       )
   }
 }
