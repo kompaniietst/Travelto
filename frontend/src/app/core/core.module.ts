@@ -10,8 +10,6 @@ import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PipesModule } from '../pipes/pipes.module';
 import { FooterComponent } from './shared/footer/footer.component';
-import { MemberComponent } from './roles/member/member.component';
-import { UserComponent } from './roles/user/user.component';
 
 const routes: Routes = []
 
@@ -33,7 +31,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, FooterComponent, MemberComponent, UserComponent],
+  declarations: [...COMPONENTS, FooterComponent],
   imports: [...MODULES],
   exports: [...COMPONENTS]
 })

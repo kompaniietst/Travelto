@@ -26,8 +26,6 @@ export class AuthenticationService {
     this.currUserBehaviorSubject.next(userFromStorage);
 
     this.currUser = this.currUserBehaviorSubject.asObservable();
-
-
   }
 
   login(email: string, password: string) {

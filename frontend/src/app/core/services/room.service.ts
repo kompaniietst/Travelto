@@ -12,7 +12,6 @@ import { User } from '../models/User';
 })
 export class RoomService {
 
-
   readonly URL = environment.apiUrl;
 
   constructor(
@@ -22,7 +21,6 @@ export class RoomService {
   register(room: Room, user_id: string): Observable<Room> {
     const newRoom = room;
     newRoom["creator"] = user_id;
-
     console.log('ner', newRoom);
 
     return this.http.post<Room>(`${this.URL}/rooms`, newRoom)
@@ -60,7 +58,6 @@ export class RoomService {
 
   editRoom(_id: string, room: Room): Observable<Room> {
     console.log('=====', _id, room);
-
     return this.http.patch<Room>(`${this.URL}/rooms/${_id}`, room)
   }
 
@@ -70,7 +67,6 @@ export class RoomService {
 
   removeRoom(_id: string) {
     console.log('id', _id);
-
     return this.http.delete<Room>(`${this.URL}/rooms/${_id}`)
   }
 }

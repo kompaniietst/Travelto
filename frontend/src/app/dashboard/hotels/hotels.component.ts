@@ -5,7 +5,7 @@ import { AuthenticationService } from 'src/app/core/authentication/authenticatio
 import { HotelService } from 'src/app/core/services/hotel.service';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/core/models/User';
-import { mergeMap, tap } from 'rxjs/operators';
+import { mergeMap, tap, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-hotels',
@@ -34,7 +34,7 @@ export class HotelsComponent implements OnInit, AfterViewInit {
     this.auth.currUser                                  // get hotels by current user
       .pipe(
         tap(x => console.log('hotels$', x)),
-        mergeMap((user: User) =>
+        switchMap((user: User) =>
           this.service
             .getHotelsByCurrRole(user.role, user._id)))
       .subscribe(

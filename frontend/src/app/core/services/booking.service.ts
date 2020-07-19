@@ -13,23 +13,25 @@ import { User } from '../models/User';
 export class BookingService {
 
   readonly URL = environment.apiUrl;
-  date: Date;
+  date: Date = new Date();
 
   private newOrdersSubj = new BehaviorSubject<string[]>([]);
   newOrders: Observable<string[]>;
 
   constructor(private http: HttpClient, private auth: AuthenticationService) {
-    this.date = new Date();
 
     this.newOrders = this.newOrdersSubj.asObservable();
 
-    this.auth.currUser
-      .pipe(tap(o => console.log('or=>', o)),
+    const source = this.auth.currUser;
+
+    const ordersStream = source
+      .pipe(tap(o => console.log('orders =>', o)),
         switchMap(currUser => {
           if (!currUser) return of([]);
-          return timer(0, 5000)
-            .pipe(switchMapTo(this.getNewOrders(currUser.role, currUser._id)))
+          return timer(0, 5000).pipe(switchMapTo(this.getNewOrders(currUser.role, currUser._id)))
         }))
+
+    ordersStream
       .subscribe(orders => this.newOrdersSubj.next([...orders]));
   }
 

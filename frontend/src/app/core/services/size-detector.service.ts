@@ -8,7 +8,8 @@ import { distinctUntilChanged } from 'rxjs/operators';
 export class SizeDetectorService {
 
   get onResize$(): Observable<any> {
-    return this.resizeSubject.asObservable().pipe(distinctUntilChanged());
+    return this.resizeSubject.asObservable()
+      .pipe(distinctUntilChanged());
   }
 
   private resizeSubject: Subject<any>;

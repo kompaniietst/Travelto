@@ -20,14 +20,15 @@ export class HotelService {
   register(hotel: Hotel): Observable<Hotel> {
     const newHotel = hotel;
     newHotel["creator"] = this.auth.getCurrUser()._id;
-
     console.log('newh', newHotel, `${this.URL}/hotels`);
 
     return this.http.post<Hotel>(`${this.URL}/hotels`, newHotel)
   }
 
   getHotelsByCurrRole(role: string, user_id: string) {
-    return role == 'admin' ? this.get() : this.getHotelsBy(user_id)
+    return role == 'admin' 
+    ? this.get() 
+    : this.getHotelsBy(user_id)
   }
 
   get(): Observable<Hotel[]> {
@@ -49,7 +50,6 @@ export class HotelService {
 
   removeHotel(_id: string) {
     console.log('id', _id);
-
     return this.http.delete<Hotel>(`${this.URL}/hotels/${_id}`)
   }
 }
