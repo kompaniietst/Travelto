@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CitiesService } from '../../services/cities.service';
 import { City } from '../../models/City';
 import { Observable, of } from 'rxjs';
@@ -12,71 +12,71 @@ import { LocalStorageService } from '../../services/local-storage.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
 
   formStructure$: Observable<Control[]>
   isTablet: boolean = false;
 
   constructor(
-    private citiesService: CitiesService,
+    // private citiesService: CitiesService,
     public router: Router,
     private breakpoint: SizeDetectorService,
     private ls: LocalStorageService
   ) {
-    this.citiesService.get()
-      .subscribe((x: City[]) => {
-        this.initFormStructure(x)
-      });
+    // this.citiesService.get()
+    //   .subscribe((x: City[]) => {
+    //     this.initFormStructure(x)
+    //   });
 
     this.breakpoint.onResize$
       .subscribe((x) => this.isTablet = x < 768 || x == 768)
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
-  initFormStructure(cities: City[]) {
-    this.formStructure$ = of([
-      new Control({
-        controlType: 'dropdown',
-        key: 'city',
-        placeholder: 'Destination place',
-        options: cities
-      }),
-      new Control({
-        controlType: 'dateTimePicker',
-        key: 'date',
-        placeholder: 'Check in - check out',
-      }),
-      new Control({
-        controlType: 'pex',
-        key: 'pex',
-        placeholder: 'Guests:',
-        value: { adults: 2, children: 0 }
-      })
-    ])
+  ngAfterViewInit() {
   }
+  // initFormStructure(cities: City[]) {
+  //   this.formStructure$ = of([
+  //     new Control({
+  //       controlType: 'dropdown',
+  //       key: 'city',
+  //       placeholder: 'Destination place',
+  //       options: cities
+  //     }),
+  //     new Control({
+  //       controlType: 'dateTimePicker',
+  //       key: 'date',
+  //       placeholder: 'Check in - check out',
+  //     }),
+  //     new Control({
+  //       controlType: 'pex',
+  //       key: 'pex',
+  //       placeholder: 'Guests:',
+  //       value: { adults: 2, children: 0 }
+  //     })
+  //   ])
+  // }
 
   onSubmit(formData: any) {
 
     const queryParams: Params = {};
 
-    if (formData.city == null)
-      delete formData.city;
-
     if (formData.city != null)
       queryParams["placeId"] = formData.city._id;
 
+    if (formData.city == null)
+      delete formData.city;
 
     if (formData.date == null)
       delete formData.date;
 
-    if (formData.date) {
-      queryParams["checkIn"] = formData.date[0];
-      queryParams["checkOut"] = formData.date[1];
-    }
+    // if (formData.date) {
+    //   queryParams["checkIn"] = formData.date[0];
+    //   queryParams["checkOut"] = formData.date[1];
+    // }
 
-    this.ls.saveToLOcalstorage(formData);
+    this.ls.saveToLocalstorage(formData);
     this.router.navigate(['catalog'], { queryParams: queryParams })
   }
 }

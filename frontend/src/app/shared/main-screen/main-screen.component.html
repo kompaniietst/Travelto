@@ -4,12 +4,9 @@
             <h1>Book unique appartment<br> quickly and easily</h1>
             <p>The best way to rent the room</p>
         </div>
-        <app-form
-            *ngIf="formStructure$"
-            [controls$]="formStructure$"
-            class="home_form_search"
-            (valueChange)="onSubmit($event)"
-            buttonName="Start search">
-        </app-form>
+        <app-main-search-form 
+            class="home_form_search">
+        </app-main-search-form>
     </div>
 </div>
+

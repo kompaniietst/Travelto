@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
     <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
-{{form.valid}}
+<!-- {{form.valid}} -->
     <div class="controls_container" *ngIf="controls$ | async">
         <ng-container *ngFor="let control of controls$ | async; trackBy: trackById">
 

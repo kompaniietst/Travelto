@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Observable, BehaviorSubject, forkJoin, combineLatest } from 'rxjs';
 import { Order } from 'src/app/core/models/Order';
 import { Router, ActivatedRoute } from '@angular/router';
-import { mergeMap, tap } from 'rxjs/operators';
+import { mergeMap, tap, switchMap } from 'rxjs/operators';
 import { User } from 'src/app/core/models/User';
 
 @Component({
@@ -42,7 +42,7 @@ export class OrdersComponent implements OnInit {
 
     this.auth.currUser
       .pipe(tap(o => console.log('orders$', o)),
-        mergeMap((user: User) =>
+        switchMap((user: User) =>
           this.service.getBookingsByCurrUser(user.role, user._id)))
       .subscribe(
         (orders: Order[]) => {

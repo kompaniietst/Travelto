@@ -3,6 +3,7 @@ import { AmenitiesService } from 'src/app/core/services/amenities.service';
 import { Control } from 'src/app/core/models/Control';
 import { Observable, of } from 'rxjs';
 import { Amenity } from 'src/app/core/models/Amenity';
+import { SizeDetectorService } from 'src/app/core/services/size-detector.service';
 
 @Component({
   selector: 'app-filter-form',
@@ -12,10 +13,17 @@ import { Amenity } from 'src/app/core/models/Amenity';
 export class FilterFormComponent implements OnInit {
 
   formStructure$: Observable<Control[]>;
+  isTablet: boolean = false;
 
-  constructor(private amenitiesService: AmenitiesService) {
+  constructor(
+    private amenitiesService: AmenitiesService,
+    private breakpoint: SizeDetectorService
+  ) {
     this.amenitiesService.get()
       .subscribe((x: Amenity[]) => this.initFormStructure(x));
+
+    this.breakpoint.onResize$
+      .subscribe((x) => this.isTablet = x < 768 || x == 768)
   }
 
   initFormStructure(amenities: Amenity[]) {

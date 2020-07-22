@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LoginComponent } from 'src/app/core/authentication/login/login.component';
@@ -14,7 +14,7 @@ import { SizeDetectorService } from 'src/app/core/services/size-detector.service
   templateUrl: './profile-trigger.component.html',
   styleUrls: ['./profile-trigger.component.scss']
 })
-export class ProfileTriggerComponent implements OnInit {
+export class ProfileTriggerComponent implements OnInit, AfterViewInit {
 
   readonly URL = environment.apiUrl;
 
@@ -47,8 +47,6 @@ export class ProfileTriggerComponent implements OnInit {
         : this.profileImage = '';
     })
 
-    this.breakpoint.onResize$
-    .subscribe((x) => this.isTablet = x < 768 || x == 768)
   }
 
   get isAdmin() { return this.currUser.role == 'admin' }
@@ -56,6 +54,11 @@ export class ProfileTriggerComponent implements OnInit {
   get isUser() { return this.currUser.role == 'user' }
 
   ngOnInit() { }
+
+  ngAfterViewInit() {
+    this.breakpoint.onResize$
+      .subscribe((x) => this.isTablet = x < 768 || x == 768)
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(LoginComponent, {

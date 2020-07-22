@@ -1,0 +1,63 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+    <div class="controls_container">
+
+        <div class="cityControl">
+            <app-dropdown  
+                *ngIf="cityControl"
+                formControlName="city" 
+                [control]="cityControl" 
+                class="dropdown">
+            </app-dropdown>
+        </div>
+
+        <div class="dateControl">
+            <app-date-time-picker
+                *ngIf="dateControl"
+                formControlName="date" 
+                [control]="dateControl"
+                class="dateTimePicker">
+            </app-date-time-picker>
+        </div>
+
+        <div class="pex">
+            <div class="placeholder" (click)="triggerPexPanel()">
+                <span *ngIf="adults == 0 && children == 0; else default">Choose guests</span>
+                <ng-template #default>
+                    <span>{{ adults + children }} guests</span>
+                </ng-template>
+            </div>
+            <div class="panel" *ngIf="openPanel" formGroupName="pex">
+            <div class="option d_flex justify_content_between">
+                <strong>Adults:</strong>
+                <app-counter formControlName="adults" [limitRange]="[0,4]"></app-counter>
+            </div>
+
+            <div class="option d_flex justify_content_between">
+                <strong>Children:</strong>
+                <app-counter formControlName="children" [limitRange]="[0,4]"></app-counter>
+            </div>
+
+            <div *ngIf="ages.controls.length > 0" class="ages_container">
+                <div formArrayName="ages" *ngFor="let item of ages.controls; trackBy: trackById; let i = index"
+                    class="ages">
+                    <div>Child {{ i+1 }} age</div>
+                    <app-counter [formControlName]="i" [limitRange]="[0,12]" class="count_ages"></app-counter>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-orange" (click)="openPanel=!openPanel">Confirm</button>
+        </div>
+    </div>
+
+        <button type="submit" class="btn btn-orange w_100">
+            <span>
+                <!-- <mat-spinner
+                *ngIf="showSpinner"
+                strokeWidth="3"
+                diameter="20">
+            </mat-spinner> -->
+            </span>
+            Start search
+        </button>
+    </div>
+</form>

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 import { City } from 'src/app/core/models/City';
+import { Control } from 'src/app/core/models/Control';
 
 @Component({
   selector: 'app-dropdown',
@@ -20,7 +21,7 @@ import { City } from 'src/app/core/models/City';
 })
 export class DropdownComponent implements OnInit, ControlValueAccessor {
 
-  @Input() control: any;
+  @Input() control: Control;
   @Input() lsData: City;
 
   formControl = new FormControl();
@@ -30,13 +31,14 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {
 
-    if (this.control.value) {
+    // if (this.control.value) {
+    //   this.formControl.setValue(this.control.value)
+    // }
+
+    console.log('CONTROL', this.control);
+
+    if (this.control.key == "city") {
       this.formControl.setValue(this.control.value)
-    }
-
-
-    if (this.lsData && this.control.key == "city") {
-      this.formControl.setValue(this.lsData)
     }
     // this.filteredOptions = this.formControl.valueChanges
     //   .pipe(

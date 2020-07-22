@@ -42,13 +42,16 @@
 <div class="form_container" 
     *ngIf="router.url.includes('/catalog') && !isTablet">
     <div class="container">
-        <app-form
+        <!-- <app-form
             *ngIf="formStructure$"
             [controls$]="formStructure$"
             class="catalog_form_search"
             (valueChange)="onSubmit($event)"
             buttonName="Start search">
-        </app-form>
+        </app-form> -->
+        <app-main-search-form 
+            class="catalog_form_search">
+        </app-main-search-form>
     </div>
 </div>
 
@@ -56,13 +59,16 @@
     *ngIf="router.url.includes('/catalog') && isTablet" 
     [ngClass]="{ 'dark_blue' : isTablet }">
     <div *ngIf="isTablet">
-        <app-form
+        <!-- <app-form
             *ngIf="formStructure$"
             [controls$]="formStructure$"
             class="catalog_form_search direction_column"
             buttonName="Start search"
             (valueChange)="onSubmit($event)">
-        </app-form>
+        </app-form> -->
+        <app-main-search-form 
+            class="catalog_form_search direction_column">
+        </app-main-search-form>
     </div>
 </div>
 

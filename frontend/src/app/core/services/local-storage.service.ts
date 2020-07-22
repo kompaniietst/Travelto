@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 export class LocalStorageService {
 
   private storageSubject: BehaviorSubject<any> = new BehaviorSubject({});
-  private cityIdSubject: BehaviorSubject<string>;
+  private cityIdSubject: BehaviorSubject<string> = new BehaviorSubject('');
 
   constructor() {
     if (!localStorage.getItem('searchParams')) {
@@ -16,7 +16,7 @@ export class LocalStorageService {
     }
 
     var lsData = JSON.parse(localStorage.getItem('searchParams'))
-    
+
     if (Object.keys(lsData).length > 0)
       this.storageSubject.next(lsData);
 
@@ -25,9 +25,13 @@ export class LocalStorageService {
       this.cityIdSubject = new BehaviorSubject(lsData.city._id)
   }
 
-  saveToLOcalstorage(obj: any) {
+  saveToLocalstorage(obj: any) {
+    console.log('obj', obj);
+
     localStorage.setItem('searchParams', JSON.stringify(obj))
     this.storageSubject.next(obj);
+
+    console.log('obj.city', obj.city);
 
     if (obj.city) this.cityIdSubject.next(obj.city._id)
   }
@@ -46,6 +50,14 @@ export class LocalStorageService {
       return of('');
 
     return this.cityIdSubject.asObservable();
+  }
+
+  getData() {
+    // if (!this.storageSubject)
+    //   return of({});
+
+    // return this.storageSubject.asObservable();
+    return JSON.parse(localStorage.getItem('searchParams'))
   }
 
   get(): Observable<any> {
