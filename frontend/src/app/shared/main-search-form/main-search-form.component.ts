@@ -17,173 +17,99 @@ import { LsSearchData } from 'src/app/core/models/LsSearchData';
 export class MainSearchFormComponent implements OnInit {
 
   form: FormGroup;
-  pexGroup: FormGroup;
+  paxGroup: FormGroup;
 
   openPanel: boolean = false;
   cityControl: Control;
   dateControl: Control;
-  lsData: LsSearchData;
 
   adults: number = 0;
   children: number = 0;
+  ages: FormArray;
+  maxCildrenPerRoom: number = 4;
 
   constructor(
     private citiesService: CitiesService,
     private router: Router,
     private ls: LocalStorageService) {
 
+    var lsData = this.ls.getData() as LsSearchData;
+    this.initCityControl(lsData);
+    this.initDateControl(lsData);
+    this.paxGroup = this.getInitializedPaxGroup(lsData);
+
     this.form = new FormGroup({
-      city: new FormControl(),
-      date: new FormControl(),
+      city: new FormControl(lsData?.city),
+      date: new FormControl(lsData?.date),
+      pex: this.paxGroup
     });
-
-    this.lsData = this.ls.getData() as LsSearchData;
-
-    this.fillByLocalstorageData(this.lsData);
-
-    // this.pexGroup = this.form.get('pex') as FormGroup
-
   }
 
-  // get adults() { return this.form.get('pex') ? this.form.get('pex').get('adults').value : 0 }
-  // get children() { return this.pexGroup ? this.pexGroup.get('children').value : 0 }
-  get ages() { return this.form.get('pex').get('ages') as FormArray }
+  getInitializedPaxGroup(lsData: LsSearchData): FormGroup {
 
-  ngOnInit(): void {
+    var adults = new FormControl(lsData?.pex?.adults ?? 0);
+    adults.valueChanges.subscribe(x => this.adults = x);
 
-    this.citiesService.get()
-      .subscribe((x: City[]) =>
-        this.cityControl = new Control({
-          controlType: 'dropdown',
-          key: 'city',
-          placeholder: 'Destination place',
-          value: this.lsData.city || 'dddddd',
-          options: x
-        }));
+    this.ages = new FormArray(lsData?.pex?.ages?.map(n => new FormControl(n)) ?? []);
 
+    var childrenControl = this.initChildrenControl(lsData)
+
+    this.adults = lsData.pex.adults
+    this.children = lsData.pex.children
+
+    return new FormGroup({
+      adults: adults,
+      children: childrenControl,
+      ages: this.ages,
+    });
+  }
+
+  initChildrenControl(lsData: LsSearchData) : FormControl {
+    var childrenControl = new FormControl(lsData?.pex?.children ?? 0);
+    childrenControl.valueChanges.subscribe((x: number) => {
+
+      var agesControlsAmount = this.ages.controls.length;
+      if (x < 0 || x === agesControlsAmount)
+        return;
+
+      x > agesControlsAmount
+        ? this.ages.push(new FormControl(0))
+        : this.ages.removeAt(agesControlsAmount - 1)
+
+      this.children = x;
+    });
+    return childrenControl;
+  }
+
+  ngOnInit(): void { }
+
+  private initDateControl(lsData: LsSearchData) {
     this.dateControl = new Control({
       controlType: 'dateTimePicker',
       key: 'date',
       placeholder: 'Check in - check out',
-      value: this.lsData.date || ''
+      value: lsData.date || ''
     });
   }
 
-  triggerPexPanel() {
-    if (!this.openPanel) {
-      //   console.log('not openpanel');
-
-      this.openPanel = true;
-
-      this.addPexGroup();
-      return
-    }
-
-    if (this.openPanel && this.pexIsEmpty()) {
-      this.openPanel = false;
-      //   this.form.removeControl('pex');
-      return
-    }
-
-    this.openPanel = false;
+  private initCityControl(lsData: LsSearchData) {
+    this.citiesService.get()
+      .subscribe((allCities: City[]) => this.cityControl = new Control({
+        controlType: 'dropdown',
+        key: 'city',
+        placeholder: 'Destination place',
+        value: lsData.city,
+        options: allCities
+      }));
   }
 
-  addPexGroup() {
-    var pex = new FormGroup({
-      adults: new FormControl(0),
-      children: new FormControl(0),
-      ages: new FormArray([]),
-    })
-
-    this.form.addControl("pex", pex);
-
-    // if (this.lsData?.pex)
-    //   this.fillByLocalstorageData(pex);
-
-    pex.get('adults').valueChanges
-      .subscribe(x => this.adults = x)
-
-    pex.get('children').valueChanges
-      .subscribe(x => {
-        x > this.ages.controls.length
-          ? this.addAgeControl()
-          : this.removeAgeControl()
-        this.children = x;
-      });
-  }
-
-  fillByLocalstorageData(data: LsSearchData) {
-
-    for (const key in data) {
-      console.log('key', key, 'data', data[key]);
-
-      if (key == "pex") {
-
-        this.adults = this.lsData.pex.adults
-        this.children = this.lsData.pex.children
-
-        this.form.addControl("pex", new FormGroup({
-          adults: new FormControl(0),
-          children: new FormControl(0),
-          ages: new FormArray([]),
-        }))
-
-        for (const pexKey in data.pex) {
-          // console.log('pexKey', pexKey, data.pex[pexKey]);
-          // if (pexKey == "ages") continue;
-          if (pexKey == "ages") {
-
-            // this.form.addControl("pex", new FormArray())
-
-            data.pex["ages"].forEach(age => {
-              (this.form.get("pex").get('ages') as FormArray).push(new FormControl(age))
-            })
-          }
-          // else
-          this.form.get("pex").get(pexKey).setValue(data.pex[pexKey]);
-        }
-      }
-      else
-        this.form.get(key).setValue(data[key]);
-
-
-    }
-
-    // if (this.lsData.pex.adults > 0) {
-    //   pex.get('adults').setValue(this.lsData.pex.adults);
-    // }
-
-    // if (this.lsData.pex.children > 0)
-    //   pex.get('children').setValue(this.lsData.pex.children)
-
-    // console.log('this.lsData.pex.ages', this.lsData.pex.ages, pex.get('ages'));
-
-    // if (this.lsData.pex.ages.length > 0)
-    //   this.lsData.pex.ages.forEach(age => {
-    //     (pex.get('ages') as FormArray).push(new FormControl(age))
-    //   })
-  }
-
-  pexIsEmpty() {
-    let pexGroup = this.form.get('pex')
-
-    return pexGroup.get('adults').value === 0
-      && pexGroup.get('children').value === 0
-      && pexGroup.get('ages').value.length === 0
-  }
-
-  addAgeControl() {
-    (this.form.get('pex').get('ages') as FormArray)
-      .push(new FormControl(0))
-  }
-
-  removeAgeControl() {
-    let ages = (this.form.get('pex').get('ages') as FormArray);
-    ages.removeAt(ages.controls.length - 1)
+  paxControlIsEmpty() {
+    return this.paxGroup.get('adults').value === 0
+      && this.paxGroup.get('children').value === 0
+      && this.paxGroup.get('ages').value.length === 0
   }
 
   onSubmit() {
-    console.log('value ', this.form);
     let formData = this.form.value;
 
     const queryParams: Params = {};
@@ -207,7 +133,7 @@ export class MainSearchFormComponent implements OnInit {
     if (Object.keys(formData).length > 0)
       this.ls.saveToLocalstorage(formData);
 
-    // this.router.navigate(['catalog'], { queryParams: queryParams })
+    this.router.navigate(['catalog'], { queryParams: queryParams })
   }
 
   trackById(index, item) {

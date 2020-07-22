@@ -20,7 +20,7 @@
         </div>
 
         <div class="pex">
-            <div class="placeholder" (click)="triggerPexPanel()">
+            <div class="placeholder" (click)="openPanel=!openPanel">
                 <span *ngIf="adults == 0 && children == 0; else default">Choose guests</span>
                 <ng-template #default>
                     <span>{{ adults + children }} guests</span>
@@ -29,7 +29,7 @@
             <div class="panel" *ngIf="openPanel" formGroupName="pex">
             <div class="option d_flex justify_content_between">
                 <strong>Adults:</strong>
-                <app-counter formControlName="adults" [limitRange]="[0,4]"></app-counter>
+                <app-counter formControlName="adults" [limitRange]="[0,maxCildrenPerRoom]"></app-counter>
             </div>
 
             <div class="option d_flex justify_content_between">

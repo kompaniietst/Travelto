@@ -53,10 +53,6 @@ export class LocalStorageService {
   }
 
   getData() {
-    // if (!this.storageSubject)
-    //   return of({});
-
-    // return this.storageSubject.asObservable();
     return JSON.parse(localStorage.getItem('searchParams'))
   }
 
