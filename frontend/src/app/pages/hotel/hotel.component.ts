@@ -53,14 +53,14 @@ export class HotelComponent implements OnInit {
 
     this.hotelService
       .getHotelBy(this.id)
-      .pipe(tap(x => console.log('HOTEl', this.hotel)))
+      .pipe(tap(x => console.log('HOTEl', x)))
       .subscribe(
         (h: Hotel) => {
           this.hotel = h
           this.loading = false;
           this.getRooms();
           this.defineMapData();
-
+          this.defineCarousels();
         },
         err => this.alert.error(err.error))
 
