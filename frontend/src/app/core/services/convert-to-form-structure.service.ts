@@ -28,7 +28,7 @@ export class ConvertToFormStructureService<T> {
     // console.log(data);
 
 
-    for (let key of Object.keys(data)) {
+    for (let key in data) {
       var value = data[key];
 
       // console.log(key, value);

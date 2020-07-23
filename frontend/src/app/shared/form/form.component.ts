@@ -62,7 +62,7 @@ export class FormComponent<T> implements OnInit {
       // console.log('==defaultData==', this.defaultData);
       // console.log('==form==', this.form);
 
-      for (const key of Object.keys(this.defaultData)) {
+      for (const key in this.defaultData) {
         var value = this.defaultData[key];
 
         if (key == '_id' || key == 'feedbacks' || key == '__v') return
@@ -79,7 +79,7 @@ export class FormComponent<T> implements OnInit {
     if (this.lsData) {
 
       //  if there are data in the LocalStorage
-      for (const key of Object.keys(this.lsData)) {
+      for (const key in this.lsData) {
 
         if (this.form.get(key))
           this.form.get(key).setValue(this.lsData[key])

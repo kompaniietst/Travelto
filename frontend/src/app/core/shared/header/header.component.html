@@ -38,7 +38,7 @@
     </div>
     <app-navbar></app-navbar>
 </div>
-
+<!-- {{router.url.includes('/catalog')}} {{isTablet }} -->
 <div class="form_container" 
     *ngIf="router.url.includes('/catalog') && !isTablet">
     <div class="container">
@@ -49,6 +49,7 @@
             (valueChange)="onSubmit($event)"
             buttonName="Start search">
         </app-form> -->
+        
         <app-main-search-form 
             class="catalog_form_search">
         </app-main-search-form>

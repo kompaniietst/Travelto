@@ -12,7 +12,7 @@ export class Hotel {
             label: string;
         }
         street: string;
-        houseNumber: string;
+        houseNumber: number;
         disctrict: string;
         map: number[];
     }

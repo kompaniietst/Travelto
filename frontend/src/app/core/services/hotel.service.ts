@@ -41,6 +41,8 @@ export class HotelService {
   }
 
   getHotelBy(hotel_id: string): Observable<Hotel> {
+    console.log('!!!GET');
+    
     return this.http.get<Hotel>(`${this.URL}/hotels/${hotel_id}`)
   }
 

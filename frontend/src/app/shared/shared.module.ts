@@ -48,7 +48,6 @@ import { GoogleMapMarkerComponent } from './form/form-control/google-maps/google
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { DateTimePickerComponent } from './form/form-control/date-time-picker/date-time-picker.component';
-import { PexComponent } from './form/form-control/pex/pex.component';
 import { CounterComponent } from './form/form-control/counter/counter.component';
 import { FormOrderComponent } from './form-order/form-order.component';
 import { SizeDetectorComponent } from './size-detector/size-detector.component';
@@ -85,7 +84,6 @@ const COMPONENTS = [
   SubscriptionComponent,
   MainScreenComponent,
   DateTimePickerComponent,
-  PexComponent,
   CounterComponent,
   FormOrderComponent,
   SizeDetectorComponent,

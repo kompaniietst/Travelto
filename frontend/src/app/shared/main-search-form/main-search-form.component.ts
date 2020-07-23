@@ -54,8 +54,8 @@ export class MainSearchFormComponent implements OnInit {
 
     var childrenControl = this.initChildrenControl(lsData)
 
-    this.adults = lsData.pex.adults
-    this.children = lsData.pex.children
+    this.adults = lsData?.pex?.adults ?? 0
+    this.children = lsData?.pex?.children ?? 0
 
     return new FormGroup({
       adults: adults,

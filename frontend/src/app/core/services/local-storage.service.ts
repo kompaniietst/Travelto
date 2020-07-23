@@ -62,5 +62,4 @@ export class LocalStorageService {
 
     return this.storageSubject.asObservable();
   }
-
 }

@@ -85,6 +85,7 @@ export class AddHotelComponent implements OnInit {
             controlType: 'input',
             key: 'houseNumber',
             placeholder: '№:',
+            type: 'number',
             required: true
           }),
           new Control({
@@ -97,6 +98,7 @@ export class AddHotelComponent implements OnInit {
             controlType: 'input',
             key: 'map',
             label: 'Map coordinates:',
+            type: 'number',
             required: true,
             options: [
               { placeholder: 'latitude' },

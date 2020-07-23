@@ -100,6 +100,7 @@ export class HotelItemComponent<T> implements OnInit {
             controlType: 'input',
             key: 'houseNumber',
             value: this.item.address.houseNumber,
+            type: 'number',
             placeholder: '№:',
             required: true
           }),
@@ -114,6 +115,7 @@ export class HotelItemComponent<T> implements OnInit {
             controlType: 'input',
             key: 'map',
             label: 'Map coordinates:',
+            type: 'number',
             required: true,
             value: this.item.address.map || [0, 0],
             options: [
