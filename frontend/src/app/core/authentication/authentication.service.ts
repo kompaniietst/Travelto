@@ -53,10 +53,10 @@ export class AuthenticationService {
   }
 
   isAuthorized(): boolean {
-    
+
     return !!this.currUserBehaviorSubject.value;
   }
-  
+
   getCurrUser(): User {
     // console.log('AUTH');
     // console.log('this.currUserBehaviorSubject', this.currUserBehaviorSubject.value);

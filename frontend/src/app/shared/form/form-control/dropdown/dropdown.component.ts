@@ -35,7 +35,7 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
     //   this.formControl.setValue(this.control.value)
     // }
 
-    console.log('CONTROL', this.control);
+    // console.log('CONTROL', this.control);
 
     if (this.control.key == "city") {
       this.formControl.setValue(this.control.value)

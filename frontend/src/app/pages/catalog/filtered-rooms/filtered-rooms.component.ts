@@ -64,7 +64,7 @@ export class FilteredRoomsComponent implements OnInit {
     this.rooms$ = this.roomsSubject.asObservable();
 
     this.roomService.get()
-      .pipe(tap(x => console.log('0=>', x)))
+      // .pipe(tap(x => console.log('0=>', x)))
       .subscribe((rooms: Room[]) => {
         this.rooms = rooms;
         this.roomsSubject.next([...rooms]);

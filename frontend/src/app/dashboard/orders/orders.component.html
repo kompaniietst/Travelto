@@ -37,10 +37,10 @@
                         (click)="changeOrderStatus(order._id,'completed')" class="btn btn-orange w_100">
                         Complete order
                     </button>
-                    <button *ngIf="state == 'confirmCancel'" (click)="changeOrderStatus(order._id,'canceled')"
+                    <button *ngIf="state == 'confirmCancel' && role != 'user'" (click)="changeOrderStatus(order._id,'canceled')"
                         class="btn btn-blue w_100">
                         Cancel order
-                    </button>
+                    </button>{{state}}
                 </app-active>
                 
             </div>

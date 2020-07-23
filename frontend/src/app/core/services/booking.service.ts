@@ -25,7 +25,8 @@ export class BookingService {
     const source = this.auth.currUser;
 
     const ordersStream = source
-      .pipe(tap(o => console.log('orders =>', o)),
+      .pipe(
+        // tap(o => console.log('orders =>', o)),
         switchMap(currUser => {
           if (!currUser) return of([]);
           return timer(0, 5000).pipe(switchMapTo(this.getNewOrders(currUser.role, currUser._id)))
