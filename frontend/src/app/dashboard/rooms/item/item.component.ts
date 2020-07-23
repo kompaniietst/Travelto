@@ -107,8 +107,8 @@ export class RoomItemComponent implements OnInit {
         value: this.item.specials,
         options: [
           { _id: "1", label: "25%" },
-          { _id: "2", label: "Рекомендуем" },
-          { _id: "3", label: "Лучшая цена" }
+          { _id: "2", label: "Recommend" },
+          { _id: "3", label: "Best price" }
         ],
       }),
 

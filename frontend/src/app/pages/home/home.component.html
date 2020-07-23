@@ -19,17 +19,17 @@
 
         <p>So, when you want to book a hotel, be sure to compare prices first through our FindHotel service, so you can get the best deal for your hotel stay!</p>
     </div>
+    
+    <app-google-maps 
+        [key]="mapApiKey" 
+        [zoom]="4" 
+        [mapLat]="mapLat" 
+        [mapLng]="mapLng">
+        <ng-template let-google="google" let-map="map">
+            <app-google-map-marker *ngFor="let marker of markers; trackBy: trackById" [google]="google" [map]="map"
+                [lat]="marker.lat" 
+                [lng]="marker.lng">
+            </app-google-map-marker>
+        </ng-template>
+    </app-google-maps>
 </div>
-
-<app-google-maps 
-    [key]="mapApiKey" 
-    [zoom]="4" 
-    [mapLat]="mapLat" 
-    [mapLng]="mapLng">
-    <ng-template let-google="google" let-map="map">
-        <app-google-map-marker *ngFor="let marker of markers; trackBy: trackById" [google]="google" [map]="map"
-            [lat]="marker.lat" 
-            [lng]="marker.lng">
-        </app-google-map-marker>
-    </ng-template>
-</app-google-maps>

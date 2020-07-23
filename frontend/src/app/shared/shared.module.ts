@@ -52,6 +52,7 @@ import { CounterComponent } from './form/form-control/counter/counter.component'
 import { FormOrderComponent } from './form-order/form-order.component';
 import { SizeDetectorComponent } from './size-detector/size-detector.component';
 import { MainSearchFormComponent } from './main-search-form/main-search-form.component';
+import { PexComponent } from './form/form-control/pex/pex.component';
 
 const routes: Routes = []
 
@@ -87,7 +88,8 @@ const COMPONENTS = [
   CounterComponent,
   FormOrderComponent,
   SizeDetectorComponent,
-  MainSearchFormComponent
+  MainSearchFormComponent,
+  PexComponent
 ];
 
 const MODULES = [
@@ -121,7 +123,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, SizeDetectorComponent, MainSearchFormComponent],
+  declarations: [...COMPONENTS, SizeDetectorComponent, MainSearchFormComponent, PexComponent],
   imports: [...MODULES],
   exports: [...COMPONENTS,
     FormsModule, ReactiveFormsModule
