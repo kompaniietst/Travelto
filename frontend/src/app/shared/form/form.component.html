@@ -42,6 +42,14 @@
                     </div>
                 </ng-container>
 
+                <ng-container *ngSwitchCase="'pex'">
+                    <app-pex
+                        [formControlName]="control.key" 
+                        [control]="control"
+                        class="{{ control.controlType }}">
+                    </app-pex>
+                </ng-container>
+                
                 <ng-container *ngSwitchCase="'textarea'">
                     <div class="{{ control.controlType }} {{ control.key }}">
                         <div *ngIf="control.label" class="label" [ngClass]="{ 'required': control.required }">
