@@ -62,7 +62,12 @@ export class OrdersComponent implements OnInit {
       this.auth.currUser
         .pipe(
           mergeMap((user: User) =>
-            this.service.getBookingsByCurrUser(user.role, user._id)))
+          {if(user)
+          return  this.service.getBookingsByCurrUser(user.role, user._id)
+
+          }
+            
+            ))
     )
       .subscribe(x => {
         let newOrders = x[0] as string[];
@@ -89,9 +94,13 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void { }
 
   changeOrderStatus(_id: string, status: string) {
+    console.log('changeOrderStatus', status);
+    
     this.service.changeOrderStatus(_id, status)
       .subscribe(
         (resp: Order) => {
+          console.log('RESP',resp);
+          
           let i = this.bookings.findIndex((o: Order) => o._id == resp._id);
           this.bookings[i].status = resp.status;
           this.bookings[i]["completed"] = resp.completed;

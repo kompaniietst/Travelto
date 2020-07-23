@@ -235,6 +235,7 @@ router.get('/bookingsByUser/:id', async (req, res) => {
 })
 
 router.patch('/bookings/:id', async (req, res) => {
+    console.log('!!!!!');
 
     const id = req.params.id;
     const prop = req.body
@@ -281,20 +282,57 @@ router.patch('/bookings/:id', async (req, res) => {
     if (prop.status == 'canceled') {
         await Booking.findOneAndUpdate(
             { _id: id },  //filter
-            { $set: { "canceled": new Date() } },
+            { $set: { status: "canceled", "canceled": new Date() } },
             // {"Time______" : Date.now }, //data to update
             { //options
                 returnNewDocument: true,
                 new: true,
                 strict: false
+            },
+            function (err, result) {
+                let res = result
+                console.log();
+
+
+                if (err) throw err;
+                // res.status(200).send({ status: "ok" })
             }
         )
+        return res.send(booking);
     }
+
+
+    if (prop.status == 'confirmCancel') {
+        const booking = await Booking.findOneAndUpdate(
+            { _id: id },  //filter
+            // { $set: prop },
+            { $set: { status: "confirmCancel" } },
+            // {"Time______" : Date.now }, //data to update
+            { //options
+                returnNewDocument: true,
+                new: true,
+                strict: false
+            },
+            function (err, result) {
+                let res = result
+                console.log();
+
+
+                if (err) throw err;
+                // res.status(200).send({ status: "ok" })
+            }
+
+        )
+        return res.send(booking);
+
+    }
+
+
 })
 
 router.post('/bookings_new', async (req, res) => {
 
-    console.log(req.body);
+    // console.log(req.body);
 
     const date = req.body.date;
     const clientId = req.body.clientId;
