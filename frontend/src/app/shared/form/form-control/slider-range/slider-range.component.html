@@ -1,14 +1,12 @@
-<form [formGroup]="form">
-    <nouislider 
-        [connect]='true' 
-        [min]="0" 
-        [max]="350" 
-        [step]="1" 
-        [formControl]="formControl">
-    </nouislider>
+<nouislider 
+    [connect]='true' 
+    [min]="0" 
+    [max]="350" 
+    [step]="1" 
+    [formControl]="form_control">
+</nouislider>
 
-    <div class="d_flex justify_content_between">
-        <span>{{ range[0] }} $</span>
-        <span>{{ range[1] }} $</span>
-    </div>
-</form>
+<div class="d_flex justify_content_between">
+    <span>{{ range[0] }} $</span>
+    <span>{{ range[1] }} $</span>
+</div>

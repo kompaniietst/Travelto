@@ -1,5 +1,5 @@
 import { Component, OnInit, forwardRef, Input } from '@angular/core';
-import { NG_VALUE_ACCESSOR, FormGroup, FormArray, FormControl, ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, FormGroup, FormArray, FormControl, ControlValueAccessor, AbstractControl } from '@angular/forms';
 import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 
 @Component({
@@ -15,7 +15,8 @@ import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 export class CheckboxComponent implements OnInit, ControlValueAccessor {
 
   @Input() control: any;
-  form: FormGroup = new FormGroup({})
+  form: FormGroup = new FormGroup({});
+  array: FormArray = new FormArray([]);
   defaultData: any;
 
   constructor(private filterTabsService: FilterTabsService) {
@@ -48,7 +49,7 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
       this.control.options
         .forEach(o => {                              // turn property "checked" of selected checboxes to true
           if (this.defaultData.some(d => o._id == d._id))
-            o.checked = true
+            o.checked = true;
         })
 
       return;

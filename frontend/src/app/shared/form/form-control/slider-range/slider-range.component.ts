@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, forwardRef } from '@angular/core';
 import { NouisliderModule } from 'ng2-nouislider';
-import { FormControl, NG_VALUE_ACCESSOR, ControlValueAccessor, FormGroup, FormArray } from '@angular/forms';
+import { FormControl, NG_VALUE_ACCESSOR, ControlValueAccessor, FormGroup, FormArray, AbstractControl } from '@angular/forms';
 import { Control } from 'src/app/core/models/Control';
 import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 
@@ -17,32 +17,37 @@ import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 export class SliderRangeComponent implements OnInit, ControlValueAccessor {
 
   @Input() control: Control;
+  formControl = new FormControl();
   range: number[];
-
-  form: FormGroup = new FormGroup({});
+  defaultData: any;
 
   constructor(private filterTabsService: FilterTabsService) { }
 
-  get formControl() {
-    return this.form.get(this.control.key);
-  }
+  get form_control() { return this.formControl }
 
   registerOnChange(fn: any): void {
-    this.form.get(this.control.key).valueChanges.subscribe(fn)
-
+    this.formControl.valueChanges.subscribe(fn)
   }
 
   writeValue(obj: any): void { }
+
   registerOnTouched(fn: any): void { }
 
   ngOnInit(): void {
-    this.form.addControl(this.control.key, new FormControl(this.control.value))
-    this.range = this.control.value;
+    this.defaultData = this.control.value;
 
-    this.form.get(this.control.key).valueChanges.subscribe(x => {
+    if (this.defaultDataExist()) {
+      this.formControl.setValue(this.defaultData);
+      this.range = this.defaultData;
+    }
+
+    this.formControl.valueChanges.subscribe(x => {
       this.range = x;
       this.filterTabsService.setPriceFilter(x);
     })
   }
 
+  defaultDataExist() {
+    return this.control.value ? true : false;
+  }
 }

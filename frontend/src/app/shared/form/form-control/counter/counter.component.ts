@@ -12,14 +12,13 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
   }]
 })
 export class CounterComponent implements OnInit, ControlValueAccessor {
-  @Input() limitRange: Array<number> = [0, 10];
 
+  @Input() limitRange: Array<number> = [0, 10];
   value = 0;
 
   constructor() { }
 
   onChange = (value: number) => { }
-  onTounched = () => { }
 
   writeValue(val: any): void {
     this.value = val;
@@ -29,9 +28,7 @@ export class CounterComponent implements OnInit, ControlValueAccessor {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
-    this.onTounched = fn;
-  }
+  registerOnTouched(fn: any): void { }
 
   count(n: number) {
     if (n < this.limitRange[0] && this.value > this.limitRange[0] || n > this.limitRange[0] && this.value < this.limitRange[1])

@@ -1,8 +1,9 @@
 <div *ngIf="control.label" class="label" [ngClass]="{'required': control.required }">
     {{ control.label }}
 </div>
-<div [formGroup]="form">
-    <div [formArrayName]="control.key" *ngFor="let item of controls; let i = index; trackBy: trackById;" class="item">
+<form [formGroup]="form">
+
+    <div formArrayName="array" *ngFor="let item of controls; let i = index; trackBy: trackById;" class="item">
         <input type="text" [formControlName]="i" [placeholder]="control.placeholder">
 
         <div *ngIf="(controls.length - 1) == i">
@@ -14,4 +15,4 @@
         </div>
 
     </div>
-</div>
+</form>

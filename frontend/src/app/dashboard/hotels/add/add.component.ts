@@ -57,9 +57,8 @@ export class AddHotelComponent implements OnInit {
       }),
 
       new Control({
-        controlType: 'input',
+        controlType: 'textarea',
         key: 'description',
-        type: 'textarea',
         placeholder: 'Description:',
         required: true
       }),

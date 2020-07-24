@@ -15,23 +15,22 @@ export class RadioFinalComponent implements OnInit, ControlValueAccessor {
 
   @Input() control;
 
-  constructor() { }
-
-  writeValue(obj: any): void { }
-  onChange = (value: any) => { };
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void { }
+  writeValue(obj: any): void { }
 
+  onChange = (value: any) => { };
+
+  registerOnTouched(fn: any): void { }
 
   ngOnInit(): void { }
 
   onSelect(i) {
     this.onChange(i);
   }
-  
+
   trackById(index, item) {
     return item.id;
   }

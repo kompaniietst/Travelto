@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, forwardRef } from '@angular/core';
 import { Control } from 'src/app/core/models/Control';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup, FormArray, FormControl, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-text-features',
@@ -17,45 +17,48 @@ export class TextFeaturesComponent implements OnInit, ControlValueAccessor {
 
   @Input() control: Control;
 
+  array: FormArray = new FormArray([]);
   form: FormGroup = new FormGroup({});
-
   defaultData: any;
 
-  get controls() {
-    return (this.form.get(this.control.key) as FormArray).controls
-  }
-
-  constructor() { }
-  writeValue(obj: any): void { }
-  registerOnTouched(fn: any): void { }
+  get controls() { return (this.array as FormArray).controls }
 
   registerOnChange(fn: any): void {
-    (this.form.get(this.control.key) as FormArray).valueChanges.subscribe(fn)
+    (this.array as FormArray).valueChanges.subscribe(fn)
   }
+
+  writeValue(obj: any): void { }
+
+  registerOnTouched(fn: any): void { }
 
   ngOnInit(): void {
     this.defaultData = this.control.value;
 
     if (this.defaultDataExist()) {
-      var formControls = this.defaultData.map(d => new FormControl(d))
-      this.form.addControl(this.control.key, new FormArray(formControls))
+      var generatedControls = this.defaultData
+        .map((v: string) => new FormControl(v));
+
+      generatedControls.forEach((control: AbstractControl) =>
+        this.array.push(control))
     }
+    else
+      this.array.push(new FormControl());
 
-    this.form.addControl(this.control.key, new FormArray([new FormControl()]))
-  }
-
-  addField() {
-    (this.form.get(this.control.key) as FormArray).push(new FormControl());
-  }
-
-  removeField(i) {
-    (this.form.get(this.control.key) as FormArray).removeAt(i)
+    this.form.addControl('array', this.array);
   }
 
   defaultDataExist() {
     return this.control.value ? true : false;
   }
-  
+
+  addField() {
+    (this.array as FormArray).push(new FormControl());
+  }
+
+  removeField(i) {
+    (this.array as FormArray).removeAt(i)
+  }
+
   trackById(index, item) {
     return item.id;
   }

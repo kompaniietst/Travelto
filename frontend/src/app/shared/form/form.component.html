@@ -17,7 +17,6 @@
                 <ng-container *ngSwitchCase="'dateTimePicker'">
                     <app-date-time-picker 
                         [formControlName]="control.key" 
-                        [control]="control"
                         class="{{ control.controlType }}">
                     </app-date-time-picker>
                 </ng-container>
@@ -56,8 +55,6 @@
                             {{ control.label }}
                         </div>
                         <textarea
-                            *ngIf="control.type == 'textarea'" 
-                            type="text" 
                             [formControlName]="control.key"
                             [placeholder]="control.placeholder">
                         </textarea>
@@ -100,7 +97,6 @@
                     <app-dropdown 
                         [formControlName]="control.key" 
                         [control]="control" 
-                        [lsData]="lsData?.city"
                         class="{{ control.controlType }}">
                     </app-dropdown>
                 </ng-container>

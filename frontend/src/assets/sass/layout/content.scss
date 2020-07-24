@@ -56,17 +56,23 @@
     span.mat-form-field-ripple {
         color: unset;
     }
-    input,
-    textarea {
+    input {
         border: $border_input;
         padding: 15px 10px;
         border-radius: 3px;
         margin: 12px 0;
         width: 100%;
     }
-    textarea {
-        height: 100px;
-    }
+}
+textarea {
+    border: $border_input;
+    padding: 15px 10px;
+    border-radius: 3px;
+    margin: 12px 0;
+    width: 100%;
+}
+textarea {
+    height: 100px;
 }
 .label {
     font-family: $font_bold;

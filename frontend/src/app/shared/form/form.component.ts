@@ -45,8 +45,8 @@ export class FormComponent<T> implements OnInit {
     private ls: LocalStorageService
   ) {
 
-    if (this.localstorageNotEmpty)
-      this.ls.get().subscribe(x => this.lsData = x);                           // get localstorage data
+    // if (this.localstorageNotEmpty)
+    //   this.ls.get().subscribe(x => this.lsData = x);                           // get localstorage data
   }
 
   localstorageNotEmpty() {
@@ -76,15 +76,15 @@ export class FormComponent<T> implements OnInit {
 
     }
 
-    if (this.lsData) {
+    // if (this.lsData) {
 
-      //  if there are data in the LocalStorage
-      for (const key in this.lsData) {
+    //   //  if there are data in the LocalStorage
+    //   for (const key in this.lsData) {
 
-        if (this.form.get(key))
-          this.form.get(key).setValue(this.lsData[key])
-      }
-    }
+    //     if (this.form.get(key))
+    //       this.form.get(key).setValue(this.lsData[key])
+    //   }
+    // }
 
   }
 

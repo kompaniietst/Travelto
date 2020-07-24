@@ -21,29 +21,28 @@ export class DateTimePickerComponent implements OnInit, ControlValueAccessor {
   @Input() control: Control;
   formControl = new FormControl();
 
-  constructor(private ls: LocalStorageService) {
-
-    this.ls.get().subscribe(x => {                // if date exists in localstorage
-      if (x.date)
-        this.formControl.setValue({
-          startDate: moment(x.date[0]),
-          endDate: moment(x.date[1])
-        });
-    })
-  }
+  constructor(private ls: LocalStorageService) { }
 
   registerOnChange(fn: any): void {
     this.formControl.valueChanges
-      .pipe(map(d => [d.startDate.toDate(), d.endDate.toDate()]))
+      .pipe(
+        map(d => [d.startDate.toDate(), d.endDate.toDate()]))
       .subscribe(fn)
   }
 
   writeValue(obj: any): void { }
+  
   registerOnTouched(fn: any): void { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if (this.control.value)
+      this.fillByDataFromLocalstorage();
+  }
 
-  onChangeDateTimePicker(date) {
-    this.ls.saveDateToLocalstorage([date.startDate.toDate(), date.endDate.toDate()])
+  fillByDataFromLocalstorage() {
+    this.formControl.setValue({
+      startDate: moment(this.control.value[0]),
+      endDate: moment(this.control.value[1])
+    });
   }
 }

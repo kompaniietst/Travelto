@@ -19,10 +19,7 @@ export class GoogleMapsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
-
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
     GoogleMapsApiLoader({
@@ -36,6 +33,4 @@ export class GoogleMapsComponent implements OnInit {
       });
     })
   }
-
-
 }
