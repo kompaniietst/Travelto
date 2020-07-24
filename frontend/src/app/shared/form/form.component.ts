@@ -5,7 +5,7 @@ import { Control } from 'src/app/core/models/Control';
 import { Observable } from 'rxjs';
 import { ImagesComponent } from './form-control/images/images.component';
 import { CheckboxComponent } from './form-control/checkbox/checkbox.component';
-import { AdvancedInputComponent } from './form-control/advanced-input/advanced-input.component';
+import { AddressComponent } from './form-control/address/address.component';
 import { ConvertToFormStructureService } from 'src/app/core/services/convert-to-form-structure.service';
 import { FilterTabsService } from 'src/app/core/services/filter-tabs.service';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
@@ -33,9 +33,7 @@ export class FormComponent<T> implements OnInit {
 
   lsData: any;
 
-  // @ViewChild(ImagesComponent) imagesComponentRef: ImagesComponent;
   @ViewChild(CheckboxComponent) checkboxComponentRef: CheckboxComponent;
-  // @ViewChild(AdvancedInputComponent) advancedInputComponentRef: AdvancedInputComponent;
 
   form: FormGroup;
 

@@ -28,7 +28,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormComponent } from './form/form.component';
-import { AdvancedInputComponent } from './form/form-control/advanced-input/advanced-input.component';
+import { AddressComponent } from './form/form-control/address/address.component';
 import { ImagesComponent } from './form/form-control/images/images.component';
 import { DropdownComponent } from './form/form-control/dropdown/dropdown.component';
 import { RadioFinalComponent } from './form/form-control/radio-final/radio-final.component';
@@ -62,7 +62,7 @@ const COMPONENTS = [
   SidebarComponent,
   NavbarComponent,
   FormComponent,
-  AdvancedInputComponent,
+  AddressComponent,
   ImagesComponent,
   DropdownComponent,
   RadioFinalComponent,

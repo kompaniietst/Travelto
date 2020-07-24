@@ -62,11 +62,11 @@
                 </ng-container>
 
                 <ng-container *ngSwitchCase="'address'">
-                    <app-advanced-input 
+                    <app-address 
                         [formControlName]="control.key" 
                         [control]="control"
                         class="{{ control.controlType }}">
-                    </app-advanced-input>
+                    </app-address>
                 </ng-container>
 
                 <ng-container *ngSwitchCase="'checkbox'">

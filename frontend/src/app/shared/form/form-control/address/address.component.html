@@ -1,0 +1,24 @@
+<form [formGroup]="form">
+
+    <div class="city input">
+        <app-dropdown formControlName="city" [control]="dropdownControl"></app-dropdown>
+    </div>
+    <div class="street input">
+        <input type="text" formControlName="street" placeholder="Street">
+    </div>
+    <div class="houseNumber input">
+        <input type="text" type="number" formControlName="houseNumber" placeholder="№">
+    </div>
+    <!-- <div class="district input">
+        <input type="text" formControlName="district" placeholder="District">
+    </div> -->
+
+    <div class="map input">
+        <div class="d_flex align_center">
+            <div><strong>Map coordinates:</strong></div>
+            <div formArrayName="map" *ngFor="let _ of mapControls; trackBy: trackById; let i = index">
+                <input type="text" [formControlName]="i" type="number" [placeholder]="i == 0 ? 'latitude' : 'longitude'">
+            </div>
+        </div>
+    </div>
+</form>

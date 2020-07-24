@@ -5,14 +5,14 @@
     <div class="checkboxes_container">
         <mat-checkbox 
             [formArrayName]="control.key"
-            *ngFor="let item of control.options; trackBy: trackById; let i = index"
-            (change)="onCheckboxChange($event.checked, i, item)" 
+            *ngFor="let item of allCheckboxes; trackBy: trackById; let i = index"
+            (change)="onCheckboxSelect($event.checked, i, item)" 
             [checked]="item.checked">
 
-            <span *ngIf="control.options[i]._id == 1; else default">
+            <span *ngIf="allCheckboxes[i]._id == 1; else default">
                 Room has <span style="color:red"><strong>discount!</strong></span>
             </span>
-            <ng-template #default> {{ control.options[i].label }} </ng-template>
+            <ng-template #default> {{ allCheckboxes[i].label }} </ng-template>
         </mat-checkbox>
     </div>
 </div>
