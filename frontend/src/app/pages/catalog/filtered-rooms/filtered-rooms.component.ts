@@ -115,18 +115,18 @@ export class FilteredRoomsComponent implements OnInit {
 
           var filteredRooms: Room[];
 
-          filters.forEach(filter => {
+          filters.forEach(({ type }) => {
 
-            if (filter.type == 'specials') {
+            if (type == 'specials') {
               var filterIds = filters
-                .filter(f => f.type == filter.type)
+                .filter(f => f.type == type)
                 .map(_ => _._id);
               filteredRooms = this.filterBySpecials(filterIds, rooms);
             }
 
-            if (filter.type == 'amenities') {
+            if (type == 'amenities') {
               var filterIds = filters
-                .filter(f => f.type == filter.type)
+                .filter(f => f.type == type)
                 .map(_ => _._id);
               filteredRooms = this.filterByAmenities(filterIds, rooms);
             }
@@ -134,6 +134,30 @@ export class FilteredRoomsComponent implements OnInit {
           })
           return filteredRooms;
         }))
+    // map(rooms => {
+    //   this.showSpinner = false
+
+    //   var filteredRooms: Room[];
+
+    //   filters.forEach(filter => {
+
+    //     if (filter.type == 'specials') {
+    //       var filterIds = filters
+    //         .filter(f => f.type == filter.type)
+    //         .map(_ => _._id);
+    //       filteredRooms = this.filterBySpecials(filterIds, rooms);
+    //     }
+
+    //     if (filter.type == 'amenities') {
+    //       var filterIds = filters
+    //         .filter(f => f.type == filter.type)
+    //         .map(_ => _._id);
+    //       filteredRooms = this.filterByAmenities(filterIds, rooms);
+    //     }
+
+    //   })
+    //   return filteredRooms;
+    // }))
   }
 
   filterBySpecials(filterIds: string[], rooms: Room[]) {
@@ -159,12 +183,13 @@ export class FilteredRoomsComponent implements OnInit {
       controlType: 'dateTimePicker',
       key: 'date',
       placeholder: 'Check in - check out',
+      required: true
     }),
     new Control({
       controlType: 'pex',
       key: 'pex',
       placeholder: 'Guests:',
-      value: { adults: 2, children: 0 }
+      required: true
     })
   ]);
 

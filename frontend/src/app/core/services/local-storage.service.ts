@@ -15,14 +15,14 @@ export class LocalStorageService {
       return;
     }
 
-    var lsData = JSON.parse(localStorage.getItem('searchParams'))
+    var localstorageData = JSON.parse(localStorage.getItem('searchParams'))
 
-    if (Object.keys(lsData).length > 0)
-      this.storageSubject.next(lsData);
+    if (Object.keys(localstorageData).length > 0)
+      this.storageSubject.next(localstorageData);
 
 
-    if (lsData.city)
-      this.cityIdSubject = new BehaviorSubject(lsData.city._id)
+    if (localstorageData.city)
+      this.cityIdSubject = new BehaviorSubject(localstorageData.city._id)
   }
 
   saveToLocalstorage(obj: any) {
@@ -39,10 +39,10 @@ export class LocalStorageService {
   saveDateToLocalstorage(date) {
     // console.log('date',date);
 
-    var lsData = JSON.parse(localStorage.getItem('searchParams'));
-    lsData["date"] = date;
-    localStorage.setItem('searchParams', JSON.stringify(lsData));
-    this.storageSubject.next(lsData);
+    var localstorageData = JSON.parse(localStorage.getItem('searchParams'));
+    localstorageData["date"] = date;
+    localStorage.setItem('searchParams', JSON.stringify(localstorageData));
+    this.storageSubject.next(localstorageData);
   }
 
   onCityChange(): Observable<string> {

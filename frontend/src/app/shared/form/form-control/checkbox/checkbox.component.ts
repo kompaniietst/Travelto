@@ -75,8 +75,8 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
     generatedControls.forEach((control: AbstractControl) =>
       this.array.push(control))
 
-    this.allCheckboxes.forEach(checkbox => {                       // turn property "checked" of selected checboxes (in html) to true
-      if (data.some(v => checkbox._id == v._id))
+    this.allCheckboxes.forEach((checkbox: FilterItem) => {                       // turn property "checked" of selected checboxes (in html) to true
+      if (data.some(({ _id }) => checkbox._id == _id))
         checkbox.checked = true;
     })
   }
@@ -88,12 +88,17 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
   onFilterTabRemove() {
     this.filterTabsService.getRemovedTabID()                        // uncheck checkbox after removing of filter tab
       .subscribe((tab_id: string) => {
-        if (tab_id.length > 0)
+        if (tab_id.length > 0) {
+          console.log('HERE');
+
           this.removeControl(tab_id)
+        }
       })
   }
 
   onCheckboxSelect(checked: boolean, i: number, item: any) {         // on select checkbox
+    console.log('onCheckboxSelect');
+
     checked
       ? this.addControl(item, i)
       : this.removeControl(item._id);
@@ -118,10 +123,10 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
 
     this.array.removeAt(index);
 
-    var controlOptionsindex = this.control.options                     //change checked state in control.options
+    var controlOptionsIndex = this.control.options                     //change checked state in control.options
       .findIndex((c: FilterItem) => c._id == _id);
 
-    this.allCheckboxes[controlOptionsindex].checked = false;
+    if (controlOptionsIndex != -1) this.allCheckboxes[controlOptionsIndex].checked = false;
   }
 
   setFilterTabs(checked: boolean, item: any) {

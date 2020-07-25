@@ -16,7 +16,8 @@
 
                 <ng-container *ngSwitchCase="'dateTimePicker'">
                     <app-date-time-picker 
-                        [formControlName]="control.key" 
+                        [formControlName]="control.key"  
+                        [control]="control"
                         class="{{ control.controlType }}">
                     </app-date-time-picker>
                 </ng-container>

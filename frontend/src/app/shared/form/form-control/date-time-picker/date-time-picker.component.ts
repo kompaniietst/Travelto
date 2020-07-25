@@ -20,6 +20,7 @@ export class DateTimePickerComponent implements OnInit, ControlValueAccessor {
 
   @Input() control: Control;
   formControl = new FormControl();
+  defaultData: any;
 
   constructor(private ls: LocalStorageService) { }
 
@@ -31,12 +32,20 @@ export class DateTimePickerComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(obj: any): void { }
-  
+
   registerOnTouched(fn: any): void { }
 
   ngOnInit(): void {
-    if (this.control.value)
+    console.log('C',this.control);
+    
+    this.defaultData = this.control?.value;
+
+    if (this.defaultDataExist())
       this.fillByDataFromLocalstorage();
+  }
+
+  defaultDataExist(): boolean {
+    return this.control?.value ? true : false;
   }
 
   fillByDataFromLocalstorage() {

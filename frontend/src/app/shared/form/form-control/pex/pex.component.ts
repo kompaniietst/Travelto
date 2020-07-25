@@ -1,6 +1,7 @@
 import { Component, OnInit, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { Control } from 'src/app/core/models/Control';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-pex',
@@ -18,11 +19,22 @@ export class PexComponent implements OnInit, ControlValueAccessor {
 
   form = new FormGroup({});
   openPanel: boolean = false;
+  adults: number;
+  children: number;
 
-  constructor() { }
+  constructor(private ls: LocalStorageService) {
+    var localstorageData = this.ls.getData();
 
-  get adults() { return this.form.get('adults').value }
-  get children() { return this.form.get('children').value }
+    this.form = new FormGroup({
+      adults: new FormControl(localstorageData?.pex?.adults ?? 0),
+      children: new FormControl(localstorageData?.pex?.children ?? 0),
+      ages: new FormArray(localstorageData?.pex?.ages ?? [])
+    });
+
+    this.adults = localstorageData?.pex?.adults ?? 0;
+    this.children = localstorageData?.pex?.children ?? 0;
+  }
+
   get ages() { return this.form.get('ages') as FormArray }
 
   registerOnChange(fn: any): void {
@@ -30,35 +42,41 @@ export class PexComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(obj: any): void { }
+
   registerOnTouched(fn: any): void { }
 
   ngOnInit(): void {
 
-    this.form.addControl('adults', new FormControl(this.control.value.adults));
-    this.form.addControl('children', new FormControl(this.control.value.children));
-    this.form.addControl('ages', new FormArray([]));
 
-    this.form.controls.children.valueChanges
-      .subscribe(x => {
+    console.log('control=> ', this.control);
+
+    this.form.get("adults").valueChanges
+      .subscribe((x: number) => this.adults = x);
+
+
+    this.form.get("children").valueChanges
+      .subscribe((x: number) => {
         console.log(x);
 
+        this.children = x
+
         x > this.ages.controls.length
-          ? this.addAgeControl()
-          : this.removeAgeControl()
+          ? this.ages.push(new FormControl(0))
+          : this.ages.removeAt(this.ages.controls.length - 1)
       });
   }
 
-  addAgeControl() {
-    console.log('add');
+  // addAgeControl() {
+  //   console.log('add');
 
-    (this.form.get('ages') as FormArray)
-      .push(new FormControl(0))
-  }
+  //   (this.form.get('ages') as FormArray)
+  //     .push(new FormControl(0))
+  // }
 
-  removeAgeControl() {
-    (this.form.get('ages') as FormArray)
-      .removeAt((this.form.get('ages') as FormArray).controls.length - 1)
-  }
+  // removeAgeControl() {
+  //   (this.form.get('ages') as FormArray)
+  //     .removeAt((this.form.get('ages') as FormArray).controls.length - 1)
+  // }
 
   trackById(index, item) {
     return item.id;

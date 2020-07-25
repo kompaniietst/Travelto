@@ -31,7 +31,7 @@ export class FormComponent<T> implements OnInit {
 
   @Output() valueChange = new EventEmitter();
 
-  lsData: any;
+  localstorageData: any;
 
   @ViewChild(CheckboxComponent) checkboxComponentRef: CheckboxComponent;
 
@@ -44,7 +44,7 @@ export class FormComponent<T> implements OnInit {
   ) {
 
     // if (this.localstorageNotEmpty)
-    //   this.ls.get().subscribe(x => this.lsData = x);                           // get localstorage data
+    //   this.ls.get().subscribe(x => this.localstorageData = x);                           // get localstorage data
   }
 
   localstorageNotEmpty() {
@@ -74,13 +74,13 @@ export class FormComponent<T> implements OnInit {
 
     }
 
-    // if (this.lsData) {
+    // if (this.localstorageData) {
 
     //   //  if there are data in the LocalStorage
-    //   for (const key in this.lsData) {
+    //   for (const key in this.localstorageData) {
 
     //     if (this.form.get(key))
-    //       this.form.get(key).setValue(this.lsData[key])
+    //       this.form.get(key).setValue(this.localstorageData[key])
     //   }
     // }
 

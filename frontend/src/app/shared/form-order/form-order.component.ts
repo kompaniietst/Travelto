@@ -49,7 +49,11 @@ export class FormOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('data ',this.data  );
+    
     this.controls$ = this.data.controls;
+    this.controls$.subscribe(x=>console.log('(x) ',x))
+    
     this.room = this.data.room;
 
     this.total = this.room.price * this.nights
@@ -95,14 +99,12 @@ export class FormOrderComponent implements OnInit {
   }
 
   openLogInModal() {
-    // this.dialog.closeAll();
     this.dialog.open(LoginComponent, {
       panelClass: 'popup',
     });
   }
 
   openRegModal() {
-    //  this.dialog.closeAll();
     this.dialog.open(RegistrationComponent, {
       panelClass: 'popup',
     });

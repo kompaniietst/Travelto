@@ -33,29 +33,29 @@ export class MainSearchFormComponent implements OnInit {
     private router: Router,
     private ls: LocalStorageService) {
 
-    var lsData = this.ls.getData() as LsSearchData;
-    this.initCityControl(lsData);
-    this.initDateControl(lsData);
-    this.paxGroup = this.getInitializedPaxGroup(lsData);
+    var localstorageData = this.ls.getData() as LsSearchData;
+    this.initCityControl(localstorageData);
+    this.initDateControl(localstorageData);
+    this.paxGroup = this.getInitializedPaxGroup(localstorageData);
 
     this.form = new FormGroup({
-      city: new FormControl(lsData?.city),
-      date: new FormControl(lsData?.date),
+      city: new FormControl(localstorageData?.city),
+      date: new FormControl(localstorageData?.date),
       pex: this.paxGroup
     });
   }
 
-  getInitializedPaxGroup(lsData: LsSearchData): FormGroup {
+  getInitializedPaxGroup(localstorageData: LsSearchData): FormGroup {
 
-    var adults = new FormControl(lsData?.pex?.adults ?? 0);
+    var adults = new FormControl(localstorageData?.pex?.adults ?? 0);
     adults.valueChanges.subscribe(x => this.adults = x);
 
-    this.ages = new FormArray(lsData?.pex?.ages?.map(n => new FormControl(n)) ?? []);
+    this.ages = new FormArray(localstorageData?.pex?.ages?.map(n => new FormControl(n)) ?? []);
 
-    var childrenControl = this.initChildrenControl(lsData)
+    var childrenControl = this.initChildrenControl(localstorageData)
 
-    this.adults = lsData?.pex?.adults ?? 0
-    this.children = lsData?.pex?.children ?? 0
+    this.adults = localstorageData?.pex?.adults ?? 0
+    this.children = localstorageData?.pex?.children ?? 0
 
     return new FormGroup({
       adults: adults,
@@ -64,8 +64,8 @@ export class MainSearchFormComponent implements OnInit {
     });
   }
 
-  initChildrenControl(lsData: LsSearchData) : FormControl {
-    var childrenControl = new FormControl(lsData?.pex?.children ?? 0);
+  initChildrenControl(localstorageData: LsSearchData) : FormControl {
+    var childrenControl = new FormControl(localstorageData?.pex?.children ?? 0);
     childrenControl.valueChanges.subscribe((x: number) => {
 
       var agesControlsAmount = this.ages.controls.length;
@@ -83,22 +83,22 @@ export class MainSearchFormComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  private initDateControl(lsData: LsSearchData) {
+  private initDateControl(localstorageData: LsSearchData) {
     this.dateControl = new Control({
       controlType: 'dateTimePicker',
       key: 'date',
       placeholder: 'Check in - check out',
-      value: lsData.date || ''
+      value: localstorageData.date || ''
     });
   }
 
-  private initCityControl(lsData: LsSearchData) {
+  private initCityControl(localstorageData: LsSearchData) {
     this.citiesService.get()
       .subscribe((allCities: City[]) => this.cityControl = new Control({
         controlType: 'dropdown',
         key: 'city',
         placeholder: 'Destination place',
-        value: lsData.city,
+        value: localstorageData.city,
         options: allCities
       }));
   }

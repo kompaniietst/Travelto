@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { FilterItem } from '../models/FilterItem';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,12 @@ export class FilterTabsService {
   constructor() {
     this.tabsSubject = new BehaviorSubject(null);
     this.removedTabID = new BehaviorSubject("");
-    this.priceRangeSubject = new BehaviorSubject([50,250]);
+    this.priceRangeSubject = new BehaviorSubject([50, 250]);
   }
 
-  setFilter(obj: any) {
-    console.log('tab',obj);
-    
+  setFilter(obj: FilterItem) {
+    console.log('tab', obj);
+
     this.tabs.push(obj);
     this.tabsSubject.next(this.tabs);
   }
@@ -29,15 +30,15 @@ export class FilterTabsService {
     this.priceRangeSubject.next(arr);
   }
 
-  getPriceFilter() {
+  getPriceFilter(): Observable<number[]> {
     return this.priceRangeSubject.asObservable()
   }
 
-  getFilters() {
+  getFilters(): Observable<FilterItem[]> {
     return this.tabsSubject.asObservable()
   }
 
-  remove(_id: any) {
+  remove(_id: string) {
     this.removedTabID.next(_id); // set id of removed element
 
     var i = this.tabs.findIndex(t => t._id == _id);
@@ -46,7 +47,7 @@ export class FilterTabsService {
     this.tabsSubject.next(this.tabs);
   }
 
-  getRemovedTabID() {
+  getRemovedTabID(): Observable<string> {
     return this.removedTabID.asObservable()
   }
 }

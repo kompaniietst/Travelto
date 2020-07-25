@@ -1,6 +1,6 @@
 <div [formGroup]="form" class="pex_form">
     
-    <div class="placeholder" (click)="openPanel=!openPanel">
+    <!-- <div class="placeholder" (click)="openPanel=!openPanel">
         <span *ngIf="adults == 0 && children == 0; else default">Choose guests</span>
         <ng-template #default>
             <span>{{ adults + children }} guests</span>
@@ -26,5 +26,37 @@
         </div>
 
         <button type="button" class="btn btn-orange" (click)="openPanel=!openPanel">Confirm</button>
+    </div> -->
+
+
+    <div class="placeholder" (click)="openPanel=!openPanel">
+        <span *ngIf="adults == 0 && children == 0; else default">Choose guests</span>
+        <ng-template #default>
+            <span>{{ adults + children }} guests</span>
+        </ng-template>
     </div>
+    <div class="panel" *ngIf="openPanel">
+        <div class="option d_flex justify_content_between">
+            <strong>Adults:</strong>
+            <app-counter formControlName="adults" [limitRange]="[0,4]"></app-counter>
+        </div>
+
+        <div class="option d_flex justify_content_between">
+            <strong>Children:</strong>
+            <app-counter formControlName="children" [limitRange]="[0,4]"></app-counter>
+        </div>
+
+        <div *ngIf="ages.controls.length > 0" class="ages_container">
+            <div formArrayName="ages" *ngFor="let item of ages.controls; trackBy: trackById; let i = index"
+                class="ages">
+                <div>Child {{ i+1 }} age</div>
+                <app-counter [formControlName]="i" [limitRange]="[0,12]" class="count_ages"></app-counter>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-orange" (click)="openPanel=!openPanel">Confirm</button>
+    </div>
+
+
+
 </div>

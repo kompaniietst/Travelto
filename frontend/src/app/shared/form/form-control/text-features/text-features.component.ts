@@ -55,7 +55,7 @@ export class TextFeaturesComponent implements OnInit, ControlValueAccessor {
     (this.array as FormArray).push(new FormControl());
   }
 
-  removeField(i) {
+  removeField(i: number) {
     (this.array as FormArray).removeAt(i)
   }
 
