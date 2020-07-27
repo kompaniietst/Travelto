@@ -149,15 +149,16 @@
             background: url(src/assets/images/icons/form/map.svg);
             background-size: 100%;
         }
-        .dateControl:before {
-            background: url(src/assets/images/icons/form/calendar.svg) no-repeat center;
-        }
         @media only screen and (max-width: $tablet) {
             border-right: none;
             width: 100%;
             height: 53px;
             border-bottom: $border;
         }
+    }
+    .dateControl:before {
+        background: url(src/assets/images/icons/form/calendar.svg) no-repeat center;
+        background-size: contain;
     }
 }
 .dropdown ::ng-deep {

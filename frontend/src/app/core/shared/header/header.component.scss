@@ -99,19 +99,27 @@
 
             // }
             .dateTimePicker {
+                @media only screen and (max-width: $tablet) {
+                    display: flex;
+                    align-items: center;
+                    input {
+                        padding-left: 52px;
+                    }
+                }
                 // padding-left: 52px;
                 position: relative;
-                // &:before {
-                //     content: "";
-                //     position: absolute;
-                //     width: 25px;
-                //     height: 31px;
-                //     left: 15px;
-                //     top: 50%;
-                //     transform: translate(0, -50%);
-                //     background: url(src/assets/images/icons/form/calendar.svg) no-repeat center;
-                //     background-size: 100%;
-                // }
+                &:before {
+                    //     content: "";
+                    //     position: absolute;
+                    //     width: 25px;
+                    //     height: 31px;
+                    //     left: 15px;
+                    //     top: 50%;
+                    //     transform: translate(0, -50%);
+                    background: url(src/assets/images/icons/form/calendar.svg) no-repeat center;
+                    background: red;
+                    //     background-size: 100%;
+                }
                 input {
                     height: 100%;
                     width: 100%;
@@ -172,6 +180,18 @@
                 border-right: none;
                 border: 1px solid #e4e7eaa6;
                 //  border: 1px solid #e4e7eaa6;border-radius: 3px;
+
+                @media only screen and (max-width: $tablet) {
+                    width: 100%;
+                    padding: 0;
+                    margin: 0;
+                    background: none;
+                    border: none;
+                    &:before {
+                        filter: brightness(0) invert(1);    width: 20px;
+                        height: 26px;
+                    }
+                }
             }
         }
         .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
@@ -220,6 +240,9 @@
         .mat-form-field-appearance-legacy .mat-form-field-label {
             color: white;
             font-family: $font_bold;
+            @media only screen and (max-width: $tablet) {
+                padding-left: 52px;
+            }
         }
         .dateTimePicker input::placeholder {
             color: white;
