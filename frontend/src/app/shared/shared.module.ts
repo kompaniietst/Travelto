@@ -22,6 +22,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
+// import { LayoutModule } from '@angular/cdk/layout';
 
 import { ProfileTriggerComponent } from './profile-trigger/profile-trigger.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -50,7 +51,6 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { DateTimePickerComponent } from './form/form-control/date-time-picker/date-time-picker.component';
 import { CounterComponent } from './form/form-control/counter/counter.component';
 import { FormOrderComponent } from './form-order/form-order.component';
-import { SizeDetectorComponent } from './size-detector/size-detector.component';
 import { MainSearchFormComponent } from './main-search-form/main-search-form.component';
 import { PexComponent } from './form/form-control/pex/pex.component';
 
@@ -87,7 +87,6 @@ const COMPONENTS = [
   DateTimePickerComponent,
   CounterComponent,
   FormOrderComponent,
-  SizeDetectorComponent,
   MainSearchFormComponent,
   PexComponent
 ];
@@ -123,7 +122,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, SizeDetectorComponent, MainSearchFormComponent, PexComponent],
+  declarations: [...COMPONENTS],
   imports: [...MODULES],
   exports: [...COMPONENTS,
     FormsModule, ReactiveFormsModule

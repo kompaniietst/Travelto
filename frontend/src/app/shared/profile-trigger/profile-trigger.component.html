@@ -59,7 +59,7 @@
 </div>
 
 <ng-template #default>
-    <div (click)="openDialog()" class="account" [ngClass]="{ 'isTablet' : isTablet }">
+    <div (click)="openDialog()" class="account" [ngClass]="{ 'is_tablet' : screenXSmall || screenSmall }">
         <span>
             <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -67,6 +67,6 @@
                     fill="#FF6847" />
             </svg>
         </span>
-        <span *ngIf="!isTablet">Sign in</span>
+        <span *ngIf="screenMedium || screenLarge || screenXLarge">Sign in</span>
     </div>
 </ng-template>

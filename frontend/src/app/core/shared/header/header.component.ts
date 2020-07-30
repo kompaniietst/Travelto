@@ -1,62 +1,31 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { CitiesService } from '../../services/cities.service';
-import { City } from '../../models/City';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Control } from '../../models/Control';
 import { Router, Params } from '@angular/router';
-import { SizeDetectorService } from '../../services/size-detector.service';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { ViewportSizeDetector } from '../../extends/ViewportSizeDetector';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, AfterViewInit {
+export class HeaderComponent extends ViewportSizeDetector {
 
   formStructure$: Observable<Control[]>
-  isTablet: boolean = false;
+
+  @HostListener('window:resize', ['$event'])
+  onResize = () => this.defineScreenSize();
 
   constructor(
-    // private citiesService: CitiesService,
     public router: Router,
-    private breakpoint: SizeDetectorService,
-    private ls: LocalStorageService
+    private ls: LocalStorageService,
+    breakpointObserver: BreakpointObserver
   ) {
-    // this.citiesService.get()
-    //   .subscribe((x: City[]) => {
-    //     this.initFormStructure(x)
-    //   });
-
-    this.breakpoint.onResize$
-      .subscribe((x) => this.isTablet = x < 768 || x == 768)
+    super(breakpointObserver);
+    this.defineScreenSize()
   }
-
-  ngOnInit(): void { }
-
-  ngAfterViewInit() {
-  }
-  // initFormStructure(cities: City[]) {
-  //   this.formStructure$ = of([
-  //     new Control({
-  //       controlType: 'dropdown',
-  //       key: 'city',
-  //       placeholder: 'Destination place',
-  //       options: cities
-  //     }),
-  //     new Control({
-  //       controlType: 'dateTimePicker',
-  //       key: 'date',
-  //       placeholder: 'Check in - check out',
-  //     }),
-  //     new Control({
-  //       controlType: 'pex',
-  //       key: 'pex',
-  //       placeholder: 'Guests:',
-  //       value: { adults: 2, children: 0 }
-  //     })
-  //   ])
-  // }
 
   onSubmit(formData: any) {
 

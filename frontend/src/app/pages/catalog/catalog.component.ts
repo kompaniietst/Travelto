@@ -1,21 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { SizeDetectorService } from 'src/app/core/services/size-detector.service';
+import { Component, HostListener } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { ViewportSizeDetector } from 'src/app/core/extends/ViewportSizeDetector';
 
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.scss']
 })
-export class CatalogComponent {
+export class CatalogComponent extends ViewportSizeDetector {
 
   showFilters: boolean = false;
-  isTablet: boolean = false;
+
+  @HostListener('window:resize', ['$event'])
+  onResize = () => this.defineScreenSize();
 
   constructor(
-    private breakpoint: SizeDetectorService
+    breakpointObserver: BreakpointObserver
   ) {
-
-    this.breakpoint.onResize$
-      .subscribe((x) => this.isTablet = x < 768 || x == 768)
+    super(breakpointObserver);
+    this.defineScreenSize()
   }
 }

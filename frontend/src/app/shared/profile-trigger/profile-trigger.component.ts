@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LoginComponent } from 'src/app/core/authentication/login/login.component';
@@ -6,30 +6,34 @@ import { AuthenticationService } from 'src/app/core/authentication/authenticatio
 import { User } from 'src/app/core/models/User';
 import { environment } from 'src/environments/environment';
 import { BookingService } from 'src/app/core/services/booking.service';
-import { Order } from 'src/app/core/models/Order';
-import { SizeDetectorService } from 'src/app/core/services/size-detector.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { ViewportSizeDetector } from '../../core/extends/ViewportSizeDetector';
 
 @Component({
   selector: 'app-profile-trigger',
   templateUrl: './profile-trigger.component.html',
   styleUrls: ['./profile-trigger.component.scss']
 })
-export class ProfileTriggerComponent implements OnInit, AfterViewInit {
+export class ProfileTriggerComponent extends ViewportSizeDetector implements OnInit {
 
   readonly URL = environment.apiUrl;
 
   currUser: User;
   profileImage: string;
   count = 0;
-  isTablet: boolean = false;
+
+  @HostListener('window:resize', ['$event'])
+  onResize = () => this.defineScreenSize();
 
   constructor(
     private dialog: MatDialog,
     private router: Router,
     private bookingService: BookingService,
     private auth: AuthenticationService,
-    private breakpoint: SizeDetectorService
+    breakpointObserver: BreakpointObserver
   ) {
+    super(breakpointObserver);
+    this.defineScreenSize()
 
     this.bookingService.newOrders
       .subscribe((x: string[]) => {
@@ -54,11 +58,6 @@ export class ProfileTriggerComponent implements OnInit, AfterViewInit {
   get isUser() { return this.currUser.role == 'user' }
 
   ngOnInit() { }
-
-  ngAfterViewInit() {
-    this.breakpoint.onResize$
-      .subscribe((x) => this.isTablet = x < 768 || x == 768)
-  }
 
   openDialog() {
     const dialogRef = this.dialog.open(LoginComponent, {

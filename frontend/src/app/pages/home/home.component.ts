@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Hotel } from 'src/app/core/models/Hotel';
 import { HotelService } from 'src/app/core/services/hotel.service';
-import { HttpClient } from '@angular/common/http';
+import { ViewportSizeDetector } from 'src/app/core/extends/ViewportSizeDetector';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-home',
@@ -19,11 +20,15 @@ export class HomeComponent implements OnInit {
   mapLat = 36;
   mapLng = 30;
 
+
+  
   constructor(
     private hotelService: HotelService,
-  ) {
+    ) {
+
+
     this.hotelService.get()
-      .subscribe((x: Hotel[]) =>{
+      .subscribe((x: Hotel[]) => {
         this.markers = x
           .map(h => {
             return {
@@ -31,10 +36,10 @@ export class HomeComponent implements OnInit {
               lng: +h.address.map[1]
             }
           }
-          
+
           );
-          // console.log('this.markers',this.markers);
-        }
+        // console.log('this.markers',this.markers);
+      }
       )
   }
 

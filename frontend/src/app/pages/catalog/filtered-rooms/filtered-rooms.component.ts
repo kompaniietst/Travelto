@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Room } from 'src/app/core/models/Room';
 import { RoomService } from 'src/app/core/services/room.service';
@@ -10,14 +10,15 @@ import { map, delay, tap } from 'rxjs/operators';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormOrderComponent } from 'src/app/shared/form-order/form-order.component';
-import { SizeDetectorService } from 'src/app/core/services/size-detector.service';
+import { ViewportSizeDetector } from 'src/app/core/extends/ViewportSizeDetector';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-filtered-rooms',
   templateUrl: './filtered-rooms.component.html',
   styleUrls: ['./filtered-rooms.component.scss']
 })
-export class FilteredRoomsComponent implements OnInit {
+export class FilteredRoomsComponent extends ViewportSizeDetector implements OnInit {
 
   rooms$: Observable<Room[]>
   amenities: Amenity[];
@@ -26,7 +27,6 @@ export class FilteredRoomsComponent implements OnInit {
   showSpinner: boolean = false;
   priceFilter: { key: string, price: number[] };
   cityFilter: { key: string, cityId: string };
-  isTablet: boolean = false;
 
   private roomsSubject: BehaviorSubject<Room[]> = new BehaviorSubject<Room[]>([]);
   rooms: Room[] = []
@@ -53,13 +53,18 @@ export class FilteredRoomsComponent implements OnInit {
     focusOnSelect: true,
   };
 
+  @HostListener('window:resize', ['$event'])
+  onResize = () => this.defineScreenSize();
+
   constructor(
     private roomService: RoomService,
     private filterTabsService: FilterTabsService,
     private localStorageService: LocalStorageService,
     private dialog: MatDialog,
-    private breakpoint: SizeDetectorService
+    breakpointObserver: BreakpointObserver
   ) {
+    super(breakpointObserver);
+    this.defineScreenSize()
 
     this.rooms$ = this.roomsSubject.asObservable();
 
@@ -97,9 +102,6 @@ export class FilteredRoomsComponent implements OnInit {
           }
         }
       })
-
-    this.breakpoint.onResize$
-      .subscribe((x) => this.isTablet = x < 768 || x == 768)
   }
 
   ngOnInit(): void { }

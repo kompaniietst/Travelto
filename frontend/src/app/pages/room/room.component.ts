@@ -1,25 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Hotel } from 'src/app/core/models/Hotel';
 import { Room } from 'src/app/core/models/Room';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
-import { Amenity } from 'src/app/core/models/Amenity';
 import { environment } from 'src/environments/environment';
 import { RoomService } from 'src/app/core/services/room.service';
-import { SizeDetectorService } from 'src/app/core/services/size-detector.service';
 import { tap } from 'rxjs/operators';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { ViewportSizeDetector } from 'src/app/core/extends/ViewportSizeDetector';
 
 @Component({
   selector: 'app-room',
   templateUrl: './room.component.html',
   styleUrls: ['./room.component.scss']
 })
-export class RoomComponent implements OnInit {
+export class RoomComponent extends ViewportSizeDetector implements OnInit {
 
   id: string = this.route.snapshot.params.id;
   room: Room;
-  isTablet: boolean = false;
 
   loading = true;
 
@@ -31,12 +28,17 @@ export class RoomComponent implements OnInit {
   mapLat: number;
   mapLng: number;
 
+  @HostListener('window:resize', ['$event'])
+  onResize = () => this.defineScreenSize();
+
   constructor(
     private route: ActivatedRoute,
     private roomService: RoomService,
     private alert: AlertMessageService,
-    private breakpoint: SizeDetectorService
+    breakpointObserver: BreakpointObserver
   ) {
+    super(breakpointObserver);
+    this.defineScreenSize();
 
     this.roomService
       .getRoomBy(this.id)
@@ -49,17 +51,14 @@ export class RoomComponent implements OnInit {
         },
         err => this.alert.error(err.error))
 
-    this.breakpoint.onResize$
-      .subscribe((x) => {
-        this.isTablet = x < 768 || x == 768
-        this.defineCarouelConfig()
-      })
+
+    this.defineCarouelConfig()
   }
 
   ngOnInit(): void { }
 
   defineCarouelConfig() {
-    this.isTablet
+    this.screenXSmall || this.screenSmall
       ? this.carouselConfig = {
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -72,7 +71,6 @@ export class RoomComponent implements OnInit {
         autoplay: true,
         arrows: true
       }
-
   }
 
   defineMapData() {

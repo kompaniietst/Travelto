@@ -15,7 +15,7 @@ const routes: Routes = []
 
 const COMPONENTS = [
   HeaderComponent,
-  FooterComponent
+  FooterComponent,
 ];
 
 const MODULES = [
@@ -31,7 +31,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, FooterComponent],
+  declarations: [...COMPONENTS],
   imports: [...MODULES],
   exports: [...COMPONENTS]
 })

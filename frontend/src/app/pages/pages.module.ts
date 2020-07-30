@@ -7,6 +7,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatRadioModule } from '@angular/material/radio';
+import { LayoutModule } from '@angular/cdk/layout';
 
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';

@@ -47,7 +47,6 @@ export class PexComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {
 
-
     console.log('control=> ', this.control);
 
     this.form.get("adults").valueChanges

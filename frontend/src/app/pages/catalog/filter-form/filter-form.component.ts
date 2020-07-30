@@ -1,29 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { AmenitiesService } from 'src/app/core/services/amenities.service';
 import { Control } from 'src/app/core/models/Control';
 import { Observable, of } from 'rxjs';
 import { Amenity } from 'src/app/core/models/Amenity';
-import { SizeDetectorService } from 'src/app/core/services/size-detector.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { ViewportSizeDetector } from 'src/app/core/extends/ViewportSizeDetector';
 
 @Component({
   selector: 'app-filter-form',
   templateUrl: './filter-form.component.html',
   styleUrls: ['./filter-form.component.scss']
 })
-export class FilterFormComponent implements OnInit {
+export class FilterFormComponent extends ViewportSizeDetector implements OnInit {
 
   formStructure$: Observable<Control[]>;
-  isTablet: boolean = false;
+
+  @HostListener('window:resize', ['$event'])
+  onResize = () => this.defineScreenSize();
 
   constructor(
     private amenitiesService: AmenitiesService,
-    private breakpoint: SizeDetectorService
+    breakpointObserver: BreakpointObserver
   ) {
+    super(breakpointObserver);
+    this.defineScreenSize()
+
     this.amenitiesService.get()
       .subscribe((x: Amenity[]) => this.initFormStructure(x));
-
-    this.breakpoint.onResize$
-      .subscribe((x) => this.isTablet = x < 768 || x == 768)
   }
 
   initFormStructure(amenities: Amenity[]) {

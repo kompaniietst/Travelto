@@ -31,7 +31,7 @@
         padding-left: 0;
     }
 }
-.isTablet {
+.is_tablet {
     .sidebar {
         position: fixed;
         top: 0;
@@ -49,7 +49,7 @@
         margin-top: 20px;
     }
 }
-:host .isTablet ::ng-deep .block {
+:host .is_tablet ::ng-deep .block {
     border: none;
     box-shadow: none;
     width: 100%;

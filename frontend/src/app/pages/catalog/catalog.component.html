@@ -1,19 +1,17 @@
 <div class="container">
     <div class="content_container">
 
-        <app-size-detector></app-size-detector>
-
         <app-sidebar 
             class="sidebar" 
-            *ngIf="!isTablet">
+            *ngIf="screenMedium || screenLarge || screenXLarge">
             <div class="title">
                 <strong>Filter:</strong>
             </div>
             <app-filter-form></app-filter-form>
         </app-sidebar>
 
-        <div *ngIf="isTablet" 
-            [ngClass]="{ 'isTablet' : isTablet }">
+        <div *ngIf="screenXSmall || screenSmall" 
+            [ngClass]="{ 'is_tablet' : screenXSmall || screenSmall }">
             <button class="btn btn-grey-outline w_100"
                 (click)="showFilters = ! showFilters">
                 Set filters

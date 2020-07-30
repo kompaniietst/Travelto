@@ -1,15 +1,15 @@
-<div [ngClass]="{'isTablet' : isTablet }">
+<div [ngClass]="{'is_tablet' : screenXSmall || screenSmall }">
     <div class="container">
         <div class="header">
-            <div *ngIf="isTablet" class="logo_container">
+            <div *ngIf="screenXSmall || screenSmall" class="logo_container">
                 <a href routerLink="/" class="logo"> </a>
             </div>
-            <a *ngIf="!isTablet" href routerLink="/" class="logo"> </a>
-            <div *ngIf="!isTablet">
+            <a *ngIf="screenMedium || screenLarge || screenXLarge" href routerLink="/" class="logo"> </a>
+            <div *ngIf="screenMedium || screenLarge || screenXLarge">
                 <strong>+7 (495) 677-17-79 </strong>
                 <br /> Every day 10:00 - 20:00
             </div>
-            <div *ngIf="isTablet"><span class="icon_tel"></span></div>
+            <div *ngIf="screenXSmall || screenSmall"><span class="icon_tel"></span></div>
             <div class="d_flex socials">
                 <div class="icon icon_facebook">
                     <svg width="12" height="21" viewBox="0 0 12 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,18 +38,9 @@
     </div>
     <app-navbar></app-navbar>
 </div>
-<!-- {{router.url.includes('/catalog')}} {{isTablet }} -->
-<div class="form_container" 
-    *ngIf="router.url.includes('/catalog') && !isTablet">
+
+<div class="form_container" *ngIf="router.url.includes('/catalog') && screenMedium || screenLarge || screenXLarge">
     <div class="container">
-        <!-- <app-form
-            *ngIf="formStructure$"
-            [controls$]="formStructure$"
-            class="catalog_form_search"
-            (valueChange)="onSubmit($event)"
-            buttonName="Start search">
-        </app-form> -->
-        
         <app-main-search-form 
             class="catalog_form_search">
         </app-main-search-form>
@@ -57,20 +48,9 @@
 </div>
 
 <div class="form_container" 
-    *ngIf="router.url.includes('/catalog') && isTablet" 
-    [ngClass]="{ 'dark_blue' : isTablet }">
-    <div *ngIf="isTablet">
-        <!-- <app-form
-            *ngIf="formStructure$"
-            [controls$]="formStructure$"
-            class="catalog_form_search direction_column"
-            buttonName="Start search"
-            (valueChange)="onSubmit($event)">
-        </app-form> -->
+    *ngIf="router.url.includes('/catalog') && screenXSmall || screenSmall" 
+    [ngClass]="{ 'dark_blue' : screenXSmall || screenSmall }">
         <app-main-search-form 
             class="catalog_form_search direction_column">
         </app-main-search-form>
-    </div>
 </div>
-
-<app-size-detector></app-size-detector>

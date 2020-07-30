@@ -27,18 +27,10 @@
                         <div *ngIf="control.label" class="label" [ngClass]="{'required': control.required }">
                             {{ control.label }}
                         </div>
-                        <!-- <div *ngIf="control.type == 'number'">
-                            <input type="number" 
-                                [formControlName]="control.key" 
-                                [placeholder]="control.placeholder">
-                        </div> -->
-                        <!-- <div *ngIf="control.type != 'number'"> -->
-                        <!-- <div *ngIf="control.type != 'number'"> -->
-                            <input
-                                [formControlName]="control.key"
-                                [placeholder]="control.placeholder"
-                                [type]="control.type">
-                        <!-- </div> -->
+                        <input
+                            [formControlName]="control.key"
+                            [placeholder]="control.placeholder"
+                            [type]="control.type">
                     </div>
                 </ng-container>
 

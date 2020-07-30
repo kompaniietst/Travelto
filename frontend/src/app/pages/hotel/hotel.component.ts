@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { CustomCurrencyPipe } from 'src/app/pipes/customCurrency.pipe';
 import { ActivatedRoute } from '@angular/router';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
@@ -10,8 +10,9 @@ import { HotelService } from 'src/app/core/services/hotel.service';
 import { RoomService } from 'src/app/core/services/room.service';
 import { AmenitiesService } from 'src/app/core/services/amenities.service';
 import { Amenity } from 'src/app/core/models/Amenity';
-import { SizeDetectorService } from 'src/app/core/services/size-detector.service';
 import { tap } from 'rxjs/operators';
+import { ViewportSizeDetector } from 'src/app/core/extends/ViewportSizeDetector';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-hotel',
@@ -19,14 +20,13 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./hotel.component.scss'],
   providers: [CustomCurrencyPipe]
 })
-export class HotelComponent implements OnInit {
+export class HotelComponent extends ViewportSizeDetector implements OnInit {
 
   readonly URL = environment.apiUrl;
 
   id: string = this.route.snapshot.params.id;
   hotel: Hotel;
   loading = true;
-  isTablet: boolean = false;
 
   rooms$: Observable<Room[]>;
   amenities: Amenity[];
@@ -41,14 +41,20 @@ export class HotelComponent implements OnInit {
   carouselConfig;
   carouselConfigRooms;
 
+  @HostListener('window:resize', ['$event'])
+  onResize = () => this.defineScreenSize();
+
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
     private roomService: RoomService,
     private amenitiesService: AmenitiesService,
     private alert: AlertMessageService,
-    private breakpoint: SizeDetectorService
+    breakpointObserver: BreakpointObserver
   ) {
+    super(breakpointObserver);
+    this.defineScreenSize()
+
     console.log(this.id);
 
     this.hotelService
@@ -67,11 +73,7 @@ export class HotelComponent implements OnInit {
     this.amenitiesService.get()
       .subscribe((x: Amenity[]) => this.amenities = x);
 
-    this.breakpoint.onResize$
-      .subscribe((x) => {
-        this.isTablet = x < 768 || x == 768;
-        this.defineCarousels();
-      })
+    this.defineCarousels();
   }
 
   ngOnInit(): void {
@@ -85,9 +87,7 @@ export class HotelComponent implements OnInit {
       .subscribe(
         r => console.log('after r', r),
         er => console.log(er))
-
   }
-
 
   ifActiveAmenity(_id: string) {
     return this.hotel.amenities.some(a => a._id == _id)
@@ -102,9 +102,8 @@ export class HotelComponent implements OnInit {
   }
 
   defineCarousels() {
-    console.log('this.isTablet', this.isTablet);
 
-    if (this.isTablet) {
+    if (this.screenXSmall || this.screenSmall) {
       this.carouselConfig = {
         slidesToShow: 1,
         slidesToScroll: 1,

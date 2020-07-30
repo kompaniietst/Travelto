@@ -6,7 +6,7 @@
         background: #0098db;
         justify-content: space-between;
         align-items: center;
-        &.isTablet {
+        &.is_tablet {
             background: none;
         }
     }
@@ -61,7 +61,7 @@
     }
 }
 
-.menu.isTablet {
+.menu.is_tablet {
     position: relative;
     justify-content: center;
     display: flex;

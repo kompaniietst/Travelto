@@ -6,7 +6,6 @@ import { AlertMessageService } from '../../services/alert-message.service';
 import { AuthenticationService } from '../authentication.service';
 import { of } from 'rxjs';
 import { Control } from '../../models/Control';
-import { SizeDetectorService } from '../../services/size-detector.service';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +38,6 @@ export class LoginComponent implements OnInit {
     private dialog: MatDialog,
     private auth: AuthenticationService,
     private alert: AlertMessageService,
-    private breakpoint: SizeDetectorService
   ) { }
 
   ngOnInit() {

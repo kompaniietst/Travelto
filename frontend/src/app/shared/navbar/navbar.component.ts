@@ -1,31 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Control } from 'src/app/core/models/Control';
-import { CitiesService } from 'src/app/core/services/cities.service';
-import { Router, Params } from '@angular/router';
-import { City } from 'src/app/core/models/City';
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
-import { SizeDetectorService } from 'src/app/core/services/size-detector.service';
+import { Router } from '@angular/router';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { ViewportSizeDetector } from '../../core/extends/ViewportSizeDetector';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent extends ViewportSizeDetector implements OnInit {
 
   formStructure$: Observable<Control[]>
   isCatalog = false;
-  isTablet: boolean = false;
   showSearch: boolean = false;
+
+  @HostListener('window:resize', ['$event'])
+  onResize = () => this.defineScreenSize();
 
   constructor(
     public router: Router,
-    private breakpoint: SizeDetectorService
+    breakpointObserver: BreakpointObserver
   ) {
-
-    this.breakpoint.onResize$
-      .subscribe((x) => this.isTablet = x < 768 || x == 768)
+    super(breakpointObserver);
+    this.defineScreenSize()
   }
 
   ngOnInit(): void { }

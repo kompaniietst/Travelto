@@ -1,4 +1,4 @@
-<div class="menu" *ngIf="!isTablet">
+<div class="menu" *ngIf="screenMedium || screenLarge || screenXLarge">
     <div class="container">
         <ul>
             <li class="separator"><span></span></li>
@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<div class="menu" *ngIf="isTablet" [ngClass]="{ 'isTablet' : isTablet }">
+<div class="menu" *ngIf="screenXSmall || screenSmall" [ngClass]="{ 'is_tablet' : screenXSmall || screenSmall }">
     <div class="gamburger">
         <span></span>
         <span></span>

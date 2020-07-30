@@ -5,7 +5,7 @@
     [contentTemplate]="contentTemplate"
     class="filter_form">
     <ng-template #headerTemplate>
-        <div class="filter_header" *ngIf="isTablet">
+        <div class="filter_header" *ngIf="screenXSmall || screenSmall">
             <strong>
                 Filters:
                 <ng-content></ng-content>
@@ -16,5 +16,3 @@
         <ng-content select=".btn"></ng-content>
     </ng-template>
 </app-form>
-
-<app-size-detector></app-size-detector>
