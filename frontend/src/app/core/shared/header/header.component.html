@@ -39,7 +39,7 @@
     <app-navbar></app-navbar>
 </div>
 
-<div class="form_container" *ngIf="router.url.includes('/catalog') && screenMedium || screenLarge || screenXLarge">
+<div class="form_container" *ngIf="router.url.includes('/catalog') && (screenMedium || screenLarge || screenXLarge)">
     <div class="container">
         <app-main-search-form 
             class="catalog_form_search">
@@ -48,7 +48,7 @@
 </div>
 
 <div class="form_container" 
-    *ngIf="router.url.includes('/catalog') && screenXSmall || screenSmall" 
+    *ngIf="router.url.includes('/catalog') && (screenXSmall || screenSmall)" 
     [ngClass]="{ 'dark_blue' : screenXSmall || screenSmall }">
         <app-main-search-form 
             class="catalog_form_search direction_column">

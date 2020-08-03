@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Observable, BehaviorSubject, forkJoin, pipe } from 'rxjs';
 import { Room } from 'src/app/core/models/Room';
 import { RoomService } from 'src/app/core/services/room.service';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { User } from 'src/app/core/models/User';
 import { mergeMap, tap } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-rooms',
@@ -12,7 +13,7 @@ import { mergeMap, tap } from 'rxjs/operators';
   styleUrls: ['./rooms.component.scss']
 })
 
-export class RoomsComponent implements OnInit {
+export class RoomsComponent implements AfterViewInit {
 
   rooms$: Observable<Room[]>;
   loading = true;
@@ -26,7 +27,9 @@ export class RoomsComponent implements OnInit {
 
   constructor(
     private service: RoomService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
 
     this.rooms$ = this.roomSubject.asObservable();
@@ -37,55 +40,90 @@ export class RoomsComponent implements OnInit {
           this.service
             .getRoomsByCurrRole(user.role, user._id)))
       .subscribe(
-        (x: Room[]) => {
-
-          this.rooms = x;
-          this.roomSubject.next([...this.rooms]);
-
-          this.loading = false;
-          this.countRooms = x.length;
+        (rooms: Room[]) => {
+          this.pushToBehaviorSubject(rooms);
+          this.stopSpinner();
+          this.count(rooms);
         },
         err => console.log(err))
   }
 
-  ngOnInit(): void { }
+  pushToBehaviorSubject(rooms: Room[]) {
+    this.rooms = rooms;
+    this.roomSubject.next([...this.rooms]);
+  }
+
+  stopSpinner() {
+    this.loading = false;
+  }
+
+  count(rooms: Room[]) {
+    this.countRooms = rooms.length;
+  }
+
+  ngAfterViewInit(): void {
+    this.route.queryParams
+      .subscribe(x => this.tabGroupRef.selectedIndex = x.tab)
+  }
 
   onAdd(formData: Room) {
     let room_id = formData._id;
     this.service.getRoomBy(room_id)
-      .subscribe((x: Room) => {
+      .subscribe((room: Room) => {
 
-        this.rooms.push(x);
-        this.roomSubject.next([...this.rooms]);
+        this.pushSingleToBehaviorSubject(room);
+        this.backToFirstTab();
 
-        this.tabGroupRef.selectedIndex = 0;
-        window.scrollTo(0, 0)
+        this.router.navigate(["."], { relativeTo: this.route });
       })
+  }
+
+  pushSingleToBehaviorSubject(room: Room) {
+    this.rooms.push(room);
+    this.roomSubject.next([...this.rooms]);
+  }
+
+  backToFirstTab() {
+    this.tabGroupRef.selectedIndex = 0;
+    window.scrollTo(0, 0);
   }
 
   onEdit(_id: string) {
-    console.log('edit', _id);
     this.service.getRoomBy(_id)
       .pipe(tap(x => console.log('R', x)))
-      .subscribe((x: Room) => {
+      .subscribe((room: Room) => {
 
-        let i = this.rooms.findIndex(h => h._id == _id);
-        this.rooms[i] = x;
-        this.roomSubject.next([...this.rooms]);
-
-        this.tabGroupRef.selectedIndex = 0;
-        window.scrollTo(0, 0)
+        this.editSingleFromBehaviorSubject(room, _id);
+        this.backToFirstTab();
+        this.router.navigate(["."], { relativeTo: this.route });
       })
   }
 
+  editSingleFromBehaviorSubject(room: Room, _id: string) {
+    let i = this.rooms.findIndex(h => h._id == _id);
+    this.rooms[i] = room;
+    this.roomSubject.next([...this.rooms]);
+  }
+
   onRemove(_id: string) {
-    console.log('rem ', _id);
     this.service.removeRoom(_id)
-      .subscribe(_ => {
-        let i = this.rooms.findIndex(h => h._id == _id);
-        this.rooms.splice(i, 1)
-        this.roomSubject.next([...this.rooms]);
-      })
+      .subscribe(_ => this.removeSingleFromBehaviorSubject(_id))
+  }
+
+  removeSingleFromBehaviorSubject(_id: string) {
+    let i = this.rooms.findIndex(h => h._id == _id);
+    this.rooms.splice(i, 1)
+    this.roomSubject.next([...this.rooms]);
+  }
+
+  selectedTabChange(e) {
+    var viewTab = e.index == 0;
+    var addTab = e.index == 1;
+
+    if (addTab)
+      this.router.navigate(["create"], { relativeTo: this.route });
+    if (viewTab)
+      this.router.navigate(["."], { relativeTo: this.route });
   }
 
   trackById(index, item) {

@@ -20,7 +20,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
   styleUrls: ['./hotel.component.scss'],
   providers: [CustomCurrencyPipe]
 })
-export class HotelComponent extends ViewportSizeDetector implements OnInit {
+export class HotelComponent extends ViewportSizeDetector {
 
   readonly URL = environment.apiUrl;
 
@@ -61,8 +61,8 @@ export class HotelComponent extends ViewportSizeDetector implements OnInit {
       .getHotelBy(this.id)
       .pipe(tap(x => console.log('HOTEl', x)))
       .subscribe(
-        (h: Hotel) => {
-          this.hotel = h
+        (hotel: Hotel) => {
+          this.hotel = hotel;
           this.loading = false;
           this.getRooms();
           this.defineMapData();
@@ -71,26 +71,18 @@ export class HotelComponent extends ViewportSizeDetector implements OnInit {
         err => this.alert.error(err.error))
 
     this.amenitiesService.get()
-      .subscribe((x: Amenity[]) => this.amenities = x);
+      .subscribe((amenities: Amenity[]) => this.amenities = amenities);
 
     this.defineCarousels();
   }
 
-  ngOnInit(): void {
-    console.log('ROUTE', this.route);
-  }
-
   getRooms() {
     this.rooms$ = this.roomService.getRoomsByHotel(this.id)
-
-    this.roomService.getRoomsByHotel(this.id)
-      .subscribe(
-        r => console.log('after r', r),
-        er => console.log(er))
+      .pipe(tap(r => console.log('after r', r)))
   }
 
-  ifActiveAmenity(_id: string) {
-    return this.hotel.amenities.some(a => a._id == _id)
+  ifActiveAmenity(amenity_id: string) {
+    return this.hotel.amenities.some(({ _id }) => _id == amenity_id)
   }
 
   defineMapData() {

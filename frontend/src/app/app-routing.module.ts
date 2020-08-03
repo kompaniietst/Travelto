@@ -41,11 +41,19 @@ const routes: Routes = [
       },
       {
         path: 'hotels', component: HotelsComponent,
-        canActivate: [RoleGuard], data: { expectedRole: ['admin', 'member'] }
+        canActivate: [RoleGuard], data: { expectedRole: ['admin', 'member'] },
+        children: [
+          { path: 'create', component: HotelsComponent },
+          { path: 'edit/:id', component: HotelsComponent },
+        ]
       },
       {
         path: 'rooms', component: RoomsComponent,
-        canActivate: [RoleGuard], data: { expectedRole: ['admin', 'member'] }
+        canActivate: [RoleGuard], data: { expectedRole: ['admin', 'member'] },
+        children: [
+          { path: 'create', component: RoomsComponent },
+          { path: 'edit/:id', component: RoomsComponent },
+        ]
       },
       {
         path: 'cities', component: CitiesComponent,

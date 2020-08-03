@@ -44,7 +44,7 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
   registerOnTouched(fn: any): void { }
 
   displayFn(option) {
-    return option?.label;
+    return option?.name;
   }
 
   trackById(index, item) {

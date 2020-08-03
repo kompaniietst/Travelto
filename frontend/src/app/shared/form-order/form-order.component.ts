@@ -76,7 +76,7 @@ export class FormOrderComponent implements OnInit {
         address: {
           city: {
             _id: this.room.hotel.address.city._id,
-            label: this.room.hotel.address.city.label
+            label: this.room.hotel.address.city.name
           },
           street: this.room.hotel.address.street,
           houseNumber: this.room.hotel.address.houseNumber

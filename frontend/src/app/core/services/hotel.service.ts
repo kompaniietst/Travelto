@@ -26,9 +26,9 @@ export class HotelService {
   }
 
   getHotelsByCurrRole(role: string, user_id: string) {
-    return role == 'admin' 
-    ? this.get() 
-    : this.getHotelsBy(user_id)
+    return role == 'admin'
+      ? this.get()
+      : this.getHotelsBy(user_id)
   }
 
   get(): Observable<Hotel[]> {
@@ -42,7 +42,7 @@ export class HotelService {
 
   getHotelBy(hotel_id: string): Observable<Hotel> {
     console.log('!!!GET');
-    
+
     return this.http.get<Hotel>(`${this.URL}/hotels/${hotel_id}`)
   }
 

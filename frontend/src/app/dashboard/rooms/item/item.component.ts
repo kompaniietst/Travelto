@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { HotelService } from 'src/app/core/services/hotel.service';
 import { User } from 'src/app/core/models/User';
 import { RoomService } from 'src/app/core/services/room.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-room-item',
@@ -41,7 +42,9 @@ export class RoomItemComponent implements OnInit {
     private hotelService: HotelService,
     private roomService: RoomService,
     private alert: AlertMessageService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
 
     this.auth.currUser
@@ -55,18 +58,19 @@ export class RoomItemComponent implements OnInit {
 
   getHotels(role: string, _id: string) {
     this.hotelService.getHotelsByCurrRole(role, _id)                 // get hotels for editing curr room
-      .subscribe(x => {
+      .subscribe((x: Hotel[]) => {
+        var hotels = x.map(({ _id, name }) => { return { _id, name } })
 
-        var hotels = x.map((h: Hotel) => { return { _id: h._id, label: h.name } })
         this.initFormStructure(hotels)
-      })
+      }, err => err)
   }
 
   edit(_id: string) {
     this.editItem = true;
+    this.router.navigate([`edit/${_id}`], { relativeTo: this.route });
   }
 
-  initFormStructure(hotels: { _id: string, label: string }[]) { // define form structure for editing curr room
+  initFormStructure(hotels: { _id: string, name: string }[]) { // define form structure for editing curr room
 
     this.formStructure$ = of([
       new Control({
@@ -133,6 +137,7 @@ export class RoomItemComponent implements OnInit {
 
   cancelEdit() {
     this.editItem = false;
+    this.router.navigate(["."], { relativeTo: this.route });
   }
 
   ngOnInit(): void {

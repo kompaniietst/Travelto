@@ -10,11 +10,15 @@ import { environment } from 'src/environments/environment';
 export class ActiveComponent implements OnInit {
 
   readonly URL = environment.apiUrl;
-  
+
   @Input() order: Order;
   @Input() state: string;
   @Input() role: string;
 
+  get total() {
+    return this.order.price * this.order.nights
+  }
+  
   constructor() { }
 
   ngOnInit(): void {

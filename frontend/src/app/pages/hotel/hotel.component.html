@@ -12,7 +12,7 @@
                 </h1>
                 <div class="place" *ngIf="hotel.address.city">
                     <span></span>
-                    {{ hotel.address.city.label }}, {{ hotel.address.street }} {{ hotel.address.houseNumber }}
+                    {{ hotel.address.city.name }}, {{ hotel.address.street }} {{ hotel.address.houseNumber }}
                 </div>
             </div>
         </div>
@@ -93,7 +93,7 @@
 
             <div class="place">
                 <span></span>
-                {{ hotel.address.city.label }},
+                {{ hotel.address.city.name }},
                 {{ hotel.address.street }} 
                 {{ hotel.address.houseNumber }}
             </div>

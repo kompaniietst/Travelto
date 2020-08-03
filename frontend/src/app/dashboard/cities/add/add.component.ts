@@ -28,7 +28,7 @@ export class AddCitiesComponent implements OnInit {
 
     new Control({
       controlType: 'input',
-      key: 'label',
+      key: 'name',
       placeholder: 'City name:',
     })
   ])

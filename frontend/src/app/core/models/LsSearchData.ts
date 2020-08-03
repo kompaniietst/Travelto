@@ -1,5 +1,5 @@
 export class LsSearchData {
-  city?: { id: string, label: string };
+  city?: { id: string, name: string };
   date?: [string, string];
   pex?: {
     adults: number,

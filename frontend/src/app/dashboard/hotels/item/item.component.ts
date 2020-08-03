@@ -7,6 +7,7 @@ import { Control } from 'src/app/core/models/Control';
 import { City } from 'src/app/core/models/City';
 import { AlertMessageService } from 'src/app/core/services/alert-message.service';
 import { environment } from 'src/environments/environment';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-hotel-item',
@@ -28,7 +29,9 @@ export class HotelItemComponent<T> implements OnInit {
 
   constructor(
     private admin: AdminService,
-    private alert: AlertMessageService
+    private alert: AlertMessageService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
 
     forkJoin(
@@ -42,6 +45,7 @@ export class HotelItemComponent<T> implements OnInit {
 
   edit(_id: string) {
     this.editItem = true;
+    this.router.navigate([`edit/${_id}`], { relativeTo: this.route });
   }
 
   remove(_id: string) {
@@ -146,6 +150,7 @@ export class HotelItemComponent<T> implements OnInit {
 
   cancelEdit() {
     this.editItem = false;
+    this.router.navigate(["."], { relativeTo: this.route });
   }
 
   onSubmitEditForm(formData: Hotel) {

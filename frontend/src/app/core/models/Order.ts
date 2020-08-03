@@ -19,7 +19,7 @@ export class Order {
         address: {
             city: {
                 _id: string;
-                label: string;
+                name: string;
             },
             street: string;
             houseNumber: number;

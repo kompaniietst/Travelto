@@ -3,7 +3,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { Hotel } from 'src/app/core/models/Hotel';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { HotelService } from 'src/app/core/services/hotel.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/core/models/User';
 import { mergeMap, tap, switchMap } from 'rxjs/operators';
 
@@ -12,7 +12,7 @@ import { mergeMap, tap, switchMap } from 'rxjs/operators';
   templateUrl: './hotels.component.html',
   styleUrls: ['./hotels.component.scss']
 })
-export class HotelsComponent implements OnInit, AfterViewInit {
+export class HotelsComponent implements AfterViewInit {
 
   hotels$: Observable<Hotel[]>;
   loading = true;
@@ -26,7 +26,8 @@ export class HotelsComponent implements OnInit, AfterViewInit {
   constructor(
     private service: HotelService,
     private auth: AuthenticationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
 
     this.hotels$ = this.hotelSubject.asObservable();
@@ -54,8 +55,6 @@ export class HotelsComponent implements OnInit, AfterViewInit {
       .subscribe(x => this.tabGroupRef.selectedIndex = x.tab)
   }
 
-  ngOnInit(): void { }
-
   onAdd(formData: Hotel) {
     this.service.register(formData)
       .subscribe(
@@ -65,12 +64,12 @@ export class HotelsComponent implements OnInit, AfterViewInit {
           this.hotelSubject.next([...this.hotels]);
 
           this.tabGroupRef.selectedIndex = 0;
-          window.scrollTo(0, 0)
+          window.scrollTo(0, 0);
+          this.router.navigate(["."], { relativeTo: this.route });
         })
   }
 
   onEdit(data: { _id: string, formData: Hotel }) {
-    console.log('edit', data);
     this.service.editHotel(data._id, data.formData)
       .subscribe(
         (x: Hotel) => {
@@ -78,19 +77,27 @@ export class HotelsComponent implements OnInit, AfterViewInit {
           this.hotels[i] = x;
 
           this.hotelSubject.next([...this.hotels]);
+          this.router.navigate(["."], { relativeTo: this.route });
         },
         err => console.log(err)
       )
   }
 
   onRemove(_id: string) {
-    console.log('rem ', _id);
     this.service.removeHotel(_id)
       .subscribe(_ => {
         let i = this.hotels.findIndex(h => h._id == _id);
         this.hotels.splice(i, 1)
         this.hotelSubject.next([...this.hotels]);
       })
+  }
+
+  selectedTabChange(e) {
+    var viewTab = e.index == 0;
+    var addTab = e.index == 1;
+
+    if (addTab) this.router.navigate(["create"], { relativeTo: this.route });
+    if (viewTab) this.router.navigate(["."], { relativeTo: this.route });
   }
 
   trackById(index, item) {

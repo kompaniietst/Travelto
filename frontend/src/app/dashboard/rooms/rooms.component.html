@@ -1,4 +1,4 @@
-<mat-tab-group animationDuration="0ms" #tabGroup>
+<mat-tab-group animationDuration="0ms" #tabGroup (selectedTabChange)="selectedTabChange($event)">
     <mat-tab label="View your rooms">
 
        <h2 class="header_title">Rooms
